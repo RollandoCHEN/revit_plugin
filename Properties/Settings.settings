@@ -80,5 +80,8 @@
     <Setting Name="LEGEND_POSITION_Y_MAX_R" Type="System.Double" Scope="User">
       <Value Profile="(Default)">0.858</Value>
     </Setting>
+    <Setting Name="BEAM_CATEGORY_NAME" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Ossature</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

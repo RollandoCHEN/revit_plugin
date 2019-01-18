@@ -334,5 +334,17 @@ namespace DCEStudyTools.Properties {
                 this["LEGEND_POSITION_Y_MAX_R"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Ossature")]
+        public string BEAM_CATEGORY_NAME {
+            get {
+                return ((string)(this["BEAM_CATEGORY_NAME"]));
+            }
+            set {
+                this["BEAM_CATEGORY_NAME"] = value;
+            }
+        }
     }
 }

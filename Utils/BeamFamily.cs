@@ -82,7 +82,7 @@ namespace DCEStudyTools.Utils
 
                 //add symbols of beams to lists 
                 string categoryName = familyType.Category.Name;
-                if ("Ossature".Equals(categoryName))
+                if (Properties.Settings.Default.BEAM_CATEGORY_NAME.Equals(categoryName))
                 {
                     BeamMaps.Add(familyType);
                 }
