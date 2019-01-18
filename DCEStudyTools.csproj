@@ -1,0 +1,437 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{03370C55-9F95-4B95-B7FD-DFD42F4DF3F2}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DCEStudyTools</RootNamespace>
+    <AssemblyName>DCEStudyTools</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AdWindows">
+      <HintPath>C:\Program Files\Autodesk\Revit 2017\AdWindows.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="RevitAPI">
+      <HintPath>C:\Program Files\Autodesk\Revit 2017\RevitAPI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="RevitAPIUI">
+      <HintPath>C:\Program Files\Autodesk\Revit 2017\RevitAPIUI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App.cs" />
+    <Compile Include="BeamTypeChange\BeamSelectionFilter.cs" />
+    <Compile Include="BeamTypeChange\BeamTypeChange.cs" />
+    <Compile Include="BeamTypeChange\BeamTypeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BeamTypeChange\BeamTypeForm.Designer.cs">
+      <DependentUpon>BeamTypeForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BeamTypeDetect\BeamTypeDetect.cs" />
+    <Compile Include="CategoriesHiding\CategoriesHiding.cs" />
+    <Compile Include="Configuration\LevelConfigForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Configuration\LevelConfigForm.Designer.cs">
+      <DependentUpon>LevelConfigForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Configuration\LevelConfiguration.cs" />
+    <Compile Include="BeamTypeDetect\ChangeBeamFamilyTypeEvent.cs" />
+    <Compile Include="Debug\Debug.cs" />
+    <Compile Include="BeamTypeDetect\BeamChangingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BeamTypeDetect\BeamChangingForm.Designer.cs">
+      <DependentUpon>BeamChangingForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BeamTypeDetect\ucNomalBeamFilterCondition.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="BeamTypeDetect\ucNomalBeamFilterCondition.Designer.cs">
+      <DependentUpon>ucNomalBeamFilterCondition.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BeamTypeDetect\WindowHandle.cs" />
+    <Compile Include="Debug\StringForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Debug\StringForm.Designer.cs">
+      <DependentUpon>StringForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FloorSpanDirection\FloorSelectionFilter.cs" />
+    <Compile Include="Design\Beam\BeamCreation\BeamCreation.cs" />
+    <Compile Include="Design\Beam\BeamCreation\BeamCreationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Design\Beam\BeamCreation\BeamCreationForm.Designer.cs">
+      <DependentUpon>BeamCreationForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Design\Beam\BeamCreation\BeamType.cs" />
+    <Compile Include="Design\Beam\DimensionEditing\DimensionEditing.cs" />
+    <Compile Include="Design\Beam\BeamAxeMarking\BeamDimensionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Design\Beam\BeamAxeMarking\BeamDimensionForm.Designer.cs">
+      <DependentUpon>BeamDimensionForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Design\Beam\BeamAxeMarking\BeamMarking.cs" />
+    <Compile Include="Design\Beam\BeamAxeMarking\BeamMarkingWithDimension.cs" />
+    <Compile Include="Design\Beam\BeamAxeMarking\BeamMarkingWithoutDimension.cs" />
+    <Compile Include="Design\Beam\DimensionEditing\DimensionEditingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Design\Beam\DimensionEditing\DimensionEditingForm.Designer.cs">
+      <DependentUpon>DimensionEditingForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Design\Beam\DimensionEditing\EntityToUpdateLine.cs" />
+    <Compile Include="Design\Beam\DimensionEditing\StaticMethods.cs" />
+    <Compile Include="Design\Beam\DimensionEditing\SaveDimensionEvent.cs" />
+    <Compile Include="Design\Beam\DimensionEditing\WindowHandle.cs" />
+    <Compile Include="Design\UserControls\usLengthTextBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Design\UserControls\usLengthTextBox.Designer.cs">
+      <DependentUpon>usLengthTextBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Design\UserControls\ucBeamHeight.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Design\UserControls\ucBeamHeight.Designer.cs">
+      <DependentUpon>ucBeamHeight.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Design\UserControls\ucBeamLength.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Design\UserControls\ucBeamLength.Designer.cs">
+      <DependentUpon>ucBeamLength.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Design\UserControls\ucBeamType.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Design\UserControls\ucBeamType.Designer.cs">
+      <DependentUpon>ucBeamType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Design\UserControls\ucBeamWidth.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Design\UserControls\ucBeamWidth.Designer.cs">
+      <DependentUpon>ucBeamWidth.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Design\Wall\WallUnmarking.cs" />
+    <Compile Include="Design\Wall\WallSelectionFilter.cs" />
+    <Compile Include="Design\Wall\WallMarking.cs" />
+    <Compile Include="FloorSpanDirection\FloorDirectionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FloorSpanDirection\FloorDirectionForm.Designer.cs">
+      <DependentUpon>FloorDirectionForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FloorSpanDirection\FloorSpanDirectionChange.cs" />
+    <Compile Include="FoundationLoadCreation\FoundationLoadCreation.cs" />
+    <Compile Include="LegendUpdate\LegendUpdate.cs" />
+    <Compile Include="LegendUpdate\LegendUpdateForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LegendUpdate\LegendUpdateForm.Designer.cs">
+      <DependentUpon>LegendUpdateForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LevelCreation\UserControls\ucHeight.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="LevelCreation\UserControls\ucHeight.Designer.cs">
+      <DependentUpon>ucHeight.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LevelCreation\UserControls\ucLevels.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="LevelCreation\UserControls\ucLevels.Designer.cs">
+      <DependentUpon>ucLevels.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="LevelCreation\LevelCreationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LevelCreation\LevelCreationForm.Designer.cs">
+      <DependentUpon>LevelCreationForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LevelCreation\LevelCreation.cs" />
+    <Compile Include="Properties\Resources2.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="ScaleSetting\ScaleSetting.cs" />
+    <Compile Include="ScaleSetting\SetScaleForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ScaleSetting\SetScaleForm.Designer.cs">
+      <DependentUpon>SetScaleForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ScaleSetting\ucScale.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ScaleSetting\ucScale.Designer.cs">
+      <DependentUpon>ucScale.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SheetCreation\SheetCreationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SheetCreation\SheetCreationForm.Designer.cs">
+      <DependentUpon>SheetCreationForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SheetCreation\SheetCreation.cs" />
+    <Compile Include="SheetCreation\UserControls\ucDuplicataNum.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SheetCreation\UserControls\ucDuplicataNum.Designer.cs">
+      <DependentUpon>ucDuplicataNum.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SheetCreation\UserControls\ucFireResist.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SheetCreation\UserControls\ucFireResist.Designer.cs">
+      <DependentUpon>ucFireResist.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SheetCreation\UserControls\ucFoundation.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SheetCreation\UserControls\ucFoundation.Designer.cs">
+      <DependentUpon>ucFoundation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TagsAdjustment\TagsAdjustment.cs" />
+    <Compile Include="TagsAdjustment\TagTypeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TagsAdjustment\TagTypeForm.Designer.cs">
+      <DependentUpon>TagTypeForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TagsAdjustment\UserControls\ucBeamTagWithDimension.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TagsAdjustment\UserControls\ucBeamTagWithDimension.Designer.cs">
+      <DependentUpon>ucBeamTagWithDimension.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TagsAdjustment\UserControls\ucBeamTagWithoutDimension.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TagsAdjustment\UserControls\ucBeamTagWithoutDimension.Designer.cs">
+      <DependentUpon>ucBeamTagWithoutDimension.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TagsAdjustment\UserControls\ucRectColumn.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TagsAdjustment\UserControls\ucRectColumn.Designer.cs">
+      <DependentUpon>ucRectColumn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TagsAdjustment\UserControls\ucSquareColumn.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TagsAdjustment\UserControls\ucSquareColumn.Designer.cs">
+      <DependentUpon>ucSquareColumn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TagsAdjustment\UserControls\ucRoundColumn.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TagsAdjustment\UserControls\ucRoundColumn.Designer.cs">
+      <DependentUpon>ucRoundColumn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ThreeDViewsCreation\ThreeDViewsCreation.cs" />
+    <Compile Include="Utils\BeamFamily.cs" />
+    <Compile Include="Utils\Guids.cs" />
+    <Compile Include="Utils\SubstringExtensions.cs" />
+    <Compile Include="Utils\ViewTemplate.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DCEStudyTools.addin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+    <None Include="Resources\Revit_2019-01-17_16-21-57.png" />
+    <None Include="Resources\Revit_2019-01-17_16-19-25.png" />
+    <None Include="Resources\Revit_2019-01-17_14-39-41.png" />
+    <None Include="Resources\Revit_2019-01-17_14-26-11.png" />
+    <Resource Include="Resources\beam_confirm_32.ico" />
+    <Resource Include="Resources\beam_confirm_32.png" />
+    <Resource Include="Resources\beam_doubt_32.ico" />
+    <Resource Include="Resources\beam_doubt_32.png" />
+    <Resource Include="Resources\direction_32.ico" />
+    <Resource Include="Resources\direction_32.png" />
+    <Resource Include="Resources\FloorSpanDirectionImage.png" />
+    <Resource Include="Resources\load_32.ico" />
+    <Resource Include="Resources\load_32.png" />
+    <Resource Include="Resources\scale_32.ico" />
+    <Resource Include="Resources\scale_32.png" />
+    <Resource Include="Resources\level_setting_32.ico" />
+    <Resource Include="Resources\level_setting_32.png" />
+    <Resource Include="Resources\dimension_edit_32.ico" />
+    <Resource Include="Resources\dimension_edit_32.png" />
+    <Resource Include="Resources\beam_dimension_32.ico" />
+    <Resource Include="Resources\beam_dimension_32.png" />
+    <Resource Include="Resources\beamrmv_32.ico" />
+    <Resource Include="Resources\beamrmv_32.png" />
+    <Resource Include="Resources\beam_32.ico" />
+    <Resource Include="Resources\beam_32.png" />
+    <Resource Include="Resources\wall_remove_32.ico" />
+    <Resource Include="Resources\wall_remove_32.png" />
+    <Resource Include="Resources\wall_32.ico" />
+    <Resource Include="Resources\wall_32.png" />
+    <Resource Include="Resources\levels_32.png" />
+    <Resource Include="Resources\levels_32.ico" />
+    <Resource Include="Resources\hide_32.ico" />
+    <Resource Include="Resources\hide_32.png" />
+    <Resource Include="Resources\tag_32.png" />
+    <Resource Include="Resources\tag_32.ico" />
+    <Resource Include="Resources\3dview_32.ico" />
+    <Resource Include="Resources\3dview_32.png" />
+    <Resource Include="Resources\debug_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="BeamTypeChange\BeamTypeForm.resx">
+      <DependentUpon>BeamTypeForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Configuration\LevelConfigForm.resx">
+      <DependentUpon>LevelConfigForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BeamTypeDetect\BeamChangingForm.resx">
+      <DependentUpon>BeamChangingForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BeamTypeDetect\ucNomalBeamFilterCondition.resx">
+      <DependentUpon>ucNomalBeamFilterCondition.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Debug\StringForm.resx">
+      <DependentUpon>StringForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Design\Beam\BeamAxeMarking\BeamDimensionForm.resx">
+      <DependentUpon>BeamDimensionForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Design\Beam\BeamCreation\BeamCreationForm.resx">
+      <DependentUpon>BeamCreationForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Design\Beam\DimensionEditing\DimensionEditingForm.resx">
+      <DependentUpon>DimensionEditingForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Design\UserControls\usLengthTextBox.resx">
+      <DependentUpon>usLengthTextBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Design\UserControls\ucBeamHeight.resx">
+      <DependentUpon>ucBeamHeight.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Design\UserControls\ucBeamLength.resx">
+      <DependentUpon>ucBeamLength.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Design\UserControls\ucBeamType.resx">
+      <DependentUpon>ucBeamType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Design\UserControls\ucBeamWidth.resx">
+      <DependentUpon>ucBeamWidth.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FloorSpanDirection\FloorDirectionForm.resx">
+      <DependentUpon>FloorDirectionForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LegendUpdate\LegendUpdateForm.resx">
+      <DependentUpon>LegendUpdateForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LevelCreation\LevelCreationForm.resx">
+      <DependentUpon>LevelCreationForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LevelCreation\UserControls\ucHeight.resx">
+      <DependentUpon>ucHeight.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LevelCreation\UserControls\ucLevels.resx">
+      <DependentUpon>ucLevels.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources2.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ScaleSetting\SetScaleForm.resx">
+      <DependentUpon>SetScaleForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ScaleSetting\ucScale.resx">
+      <DependentUpon>ucScale.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SheetCreation\SheetCreationForm.resx">
+      <DependentUpon>SheetCreationForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SheetCreation\UserControls\ucDuplicataNum.resx">
+      <DependentUpon>ucDuplicataNum.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SheetCreation\UserControls\ucFireResist.resx">
+      <DependentUpon>ucFireResist.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SheetCreation\UserControls\ucFoundation.resx">
+      <DependentUpon>ucFoundation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TagsAdjustment\TagTypeForm.resx">
+      <DependentUpon>TagTypeForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TagsAdjustment\UserControls\ucBeamTagWithDimension.resx">
+      <DependentUpon>ucBeamTagWithDimension.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TagsAdjustment\UserControls\ucBeamTagWithoutDimension.resx">
+      <DependentUpon>ucBeamTagWithoutDimension.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TagsAdjustment\UserControls\ucRectColumn.resx">
+      <DependentUpon>ucRectColumn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TagsAdjustment\UserControls\ucSquareColumn.resx">
+      <DependentUpon>ucSquareColumn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TagsAdjustment\UserControls\ucRoundColumn.resx">
+      <DependentUpon>ucRoundColumn.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings1.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

@@ -1,0 +1,84 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="DCEStudyTools.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="TITLEBLOCK_NAME" Type="System.String" Scope="User">
+      <Value Profile="(Default)">DCE A3 Standard</Value>
+    </Setting>
+    <Setting Name="STANDARD_LEGEND_NAME" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Légendes</Value>
+    </Setting>
+    <Setting Name="PILE_FOUNDATION_TITLE" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Charge Verticale par Pieux en Tonnes à ELS(G+Q) Test</Value>
+    </Setting>
+    <Setting Name="FOOTING_FOUNDATION_TITLE" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Fondation : Semelles isolées et Filantes</Value>
+    </Setting>
+    <Setting Name="GROUND_SLAB_FOUNDATION_TITLE" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Fondation : Radier</Value>
+    </Setting>
+    <Setting Name="VIEWPORT_WITHOUT_TITLE_TYPE_NAME" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Sans titre</Value>
+    </Setting>
+    <Setting Name="THREED_VIEW_TEMPLATE_NAME" Type="System.String" Scope="User">
+      <Value Profile="(Default)">DCE Structure 3D</Value>
+    </Setting>
+    <Setting Name="STANDARD_FLOOR_TEMPLATE_NAME" Type="System.String" Scope="User">
+      <Value Profile="(Default)">DCE Structure Etage Courant</Value>
+    </Setting>
+    <Setting Name="FOUNDATION_TEMPLATE_NAME" Type="System.String" Scope="User">
+      <Value Profile="(Default)">DCE Structure Fondation</Value>
+    </Setting>
+    <Setting Name="BEAM_HEIGHT_PARAMETER" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Hauteur</Value>
+    </Setting>
+    <Setting Name="BEAM_WIDTH_PARAMETER" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Largeur</Value>
+    </Setting>
+    <Setting Name="BEAM_TYPE_PARAMETER" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Poutre type</Value>
+    </Setting>
+    <Setting Name="FOUNDATION_KEY_WORD" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Fondation</Value>
+    </Setting>
+    <Setting Name="PILE_TYPE_NAME" Type="System.String" Scope="User">
+      <Value Profile="(Default)">FON-PIEUX</Value>
+    </Setting>
+    <Setting Name="POINT_LOAD_TYPE_NAME" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Charge-Point 2.5mm</Value>
+    </Setting>
+    <Setting Name="SHEET_TITLE_PARA_NAME" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Titre en haut</Value>
+    </Setting>
+    <Setting Name="SHEET_REI_PARA_NAME" Type="System.String" Scope="User">
+      <Value Profile="(Default)">REI</Value>
+    </Setting>
+    <Setting Name="SHEET_REI_NA_VALUE" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Sans sujet</Value>
+    </Setting>
+    <Setting Name="BEAM_FAMILY_NAME" Type="System.String" Scope="User">
+      <Value Profile="(Default)">POU-BA</Value>
+    </Setting>
+    <Setting Name="RVT_FAMILY_EXTENSION" Type="System.String" Scope="User">
+      <Value Profile="(Default)">.rfa</Value>
+    </Setting>
+    <Setting Name="LEGEND_POSITION_X_MAX" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">1.355</Value>
+    </Setting>
+    <Setting Name="LEGEND_POSITION_X_MIN" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0.033</Value>
+    </Setting>
+    <Setting Name="LEGEND_POSITION_Y_MIN_L" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0.009</Value>
+    </Setting>
+    <Setting Name="LEGEND_POSITION_Y_MIN_R" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0.056</Value>
+    </Setting>
+    <Setting Name="LEGEND_POSITION_Y_MAX_L" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0.9</Value>
+    </Setting>
+    <Setting Name="LEGEND_POSITION_Y_MAX_R" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0.858</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
