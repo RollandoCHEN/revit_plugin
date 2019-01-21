@@ -49,7 +49,7 @@ namespace DCEStudyTools.LegendUpdate
                 (from v in new FilteredElementCollector(_doc)
                  .OfClass(typeof(View))
                  .Cast<View>()
-                 where v.ViewType == ViewType.Legend && v.ViewName.Equals(Properties.Settings.Default.STANDARD_LEGEND_NAME)
+                 where v.ViewType == ViewType.Legend && v.ViewName.Equals(Properties.Settings.Default.LEGEND_NAME_STANDARD)
                  select v).FirstOrDefault();
 
             // Get the "Légendes" legend view 
@@ -65,7 +65,7 @@ namespace DCEStudyTools.LegendUpdate
                 (from type in new FilteredElementCollector(_doc)
                  .OfClass(typeof(ElementType))
                  .Cast<ElementType>()
-                 where type.Name.Equals(Properties.Settings.Default.VIEWPORT_WITHOUT_TITLE_TYPE_NAME)
+                 where type.Name.Equals(Properties.Settings.Default.TYPE_NAME_VIEWPORT_WITHOUT_TITLE)
                  select type)
                  .FirstOrDefault();
 
@@ -78,13 +78,13 @@ namespace DCEStudyTools.LegendUpdate
             t.Start();
             foreach (ViewSheet viewSheet in viewSheets)
             {
-                if (viewSheet.Name.Contains(Properties.Settings.Default.FOUNDATION_KEY_WORD))
+                if (viewSheet.Name.Contains(Properties.Settings.Default.KEY_WORD_FOUNDATION))
                 {
                     ElementId viewportId =
                     (from vpId in viewSheet.GetAllViewports()
                      where ((Viewport)_doc.GetElement(vpId))
                         .get_Parameter(BuiltInParameter.VIEWPORT_VIEW_NAME)
-                        .AsString().Contains(Properties.Settings.Default.STANDARD_LEGEND_NAME)
+                        .AsString().Contains(Properties.Settings.Default.LEGEND_NAME_STANDARD)
                      select vpId)
                      .ToList()
                      .FirstOrDefault();

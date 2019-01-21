@@ -134,7 +134,7 @@ namespace DCEStudyTools.LevelCreation
                 if (i == 0)
                 {
                     elevations[i] = lowestLvlElv - _foundationHghtFeets;
-                    names[i] = string.Format("Fondations");
+                    names[i] = Properties.Settings.Default.LEVEL_NAME_FOUDATION;
                 }
                 // Base level of the lowest basement or RDC
                 else if (i == 1)
@@ -142,28 +142,28 @@ namespace DCEStudyTools.LevelCreation
                     elevations[i] = lowestLvlElv;
                     if (_numOfBasements == 0)
                     {
-                        names[i] = string.Format("Bas RDC");
+                        names[i] = Properties.Settings.Default.LEVEL_NAME_BOTTOM_L1;
                     }
                     else
                     {
-                        names[i] = string.Format("Bas SS-{0}", _numOfBasements);
+                        names[i] = $"Bas SS-{_numOfBasements}";
                     }
                 }
                 else if (i < refNumOfF1Top)
                 {
                     elevations[i] = elevations[i - 1] + _baseHghtFeets;
-                    names[i] = string.Format("PH SS-{0}", refNumOfF1Top - i);
+                    names[i] = $"PH SS-{refNumOfF1Top - i}";
                 }
                 else
                 {
                     elevations[i] = elevations[i - 1] + _lvlsHghtFeets;
                     if (elevations[i - 1] == 0.0)
                     {
-                        names[i] = string.Format("PH RDC");
+                        names[i] = Properties.Settings.Default.LEVEL_NAME_TOP_L1;
                     }
                     else
                     {
-                        names[i] = string.Format("PH R+{0}", i - refNumOfF1Top);
+                        names[i] = $"PH R+{i - refNumOfF1Top}";
                     }
                 }
             }
@@ -208,14 +208,14 @@ namespace DCEStudyTools.LevelCreation
                 ViewTemplate.FindViewTemplateOrDefault(
                     _doc,
                     ViewType.FloorPlan,
-                    Properties.Settings.Default.STANDARD_FLOOR_TEMPLATE_NAME,
+                    Properties.Settings.Default.TEMPLATE_NAME_STANDARD_FLOOR,
                     out bool standardTemplateIsFound);
 
             View foundationTemplate =
                 ViewTemplate.FindViewTemplateOrDefault(
                     _doc,
                     ViewType.FloorPlan,
-                    Properties.Settings.Default.FOUNDATION_TEMPLATE_NAME,
+                    Properties.Settings.Default.FOUNDATION_TEMPLATE_NAME_FOUND,
                     out bool foundationTemplateIsFound);
 
             using (Transaction t = new Transaction(doc, "Create View Plans"))
@@ -227,15 +227,15 @@ namespace DCEStudyTools.LevelCreation
                     {
                         Level level = newLevels[i];
                         ViewPlan viewPlan = ViewPlan.Create(doc, viewFamilyType.Id, level.Id);
-                        viewPlan.Name = string.Format("0{0} {1}", i + 1, level.Name);
+                        viewPlan.Name = $"0{i + 1} {level.Name}";
                         viewPlans.Add(viewPlan);
                         // TODO: Deal with the case when template is not found
-                        if (!viewPlan.Name.Contains(Properties.Settings.Default.FOUNDATION_KEY_WORD) && standardTemplateIsFound)
+                        if (!viewPlan.Name.Contains(Properties.Settings.Default.KEY_WORD_FOUNDATION) && standardTemplateIsFound)
                         {
                             viewPlan.ViewTemplateId = standardTemplate.Id;
                         }
 
-                        if (viewPlan.Name.Contains(Properties.Settings.Default.FOUNDATION_KEY_WORD) && foundationTemplateIsFound)
+                        if (viewPlan.Name.Contains(Properties.Settings.Default.KEY_WORD_FOUNDATION) && foundationTemplateIsFound)
                         {
                             viewPlan.ViewTemplateId = foundationTemplate.Id;
                         }

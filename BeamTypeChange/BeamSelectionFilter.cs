@@ -29,7 +29,7 @@ namespace DCEStudyTools.BeamTypeChange
             FamilyInstance fi = elem as FamilyInstance;
 
             if ((_selectFilterElem == null || _selectFilterElem.Contains(elem.Id))
-                && fi.Category.Name == Properties.Settings.Default.BEAM_CATEGORY_NAME && fi.Host.Id == _levelId)
+                && fi.Category.Name == Properties.Settings.Default.CATEGORY_NAME_BEAM && fi.Host.Id == _levelId)
             {
                 return true;
             }

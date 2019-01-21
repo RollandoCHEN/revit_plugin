@@ -13,7 +13,7 @@ namespace DCEStudyTools.Design.Beam.BeamAxeMarking
     {
         protected const double HEIGHT_BY_DEFAULT = 20;
         protected const double WIDTH_BY_DEFAULT = 20;
-        protected string TYPE_BY_DEFAULT = BeamType.NORMALE.Name;
+        protected string TYPE_BY_DEFAULT = BeamCreation.BeamType.NORMALE.Name;
 
         public static void CreateEntitiesForModelLineAndSetValue(
             Document doc, ModelLine line, 

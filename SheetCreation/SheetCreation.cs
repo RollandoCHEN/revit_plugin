@@ -58,7 +58,7 @@ namespace DCEStudyTools.SheetCreation
                 (from fs in new FilteredElementCollector(doc)
                  .OfClass(typeof(FamilySymbol)).OfCategory(BuiltInCategory.OST_TitleBlocks)
                  .Cast<FamilySymbol>()
-                 where fs.Name.Equals(Properties.Settings.Default.TITLEBLOCK_NAME)
+                 where fs.Name.Equals(Properties.Settings.Default.TYPE_NAME_TITLEBLOCK)
                  select fs).FirstOrDefault();
 
             // Get the "Légendes" legend view 
@@ -66,7 +66,7 @@ namespace DCEStudyTools.SheetCreation
                 (from v in new FilteredElementCollector(doc)
                  .OfClass(typeof(View))
                  .Cast<View>()
-                 where v.ViewType == ViewType.Legend && v.ViewName.Equals(Properties.Settings.Default.STANDARD_LEGEND_NAME)
+                 where v.ViewType == ViewType.Legend && v.ViewName.Equals(Properties.Settings.Default.LEGEND_NAME_STANDARD)
                  select v).FirstOrDefault();
 
             // Get the "Légendes" legend view 
@@ -75,7 +75,7 @@ namespace DCEStudyTools.SheetCreation
                  .OfClass(typeof(View))
                  .Cast<View>()
                  where v.ViewType == ViewType.Legend &&
-                 v.ViewName.Equals(Properties.Settings.Default.STANDARD_LEGEND_NAME + $" {_form.FoundationType}")
+                 v.ViewName.Equals(Properties.Settings.Default.LEGEND_NAME_STANDARD + $" {_form.FoundationType}")
                  select v).FirstOrDefault();
 
             // If there exists the "Cartouche A3" title block, create sheets with it
@@ -102,7 +102,7 @@ namespace DCEStudyTools.SheetCreation
             }
             else
             {
-                throw new MissingMemberException($"Ne pas trouver la cartouche \"{Properties.Settings.Default.TITLEBLOCK_NAME}\"!");
+                throw new MissingMemberException($"Ne pas trouver la cartouche \"{Properties.Settings.Default.TYPE_NAME_TITLEBLOCK}\"!");
             }
         }
 
@@ -117,7 +117,7 @@ namespace DCEStudyTools.SheetCreation
                 (from type in new FilteredElementCollector(_doc)
                  .OfClass(typeof(ElementType))
                  .Cast<ElementType>()
-                 where type.Name.Equals(Properties.Settings.Default.VIEWPORT_WITHOUT_TITLE_TYPE_NAME)
+                 where type.Name.Equals(Properties.Settings.Default.TYPE_NAME_VIEWPORT_WITHOUT_TITLE)
                  select type)
                  .FirstOrDefault();
 
@@ -139,30 +139,30 @@ namespace DCEStudyTools.SheetCreation
                         viewSheet.ViewName = $"{levels[i].Name} -{duplicateNum + 1}";
                     }
 
-                    if (!levels[i].Name.Contains(Properties.Settings.Default.FOUNDATION_KEY_WORD))
+                    if (!levels[i].Name.Contains(Properties.Settings.Default.KEY_WORD_FOUNDATION))
                     {
-                        SetParameterValuefor(viewSheet, Properties.Settings.Default.SHEET_REI_PARA_NAME, _form.FireResist);
+                        SetParameterValuefor(viewSheet, Properties.Settings.Default.SHEET_REI_PARAMETER, _form.FireResist);
                         AddLegendToSheetView(legendView, viewPortType_WithoutTitle, viewSheet);
                     }
                     else
                     {
-                        SetParameterValuefor(viewSheet, Properties.Settings.Default.SHEET_REI_PARA_NAME, Properties.Settings.Default.SHEET_REI_NA_VALUE);
+                        SetParameterValuefor(viewSheet, Properties.Settings.Default.SHEET_REI_PARAMETER, Properties.Settings.Default.SHEET_REI_NA_VALUE);
                         string title = string.Empty;
                         switch (_form.FoundationType)
                         {
                             case "Pieux":
-                                title = Properties.Settings.Default.PILE_FOUNDATION_TITLE;
+                                title = Properties.Settings.Default.FOUNDATION_TITLE_PILE;
                                 break;
                             case "Semelles":
-                                title = Properties.Settings.Default.FOOTING_FOUNDATION_TITLE;
+                                title = Properties.Settings.Default.FOUNDATION_TITLE_FOOTING;
                                 break;
                             case "Radier":
-                                title = Properties.Settings.Default.GROUND_SLAB_FOUNDATION_TITLE;
+                                title = Properties.Settings.Default.FOUNDATION_TITLE_GROUND_SLAB;
                                 break;
                             default:
                                 break;
                         }
-                        SetParameterValuefor(viewSheet, Properties.Settings.Default.SHEET_TITLE_PARA_NAME, title);
+                        SetParameterValuefor(viewSheet, Properties.Settings.Default.SHEET_TITLE_PARAMETER, title);
                         AddLegendToSheetView(foundationLegend, viewPortType_WithoutTitle, viewSheet);
                     }
 

@@ -26,108 +26,108 @@ namespace DCEStudyTools.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("DCE A3 Standard")]
-        public string TITLEBLOCK_NAME {
+        public string TYPE_NAME_TITLEBLOCK {
             get {
-                return ((string)(this["TITLEBLOCK_NAME"]));
+                return ((string)(this["TYPE_NAME_TITLEBLOCK"]));
             }
             set {
-                this["TITLEBLOCK_NAME"] = value;
+                this["TYPE_NAME_TITLEBLOCK"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Légendes")]
-        public string STANDARD_LEGEND_NAME {
+        public string LEGEND_NAME_STANDARD {
             get {
-                return ((string)(this["STANDARD_LEGEND_NAME"]));
+                return ((string)(this["LEGEND_NAME_STANDARD"]));
             }
             set {
-                this["STANDARD_LEGEND_NAME"] = value;
+                this["LEGEND_NAME_STANDARD"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Charge Verticale par Pieux en Tonnes à ELS(G+Q) Test")]
-        public string PILE_FOUNDATION_TITLE {
+        public string FOUNDATION_TITLE_PILE {
             get {
-                return ((string)(this["PILE_FOUNDATION_TITLE"]));
+                return ((string)(this["FOUNDATION_TITLE_PILE"]));
             }
             set {
-                this["PILE_FOUNDATION_TITLE"] = value;
+                this["FOUNDATION_TITLE_PILE"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Fondation : Semelles isolées et Filantes")]
-        public string FOOTING_FOUNDATION_TITLE {
+        public string FOUNDATION_TITLE_FOOTING {
             get {
-                return ((string)(this["FOOTING_FOUNDATION_TITLE"]));
+                return ((string)(this["FOUNDATION_TITLE_FOOTING"]));
             }
             set {
-                this["FOOTING_FOUNDATION_TITLE"] = value;
+                this["FOUNDATION_TITLE_FOOTING"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Fondation : Radier")]
-        public string GROUND_SLAB_FOUNDATION_TITLE {
+        public string FOUNDATION_TITLE_GROUND_SLAB {
             get {
-                return ((string)(this["GROUND_SLAB_FOUNDATION_TITLE"]));
+                return ((string)(this["FOUNDATION_TITLE_GROUND_SLAB"]));
             }
             set {
-                this["GROUND_SLAB_FOUNDATION_TITLE"] = value;
+                this["FOUNDATION_TITLE_GROUND_SLAB"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Sans titre")]
-        public string VIEWPORT_WITHOUT_TITLE_TYPE_NAME {
+        public string TYPE_NAME_VIEWPORT_WITHOUT_TITLE {
             get {
-                return ((string)(this["VIEWPORT_WITHOUT_TITLE_TYPE_NAME"]));
+                return ((string)(this["TYPE_NAME_VIEWPORT_WITHOUT_TITLE"]));
             }
             set {
-                this["VIEWPORT_WITHOUT_TITLE_TYPE_NAME"] = value;
+                this["TYPE_NAME_VIEWPORT_WITHOUT_TITLE"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("DCE Structure 3D")]
-        public string THREED_VIEW_TEMPLATE_NAME {
+        public string TEMPLATE_NAME_THREED_VIEW {
             get {
-                return ((string)(this["THREED_VIEW_TEMPLATE_NAME"]));
+                return ((string)(this["TEMPLATE_NAME_THREED_VIEW"]));
             }
             set {
-                this["THREED_VIEW_TEMPLATE_NAME"] = value;
+                this["TEMPLATE_NAME_THREED_VIEW"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("DCE Structure Etage Courant")]
-        public string STANDARD_FLOOR_TEMPLATE_NAME {
+        public string TEMPLATE_NAME_STANDARD_FLOOR {
             get {
-                return ((string)(this["STANDARD_FLOOR_TEMPLATE_NAME"]));
+                return ((string)(this["TEMPLATE_NAME_STANDARD_FLOOR"]));
             }
             set {
-                this["STANDARD_FLOOR_TEMPLATE_NAME"] = value;
+                this["TEMPLATE_NAME_STANDARD_FLOOR"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("DCE Structure Fondation")]
-        public string FOUNDATION_TEMPLATE_NAME {
+        public string FOUNDATION_TEMPLATE_NAME_FOUND {
             get {
-                return ((string)(this["FOUNDATION_TEMPLATE_NAME"]));
+                return ((string)(this["FOUNDATION_TEMPLATE_NAME_FOUND"]));
             }
             set {
-                this["FOUNDATION_TEMPLATE_NAME"] = value;
+                this["FOUNDATION_TEMPLATE_NAME_FOUND"] = value;
             }
         }
         
@@ -170,60 +170,60 @@ namespace DCEStudyTools.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Fondation")]
-        public string FOUNDATION_KEY_WORD {
+        public string KEY_WORD_FOUNDATION {
             get {
-                return ((string)(this["FOUNDATION_KEY_WORD"]));
+                return ((string)(this["KEY_WORD_FOUNDATION"]));
             }
             set {
-                this["FOUNDATION_KEY_WORD"] = value;
+                this["KEY_WORD_FOUNDATION"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("FON-PIEUX")]
-        public string PILE_TYPE_NAME {
+        public string FAMILY_NAME_PILE {
             get {
-                return ((string)(this["PILE_TYPE_NAME"]));
+                return ((string)(this["FAMILY_NAME_PILE"]));
             }
             set {
-                this["PILE_TYPE_NAME"] = value;
+                this["FAMILY_NAME_PILE"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Charge-Point 2.5mm")]
-        public string POINT_LOAD_TYPE_NAME {
+        public string TYPE_NAME_POINT_LOAD {
             get {
-                return ((string)(this["POINT_LOAD_TYPE_NAME"]));
+                return ((string)(this["TYPE_NAME_POINT_LOAD"]));
             }
             set {
-                this["POINT_LOAD_TYPE_NAME"] = value;
+                this["TYPE_NAME_POINT_LOAD"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Titre en haut")]
-        public string SHEET_TITLE_PARA_NAME {
+        public string SHEET_TITLE_PARAMETER {
             get {
-                return ((string)(this["SHEET_TITLE_PARA_NAME"]));
+                return ((string)(this["SHEET_TITLE_PARAMETER"]));
             }
             set {
-                this["SHEET_TITLE_PARA_NAME"] = value;
+                this["SHEET_TITLE_PARAMETER"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("REI")]
-        public string SHEET_REI_PARA_NAME {
+        public string SHEET_REI_PARAMETER {
             get {
-                return ((string)(this["SHEET_REI_PARA_NAME"]));
+                return ((string)(this["SHEET_REI_PARAMETER"]));
             }
             set {
-                this["SHEET_REI_PARA_NAME"] = value;
+                this["SHEET_REI_PARAMETER"] = value;
             }
         }
         
@@ -242,12 +242,12 @@ namespace DCEStudyTools.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("POU-BA")]
-        public string BEAM_FAMILY_NAME {
+        public string FAMILY_NAME_BEAM {
             get {
-                return ((string)(this["BEAM_FAMILY_NAME"]));
+                return ((string)(this["FAMILY_NAME_BEAM"]));
             }
             set {
-                this["BEAM_FAMILY_NAME"] = value;
+                this["FAMILY_NAME_BEAM"] = value;
             }
         }
         
@@ -338,12 +338,240 @@ namespace DCEStudyTools.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Ossature")]
-        public string BEAM_CATEGORY_NAME {
+        public string CATEGORY_NAME_BEAM {
             get {
-                return ((string)(this["BEAM_CATEGORY_NAME"]));
+                return ((string)(this["CATEGORY_NAME_BEAM"]));
             }
             set {
-                this["BEAM_CATEGORY_NAME"] = value;
+                this["CATEGORY_NAME_BEAM"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Bas")]
+        public string KEY_WORD_BOTTOM_LEVEL {
+            get {
+                return ((string)(this["KEY_WORD_BOTTOM_LEVEL"]));
+            }
+            set {
+                this["KEY_WORD_BOTTOM_LEVEL"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("BN")]
+        public string BEAM_TYPE_SIGN_BN {
+            get {
+                return ((string)(this["BEAM_TYPE_SIGN_BN"]));
+            }
+            set {
+                this["BEAM_TYPE_SIGN_BN"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Talon PV")]
+        public string BEAM_TYPE_SIGN_TAL {
+            get {
+                return ((string)(this["BEAM_TYPE_SIGN_TAL"]));
+            }
+            set {
+                this["BEAM_TYPE_SIGN_TAL"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("PR")]
+        public string BEAM_TYPE_SIGN_POUR {
+            get {
+                return ((string)(this["BEAM_TYPE_SIGN_POUR"]));
+            }
+            set {
+                this["BEAM_TYPE_SIGN_POUR"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("LT")]
+        public string BEAM_TYPE_SIGN_LINT {
+            get {
+                return ((string)(this["BEAM_TYPE_SIGN_LINT"]));
+            }
+            set {
+                this["BEAM_TYPE_SIGN_LINT"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string BEAM_TYPE_SIGN_POU {
+            get {
+                return ((string)(this["BEAM_TYPE_SIGN_POU"]));
+            }
+            set {
+                this["BEAM_TYPE_SIGN_POU"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("BN")]
+        public string BEAM_TYPE_SYNT_BN {
+            get {
+                return ((string)(this["BEAM_TYPE_SYNT_BN"]));
+            }
+            set {
+                this["BEAM_TYPE_SYNT_BN"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("TAL")]
+        public string BEAM_TYPE_SYNT_TAL {
+            get {
+                return ((string)(this["BEAM_TYPE_SYNT_TAL"]));
+            }
+            set {
+                this["BEAM_TYPE_SYNT_TAL"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("POUR")]
+        public string BEAM_TYPE_SYNT_POUR {
+            get {
+                return ((string)(this["BEAM_TYPE_SYNT_POUR"]));
+            }
+            set {
+                this["BEAM_TYPE_SYNT_POUR"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("LINT")]
+        public string BEAM_TYPE_SYNT_LINT {
+            get {
+                return ((string)(this["BEAM_TYPE_SYNT_LINT"]));
+            }
+            set {
+                this["BEAM_TYPE_SYNT_LINT"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("POU")]
+        public string BEAM_TYPE_SYNT_POU {
+            get {
+                return ((string)(this["BEAM_TYPE_SYNT_POU"]));
+            }
+            set {
+                this["BEAM_TYPE_SYNT_POU"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("LON")]
+        public string BEAM_TYPE_SYNT_LON {
+            get {
+                return ((string)(this["BEAM_TYPE_SYNT_LON"]));
+            }
+            set {
+                this["BEAM_TYPE_SYNT_LON"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("L")]
+        public string BEAM_TYPE_SIGN_LON {
+            get {
+                return ((string)(this["BEAM_TYPE_SIGN_LON"]));
+            }
+            set {
+                this["BEAM_TYPE_SIGN_LON"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.25")]
+        public double CHECK_BN_MAX_HEIGHT_METER {
+            get {
+                return ((double)(this["CHECK_BN_MAX_HEIGHT_METER"]));
+            }
+            set {
+                this["CHECK_BN_MAX_HEIGHT_METER"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.18")]
+        public double CHECK_PV_MAX_WIDTH_METER {
+            get {
+                return ((double)(this["CHECK_PV_MAX_WIDTH_METER"]));
+            }
+            set {
+                this["CHECK_PV_MAX_WIDTH_METER"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Sols")]
+        public string CATEGORY_NAME_FLOOR {
+            get {
+                return ((string)(this["CATEGORY_NAME_FLOOR"]));
+            }
+            set {
+                this["CATEGORY_NAME_FLOOR"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("FONDATIONS")]
+        public string LEVEL_NAME_FOUDATION {
+            get {
+                return ((string)(this["LEVEL_NAME_FOUDATION"]));
+            }
+            set {
+                this["LEVEL_NAME_FOUDATION"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Bas RDC")]
+        public string LEVEL_NAME_BOTTOM_L1 {
+            get {
+                return ((string)(this["LEVEL_NAME_BOTTOM_L1"]));
+            }
+            set {
+                this["LEVEL_NAME_BOTTOM_L1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("PH RDC")]
+        public string LEVEL_NAME_TOP_L1 {
+            get {
+                return ((string)(this["LEVEL_NAME_TOP_L1"]));
+            }
+            set {
+                this["LEVEL_NAME_TOP_L1"] = value;
             }
         }
     }

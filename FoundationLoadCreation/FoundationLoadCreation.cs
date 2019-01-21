@@ -29,7 +29,7 @@ namespace DCEStudyTools.FoundationLoadCreation
                 List<FamilyInstance> foundations =
                       new FilteredElementCollector(_doc)
                      .OfClass(typeof(FamilyInstance)).Cast<FamilyInstance>()
-                     .Where(f => f.Symbol.Name.Contains(Properties.Settings.Default.PILE_TYPE_NAME))
+                     .Where(f => f.Symbol.Name.Contains(Properties.Settings.Default.FAMILY_NAME_PILE))
                      .ToList();
 
                 foreach (FamilyInstance foundation in foundations)
@@ -119,7 +119,7 @@ namespace DCEStudyTools.FoundationLoadCreation
                     .OfCategory(BuiltInCategory.OST_PointLoadTags)
                     .OfClass(typeof(FamilySymbol))
                     .Cast<FamilySymbol>()
-                 where fs.Name.Equals(Properties.Settings.Default.POINT_LOAD_TYPE_NAME)
+                 where fs.Name.Equals(Properties.Settings.Default.TYPE_NAME_POINT_LOAD)
                  select fs)
                     .FirstOrDefault();
             if (tagType != null)

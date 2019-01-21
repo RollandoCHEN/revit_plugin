@@ -33,7 +33,7 @@ namespace DCEStudyTools.BeamTypeChange
                 BeamTypeForm form = new BeamTypeForm();
                 if (form.ShowDialog() == DialogResult.OK && form.ChoosenType != string.Empty)
                 {
-                    targetTypeSign = BeamType.GetBeamTypeFromName(form.ChoosenType).Sign;
+                    targetTypeSign = Design.Beam.BeamCreation.BeamType.GetBeamTypeFromName(form.ChoosenType).Sign;
                 }
                 else
                 {

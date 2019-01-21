@@ -15,7 +15,7 @@ namespace DCEStudyTools.FloorSpanDirection
 
         public bool AllowElement(Element elem)
         {
-            if (elem.Category.Name == "Sols" && elem.LevelId == _levelId)
+            if (Properties.Settings.Default.CATEGORY_NAME_FLOOR.Equals(elem.Category.Name) && elem.LevelId == _levelId)
             {
                 return true;
             }

@@ -23,10 +23,7 @@ namespace DCEStudyTools.BeamTypeDetect
         private BeamChangingForm _form;
 
         private ExternalEvent _exEvent;
-
-        private readonly double BN_MAX_HEIGHT_METER = 0.25;
-        private readonly double PV_MAX_WIDTH_METER = 0.18;
-
+        
         private readonly double DISTENCE_CONTINUOUS_SUPPORTER = 
             UnitUtils.Convert(25, DisplayUnitType.DUT_CENTIMETERS, DisplayUnitType.DUT_DECIMAL_FEET);
         private readonly double TOLERENCE_CONTAINED_BY_SUPPORTER = 
@@ -226,10 +223,11 @@ namespace DCEStudyTools.BeamTypeDetect
                 = GetFamilyInstanceByShareParamValue(
                     _doc,
                     BuiltInCategory.OST_StructuralFraming,
-                    "Poutre type", "");
+                    Properties.Settings.Default.BEAM_TYPE_PARAMETER, 
+                    "");
             List<Element> normalBeamList =
             (from Element elem in nomalBeamCollect
-             where (elem as FamilyInstance).Host.Name.Contains("Bas")
+             where (elem as FamilyInstance).Host.Name.Contains(Properties.Settings.Default.KEY_WORD_BOTTOM_LEVEL)
              select elem)
              .ToList();
 
@@ -250,11 +248,13 @@ namespace DCEStudyTools.BeamTypeDetect
             = GetFamilyInstanceByShareParamValue(
                 _doc,
                 BuiltInCategory.OST_StructuralFraming,
-                "Poutre type", "BN");
+                Properties.Settings.Default.BEAM_TYPE_PARAMETER, 
+                Properties.Settings.Default.BEAM_TYPE_SIGN_BN);
             ElementParameterFilter height25Filter
                 = EleParamGreaterFilter(
                     _doc,
-                    "Hauteur", BN_MAX_HEIGHT_METER);
+                    Properties.Settings.Default.BEAM_HEIGHT_PARAMETER,
+                    Properties.Settings.Default.CHECK_BN_MAX_HEIGHT_METER);
             List<Element> bnHeightGreaterList
                 = bnCollect.WherePasses(height25Filter).ToList();
 
@@ -263,11 +263,13 @@ namespace DCEStudyTools.BeamTypeDetect
                 = GetFamilyInstanceByShareParamValue(
                     _doc,
                     BuiltInCategory.OST_StructuralFraming,
-                    "Poutre type", "Talon PV");
+                    Properties.Settings.Default.BEAM_TYPE_PARAMETER, 
+                    Properties.Settings.Default.BEAM_TYPE_SIGN_TAL);
             ElementParameterFilter width18Filter
                 = EleParamGreaterFilter(
                     _doc,
-                    "Largeur", PV_MAX_WIDTH_METER);
+                    Properties.Settings.Default.BEAM_WIDTH_PARAMETER,
+                    Properties.Settings.Default.CHECK_PV_MAX_WIDTH_METER);
             List<Element> pvWidthGreaterList
                 = pvCollect.WherePasses(width18Filter).ToList();
 
@@ -276,10 +278,11 @@ namespace DCEStudyTools.BeamTypeDetect
                 = GetFamilyInstanceByShareParamValue(
                     _doc,
                     BuiltInCategory.OST_StructuralFraming,
-                    "Poutre type", "L");
+                    Properties.Settings.Default.BEAM_TYPE_PARAMETER, 
+                    Properties.Settings.Default.BEAM_TYPE_SIGN_LON);
             List<Element> groundBeamList =
             (from Element elem in groundBeamCollect
-             where !(elem as FamilyInstance).Host.Name.Contains("Bas")
+             where !(elem as FamilyInstance).Host.Name.Contains(Properties.Settings.Default.KEY_WORD_BOTTOM_LEVEL)
              select elem)
              .ToList();
 
@@ -305,7 +308,7 @@ namespace DCEStudyTools.BeamTypeDetect
                 double beamHeight =
                     UnitUtils.Convert(
                         (from Parameter pr in beam.Symbol.Parameters
-                         where pr.Definition.Name.Equals("Hauteur")
+                         where pr.Definition.Name.Equals(Properties.Settings.Default.BEAM_HEIGHT_PARAMETER)
                          select pr)
                          .First()
                          .AsDouble(),
@@ -315,7 +318,7 @@ namespace DCEStudyTools.BeamTypeDetect
                 double beamWidth =
                     UnitUtils.Convert(
                         (from Parameter pr in beam.Symbol.Parameters
-                         where pr.Definition.Name.Equals("Largeur")
+                         where pr.Definition.Name.Equals(Properties.Settings.Default.BEAM_WIDTH_PARAMETER)
                          select pr)
                          .First()
                          .AsDouble(),
@@ -324,7 +327,7 @@ namespace DCEStudyTools.BeamTypeDetect
 
                 string beamSign =
                     (from Parameter pr in beam.Symbol.Parameters
-                     where pr.Definition.Name.Equals("Poutre type")
+                     where pr.Definition.Name.Equals(Properties.Settings.Default.BEAM_TYPE_PARAMETER)
                      select pr)
                      .First()
                      .AsString();
@@ -449,7 +452,7 @@ namespace DCEStudyTools.BeamTypeDetect
                 double beamHeight =
                     UnitUtils.Convert(
                         (from Parameter pr in beam.Symbol.Parameters
-                         where pr.Definition.Name.Equals("Hauteur")
+                         where pr.Definition.Name.Equals(Properties.Settings.Default.BEAM_HEIGHT_PARAMETER)
                          select pr)
                          .First()
                          .AsDouble(),
@@ -459,7 +462,7 @@ namespace DCEStudyTools.BeamTypeDetect
                 double beamWidth =
                     UnitUtils.Convert(
                         (from Parameter pr in beam.Symbol.Parameters
-                         where pr.Definition.Name.Equals("Largeur")
+                         where pr.Definition.Name.Equals(Properties.Settings.Default.BEAM_WIDTH_PARAMETER)
                          select pr)
                          .First()
                          .AsDouble(),
@@ -468,7 +471,7 @@ namespace DCEStudyTools.BeamTypeDetect
 
                 string beamSign =
                     (from Parameter pr in beam.Symbol.Parameters
-                     where pr.Definition.Name.Equals("Poutre type")
+                     where pr.Definition.Name.Equals(Properties.Settings.Default.BEAM_TYPE_PARAMETER)
                      select pr)
                      .First()
                      .AsString();

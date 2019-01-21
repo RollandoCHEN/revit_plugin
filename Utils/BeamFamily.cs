@@ -6,17 +6,59 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DCEStudyTools.Utils
 {
+    public class BeamType
+    {
+        public static readonly BeamType POU = new BeamType(Properties.Settings.Default.BEAM_TYPE_SIGN_POU, Properties.Settings.Default.BEAM_TYPE_SYNT_POU);
+        public static readonly BeamType BN = new BeamType(Properties.Settings.Default.BEAM_TYPE_SIGN_BN, Properties.Settings.Default.BEAM_TYPE_SYNT_BN);
+        public static readonly BeamType POUR = new BeamType(Properties.Settings.Default.BEAM_TYPE_SIGN_POUR, Properties.Settings.Default.BEAM_TYPE_SYNT_POUR);
+        public static readonly BeamType TAL = new BeamType(Properties.Settings.Default.BEAM_TYPE_SIGN_TAL, Properties.Settings.Default.BEAM_TYPE_SYNT_TAL);
+        public static readonly BeamType LINT = new BeamType(Properties.Settings.Default.BEAM_TYPE_SIGN_LINT, Properties.Settings.Default.BEAM_TYPE_SYNT_LINT);
+        public static readonly BeamType LON = new BeamType(Properties.Settings.Default.BEAM_TYPE_SYNT_LON, Properties.Settings.Default.BEAM_TYPE_SIGN_LON);
+
+        public static IEnumerable<BeamType> Values
+        {
+            get
+            {
+                yield return POU;
+                yield return BN;
+                yield return POUR;
+                yield return TAL;
+                yield return LINT;
+                yield return LON;
+            }
+        }
+
+        public string ParaSign { get; private set; }
+        public string Syntaxe { get; private set; }
+
+        BeamType(string sign, string syntaxe)
+        {
+            ParaSign = sign;
+            Syntaxe = syntaxe;
+        }
+
+        public static string GetSyntaxe(string beamSign)
+        {
+            foreach (BeamType item in Values)
+            {
+                if (beamSign.Equals(item.ParaSign))
+                {
+                    return item.Syntaxe;
+                } 
+            }
+            return String.Empty;
+        }
+    }
+
     class BeamFamily
     {
         readonly static string path =
             Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) +
             Path.DirectorySeparatorChar +
-            Properties.Settings.Default.BEAM_FAMILY_NAME + Properties.Settings.Default.RVT_FAMILY_EXTENSION;
+            Properties.Settings.Default.FAMILY_NAME_BEAM + Properties.Settings.Default.RVT_FAMILY_EXTENSION;
 
         const StructuralType STBEAM
           = StructuralType.Beam;
@@ -47,7 +89,7 @@ namespace DCEStudyTools.Utils
             Family f =
                 (from fa in new FilteredElementCollector(doc)
                 .OfClass(typeof(Family)).Cast<Family>()
-                    where fa.Name.Equals(Properties.Settings.Default.BEAM_FAMILY_NAME)
+                    where fa.Name.Equals(Properties.Settings.Default.FAMILY_NAME_BEAM)
                     select fa)
                 .FirstOrDefault();
 
@@ -82,7 +124,7 @@ namespace DCEStudyTools.Utils
 
                 //add symbols of beams to lists 
                 string categoryName = familyType.Category.Name;
-                if (Properties.Settings.Default.BEAM_CATEGORY_NAME.Equals(categoryName))
+                if (Properties.Settings.Default.CATEGORY_NAME_BEAM.Equals(categoryName))
                 {
                     BeamMaps.Add(familyType);
                 }
@@ -122,10 +164,9 @@ namespace DCEStudyTools.Utils
                         DisplayUnitType.DUT_DECIMAL_FEET,
                         DisplayUnitType.DUT_CENTIMETERS);
 
-                string targetBeamTypeName =
-                                beamSign.Equals(string.Empty) ?
-                                $"{beamWidth}x{beamHeight}ht" :
-                                $"{beamSign} {beamWidth}x{beamHeight}ht";
+                string synthaxe = BeamType.GetSyntaxe(beamSign);
+
+                string targetBeamTypeName = $"{synthaxe}-BA25-{beamWidth}x{beamHeight}";
 
                 if (!beamType.Name.Equals(targetBeamTypeName))
                 {
@@ -139,10 +180,9 @@ namespace DCEStudyTools.Utils
 
         public FamilySymbol GetBeamFamilyTypeOrCreateNew(string beamSign, double beamHeight, double beamWidth)
         {
-            string targetBeamTypeName =
-                                beamSign.Equals(string.Empty) ?
-                                $"{beamWidth}x{beamHeight}ht" :
-                                $"{beamSign} {beamWidth}x{beamHeight}ht";
+            string synthaxe = BeamType.GetSyntaxe(beamSign);
+
+            string targetBeamTypeName = $"{synthaxe}-BA25-{beamWidth}x{beamHeight}";
 
             // find the family type for beam creation
             FamilySymbol beamType =

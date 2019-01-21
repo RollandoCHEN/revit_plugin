@@ -2,31 +2,31 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="DCEStudyTools.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="TITLEBLOCK_NAME" Type="System.String" Scope="User">
+    <Setting Name="TYPE_NAME_TITLEBLOCK" Type="System.String" Scope="User">
       <Value Profile="(Default)">DCE A3 Standard</Value>
     </Setting>
-    <Setting Name="STANDARD_LEGEND_NAME" Type="System.String" Scope="User">
+    <Setting Name="LEGEND_NAME_STANDARD" Type="System.String" Scope="User">
       <Value Profile="(Default)">Légendes</Value>
     </Setting>
-    <Setting Name="PILE_FOUNDATION_TITLE" Type="System.String" Scope="User">
+    <Setting Name="FOUNDATION_TITLE_PILE" Type="System.String" Scope="User">
       <Value Profile="(Default)">Charge Verticale par Pieux en Tonnes à ELS(G+Q) Test</Value>
     </Setting>
-    <Setting Name="FOOTING_FOUNDATION_TITLE" Type="System.String" Scope="User">
+    <Setting Name="FOUNDATION_TITLE_FOOTING" Type="System.String" Scope="User">
       <Value Profile="(Default)">Fondation : Semelles isolées et Filantes</Value>
     </Setting>
-    <Setting Name="GROUND_SLAB_FOUNDATION_TITLE" Type="System.String" Scope="User">
+    <Setting Name="FOUNDATION_TITLE_GROUND_SLAB" Type="System.String" Scope="User">
       <Value Profile="(Default)">Fondation : Radier</Value>
     </Setting>
-    <Setting Name="VIEWPORT_WITHOUT_TITLE_TYPE_NAME" Type="System.String" Scope="User">
+    <Setting Name="TYPE_NAME_VIEWPORT_WITHOUT_TITLE" Type="System.String" Scope="User">
       <Value Profile="(Default)">Sans titre</Value>
     </Setting>
-    <Setting Name="THREED_VIEW_TEMPLATE_NAME" Type="System.String" Scope="User">
+    <Setting Name="TEMPLATE_NAME_THREED_VIEW" Type="System.String" Scope="User">
       <Value Profile="(Default)">DCE Structure 3D</Value>
     </Setting>
-    <Setting Name="STANDARD_FLOOR_TEMPLATE_NAME" Type="System.String" Scope="User">
+    <Setting Name="TEMPLATE_NAME_STANDARD_FLOOR" Type="System.String" Scope="User">
       <Value Profile="(Default)">DCE Structure Etage Courant</Value>
     </Setting>
-    <Setting Name="FOUNDATION_TEMPLATE_NAME" Type="System.String" Scope="User">
+    <Setting Name="FOUNDATION_TEMPLATE_NAME_FOUND" Type="System.String" Scope="User">
       <Value Profile="(Default)">DCE Structure Fondation</Value>
     </Setting>
     <Setting Name="BEAM_HEIGHT_PARAMETER" Type="System.String" Scope="User">
@@ -38,25 +38,25 @@
     <Setting Name="BEAM_TYPE_PARAMETER" Type="System.String" Scope="User">
       <Value Profile="(Default)">Poutre type</Value>
     </Setting>
-    <Setting Name="FOUNDATION_KEY_WORD" Type="System.String" Scope="User">
+    <Setting Name="KEY_WORD_FOUNDATION" Type="System.String" Scope="User">
       <Value Profile="(Default)">Fondation</Value>
     </Setting>
-    <Setting Name="PILE_TYPE_NAME" Type="System.String" Scope="User">
+    <Setting Name="FAMILY_NAME_PILE" Type="System.String" Scope="User">
       <Value Profile="(Default)">FON-PIEUX</Value>
     </Setting>
-    <Setting Name="POINT_LOAD_TYPE_NAME" Type="System.String" Scope="User">
+    <Setting Name="TYPE_NAME_POINT_LOAD" Type="System.String" Scope="User">
       <Value Profile="(Default)">Charge-Point 2.5mm</Value>
     </Setting>
-    <Setting Name="SHEET_TITLE_PARA_NAME" Type="System.String" Scope="User">
+    <Setting Name="SHEET_TITLE_PARAMETER" Type="System.String" Scope="User">
       <Value Profile="(Default)">Titre en haut</Value>
     </Setting>
-    <Setting Name="SHEET_REI_PARA_NAME" Type="System.String" Scope="User">
+    <Setting Name="SHEET_REI_PARAMETER" Type="System.String" Scope="User">
       <Value Profile="(Default)">REI</Value>
     </Setting>
     <Setting Name="SHEET_REI_NA_VALUE" Type="System.String" Scope="User">
       <Value Profile="(Default)">Sans sujet</Value>
     </Setting>
-    <Setting Name="BEAM_FAMILY_NAME" Type="System.String" Scope="User">
+    <Setting Name="FAMILY_NAME_BEAM" Type="System.String" Scope="User">
       <Value Profile="(Default)">POU-BA</Value>
     </Setting>
     <Setting Name="RVT_FAMILY_EXTENSION" Type="System.String" Scope="User">
@@ -80,8 +80,65 @@
     <Setting Name="LEGEND_POSITION_Y_MAX_R" Type="System.Double" Scope="User">
       <Value Profile="(Default)">0.858</Value>
     </Setting>
-    <Setting Name="BEAM_CATEGORY_NAME" Type="System.String" Scope="User">
+    <Setting Name="CATEGORY_NAME_BEAM" Type="System.String" Scope="User">
       <Value Profile="(Default)">Ossature</Value>
+    </Setting>
+    <Setting Name="KEY_WORD_BOTTOM_LEVEL" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Bas</Value>
+    </Setting>
+    <Setting Name="BEAM_TYPE_SIGN_BN" Type="System.String" Scope="User">
+      <Value Profile="(Default)">BN</Value>
+    </Setting>
+    <Setting Name="BEAM_TYPE_SIGN_TAL" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Talon PV</Value>
+    </Setting>
+    <Setting Name="BEAM_TYPE_SIGN_POUR" Type="System.String" Scope="User">
+      <Value Profile="(Default)">PR</Value>
+    </Setting>
+    <Setting Name="BEAM_TYPE_SIGN_LINT" Type="System.String" Scope="User">
+      <Value Profile="(Default)">LT</Value>
+    </Setting>
+    <Setting Name="BEAM_TYPE_SIGN_POU" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="BEAM_TYPE_SYNT_BN" Type="System.String" Scope="User">
+      <Value Profile="(Default)">BN</Value>
+    </Setting>
+    <Setting Name="BEAM_TYPE_SYNT_TAL" Type="System.String" Scope="User">
+      <Value Profile="(Default)">TAL</Value>
+    </Setting>
+    <Setting Name="BEAM_TYPE_SYNT_POUR" Type="System.String" Scope="User">
+      <Value Profile="(Default)">POUR</Value>
+    </Setting>
+    <Setting Name="BEAM_TYPE_SYNT_LINT" Type="System.String" Scope="User">
+      <Value Profile="(Default)">LINT</Value>
+    </Setting>
+    <Setting Name="BEAM_TYPE_SYNT_POU" Type="System.String" Scope="User">
+      <Value Profile="(Default)">POU</Value>
+    </Setting>
+    <Setting Name="BEAM_TYPE_SYNT_LON" Type="System.String" Scope="User">
+      <Value Profile="(Default)">LON</Value>
+    </Setting>
+    <Setting Name="BEAM_TYPE_SIGN_LON" Type="System.String" Scope="User">
+      <Value Profile="(Default)">L</Value>
+    </Setting>
+    <Setting Name="CHECK_BN_MAX_HEIGHT_METER" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0.25</Value>
+    </Setting>
+    <Setting Name="CHECK_PV_MAX_WIDTH_METER" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0.18</Value>
+    </Setting>
+    <Setting Name="CATEGORY_NAME_FLOOR" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Sols</Value>
+    </Setting>
+    <Setting Name="LEVEL_NAME_FOUDATION" Type="System.String" Scope="User">
+      <Value Profile="(Default)">FONDATIONS</Value>
+    </Setting>
+    <Setting Name="LEVEL_NAME_BOTTOM_L1" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Bas RDC</Value>
+    </Setting>
+    <Setting Name="LEVEL_NAME_TOP_L1" Type="System.String" Scope="User">
+      <Value Profile="(Default)">PH RDC</Value>
     </Setting>
   </Settings>
 </SettingsFile>

@@ -214,6 +214,7 @@
     <Compile Include="ScaleSetting\ucScale.Designer.cs">
       <DependentUpon>ucScale.cs</DependentUpon>
     </Compile>
+    <Compile Include="Settings.cs" />
     <Compile Include="SheetCreation\SheetCreationForm.cs">
       <SubType>Form</SubType>
     </Compile>
