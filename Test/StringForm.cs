@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace DCEStudyTools.Debug
+namespace DCEStudyTools.Test
 {
     public partial class StringForm : Form
     {

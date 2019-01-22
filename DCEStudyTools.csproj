@@ -74,7 +74,7 @@
     </Compile>
     <Compile Include="Configuration\LevelConfiguration.cs" />
     <Compile Include="BeamTypeDetect\ChangeBeamFamilyTypeEvent.cs" />
-    <Compile Include="Debug\Debug.cs" />
+    <Compile Include="Test\Test.cs" />
     <Compile Include="BeamTypeDetect\BeamChangingForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -88,10 +88,10 @@
       <DependentUpon>ucNomalBeamFilterCondition.cs</DependentUpon>
     </Compile>
     <Compile Include="BeamTypeDetect\WindowHandle.cs" />
-    <Compile Include="Debug\StringForm.cs">
+    <Compile Include="Test\StringForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Debug\StringForm.Designer.cs">
+    <Compile Include="Test\StringForm.Designer.cs">
       <DependentUpon>StringForm.cs</DependentUpon>
     </Compile>
     <Compile Include="FloorSpanDirection\FloorSelectionFilter.cs" />
@@ -343,7 +343,7 @@
     <EmbeddedResource Include="BeamTypeDetect\ucNomalBeamFilterCondition.resx">
       <DependentUpon>ucNomalBeamFilterCondition.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Debug\StringForm.resx">
+    <EmbeddedResource Include="Test\StringForm.resx">
       <DependentUpon>StringForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Design\Beam\BeamAxeMarking\BeamDimensionForm.resx">

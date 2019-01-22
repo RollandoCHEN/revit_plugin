@@ -6,10 +6,10 @@ using System.Data;
 using System.Linq;
 using System.Text;
 
-namespace DCEStudyTools.Debug
+namespace DCEStudyTools.Test
 {
     [Autodesk.Revit.Attributes.Transaction(Autodesk.Revit.Attributes.TransactionMode.Manual)]
-    class Debug : IExternalCommand
+    class Test : IExternalCommand
     {
         private UIApplication _uiapp;
         private UIDocument _uidoc;

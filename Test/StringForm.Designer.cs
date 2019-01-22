@@ -1,4 +1,4 @@
-﻿namespace DCEStudyTools.Debug
+﻿namespace DCEStudyTools.Test
 {
     partial class StringForm
     {
