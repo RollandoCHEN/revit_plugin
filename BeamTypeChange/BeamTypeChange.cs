@@ -57,6 +57,7 @@ namespace DCEStudyTools.BeamTypeChange
             return Result.Succeeded;
         }
 
+        // TODO : Extraire method
         private void ChangeBeamFamilyType(string targetTypeSign, IList<Reference> refIds)
         {
             foreach (Reference reference in refIds)
@@ -65,7 +66,7 @@ namespace DCEStudyTools.BeamTypeChange
                 double selectedBeamHeight =
                     UnitUtils.Convert(
                         (from Parameter pr in beam.Symbol.Parameters
-                         where pr.Definition.Name.Equals(Properties.Settings.Default.BEAM_HEIGHT_PARAMETER)
+                         where pr.Definition.Name.Equals(Properties.Settings.Default.PARA_NAME_BEAM_HEIGHT)
                          select pr)
                          .First()
                          .AsDouble(),
@@ -75,7 +76,7 @@ namespace DCEStudyTools.BeamTypeChange
                 double selectedBeamWidth =
                     UnitUtils.Convert(
                         (from Parameter pr in beam.Symbol.Parameters
-                         where pr.Definition.Name.Equals(Properties.Settings.Default.BEAM_WIDTH_PARAMETER)
+                         where pr.Definition.Name.Equals(Properties.Settings.Default.PARA_NAME_BEAM_WIDTH)
                          select pr)
                          .First()
                          .AsDouble(),
@@ -84,7 +85,14 @@ namespace DCEStudyTools.BeamTypeChange
 
                 string selectedBeamSign =
                     (from Parameter pr in beam.Symbol.Parameters
-                     where pr.Definition.Name.Equals(Properties.Settings.Default.BEAM_TYPE_PARAMETER)
+                     where pr.Definition.Name.Equals(Properties.Settings.Default.PARA_NAME_BEAM_TYPE)
+                     select pr)
+                     .First()
+                     .AsString();
+
+                string selectedBeamMat =
+                    (from Parameter pr in beam.Symbol.Parameters
+                     where pr.Definition.Name.Equals(Properties.Settings.Default.PARA_NAME_BEAM_MATERIAL)
                      select pr)
                      .First()
                      .AsString();
@@ -95,6 +103,7 @@ namespace DCEStudyTools.BeamTypeChange
                     FamilySymbol beamType =
                         beamFamily.GetBeamFamilyTypeOrCreateNew(
                             targetTypeSign,
+                            selectedBeamMat,
                             selectedBeamHeight,
                             selectedBeamWidth);
                     Transaction t = new Transaction(_doc);

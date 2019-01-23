@@ -1,4 +1,4 @@
-﻿namespace DCEStudyTools.BeamTypeDetect
+﻿namespace DCEStudyTools.BeamTypeCorrect
 {
     partial class ucNomalBeamFilterCondition
     {

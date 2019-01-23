@@ -4,7 +4,7 @@ using DCEStudyTools.Utils;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace DCEStudyTools.BeamTypeDetect
+namespace DCEStudyTools.BeamTypeCorrect
 {
     public class ChangeBeamFamilyTypeEvent : IExternalEventHandler
     {
@@ -25,9 +25,9 @@ namespace DCEStudyTools.BeamTypeDetect
 
             _beamFamily.AdjustBeamFamilyTypeName();
 
-            ChangeBeamFamilyType("", BeamsToBeNormal);
+            ChangeBeamFamilyType(Properties.Settings.Default.BEAM_TYPE_SIGN_POU, BeamsToBeNormal);
  
-            ChangeBeamFamilyType("L", BeamsToBeGoundBeam);
+            ChangeBeamFamilyType(Properties.Settings.Default.BEAM_TYPE_SIGN_LON, BeamsToBeGoundBeam);
         }
 
         public string GetName()
@@ -35,6 +35,7 @@ namespace DCEStudyTools.BeamTypeDetect
             return "Change beam family type";
         }
 
+        // TODO : Extraire method
         private void ChangeBeamFamilyType(string targetTypeSign, IList<Element> elemCol)
         {
             if (elemCol.Count != 0)
@@ -45,7 +46,7 @@ namespace DCEStudyTools.BeamTypeDetect
                     double beamHeight =
                         UnitUtils.Convert(
                             (from Parameter pr in beam.Symbol.Parameters
-                             where pr.Definition.Name.Equals("Hauteur")
+                             where pr.Definition.Name.Equals(Properties.Settings.Default.PARA_NAME_BEAM_HEIGHT)
                              select pr)
                              .First()
                              .AsDouble(),
@@ -55,7 +56,7 @@ namespace DCEStudyTools.BeamTypeDetect
                     double beamWidth =
                         UnitUtils.Convert(
                             (from Parameter pr in beam.Symbol.Parameters
-                             where pr.Definition.Name.Equals("Largeur")
+                             where pr.Definition.Name.Equals(Properties.Settings.Default.PARA_NAME_BEAM_WIDTH)
                              select pr)
                              .First()
                              .AsDouble(),
@@ -64,16 +65,24 @@ namespace DCEStudyTools.BeamTypeDetect
 
                     string beamSign =
                         (from Parameter pr in beam.Symbol.Parameters
-                         where pr.Definition.Name.Equals("Poutre type")
+                         where pr.Definition.Name.Equals(Properties.Settings.Default.PARA_NAME_BEAM_TYPE)
                          select pr)
                          .First()
                          .AsString();
+
+                    string beamMat =
+                    (from Parameter pr in beam.Symbol.Parameters
+                     where pr.Definition.Name.Equals(Properties.Settings.Default.PARA_NAME_BEAM_MATERIAL)
+                     select pr)
+                     .First()
+                     .AsString();
 
                     if (!beamSign.Equals(targetTypeSign))
                     {
                         FamilySymbol beamType =
                             _beamFamily.GetBeamFamilyTypeOrCreateNew(
                                 targetTypeSign,
+                                beamMat,
                                 beamHeight,
                                 beamWidth);
                         Transaction t = new Transaction(_doc);

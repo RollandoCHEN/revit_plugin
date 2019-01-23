@@ -9,7 +9,7 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace DCEStudyTools.BeamTypeDetect
+namespace DCEStudyTools.BeamTypeCorrect
 {
     public partial class BeamChangingForm : System.Windows.Forms.Form
     {

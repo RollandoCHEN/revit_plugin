@@ -171,16 +171,6 @@ namespace DCEStudyTools.Properties {
         }
         
         /// <summary>
-        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap debug_32 {
-            get {
-                object obj = ResourceManager.GetObject("debug_32", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Icon semblable à (Icône).
         /// </summary>
         internal static System.Drawing.Icon dimension_edit_32 {
@@ -356,6 +346,16 @@ namespace DCEStudyTools.Properties {
         internal static System.Drawing.Bitmap tag_321 {
             get {
                 object obj = ResourceManager.GetObject("tag_321", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap test_321 {
+            get {
+                object obj = ResourceManager.GetObject("test_321", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

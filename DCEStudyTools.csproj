@@ -64,7 +64,7 @@
     <Compile Include="BeamTypeChange\BeamTypeForm.Designer.cs">
       <DependentUpon>BeamTypeForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="BeamTypeDetect\BeamTypeDetect.cs" />
+    <Compile Include="BeamTypeCorrect\BeamTypeCorrect.cs" />
     <Compile Include="CategoriesHiding\CategoriesHiding.cs" />
     <Compile Include="Configuration\LevelConfigForm.cs">
       <SubType>Form</SubType>
@@ -73,21 +73,21 @@
       <DependentUpon>LevelConfigForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Configuration\LevelConfiguration.cs" />
-    <Compile Include="BeamTypeDetect\ChangeBeamFamilyTypeEvent.cs" />
+    <Compile Include="BeamTypeCorrect\ChangeBeamFamilyTypeEvent.cs" />
     <Compile Include="Test\Test.cs" />
-    <Compile Include="BeamTypeDetect\BeamChangingForm.cs">
+    <Compile Include="BeamTypeCorrect\BeamChangingForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="BeamTypeDetect\BeamChangingForm.Designer.cs">
+    <Compile Include="BeamTypeCorrect\BeamChangingForm.Designer.cs">
       <DependentUpon>BeamChangingForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="BeamTypeDetect\ucNomalBeamFilterCondition.cs">
+    <Compile Include="BeamTypeCorrect\ucNomalBeamFilterCondition.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="BeamTypeDetect\ucNomalBeamFilterCondition.Designer.cs">
+    <Compile Include="BeamTypeCorrect\ucNomalBeamFilterCondition.Designer.cs">
       <DependentUpon>ucNomalBeamFilterCondition.cs</DependentUpon>
     </Compile>
-    <Compile Include="BeamTypeDetect\WindowHandle.cs" />
+    <Compile Include="BeamTypeCorrect\WindowHandle.cs" />
     <Compile Include="Test\StringForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -288,6 +288,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
+    <Resource Include="Resources\test_32.png" />
     <None Include="Resources\Revit_2019-01-17_16-21-57.png" />
     <None Include="Resources\Revit_2019-01-17_16-19-25.png" />
     <None Include="Resources\Revit_2019-01-17_14-39-41.png" />
@@ -325,7 +326,6 @@
     <Resource Include="Resources\tag_32.ico" />
     <Resource Include="Resources\3dview_32.ico" />
     <Resource Include="Resources\3dview_32.png" />
-    <Resource Include="Resources\debug_32.png" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
@@ -337,10 +337,10 @@
     <EmbeddedResource Include="Configuration\LevelConfigForm.resx">
       <DependentUpon>LevelConfigForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="BeamTypeDetect\BeamChangingForm.resx">
+    <EmbeddedResource Include="BeamTypeCorrect\BeamChangingForm.resx">
       <DependentUpon>BeamChangingForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="BeamTypeDetect\ucNomalBeamFilterCondition.resx">
+    <EmbeddedResource Include="BeamTypeCorrect\ucNomalBeamFilterCondition.resx">
       <DependentUpon>ucNomalBeamFilterCondition.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Test\StringForm.resx">

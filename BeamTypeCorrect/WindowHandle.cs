@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace DCEStudyTools.BeamTypeDetect
+namespace DCEStudyTools.BeamTypeCorrect
 {
     public class WindowHandle : IWin32Window
     {

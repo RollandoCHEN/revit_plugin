@@ -215,7 +215,7 @@ namespace DCEStudyTools.LevelCreation
                 ViewTemplate.FindViewTemplateOrDefault(
                     _doc,
                     ViewType.FloorPlan,
-                    Properties.Settings.Default.FOUNDATION_TEMPLATE_NAME_FOUND,
+                    Properties.Settings.Default.TEMPLATE_NAME_FOUNDATION,
                     out bool foundationTemplateIsFound);
 
             using (Transaction t = new Transaction(doc, "Create View Plans"))

@@ -16,7 +16,7 @@ namespace DCEStudyTools.Utils
         public static readonly BeamType POUR = new BeamType(Properties.Settings.Default.BEAM_TYPE_SIGN_POUR, Properties.Settings.Default.BEAM_TYPE_SYNT_POUR);
         public static readonly BeamType TAL = new BeamType(Properties.Settings.Default.BEAM_TYPE_SIGN_TAL, Properties.Settings.Default.BEAM_TYPE_SYNT_TAL);
         public static readonly BeamType LINT = new BeamType(Properties.Settings.Default.BEAM_TYPE_SIGN_LINT, Properties.Settings.Default.BEAM_TYPE_SYNT_LINT);
-        public static readonly BeamType LON = new BeamType(Properties.Settings.Default.BEAM_TYPE_SYNT_LON, Properties.Settings.Default.BEAM_TYPE_SIGN_LON);
+        public static readonly BeamType LON = new BeamType(Properties.Settings.Default.BEAM_TYPE_SIGN_LON, Properties.Settings.Default.BEAM_TYPE_SYNT_LON);
 
         public static IEnumerable<BeamType> Values
         {
@@ -53,6 +53,29 @@ namespace DCEStudyTools.Utils
         }
     }
 
+    public class BeamMat
+    {
+        public static Dictionary<string, string> MatDictionary { get; private set; }
+        
+        public static string GetMatSign(string beamMat)
+        {
+            MatDictionary.Add("Béton25", "BA25");
+            MatDictionary.Add("Béton30", "BA30");
+            MatDictionary.Add("Béton35", "BA35");
+            MatDictionary.Add("Béton40", "BA40");
+            MatDictionary.Add("Béton45", "BA45");
+
+            foreach (var mat in MatDictionary)
+            {
+                if (beamMat.Contains(mat.Key))
+                {
+                    return mat.Value;
+                }
+            }
+            return "BA25";
+        }
+    }
+
     class BeamFamily
     {
         readonly static string path =
@@ -63,7 +86,7 @@ namespace DCEStudyTools.Utils
         const StructuralType STBEAM
           = StructuralType.Beam;
 
-        private List<FamilySymbol> _beamMaps = new List<FamilySymbol>();
+        private List<FamilySymbol> _beamTypesList = new List<FamilySymbol>();
         private Family _family;
         private Document _doc;
 
@@ -74,18 +97,23 @@ namespace DCEStudyTools.Utils
                 return _family;
             }
         }
-        public List<FamilySymbol> BeamMaps
+        public List<FamilySymbol> BeamTypesList
         {
             get
             {
-                return _beamMaps;
+                return _beamTypesList;
             }
         }
+
+        // Revit    |       Objet           |       FamilyInstance
+        // Famille  =>      Family          ->      Name = "POU-BA"
+        // Type     =>      FamilySymbol    ->      .Family
+        // Poutre   =>      FamilyInstance  ->      .Symbol
 
         public BeamFamily(Document doc)
         {
             _doc = doc;
-            // Retrieve the Beam family
+            // Retrieve the Beam family "POU-BA"
             Family f =
                 (from fa in new FilteredElementCollector(doc)
                 .OfClass(typeof(Family)).Cast<Family>()
@@ -109,37 +137,34 @@ namespace DCEStudyTools.Utils
                 t.Commit();
             }
 
-            foreach (ElementId elementId in f.GetFamilySymbolIds())
-            {
-                object symbol = doc.GetElement(elementId);
-                FamilySymbol familyType = symbol as FamilySymbol;
-                if (null == familyType)
-                {
-                    continue;
-                }
-                if (null == familyType.Category)
-                {
-                    continue;
-                }
-
-                //add symbols of beams to lists 
-                string categoryName = familyType.Category.Name;
-                if (Properties.Settings.Default.CATEGORY_NAME_BEAM.Equals(categoryName))
-                {
-                    BeamMaps.Add(familyType);
-                }
-            }
+            // Retrieve all the Beam types of the family "POU-BA"
+            List<FamilySymbol> beamTypesList =
+                    (from beam in new FilteredElementCollector(_doc)
+                     .OfClass(typeof(FamilySymbol))
+                     .OfCategory(BuiltInCategory.OST_StructuralFraming)
+                     .Cast<FamilySymbol>()
+                     where beam.Family.Id==f.Id
+                     select beam)
+                     .ToList();
 
             _family = f;
+            _beamTypesList = beamTypesList;
         }
 
         public void AdjustBeamFamilyTypeName()
         {
-            foreach (FamilySymbol beamType in BeamMaps)
+            foreach (FamilySymbol beamType in BeamTypesList)
             {
                 string beamSign =
                     (from Parameter pr in beamType.Parameters
-                     where pr.Definition.Name.Equals(Properties.Settings.Default.BEAM_TYPE_PARAMETER)
+                     where pr.Definition.Name.Equals(Properties.Settings.Default.PARA_NAME_BEAM_TYPE)
+                     select pr)
+                     .First()
+                     .AsString();
+
+                string beamMat =
+                    (from Parameter pr in beamType.Parameters
+                     where pr.Definition.Name.Equals(Properties.Settings.Default.PARA_NAME_BEAM_MATERIAL)
                      select pr)
                      .First()
                      .AsString();
@@ -147,7 +172,7 @@ namespace DCEStudyTools.Utils
                 double beamHeight =
                     UnitUtils.Convert(
                         (from Parameter pr in beamType.Parameters
-                         where pr.Definition.Name.Equals(Properties.Settings.Default.BEAM_HEIGHT_PARAMETER)
+                         where pr.Definition.Name.Equals(Properties.Settings.Default.PARA_NAME_BEAM_HEIGHT)
                          select pr)
                          .First()
                          .AsDouble(),
@@ -157,16 +182,18 @@ namespace DCEStudyTools.Utils
                 double beamWidth =
                     UnitUtils.Convert(
                         (from Parameter pr in beamType.Parameters
-                         where pr.Definition.Name.Equals(Properties.Settings.Default.BEAM_WIDTH_PARAMETER)
+                         where pr.Definition.Name.Equals(Properties.Settings.Default.PARA_NAME_BEAM_WIDTH)
                          select pr)
                          .First()
                          .AsDouble(),
                         DisplayUnitType.DUT_DECIMAL_FEET,
                         DisplayUnitType.DUT_CENTIMETERS);
-
+                
                 string synthaxe = BeamType.GetSyntaxe(beamSign);
 
-                string targetBeamTypeName = $"{synthaxe}-BA25-{beamWidth}x{beamHeight}";
+                string matSign = BeamMat.GetMatSign(beamMat);
+
+                string targetBeamTypeName = $"{synthaxe}-{matSign}-{beamWidth}x{beamHeight}";
 
                 if (!beamType.Name.Equals(targetBeamTypeName))
                 {
@@ -178,15 +205,16 @@ namespace DCEStudyTools.Utils
             }
         }
 
-        public FamilySymbol GetBeamFamilyTypeOrCreateNew(string beamSign, double beamHeight, double beamWidth)
+        public FamilySymbol GetBeamFamilyTypeOrCreateNew(string beamSign, string beamMat, double beamHeight, double beamWidth)
         {
             string synthaxe = BeamType.GetSyntaxe(beamSign);
+            string matSign = BeamMat.GetMatSign(beamMat);
 
-            string targetBeamTypeName = $"{synthaxe}-BA25-{beamWidth}x{beamHeight}";
+            string targetBeamTypeName = $"{synthaxe}-{matSign}-{beamWidth}x{beamHeight}";
 
             // find the family type for beam creation
             FamilySymbol beamType =
-                (from sm in BeamMaps
+                (from sm in BeamTypesList
                  where sm.Name.Equals(targetBeamTypeName)
                  select sm)
                  .FirstOrDefault();
@@ -210,33 +238,33 @@ namespace DCEStudyTools.Utils
                     Transaction t = new Transaction(_doc);
                     t.Start("Create new family type");
 
-                    beamType = s.Duplicate("Test") as FamilySymbol;
+                    beamType = s.Duplicate("InitialName") as FamilySymbol;
 
                     SetLengthValueTo(
-                        beamType, "Hauteur",
+                        beamType, Properties.Settings.Default.PARA_NAME_BEAM_HEIGHT,
                         UnitUtils.Convert(beamHeight, DisplayUnitType.DUT_CENTIMETERS, DisplayUnitType.DUT_DECIMAL_FEET));
 
                     SetLengthValueTo(
-                        beamType, "Largeur",
+                        beamType, Properties.Settings.Default.PARA_NAME_BEAM_WIDTH,
                         UnitUtils.Convert(beamWidth, DisplayUnitType.DUT_CENTIMETERS, DisplayUnitType.DUT_DECIMAL_FEET));
 
-                    SetTextValueTo(beamType, "Poutre type", beamSign);
+                    SetTextValueTo(beamType, Properties.Settings.Default.PARA_NAME_BEAM_TYPE, beamSign);
 
                     beamType.Name = targetBeamTypeName;
                     t.Commit();
 
-                    BeamMaps.Add(beamType);
+                    BeamTypesList.Add(beamType);
                 }
             }
 
             return beamType;
         }
 
-        private  void SetLengthValueTo(Element element, string paraName, double value)
+        private void SetLengthValueTo(Element element, string paraName, double value)
         {
             foreach (Parameter pr in element.Parameters)
             {
-                if (pr.Definition.Name.Equals(paraName) && pr.Definition.ParameterType == ParameterType.Length)
+                if (pr.Definition.Name.Equals(paraName) && pr.StorageType == StorageType.Double)
                 {
                     pr.Set(value);
                 }
@@ -247,7 +275,7 @@ namespace DCEStudyTools.Utils
         {
             foreach (Parameter pr in element.Parameters)
             {
-                if (pr.Definition.Name.Equals(paraName) && pr.Definition.ParameterType == ParameterType.Text)
+                if (pr.Definition.Name.Equals(paraName) && pr.StorageType == StorageType.String)
                 {
                     pr.Set(value);
                 }

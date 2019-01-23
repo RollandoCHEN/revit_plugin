@@ -26,16 +26,16 @@
     <Setting Name="TEMPLATE_NAME_STANDARD_FLOOR" Type="System.String" Scope="User">
       <Value Profile="(Default)">DCE Structure Etage Courant</Value>
     </Setting>
-    <Setting Name="FOUNDATION_TEMPLATE_NAME_FOUND" Type="System.String" Scope="User">
+    <Setting Name="TEMPLATE_NAME_FOUNDATION" Type="System.String" Scope="User">
       <Value Profile="(Default)">DCE Structure Fondation</Value>
     </Setting>
-    <Setting Name="BEAM_HEIGHT_PARAMETER" Type="System.String" Scope="User">
+    <Setting Name="PARA_NAME_BEAM_HEIGHT" Type="System.String" Scope="User">
       <Value Profile="(Default)">Hauteur</Value>
     </Setting>
-    <Setting Name="BEAM_WIDTH_PARAMETER" Type="System.String" Scope="User">
+    <Setting Name="PARA_NAME_BEAM_WIDTH" Type="System.String" Scope="User">
       <Value Profile="(Default)">Largeur</Value>
     </Setting>
-    <Setting Name="BEAM_TYPE_PARAMETER" Type="System.String" Scope="User">
+    <Setting Name="PARA_NAME_BEAM_TYPE" Type="System.String" Scope="User">
       <Value Profile="(Default)">Poutre type</Value>
     </Setting>
     <Setting Name="KEY_WORD_FOUNDATION" Type="System.String" Scope="User">
@@ -47,13 +47,13 @@
     <Setting Name="TYPE_NAME_POINT_LOAD" Type="System.String" Scope="User">
       <Value Profile="(Default)">Charge-Point 2.5mm</Value>
     </Setting>
-    <Setting Name="SHEET_TITLE_PARAMETER" Type="System.String" Scope="User">
+    <Setting Name="PARA_NAME_SHEET_TITLE" Type="System.String" Scope="User">
       <Value Profile="(Default)">Titre en haut</Value>
     </Setting>
-    <Setting Name="SHEET_REI_PARAMETER" Type="System.String" Scope="User">
+    <Setting Name="PARA_NAME_SHEET_REI" Type="System.String" Scope="User">
       <Value Profile="(Default)">REI</Value>
     </Setting>
-    <Setting Name="SHEET_REI_NA_VALUE" Type="System.String" Scope="User">
+    <Setting Name="PARA_VALUE_SHEET_REI_NA" Type="System.String" Scope="User">
       <Value Profile="(Default)">Sans sujet</Value>
     </Setting>
     <Setting Name="FAMILY_NAME_BEAM" Type="System.String" Scope="User">
@@ -139,6 +139,15 @@
     </Setting>
     <Setting Name="LEVEL_NAME_TOP_L1" Type="System.String" Scope="User">
       <Value Profile="(Default)">PH RDC</Value>
+    </Setting>
+    <Setting Name="TITLEBLOCK_WIDTH" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0.27</Value>
+    </Setting>
+    <Setting Name="TITLEBLOCK_LENGTH" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0.4</Value>
+    </Setting>
+    <Setting Name="PARA_NAME_BEAM_MATERIAL" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Matériau structurel</Value>
     </Setting>
   </Settings>
 </SettingsFile>

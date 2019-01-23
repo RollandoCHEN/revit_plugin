@@ -3,7 +3,7 @@ using System.Data;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace DCEStudyTools.BeamTypeDetect
+namespace DCEStudyTools.BeamTypeCorrect
 {
     partial class BeamChangingForm
     {
@@ -95,7 +95,7 @@ namespace DCEStudyTools.BeamTypeDetect
             this.toN_typeGridColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toN_heightGridColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toN_widthGridColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ucBeamFilterCondition = new DCEStudyTools.BeamTypeDetect.ucNomalBeamFilterCondition();
+            this.ucBeamFilterCondition = new DCEStudyTools.BeamTypeCorrect.ucNomalBeamFilterCondition();
             this.toN_ApplyButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
@@ -273,8 +273,8 @@ namespace DCEStudyTools.BeamTypeDetect
             this.unsupportedWallGridView.AllowUserToAddRows = false;
             this.unsupportedWallGridView.AllowUserToDeleteRows = false;
             this.unsupportedWallGridView.AllowUserToResizeRows = false;
-            this.unsupportedWallGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.unsupportedWallGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.unsupportedWallGridView.AutoGenerateColumns = false;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
@@ -345,7 +345,7 @@ namespace DCEStudyTools.BeamTypeDetect
             // 
             // label3
             // 
-            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -388,8 +388,8 @@ namespace DCEStudyTools.BeamTypeDetect
             this.toGroundBeamDataView.AllowUserToAddRows = false;
             this.toGroundBeamDataView.AllowUserToDeleteRows = false;
             this.toGroundBeamDataView.AllowUserToResizeRows = false;
-            this.toGroundBeamDataView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.toGroundBeamDataView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.toGroundBeamDataView.AutoGenerateColumns = false;
             dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
@@ -477,7 +477,7 @@ namespace DCEStudyTools.BeamTypeDetect
             // 
             // label2
             // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoEllipsis = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -507,8 +507,8 @@ namespace DCEStudyTools.BeamTypeDetect
             this.toNormalDataView.AllowUserToAddRows = false;
             this.toNormalDataView.AllowUserToDeleteRows = false;
             this.toNormalDataView.AllowUserToResizeRows = false;
-            this.toNormalDataView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.toNormalDataView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.toNormalDataView.AutoGenerateColumns = false;
             dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
@@ -609,7 +609,7 @@ namespace DCEStudyTools.BeamTypeDetect
             // 
             // ucBeamFilterCondition
             // 
-            this.ucBeamFilterCondition.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.ucBeamFilterCondition.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ucBeamFilterCondition.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ucBeamFilterCondition.Location = new System.Drawing.Point(5, 8);
@@ -635,7 +635,7 @@ namespace DCEStudyTools.BeamTypeDetect
             // 
             // label1
             // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label1.Location = new System.Drawing.Point(5, 81);
@@ -648,8 +648,8 @@ namespace DCEStudyTools.BeamTypeDetect
             // 
             // tabControl1
             // 
-            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.toN_TabPage);
             this.tabControl1.Controls.Add(this.toGB_TabPage);

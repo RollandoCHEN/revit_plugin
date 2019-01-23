@@ -17,18 +17,12 @@ namespace DCEStudyTools.ScaleSetting
         private UIDocument _uidoc;
         private Autodesk.Revit.DB.Document _doc;
 
-        private List<int> _scales = new List<int>()
+        private readonly List<int> _scales = new List<int>()
         {
             100, 125,
             150, 200,
             250, 500
         };
-
-        private readonly string FLOOR_VIEW_TEMPLATE_NAME = "DCE Structure Etage Courant";
-        private readonly string FOUNDATION_VIEW_TEMPLATE_NAME = "DCE Structure Fondation";
-
-        private readonly double TITLE_BLOCK_LENGTH = 0.4;
-        private readonly double TITLE_BLOCK_WIDTH = 0.27;
 
         public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
         {
@@ -77,7 +71,8 @@ namespace DCEStudyTools.ScaleSetting
 
                 foreach (int scale in _scales)
                 {
-                    if (maxLength / scale < TITLE_BLOCK_LENGTH && minLength / scale < TITLE_BLOCK_WIDTH)
+                    if (maxLength / scale < Properties.Settings.Default.TITLEBLOCK_LENGTH && 
+                        minLength / scale < Properties.Settings.Default.TITLEBLOCK_WIDTH)
                     {
                         SetScaleForm form = new SetScaleForm(scale);
                         if (form.ShowDialog() == System.Windows.Forms.DialogResult.OK)
@@ -113,14 +108,14 @@ namespace DCEStudyTools.ScaleSetting
                 ViewTemplate.FindViewTemplateOrDefault(
                     _doc,
                     ViewType.FloorPlan,
-                    FLOOR_VIEW_TEMPLATE_NAME,
+                    Properties.Settings.Default.TEMPLATE_NAME_THREED_VIEW,
                     out bool templateIsFound);
 
             View foundationViewTemplate =
                 ViewTemplate.FindViewTemplateOrDefault(
                     _doc,
                     ViewType.FloorPlan,
-                    FOUNDATION_VIEW_TEMPLATE_NAME,
+                    Properties.Settings.Default.TEMPLATE_NAME_FOUNDATION,
                     out bool foundationTemplateIsFound);
 
             if (templateIsFound)

@@ -98,8 +98,8 @@ namespace DCEStudyTools.Design.Beam.BeamCreation
                 {
                     continue;
                 }
-
-                FamilySymbol beamType = beamFamily.GetBeamFamilyTypeOrCreateNew(beamSign, beamHeight, beamWidth);
+                // TODO : 
+                FamilySymbol beamType = beamFamily.GetBeamFamilyTypeOrCreateNew(beamSign, "Béton25", beamHeight, beamWidth);
 
                 ElementId newBeamId = PlaceBeam(line, level, beamType);
 

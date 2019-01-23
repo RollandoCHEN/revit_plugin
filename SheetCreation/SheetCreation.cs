@@ -141,12 +141,12 @@ namespace DCEStudyTools.SheetCreation
 
                     if (!levels[i].Name.Contains(Properties.Settings.Default.KEY_WORD_FOUNDATION))
                     {
-                        SetParameterValuefor(viewSheet, Properties.Settings.Default.SHEET_REI_PARAMETER, _form.FireResist);
+                        SetParameterValuefor(viewSheet, Properties.Settings.Default.PARA_NAME_SHEET_REI, _form.FireResist);
                         AddLegendToSheetView(legendView, viewPortType_WithoutTitle, viewSheet);
                     }
                     else
                     {
-                        SetParameterValuefor(viewSheet, Properties.Settings.Default.SHEET_REI_PARAMETER, Properties.Settings.Default.SHEET_REI_NA_VALUE);
+                        SetParameterValuefor(viewSheet, Properties.Settings.Default.PARA_NAME_SHEET_REI, Properties.Settings.Default.PARA_VALUE_SHEET_REI_NA);
                         string title = string.Empty;
                         switch (_form.FoundationType)
                         {
@@ -162,7 +162,7 @@ namespace DCEStudyTools.SheetCreation
                             default:
                                 break;
                         }
-                        SetParameterValuefor(viewSheet, Properties.Settings.Default.SHEET_TITLE_PARAMETER, title);
+                        SetParameterValuefor(viewSheet, Properties.Settings.Default.PARA_NAME_SHEET_TITLE, title);
                         AddLegendToSheetView(foundationLegend, viewPortType_WithoutTitle, viewSheet);
                     }
 

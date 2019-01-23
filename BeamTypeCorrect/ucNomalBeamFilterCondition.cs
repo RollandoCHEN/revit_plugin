@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace DCEStudyTools.BeamTypeDetect
+namespace DCEStudyTools.BeamTypeCorrect
 {
     public partial class ucNomalBeamFilterCondition : UserControl
     {

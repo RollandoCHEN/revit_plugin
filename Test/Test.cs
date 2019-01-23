@@ -23,7 +23,7 @@ namespace DCEStudyTools.Test
             
             try
             {
-                IList<FamilySymbol> longrinesType =
+                IList<FamilySymbol> beamTypesList =
                     (from beam in new FilteredElementCollector(_doc)
                      .OfClass(typeof(FamilySymbol))
                      .OfCategory(BuiltInCategory.OST_StructuralFraming)
@@ -31,65 +31,35 @@ namespace DCEStudyTools.Test
                      .Cast<FamilySymbol>()
                      .ToList();
 
-                
-                foreach (FamilySymbol lt in longrinesType)
+                Material target =
+                    (from Material m in new FilteredElementCollector(_doc)
+                     .OfClass(typeof(Material))
+                     where m != null
+                     select m)
+                     .Cast<Material>()
+                     .FirstOrDefault(m => m.Name.Equals("Béton - Coulé sur place - Béton25"));
+
+                Transaction t = new Transaction(_doc, "Set mat");
+                t.Start();
+                foreach (FamilySymbol bt in beamTypesList)
                 {
-                    
-                    string beamSign =
-                    (from Parameter pr in lt.Parameters
-                     where pr.Definition.Name.Equals(Properties.Settings.Default.BEAM_TYPE_PARAMETER)
-                     select pr)
-                     .FirstOrDefault()
-                     .AsString();
+                    if (bt.Name.Contains("BA25"))
+                    {
+                        Parameter mat =
+                            (from Parameter para in bt.Parameters
+                             where para.Definition.Name.Equals("Matériau structurel")
+                             select para)
+                             .Cast<Parameter>()
+                             .First();
+                
+                        mat.Set(target.Id);
+                    }
 
-                    double beamHeight =
-                    UnitUtils.Convert(
-                        (from Parameter pr in lt.Parameters
-                         where pr.Definition.Name.Equals(Properties.Settings.Default.BEAM_HEIGHT_PARAMETER)
-                         select pr)
-                         .First()
-                         .AsDouble(),
-                        DisplayUnitType.DUT_DECIMAL_FEET,
-                        DisplayUnitType.DUT_CENTIMETERS);
-
-                    double beamWidth =
-                    UnitUtils.Convert(
-                        (from Parameter pr in lt.Parameters
-                         where pr.Definition.Name.Equals(Properties.Settings.Default.BEAM_WIDTH_PARAMETER)
-                         select pr)
-                         .First()
-                         .AsDouble(),
-                        DisplayUnitType.DUT_DECIMAL_FEET,
-                        DisplayUnitType.DUT_CENTIMETERS);
-
-                    Transaction t = new Transaction(_doc, "Rename beam type");
-                    t.Start();
-
-                    if (beamSign.Equals("L"))
-                    {
-                        lt.Name = $"LON-BA25-{beamWidth}x{beamHeight}";
-                    }
-                    else if (beamSign.Equals("BN"))
-                    {
-                        lt.Name = $"BN-BA25-{beamWidth}x{beamHeight}";
-                    }
-                    else if (beamSign.Equals("PR"))
-                    {
-                        lt.Name = $"POUR-BA25-{beamWidth}x{beamHeight}";
-                    }
-                    else if (beamSign.Equals("Talon PV"))
-                    {
-                        lt.Name = $"TAL-BA25-{beamWidth}x{beamHeight}";
-                    }
-                    else
-                    {
-                        lt.Name = $"POU-BA25-{beamWidth}x{beamHeight}";
-                    }
-                    
-                    t.Commit();
                 }
+                t.Commit();
                 
 
+                
                 //// Duplicate the selected view selon the number of zone de définition
 
                 //// Get list of all structural levels

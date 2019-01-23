@@ -9,10 +9,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DCEStudyTools.BeamTypeDetect
+namespace DCEStudyTools.BeamTypeCorrect
 {
     [Autodesk.Revit.Attributes.Transaction(Autodesk.Revit.Attributes.TransactionMode.Manual)]
-    class BeamTypeDetect : IExternalCommand
+    class BeamTypeCorrect : IExternalCommand
     {
         static WindowHandle _hWndRevit = null;
 
@@ -223,10 +223,24 @@ namespace DCEStudyTools.BeamTypeDetect
                 = GetFamilyInstanceByShareParamValue(
                     _doc,
                     BuiltInCategory.OST_StructuralFraming,
-                    Properties.Settings.Default.BEAM_TYPE_PARAMETER, 
+                    Properties.Settings.Default.PARA_NAME_BEAM_TYPE, 
                     "");
+
+            FilteredElementCollector pouRCollect
+                = GetFamilyInstanceByShareParamValue(
+                    _doc,
+                    BuiltInCategory.OST_StructuralFraming,
+                    Properties.Settings.Default.PARA_NAME_BEAM_TYPE,
+                    "PR");
+
             List<Element> normalBeamList =
             (from Element elem in nomalBeamCollect
+             where (elem as FamilyInstance).Host.Name.Contains(Properties.Settings.Default.KEY_WORD_BOTTOM_LEVEL)
+             select elem)
+             .ToList();
+
+            List<Element> pouRList =
+            (from Element elem in pouRCollect
              where (elem as FamilyInstance).Host.Name.Contains(Properties.Settings.Default.KEY_WORD_BOTTOM_LEVEL)
              select elem)
              .ToList();
@@ -234,6 +248,7 @@ namespace DCEStudyTools.BeamTypeDetect
             // List of beams should be changed as Ground Beam
             List<Element> beamToBeGroundBeamList = new List<Element>();
             beamToBeGroundBeamList.AddRange(normalBeamList);
+            beamToBeGroundBeamList.AddRange(pouRList);
 
             if (beamToBeGroundBeamList.Count != 0)
             {
@@ -248,12 +263,12 @@ namespace DCEStudyTools.BeamTypeDetect
             = GetFamilyInstanceByShareParamValue(
                 _doc,
                 BuiltInCategory.OST_StructuralFraming,
-                Properties.Settings.Default.BEAM_TYPE_PARAMETER, 
+                Properties.Settings.Default.PARA_NAME_BEAM_TYPE, 
                 Properties.Settings.Default.BEAM_TYPE_SIGN_BN);
             ElementParameterFilter height25Filter
                 = EleParamGreaterFilter(
                     _doc,
-                    Properties.Settings.Default.BEAM_HEIGHT_PARAMETER,
+                    Properties.Settings.Default.PARA_NAME_BEAM_HEIGHT,
                     Properties.Settings.Default.CHECK_BN_MAX_HEIGHT_METER);
             List<Element> bnHeightGreaterList
                 = bnCollect.WherePasses(height25Filter).ToList();
@@ -263,12 +278,12 @@ namespace DCEStudyTools.BeamTypeDetect
                 = GetFamilyInstanceByShareParamValue(
                     _doc,
                     BuiltInCategory.OST_StructuralFraming,
-                    Properties.Settings.Default.BEAM_TYPE_PARAMETER, 
+                    Properties.Settings.Default.PARA_NAME_BEAM_TYPE, 
                     Properties.Settings.Default.BEAM_TYPE_SIGN_TAL);
             ElementParameterFilter width18Filter
                 = EleParamGreaterFilter(
                     _doc,
-                    Properties.Settings.Default.BEAM_WIDTH_PARAMETER,
+                    Properties.Settings.Default.PARA_NAME_BEAM_WIDTH,
                     Properties.Settings.Default.CHECK_PV_MAX_WIDTH_METER);
             List<Element> pvWidthGreaterList
                 = pvCollect.WherePasses(width18Filter).ToList();
@@ -278,7 +293,7 @@ namespace DCEStudyTools.BeamTypeDetect
                 = GetFamilyInstanceByShareParamValue(
                     _doc,
                     BuiltInCategory.OST_StructuralFraming,
-                    Properties.Settings.Default.BEAM_TYPE_PARAMETER, 
+                    Properties.Settings.Default.PARA_NAME_BEAM_TYPE, 
                     Properties.Settings.Default.BEAM_TYPE_SIGN_LON);
             List<Element> groundBeamList =
             (from Element elem in groundBeamCollect
@@ -308,7 +323,7 @@ namespace DCEStudyTools.BeamTypeDetect
                 double beamHeight =
                     UnitUtils.Convert(
                         (from Parameter pr in beam.Symbol.Parameters
-                         where pr.Definition.Name.Equals(Properties.Settings.Default.BEAM_HEIGHT_PARAMETER)
+                         where pr.Definition.Name.Equals(Properties.Settings.Default.PARA_NAME_BEAM_HEIGHT)
                          select pr)
                          .First()
                          .AsDouble(),
@@ -318,7 +333,7 @@ namespace DCEStudyTools.BeamTypeDetect
                 double beamWidth =
                     UnitUtils.Convert(
                         (from Parameter pr in beam.Symbol.Parameters
-                         where pr.Definition.Name.Equals(Properties.Settings.Default.BEAM_WIDTH_PARAMETER)
+                         where pr.Definition.Name.Equals(Properties.Settings.Default.PARA_NAME_BEAM_WIDTH)
                          select pr)
                          .First()
                          .AsDouble(),
@@ -327,7 +342,7 @@ namespace DCEStudyTools.BeamTypeDetect
 
                 string beamSign =
                     (from Parameter pr in beam.Symbol.Parameters
-                     where pr.Definition.Name.Equals(Properties.Settings.Default.BEAM_TYPE_PARAMETER)
+                     where pr.Definition.Name.Equals(Properties.Settings.Default.PARA_NAME_BEAM_TYPE)
                      select pr)
                      .First()
                      .AsString();
@@ -443,59 +458,7 @@ namespace DCEStudyTools.BeamTypeDetect
                 .WherePasses(filter);
             return collector;
         }
-
-        private void ChangeBeamFamilyType(string targetTypeSign, FilteredElementCollector elemCol)
-        {
-            foreach (Element elem in elemCol)
-            {
-                FamilyInstance beam = elem as FamilyInstance;
-                double beamHeight =
-                    UnitUtils.Convert(
-                        (from Parameter pr in beam.Symbol.Parameters
-                         where pr.Definition.Name.Equals(Properties.Settings.Default.BEAM_HEIGHT_PARAMETER)
-                         select pr)
-                         .First()
-                         .AsDouble(),
-                        DisplayUnitType.DUT_DECIMAL_FEET,
-                        DisplayUnitType.DUT_CENTIMETERS);
-
-                double beamWidth =
-                    UnitUtils.Convert(
-                        (from Parameter pr in beam.Symbol.Parameters
-                         where pr.Definition.Name.Equals(Properties.Settings.Default.BEAM_WIDTH_PARAMETER)
-                         select pr)
-                         .First()
-                         .AsDouble(),
-                        DisplayUnitType.DUT_DECIMAL_FEET,
-                        DisplayUnitType.DUT_CENTIMETERS);
-
-                string beamSign =
-                    (from Parameter pr in beam.Symbol.Parameters
-                     where pr.Definition.Name.Equals(Properties.Settings.Default.BEAM_TYPE_PARAMETER)
-                     select pr)
-                     .First()
-                     .AsString();
-
-                if (!beamSign.Equals(targetTypeSign))
-                {
-                    BeamFamily beamFamily = new BeamFamily(_doc);
-                    FamilySymbol beamType =
-                        beamFamily.GetBeamFamilyTypeOrCreateNew(
-                            targetTypeSign,
-                            beamHeight,
-                            beamWidth);
-                    Transaction t = new Transaction(_doc);
-                    t.Start("Change beam type");
-                    beam.Symbol = beamType;
-                    t.Commit();
-                }
-                else
-                {
-                    continue;
-                }
-            }
-        }
-
+        
         private bool IsParallel(XYZ p, XYZ q)
         {
             return p.CrossProduct(q).IsZeroLength();

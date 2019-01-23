@@ -74,13 +74,13 @@ namespace DCEStudyTools
             RibbonPanel toolRibbonPanel = application.CreateRibbonPanel(tabName, "Tools");
 
             // Create push button for Debug
-            PushButton pbDebug = toolRibbonPanel.AddItem(
+            PushButton pbTest = toolRibbonPanel.AddItem(
                 CreatePushButtonData(
-                    "cmdDebug",
-                    "Debug",
+                    "cmdTest",
+                    "Test",
                     thisAssemblyPath,
-                    "DCEStudyTools.Debug.Debug",
-                    "debug_32.png",
+                    "DCEStudyTools.Test.Test",
+                    "test_32.png",
                     "")
             ) as PushButton;
 
@@ -117,12 +117,12 @@ namespace DCEStudyTools
 
             // Create push button data for beam type detect
             PushButtonData pbBeamTypeDetectData = CreatePushButtonData(
-                "cmdBeamTypeDetect",
-                "Detect" + System.Environment.NewLine + "Beam Type",
+                "cmdBeamTypeCorrect",
+                "Correct" + System.Environment.NewLine + "Beam Type",
                 thisAssemblyPath,
-                "DCEStudyTools.BeamTypeDetect.BeamTypeDetect",
+                "DCEStudyTools.BeamTypeCorrect.BeamTypeCorrect",
                 "beam_doubt_32.png",
-                "Detect the beams whose type are in doubt");
+                "Correct the type of beams whose type are not appropriate");
 
             // Create "Beam Type Management" split button
             SplitButtonData sbBeamTypeData = new SplitButtonData("cmdBeamTypeManagement", "Beam Types Management");

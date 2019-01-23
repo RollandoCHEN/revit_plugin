@@ -122,48 +122,48 @@ namespace DCEStudyTools.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("DCE Structure Fondation")]
-        public string FOUNDATION_TEMPLATE_NAME_FOUND {
+        public string TEMPLATE_NAME_FOUNDATION {
             get {
-                return ((string)(this["FOUNDATION_TEMPLATE_NAME_FOUND"]));
+                return ((string)(this["TEMPLATE_NAME_FOUNDATION"]));
             }
             set {
-                this["FOUNDATION_TEMPLATE_NAME_FOUND"] = value;
+                this["TEMPLATE_NAME_FOUNDATION"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Hauteur")]
-        public string BEAM_HEIGHT_PARAMETER {
+        public string PARA_NAME_BEAM_HEIGHT {
             get {
-                return ((string)(this["BEAM_HEIGHT_PARAMETER"]));
+                return ((string)(this["PARA_NAME_BEAM_HEIGHT"]));
             }
             set {
-                this["BEAM_HEIGHT_PARAMETER"] = value;
+                this["PARA_NAME_BEAM_HEIGHT"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Largeur")]
-        public string BEAM_WIDTH_PARAMETER {
+        public string PARA_NAME_BEAM_WIDTH {
             get {
-                return ((string)(this["BEAM_WIDTH_PARAMETER"]));
+                return ((string)(this["PARA_NAME_BEAM_WIDTH"]));
             }
             set {
-                this["BEAM_WIDTH_PARAMETER"] = value;
+                this["PARA_NAME_BEAM_WIDTH"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Poutre type")]
-        public string BEAM_TYPE_PARAMETER {
+        public string PARA_NAME_BEAM_TYPE {
             get {
-                return ((string)(this["BEAM_TYPE_PARAMETER"]));
+                return ((string)(this["PARA_NAME_BEAM_TYPE"]));
             }
             set {
-                this["BEAM_TYPE_PARAMETER"] = value;
+                this["PARA_NAME_BEAM_TYPE"] = value;
             }
         }
         
@@ -206,36 +206,36 @@ namespace DCEStudyTools.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Titre en haut")]
-        public string SHEET_TITLE_PARAMETER {
+        public string PARA_NAME_SHEET_TITLE {
             get {
-                return ((string)(this["SHEET_TITLE_PARAMETER"]));
+                return ((string)(this["PARA_NAME_SHEET_TITLE"]));
             }
             set {
-                this["SHEET_TITLE_PARAMETER"] = value;
+                this["PARA_NAME_SHEET_TITLE"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("REI")]
-        public string SHEET_REI_PARAMETER {
+        public string PARA_NAME_SHEET_REI {
             get {
-                return ((string)(this["SHEET_REI_PARAMETER"]));
+                return ((string)(this["PARA_NAME_SHEET_REI"]));
             }
             set {
-                this["SHEET_REI_PARAMETER"] = value;
+                this["PARA_NAME_SHEET_REI"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Sans sujet")]
-        public string SHEET_REI_NA_VALUE {
+        public string PARA_VALUE_SHEET_REI_NA {
             get {
-                return ((string)(this["SHEET_REI_NA_VALUE"]));
+                return ((string)(this["PARA_VALUE_SHEET_REI_NA"]));
             }
             set {
-                this["SHEET_REI_NA_VALUE"] = value;
+                this["PARA_VALUE_SHEET_REI_NA"] = value;
             }
         }
         
@@ -572,6 +572,42 @@ namespace DCEStudyTools.Properties {
             }
             set {
                 this["LEVEL_NAME_TOP_L1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.27")]
+        public double TITLEBLOCK_WIDTH {
+            get {
+                return ((double)(this["TITLEBLOCK_WIDTH"]));
+            }
+            set {
+                this["TITLEBLOCK_WIDTH"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.4")]
+        public double TITLEBLOCK_LENGTH {
+            get {
+                return ((double)(this["TITLEBLOCK_LENGTH"]));
+            }
+            set {
+                this["TITLEBLOCK_LENGTH"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Matériau structurel")]
+        public string PARA_NAME_BEAM_MATERIAL {
+            get {
+                return ((string)(this["PARA_NAME_BEAM_MATERIAL"]));
+            }
+            set {
+                this["PARA_NAME_BEAM_MATERIAL"] = value;
             }
         }
     }
