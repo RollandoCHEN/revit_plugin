@@ -149,5 +149,35 @@
     <Setting Name="PARA_NAME_BEAM_MATERIAL" Type="System.String" Scope="User">
       <Value Profile="(Default)">Matériau structurel</Value>
     </Setting>
+    <Setting Name="BEAM_MAT_NAME_BA25" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Béton - Coulé sur place - Béton25</Value>
+    </Setting>
+    <Setting Name="BEAM_MAT_NAME_BA30" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Béton - Coulé sur place - Béton30</Value>
+    </Setting>
+    <Setting Name="BEAM_MAT_NAME_BA35" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Béton - Coulé sur place - Béton35</Value>
+    </Setting>
+    <Setting Name="BEAM_MAT_NAME_BA40" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Béton - Coulé sur place - Béton40</Value>
+    </Setting>
+    <Setting Name="BEAM_MAT_NAME_BA45" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Béton - Coulé sur place - Béton45</Value>
+    </Setting>
+    <Setting Name="BEAM_MAT_SYNTAXE_BA25" Type="System.String" Scope="User">
+      <Value Profile="(Default)">BA25</Value>
+    </Setting>
+    <Setting Name="BEAM_MAT_SYNTAXE_BA30" Type="System.String" Scope="User">
+      <Value Profile="(Default)">BA30</Value>
+    </Setting>
+    <Setting Name="BEAM_MAT_SYNTAXE_BA35" Type="System.String" Scope="User">
+      <Value Profile="(Default)">BA35</Value>
+    </Setting>
+    <Setting Name="BEAM_MAT_SYNTAXE_BA40" Type="System.String" Scope="User">
+      <Value Profile="(Default)">BA40</Value>
+    </Setting>
+    <Setting Name="BEAM_MAT_SYNTAXE_BA45" Type="System.String" Scope="User">
+      <Value Profile="(Default)">BA45</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -53,26 +53,71 @@ namespace DCEStudyTools.Utils
         }
     }
 
-    public class BeamMat
+    public class BeamMaterial
     {
-        public static Dictionary<string, string> MatDictionary { get; private set; }
-        
+        public static readonly BeamMaterial BA25 = new BeamMaterial(
+            Properties.Settings.Default.BEAM_MAT_NAME_BA25, 
+            Properties.Settings.Default.BEAM_MAT_SYNTAXE_BA25);
+
+        public static readonly BeamMaterial BA30 = new BeamMaterial(
+            Properties.Settings.Default.BEAM_MAT_NAME_BA30,
+            Properties.Settings.Default.BEAM_MAT_SYNTAXE_BA30);
+
+        public static readonly BeamMaterial BA35 = new BeamMaterial(
+            Properties.Settings.Default.BEAM_MAT_NAME_BA35,
+            Properties.Settings.Default.BEAM_MAT_SYNTAXE_BA35);
+
+        public static readonly BeamMaterial BA40 = new BeamMaterial(
+            Properties.Settings.Default.BEAM_MAT_NAME_BA40,
+            Properties.Settings.Default.BEAM_MAT_SYNTAXE_BA40);
+
+        public static readonly BeamMaterial BA45 = new BeamMaterial(
+            Properties.Settings.Default.BEAM_MAT_NAME_BA45,
+            Properties.Settings.Default.BEAM_MAT_SYNTAXE_BA45);
+
+        public static IEnumerable<BeamMaterial> Values
+        {
+            get
+            {
+                yield return BA25;
+                yield return BA30;
+                yield return BA35;
+                yield return BA40;
+                yield return BA45;
+            }
+        }
+
+        public string MatName { get; private set; }
+        public string MatSyntaxe { get; private set; }
+
+        public BeamMaterial(string rvtMatName, string syntaxeBA)
+        {
+            MatName = rvtMatName;
+            MatSyntaxe = syntaxeBA;
+        }
+
         public static string GetMatSign(string beamMat)
         {
-            MatDictionary.Add("Béton25", "BA25");
-            MatDictionary.Add("Béton30", "BA30");
-            MatDictionary.Add("Béton35", "BA35");
-            MatDictionary.Add("Béton40", "BA40");
-            MatDictionary.Add("Béton45", "BA45");
-
-            foreach (var mat in MatDictionary)
+            foreach (BeamMaterial mat in Values)
             {
-                if (beamMat.Contains(mat.Key))
+                if (mat.MatName.Equals(beamMat))
                 {
-                    return mat.Value;
+                    return mat.MatSyntaxe;
                 }
             }
-            return "BA25";
+            return Properties.Settings.Default.BEAM_MAT_SYNTAXE_BA25;
+        }
+
+        public static string GetMatName(string matSyntaxe)
+        {
+            foreach (BeamMaterial mat in Values)
+            {
+                if (mat.MatSyntaxe.Equals(matSyntaxe))
+                {
+                    return mat.MatName;
+                }
+            }
+            return Properties.Settings.Default.BEAM_MAT_NAME_BA25;
         }
     }
 
@@ -151,47 +196,50 @@ namespace DCEStudyTools.Utils
             _beamTypesList = beamTypesList;
         }
 
+        public static void GetBeamSymbolProperties(FamilySymbol beamSymbol, out string beamSign, out string beamMat, out double beamHeight, out double beamWidth)
+        {
+            beamSign =
+                (from Parameter pr in beamSymbol.Parameters
+                 where pr.Definition.Name.Equals(Properties.Settings.Default.PARA_NAME_BEAM_TYPE)
+                 select pr)
+                 .First()
+                 .AsString();
+
+            beamMat =
+                (from Parameter pr in beamSymbol.Parameters
+                 where pr.Definition.Name.Equals(Properties.Settings.Default.PARA_NAME_BEAM_MATERIAL)
+                 select pr)
+                 .First()
+                 .AsValueString();
+
+            beamHeight = UnitUtils.Convert(
+                    (from Parameter pr in beamSymbol.Parameters
+                     where pr.Definition.Name.Equals(Properties.Settings.Default.PARA_NAME_BEAM_HEIGHT)
+                     select pr)
+                     .First()
+                     .AsDouble(),
+                    DisplayUnitType.DUT_DECIMAL_FEET,
+                    DisplayUnitType.DUT_CENTIMETERS);
+            beamWidth = UnitUtils.Convert(
+                    (from Parameter pr in beamSymbol.Parameters
+                     where pr.Definition.Name.Equals(Properties.Settings.Default.PARA_NAME_BEAM_WIDTH)
+                     select pr)
+                     .First()
+                     .AsDouble(),
+                    DisplayUnitType.DUT_DECIMAL_FEET,
+                    DisplayUnitType.DUT_CENTIMETERS);
+        }
+
         public void AdjustBeamFamilyTypeName()
         {
             foreach (FamilySymbol beamType in BeamTypesList)
             {
-                string beamSign =
-                    (from Parameter pr in beamType.Parameters
-                     where pr.Definition.Name.Equals(Properties.Settings.Default.PARA_NAME_BEAM_TYPE)
-                     select pr)
-                     .First()
-                     .AsString();
+                double beamHeight, beamWidth;
+                string beamSign, beamMat;
+                GetBeamSymbolProperties(beamType, out beamSign, out beamMat, out beamHeight, out beamWidth);
 
-                string beamMat =
-                    (from Parameter pr in beamType.Parameters
-                     where pr.Definition.Name.Equals(Properties.Settings.Default.PARA_NAME_BEAM_MATERIAL)
-                     select pr)
-                     .First()
-                     .AsString();
-
-                double beamHeight =
-                    UnitUtils.Convert(
-                        (from Parameter pr in beamType.Parameters
-                         where pr.Definition.Name.Equals(Properties.Settings.Default.PARA_NAME_BEAM_HEIGHT)
-                         select pr)
-                         .First()
-                         .AsDouble(),
-                        DisplayUnitType.DUT_DECIMAL_FEET,
-                        DisplayUnitType.DUT_CENTIMETERS);
-
-                double beamWidth =
-                    UnitUtils.Convert(
-                        (from Parameter pr in beamType.Parameters
-                         where pr.Definition.Name.Equals(Properties.Settings.Default.PARA_NAME_BEAM_WIDTH)
-                         select pr)
-                         .First()
-                         .AsDouble(),
-                        DisplayUnitType.DUT_DECIMAL_FEET,
-                        DisplayUnitType.DUT_CENTIMETERS);
-                
                 string synthaxe = BeamType.GetSyntaxe(beamSign);
-
-                string matSign = BeamMat.GetMatSign(beamMat);
+                string matSign = BeamMaterial.GetMatSign(beamMat);
 
                 string targetBeamTypeName = $"{synthaxe}-{matSign}-{beamWidth}x{beamHeight}";
 
@@ -205,22 +253,23 @@ namespace DCEStudyTools.Utils
             }
         }
 
+
         public FamilySymbol GetBeamFamilyTypeOrCreateNew(string beamSign, string beamMat, double beamHeight, double beamWidth)
         {
             string synthaxe = BeamType.GetSyntaxe(beamSign);
-            string matSign = BeamMat.GetMatSign(beamMat);
+            string matSign = BeamMaterial.GetMatSign(beamMat);
 
             string targetBeamTypeName = $"{synthaxe}-{matSign}-{beamWidth}x{beamHeight}";
 
             // find the family type for beam creation
-            FamilySymbol beamType =
+            FamilySymbol beamSymbol =
                 (from sm in BeamTypesList
                  where sm.Name.Equals(targetBeamTypeName)
                  select sm)
                  .FirstOrDefault();
 
             // if family type doesn't exist in the project, create a new one
-            if (null == beamType)
+            if (null == beamSymbol)
             {
                 if (null != _family)
                 {
@@ -238,29 +287,50 @@ namespace DCEStudyTools.Utils
                     Transaction t = new Transaction(_doc);
                     t.Start("Create new family type");
 
-                    beamType = s.Duplicate("InitialName") as FamilySymbol;
+                    beamSymbol = s.Duplicate("InitialName") as FamilySymbol;
 
-                    SetLengthValueTo(
-                        beamType, Properties.Settings.Default.PARA_NAME_BEAM_HEIGHT,
+                    SetDoubleValueTo(
+                        beamSymbol, Properties.Settings.Default.PARA_NAME_BEAM_HEIGHT,
                         UnitUtils.Convert(beamHeight, DisplayUnitType.DUT_CENTIMETERS, DisplayUnitType.DUT_DECIMAL_FEET));
 
-                    SetLengthValueTo(
-                        beamType, Properties.Settings.Default.PARA_NAME_BEAM_WIDTH,
+                    SetDoubleValueTo(
+                        beamSymbol, Properties.Settings.Default.PARA_NAME_BEAM_WIDTH,
                         UnitUtils.Convert(beamWidth, DisplayUnitType.DUT_CENTIMETERS, DisplayUnitType.DUT_DECIMAL_FEET));
 
-                    SetTextValueTo(beamType, Properties.Settings.Default.PARA_NAME_BEAM_TYPE, beamSign);
+                    SetStringValueTo(beamSymbol, Properties.Settings.Default.PARA_NAME_BEAM_TYPE, beamSign);
 
-                    beamType.Name = targetBeamTypeName;
+                    Material targetMaterial =
+                    (from Material m in new FilteredElementCollector(_doc)
+                     .OfClass(typeof(Material))
+                     where m != null
+                     select m)
+                     .Cast<Material>()
+                     .FirstOrDefault(m => m.Name.Equals(beamMat));
+
+                    SetElementIdValueTo(beamSymbol, Properties.Settings.Default.PARA_NAME_BEAM_MATERIAL, targetMaterial.Id);
+
+                    beamSymbol.Name = targetBeamTypeName;
                     t.Commit();
 
-                    BeamTypesList.Add(beamType);
+                    BeamTypesList.Add(beamSymbol);
                 }
             }
 
-            return beamType;
+            return beamSymbol;
         }
 
-        private void SetLengthValueTo(Element element, string paraName, double value)
+        private void SetElementIdValueTo(Element element, string paraName, ElementId value)
+        {
+            foreach (Parameter pr in element.Parameters)
+            {
+                if (pr.Definition.Name.Equals(paraName) && pr.StorageType == StorageType.ElementId)
+                {
+                    pr.Set(value);
+                }
+            }
+        }
+
+        private void SetDoubleValueTo(Element element, string paraName, double value)
         {
             foreach (Parameter pr in element.Parameters)
             {
@@ -271,7 +341,7 @@ namespace DCEStudyTools.Utils
             }
         }
 
-        private void SetTextValueTo(Element element, string paraName, string value)
+        private void SetStringValueTo(Element element, string paraName, string value)
         {
             foreach (Parameter pr in element.Parameters)
             {

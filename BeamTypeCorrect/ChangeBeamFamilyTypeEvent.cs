@@ -43,39 +43,11 @@ namespace DCEStudyTools.BeamTypeCorrect
                 foreach (Element elem in elemCol)
                 {
                     FamilyInstance beam = elem as FamilyInstance;
-                    double beamHeight =
-                        UnitUtils.Convert(
-                            (from Parameter pr in beam.Symbol.Parameters
-                             where pr.Definition.Name.Equals(Properties.Settings.Default.PARA_NAME_BEAM_HEIGHT)
-                             select pr)
-                             .First()
-                             .AsDouble(),
-                            DisplayUnitType.DUT_DECIMAL_FEET,
-                            DisplayUnitType.DUT_CENTIMETERS);
 
-                    double beamWidth =
-                        UnitUtils.Convert(
-                            (from Parameter pr in beam.Symbol.Parameters
-                             where pr.Definition.Name.Equals(Properties.Settings.Default.PARA_NAME_BEAM_WIDTH)
-                             select pr)
-                             .First()
-                             .AsDouble(),
-                            DisplayUnitType.DUT_DECIMAL_FEET,
-                            DisplayUnitType.DUT_CENTIMETERS);
+                    string beamSign, beamMat;
+                    double beamHeight, beamWidth;
 
-                    string beamSign =
-                        (from Parameter pr in beam.Symbol.Parameters
-                         where pr.Definition.Name.Equals(Properties.Settings.Default.PARA_NAME_BEAM_TYPE)
-                         select pr)
-                         .First()
-                         .AsString();
-
-                    string beamMat =
-                    (from Parameter pr in beam.Symbol.Parameters
-                     where pr.Definition.Name.Equals(Properties.Settings.Default.PARA_NAME_BEAM_MATERIAL)
-                     select pr)
-                     .First()
-                     .AsString();
+                    BeamFamily.GetBeamSymbolProperties(beam.Symbol, out beamSign, out beamMat, out beamHeight, out beamWidth);
 
                     if (!beamSign.Equals(targetTypeSign))
                     {

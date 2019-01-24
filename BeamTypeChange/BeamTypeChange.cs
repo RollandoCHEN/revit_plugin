@@ -63,39 +63,13 @@ namespace DCEStudyTools.BeamTypeChange
             foreach (Reference reference in refIds)
             {
                 FamilyInstance beam = _doc.GetElement(reference) as FamilyInstance;
-                double selectedBeamHeight =
-                    UnitUtils.Convert(
-                        (from Parameter pr in beam.Symbol.Parameters
-                         where pr.Definition.Name.Equals(Properties.Settings.Default.PARA_NAME_BEAM_HEIGHT)
-                         select pr)
-                         .First()
-                         .AsDouble(),
-                        DisplayUnitType.DUT_DECIMAL_FEET,
-                        DisplayUnitType.DUT_CENTIMETERS);
+                string selectedBeamSign, selectedBeamMat;
+                double selectedBeamHeight, selectedBeamWidth;
 
-                double selectedBeamWidth =
-                    UnitUtils.Convert(
-                        (from Parameter pr in beam.Symbol.Parameters
-                         where pr.Definition.Name.Equals(Properties.Settings.Default.PARA_NAME_BEAM_WIDTH)
-                         select pr)
-                         .First()
-                         .AsDouble(),
-                        DisplayUnitType.DUT_DECIMAL_FEET,
-                        DisplayUnitType.DUT_CENTIMETERS);
-
-                string selectedBeamSign =
-                    (from Parameter pr in beam.Symbol.Parameters
-                     where pr.Definition.Name.Equals(Properties.Settings.Default.PARA_NAME_BEAM_TYPE)
-                     select pr)
-                     .First()
-                     .AsString();
-
-                string selectedBeamMat =
-                    (from Parameter pr in beam.Symbol.Parameters
-                     where pr.Definition.Name.Equals(Properties.Settings.Default.PARA_NAME_BEAM_MATERIAL)
-                     select pr)
-                     .First()
-                     .AsString();
+                BeamFamily.GetBeamSymbolProperties(
+                    beam.Symbol, 
+                    out selectedBeamSign, out selectedBeamMat, 
+                    out selectedBeamHeight, out selectedBeamWidth);
 
                 if (!selectedBeamSign.Equals(targetTypeSign))
                 {
