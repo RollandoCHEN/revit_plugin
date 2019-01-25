@@ -141,6 +141,26 @@ namespace DCEStudyTools.Properties {
         }
         
         /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap beam_update_16 {
+            get {
+                object obj = ResourceManager.GetObject("beam_update_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap beam_update_32 {
+            get {
+                object obj = ResourceManager.GetObject("beam_update_32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Icon semblable à (Icône).
         /// </summary>
         internal static System.Drawing.Icon beamrmv_32 {
@@ -241,6 +261,16 @@ namespace DCEStudyTools.Properties {
         }
         
         /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap legend_32 {
+            get {
+                object obj = ResourceManager.GetObject("legend_32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Icon semblable à (Icône).
         /// </summary>
         internal static System.Drawing.Icon level_setting_32 {
@@ -316,6 +346,16 @@ namespace DCEStudyTools.Properties {
         internal static System.Drawing.Bitmap scale_321 {
             get {
                 object obj = ResourceManager.GetObject("scale_321", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap sheet_create_32 {
+            get {
+                object obj = ResourceManager.GetObject("sheet_create_32", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
