@@ -18,7 +18,7 @@ namespace DCEStudyTools
             application.CreateRibbonTab(tabName);
 
             // Add level management ribbon panel
-            RibbonPanel levelManagementRibbonPanel = application.CreateRibbonPanel(tabName, "Manage Levels");
+            RibbonPanel levelManagementRibbonPanel = application.CreateRibbonPanel(tabName, "Level Tools");
 
             // Create push button for LevelCreation
             PushButton pbLevelCreation = levelManagementRibbonPanel.AddItem(
@@ -45,7 +45,7 @@ namespace DCEStudyTools
             ////////////////////////////////////////////////////// Seperate line ////////////////////////////////////////////////////
 
             // Add sheet management ribbon panel
-            RibbonPanel sheetManagementRibbonPanel = application.CreateRibbonPanel(tabName, "Manage Sheets");
+            RibbonPanel sheetManagementRibbonPanel = application.CreateRibbonPanel(tabName, "Sheet Tools");
 
             // Create push button for SheetCreation
             PushButton pbSheetCreation = sheetManagementRibbonPanel.AddItem(
@@ -70,11 +70,39 @@ namespace DCEStudyTools
 
             ////////////////////////////////////////////////////// Seperate line ////////////////////////////////////////////////////
 
+            // Add sheet management ribbon panel
+            RibbonPanel beamtManagementRibbonPanel = application.CreateRibbonPanel(tabName, "Beam Tools");
+
+            // Create push button data for beam type change
+            PushButton pbBeamTypeChangeData = beamtManagementRibbonPanel.AddItem(
+                CreatePushButtonData(
+                    "cmdBeamTypeChange",
+                    "Change" + System.Environment.NewLine + "Beam Type",
+                    thisAssemblyPath,
+                    "DCEStudyTools.BeamTypeChange.BeamTypeChange",
+                    "beam_32.png",
+                    "Select the beams to be changed and choose the target type")
+            ) as PushButton;
+
+            // Create push button data for beam type detect
+            PushButton pbBeamTypeDetectData = beamtManagementRibbonPanel.AddItem(
+                CreatePushButtonData(
+                "cmdBeamTypeCorrect",
+                "Correct" + System.Environment.NewLine + "Beam Type",
+                thisAssemblyPath,
+                "DCEStudyTools.BeamTypeCorrect.BeamTypeCorrect",
+                "beam_doubt_32.png",
+                "Correct the type of beams whose type are not appropriate")
+            ) as PushButton;
+            
+
+            ////////////////////////////////////////////////////// Seperate line ////////////////////////////////////////////////////
+
             // Add tool ribbon panel
-            RibbonPanel toolRibbonPanel = application.CreateRibbonPanel(tabName, "Tools");
+            RibbonPanel genericToolsRibbonPanel = application.CreateRibbonPanel(tabName, "Generic Tools");
 
             // Create push button for Debug
-            PushButton pbTest = toolRibbonPanel.AddItem(
+            PushButton pbTest = genericToolsRibbonPanel.AddItem(
                 CreatePushButtonData(
                     "cmdTest",
                     "Test",
@@ -85,7 +113,7 @@ namespace DCEStudyTools
             ) as PushButton;
 
             // Create push button for LevelsCreation
-            PushButton pbScaleSetting = toolRibbonPanel.AddItem(
+            PushButton pbScaleSetting = genericToolsRibbonPanel.AddItem(
                 CreatePushButtonData(
                     "cmdScaleSetting",
                     "Set" + System.Environment.NewLine + "Scale",
@@ -96,7 +124,7 @@ namespace DCEStudyTools
             ) as PushButton;
 
             // Create push button for hiding categories
-            PushButton pbCatHide = toolRibbonPanel.AddItem(
+            PushButton pbCatHide = genericToolsRibbonPanel.AddItem(
                 CreatePushButtonData(
                     "cmdCategoryHiding",
                     "Hide" + System.Environment.NewLine + "Categories",
@@ -106,32 +134,8 @@ namespace DCEStudyTools
                     "Pick up elements, the categories of the elements will be hidden on the active view or on the view template of the active view")
             ) as PushButton;
 
-            // Create push button data for beam type change
-            PushButtonData pbBeamTypeChangeData = CreatePushButtonData(
-                "cmdBeamTypeChange",
-                "Change" + System.Environment.NewLine + "Beam Type",
-                thisAssemblyPath,
-                "DCEStudyTools.BeamTypeChange.BeamTypeChange",
-                "beam_32.png",
-                "Select the beams to be changed and choose the target type");
-
-            // Create push button data for beam type detect
-            PushButtonData pbBeamTypeDetectData = CreatePushButtonData(
-                "cmdBeamTypeCorrect",
-                "Correct" + System.Environment.NewLine + "Beam Type",
-                thisAssemblyPath,
-                "DCEStudyTools.BeamTypeCorrect.BeamTypeCorrect",
-                "beam_doubt_32.png",
-                "Correct the type of beams whose type are not appropriate");
-
-            // Create "Beam Type Management" split button
-            SplitButtonData sbBeamTypeData = new SplitButtonData("cmdBeamTypeManagement", "Beam Types Management");
-            SplitButton sbBeamType = toolRibbonPanel.AddItem(sbBeamTypeData) as SplitButton;
-            sbBeamType.AddPushButton(pbBeamTypeChangeData);
-            sbBeamType.AddPushButton(pbBeamTypeDetectData);
-
             // Create push button for TagsAdjustment
-            PushButton pbTags = toolRibbonPanel.AddItem(
+            PushButton pbTags = genericToolsRibbonPanel.AddItem(
                 CreatePushButtonData(
                    "cmdTagsAdjustment",
                    "Adjust" + System.Environment.NewLine + "Tags",
@@ -142,7 +146,7 @@ namespace DCEStudyTools
             ) as PushButton;
 
             // Create push button for FloorSpanDirectionChange
-            PushButton pbFloorSpanDirection = toolRibbonPanel.AddItem(
+            PushButton pbFloorSpanDirection = genericToolsRibbonPanel.AddItem(
                 CreatePushButtonData(
                    "cmdFloorSpanDirectionChange",
                    "Change Floor" + System.Environment.NewLine + "Span Direction",
@@ -153,7 +157,7 @@ namespace DCEStudyTools
             ) as PushButton;
 
             // Create push button for 3DViewCreation
-            PushButton pb3DView = toolRibbonPanel.AddItem(
+            PushButton pb3DView = genericToolsRibbonPanel.AddItem(
                 CreatePushButtonData(
                     "cmd3DViewCreation",
                     "Create/Update" + System.Environment.NewLine + "3D Views",
@@ -164,7 +168,7 @@ namespace DCEStudyTools
             ) as PushButton;
 
             // Create push button for FoundationLoad
-            PushButton pbFoundationLoad = toolRibbonPanel.AddItem(
+            PushButton pbFoundationLoad = genericToolsRibbonPanel.AddItem(
                 CreatePushButtonData(
                     "cmdFoundationLoadCreation",
                     "Create" + System.Environment.NewLine + "Foundation Load",
@@ -178,7 +182,7 @@ namespace DCEStudyTools
   ////////////////////////////////////////////////////// Seperate line ////////////////////////////////////////////////////
 
             // Add a new ribbon panel
-            RibbonPanel conceptionRibbonPanel = application.CreateRibbonPanel(tabName, "Conception");
+            RibbonPanel conceptionRibbonPanel = application.CreateRibbonPanel(tabName, "Conception Tools");
 
 
             // Create "Wall Marking" button for "Wall Design" split button
