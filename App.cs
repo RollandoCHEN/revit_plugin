@@ -73,6 +73,17 @@ namespace DCEStudyTools
             // Add beam management ribbon panel
             RibbonPanel beamtManagementRibbonPanel = application.CreateRibbonPanel(tabName, "Beam Tools");
 
+            // Create push button for beam type name adjustment
+            PushButton pbBeamTypeNameAdjust = beamtManagementRibbonPanel.AddItem(
+                CreatePushButtonData(
+                    "cmdBeamTypeNameAdjust",
+                    "Adjust Beam" + System.Environment.NewLine + "Type Name",
+                    thisAssemblyPath,
+                    "DCEStudyTools.BeamTypeNameAdjust.BeamTypeNameAdjust",
+                    "beam_32.png",
+                    "Update the type name of all beam types according to their properties")
+            ) as PushButton;
+
             // Create push button for beam type properties adjustment
             PushButton pbBeamTypePropertiesAdjust = beamtManagementRibbonPanel.AddItem(
                 CreatePushButtonData(
@@ -81,7 +92,7 @@ namespace DCEStudyTools
                     thisAssemblyPath,
                     "DCEStudyTools.BeamTypePropertiesAdjust.BeamTypePropertiesAdjust",
                     "beam_32.png",
-                    "Adjust the properties \"Poutre type, Matérial, Largeur et Hauteur\" of all beam type ")
+                    "Update the properties \"Poutre type\", \"Matérial\", \"Largeur\" and \"Hauteur\" of all beam types according to their type name")
             ) as PushButton;
 
             // Create push button for beam type change
@@ -92,7 +103,7 @@ namespace DCEStudyTools
                     thisAssemblyPath,
                     "DCEStudyTools.BeamTypeChange.BeamTypeChange",
                     "beam_32.png",
-                    "Select the beams to be changed and choose the target type")
+                    "Select beams to be changed and choose the target type")
             ) as PushButton;
 
             // Create push button for beam type detect

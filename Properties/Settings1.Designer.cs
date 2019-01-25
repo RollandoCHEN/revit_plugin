@@ -730,5 +730,17 @@ namespace DCEStudyTools.Properties {
                 this["BEAM_MAT_SYNTAXE_BA45"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("AUTRE")]
+        public string BEAM_MAT_SYNTAXE_OTHER {
+            get {
+                return ((string)(this["BEAM_MAT_SYNTAXE_OTHER"]));
+            }
+            set {
+                this["BEAM_MAT_SYNTAXE_OTHER"] = value;
+            }
+        }
     }
 }

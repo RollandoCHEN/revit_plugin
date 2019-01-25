@@ -179,5 +179,8 @@
     <Setting Name="BEAM_MAT_SYNTAXE_BA45" Type="System.String" Scope="User">
       <Value Profile="(Default)">BA45</Value>
     </Setting>
+    <Setting Name="BEAM_MAT_SYNTAXE_OTHER" Type="System.String" Scope="User">
+      <Value Profile="(Default)">AUTRE</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

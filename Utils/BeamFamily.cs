@@ -109,7 +109,7 @@ namespace DCEStudyTools.Utils
             MatSyntaxe = syntaxeBA;
         }
 
-        public static string GetMatSign(string beamMat)
+        public static string GetMatSyntaxe(string beamMat)
         {
             foreach (BeamMaterial mat in Values)
             {
@@ -118,7 +118,7 @@ namespace DCEStudyTools.Utils
                     return mat.MatSyntaxe;
                 }
             }
-            return Properties.Settings.Default.BEAM_MAT_SYNTAXE_BA25;
+            return Properties.Settings.Default.BEAM_MAT_SYNTAXE_OTHER;
         }
 
         public static string GetMatName(string matSyntaxe)
@@ -258,7 +258,7 @@ namespace DCEStudyTools.Utils
             GetBeamSymbolProperties(beamSymbol, out beamSign, out beamMat, out beamHeight, out beamWidth);
 
             string synthaxe = BeamType.GetSyntaxe(beamSign);
-            string matSign = BeamMaterial.GetMatSign(beamMat);
+            string matSign = BeamMaterial.GetMatSyntaxe(beamMat);
 
             string targetBeamTypeName = $"{synthaxe}-{matSign}-{beamWidth}x{beamHeight}";
 
@@ -354,7 +354,7 @@ namespace DCEStudyTools.Utils
         public FamilySymbol GetBeamFamilyTypeOrCreateNew(string beamSign, string beamMat, double beamHeight, double beamWidth)
         {
             string synthaxe = BeamType.GetSyntaxe(beamSign);
-            string matSign = BeamMaterial.GetMatSign(beamMat);
+            string matSign = BeamMaterial.GetMatSyntaxe(beamMat);
 
             string targetBeamTypeName = $"{synthaxe}-{matSign}-{beamWidth}x{beamHeight}";
 
@@ -365,7 +365,7 @@ namespace DCEStudyTools.Utils
                  select sm)
                  .FirstOrDefault();
 
-            // if family type exists, adjust its name
+            // if family type exists, adjust its properties
             if (beamSymbol != null)
             {
                 AdjustBeamTypeProperties(beamSymbol);
