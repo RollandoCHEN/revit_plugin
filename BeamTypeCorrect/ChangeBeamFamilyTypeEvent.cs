@@ -23,7 +23,7 @@ namespace DCEStudyTools.BeamTypeCorrect
 
             _beamFamily = new BeamFamily(_doc);
 
-            _beamFamily.AdjustBeamFamilyTypeName();
+            _beamFamily.AdjustWholeBeamFamilyTypeName();
 
             ChangeBeamFamilyType(Properties.Settings.Default.BEAM_TYPE_SIGN_POU, BeamsToBeNormal);
  

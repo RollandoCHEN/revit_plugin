@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace DCEStudyTools.Utils
 {
@@ -48,6 +49,18 @@ namespace DCEStudyTools.Utils
                 {
                     return item.Syntaxe;
                 } 
+            }
+            return String.Empty;
+        }
+
+        public static string GetBeamSign(string syntaxe)
+        {
+            foreach (BeamType item in Values)
+            {
+                if (syntaxe.Equals(item.Syntaxe))
+                {
+                    return item.ParaSign;
+                }
             }
             return String.Empty;
         }
@@ -230,29 +243,113 @@ namespace DCEStudyTools.Utils
                     DisplayUnitType.DUT_CENTIMETERS);
         }
 
-        public void AdjustBeamFamilyTypeName()
+        public void AdjustWholeBeamFamilyTypeName()
         {
-            foreach (FamilySymbol beamType in BeamTypesList)
+            foreach (FamilySymbol beamSymbol in BeamTypesList)
             {
-                double beamHeight, beamWidth;
-                string beamSign, beamMat;
-                GetBeamSymbolProperties(beamType, out beamSign, out beamMat, out beamHeight, out beamWidth);
+                AdjustBeamTypeName(beamSymbol);
+            }
+        }
 
-                string synthaxe = BeamType.GetSyntaxe(beamSign);
-                string matSign = BeamMaterial.GetMatSign(beamMat);
+        public void AdjustBeamTypeName(FamilySymbol beamSymbol)
+        {
+            double beamHeight, beamWidth;
+            string beamSign, beamMat;
+            GetBeamSymbolProperties(beamSymbol, out beamSign, out beamMat, out beamHeight, out beamWidth);
 
-                string targetBeamTypeName = $"{synthaxe}-{matSign}-{beamWidth}x{beamHeight}";
+            string synthaxe = BeamType.GetSyntaxe(beamSign);
+            string matSign = BeamMaterial.GetMatSign(beamMat);
 
-                if (!beamType.Name.Equals(targetBeamTypeName))
+            string targetBeamTypeName = $"{synthaxe}-{matSign}-{beamWidth}x{beamHeight}";
+
+            if (!beamSymbol.Name.Equals(targetBeamTypeName))
+            {
+                Transaction t = new Transaction(_doc);
+                t.Start("Change beam type name");
+                beamSymbol.Name = targetBeamTypeName;
+                t.Commit();
+            }
+        }
+
+        public void AdjustWholeBeamFamilyProperties()
+        {
+            foreach (FamilySymbol beamSymbol in BeamTypesList)
+            {
+                // if the symbol name is in format of "ss+-BAdd-dd+xdd+", update the properties
+                Regex regex = new Regex(@"[A-Z]{2,}-BA\d{2}-\d{2,}x\d{2,}");
+                Match match = regex.Match(beamSymbol.Name);
+                if (match.Success)
                 {
-                    Transaction t = new Transaction(_doc);
-                    t.Start("Change beam type name");
-                    beamType.Name = targetBeamTypeName;
-                    t.Commit();
+                    AdjustBeamTypeProperties(beamSymbol);
                 }
             }
         }
 
+        public void AdjustBeamTypeProperties(FamilySymbol beamSymbol)
+        {
+            string actualTypeName = beamSymbol.Name;
+            string targetSynthaxe = actualTypeName.Before("-");
+            string targetBeamSign = BeamType.GetBeamSign(targetSynthaxe);
+
+            string targetMatSign = actualTypeName.Between("-", "-");
+            string targetBeamMat = BeamMaterial.GetMatName(targetMatSign);
+
+            string dimensionString = actualTypeName.After("-");
+            double targetWidth = Convert.ToDouble(dimensionString.Before("x"));
+            double targetHeight = Convert.ToDouble(dimensionString.After("x"));
+
+            double beamHeight, beamWidth;
+            string beamSign, beamMat;
+            GetBeamSymbolProperties(beamSymbol, out beamSign, out beamMat, out beamHeight, out beamWidth);
+            
+            if (!beamSign.Equals(targetBeamSign))
+            {
+                Transaction t = new Transaction(_doc);
+                t.Start("Change beam type property");
+                SetStringValueTo(beamSymbol, 
+                    Properties.Settings.Default.PARA_NAME_BEAM_TYPE, 
+                    targetBeamSign);
+                t.Commit();
+            }
+
+            if (!beamMat.Equals(targetBeamMat))
+            {
+                Material targetMaterial =
+                    (from Material m in new FilteredElementCollector(_doc)
+                     .OfClass(typeof(Material))
+                     where m != null
+                     select m)
+                     .Cast<Material>()
+                     .FirstOrDefault(m => m.Name.Equals(targetBeamMat));
+
+                Transaction t = new Transaction(_doc);
+                t.Start("Change beam material property");
+                SetElementIdValueTo(beamSymbol,
+                    Properties.Settings.Default.PARA_NAME_BEAM_MATERIAL,
+                    targetMaterial.Id);
+                t.Commit();
+            }
+
+            if (beamHeight != targetHeight)
+            {
+                Transaction t = new Transaction(_doc);
+                t.Start("Change beam height property");
+                SetDoubleValueTo(beamSymbol,
+                    Properties.Settings.Default.PARA_NAME_BEAM_HEIGHT,
+                    UnitUtils.Convert(targetHeight, DisplayUnitType.DUT_CENTIMETERS, DisplayUnitType.DUT_DECIMAL_FEET));
+                t.Commit();
+            }
+
+            if (beamWidth != targetWidth)
+            {
+                Transaction t = new Transaction(_doc);
+                t.Start("Change beam width property");
+                SetDoubleValueTo(beamSymbol,
+                    Properties.Settings.Default.PARA_NAME_BEAM_WIDTH,
+                    UnitUtils.Convert(targetWidth, DisplayUnitType.DUT_CENTIMETERS, DisplayUnitType.DUT_DECIMAL_FEET));
+                t.Commit();
+            }
+        }
 
         public FamilySymbol GetBeamFamilyTypeOrCreateNew(string beamSign, string beamMat, double beamHeight, double beamWidth)
         {
@@ -268,8 +365,13 @@ namespace DCEStudyTools.Utils
                  select sm)
                  .FirstOrDefault();
 
+            // if family type exists, adjust its name
+            if (beamSymbol != null)
+            {
+                AdjustBeamTypeProperties(beamSymbol);
+            }
             // if family type doesn't exist in the project, create a new one
-            if (null == beamSymbol)
+            else
             {
                 if (null != _family)
                 {

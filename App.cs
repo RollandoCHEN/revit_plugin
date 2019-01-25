@@ -70,11 +70,22 @@ namespace DCEStudyTools
 
             ////////////////////////////////////////////////////// Seperate line ////////////////////////////////////////////////////
 
-            // Add sheet management ribbon panel
+            // Add beam management ribbon panel
             RibbonPanel beamtManagementRibbonPanel = application.CreateRibbonPanel(tabName, "Beam Tools");
 
-            // Create push button data for beam type change
-            PushButton pbBeamTypeChangeData = beamtManagementRibbonPanel.AddItem(
+            // Create push button for beam type properties adjustment
+            PushButton pbBeamTypePropertiesAdjust = beamtManagementRibbonPanel.AddItem(
+                CreatePushButtonData(
+                    "cmdBeamTypePropertiesAdjust",
+                    "Adjust Beam" + System.Environment.NewLine + "Properties",
+                    thisAssemblyPath,
+                    "DCEStudyTools.BeamTypePropertiesAdjust.BeamTypePropertiesAdjust",
+                    "beam_32.png",
+                    "Adjust the properties \"Poutre type, Matérial, Largeur et Hauteur\" of all beam type ")
+            ) as PushButton;
+
+            // Create push button for beam type change
+            PushButton pbBeamTypeChange = beamtManagementRibbonPanel.AddItem(
                 CreatePushButtonData(
                     "cmdBeamTypeChange",
                     "Change" + System.Environment.NewLine + "Beam Type",
@@ -84,8 +95,8 @@ namespace DCEStudyTools
                     "Select the beams to be changed and choose the target type")
             ) as PushButton;
 
-            // Create push button data for beam type detect
-            PushButton pbBeamTypeDetectData = beamtManagementRibbonPanel.AddItem(
+            // Create push button for beam type detect
+            PushButton pbBeamTypeDetect = beamtManagementRibbonPanel.AddItem(
                 CreatePushButtonData(
                 "cmdBeamTypeCorrect",
                 "Correct" + System.Environment.NewLine + "Beam Type",
@@ -101,7 +112,7 @@ namespace DCEStudyTools
             // Add tool ribbon panel
             RibbonPanel genericToolsRibbonPanel = application.CreateRibbonPanel(tabName, "Generic Tools");
 
-            // Create push button for Debug
+            // Create push button for Test
             PushButton pbTest = genericToolsRibbonPanel.AddItem(
                 CreatePushButtonData(
                     "cmdTest",
