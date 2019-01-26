@@ -290,21 +290,18 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
+    <Resource Include="Resources\direction_32.png" />
     <Resource Include="Resources\beam_update_16.png" />
     <Resource Include="Resources\sheet_create_32.png" />
     <Resource Include="Resources\beam_update_32.png" />
     <Resource Include="Resources\legend_32.png" />
     <Resource Include="Resources\test_32.png" />
     <Resource Include="Resources\Revit_2019-01-17_16-21-57.png" />
-    <Resource Include="Resources\Revit_2019-01-17_16-19-25.png" />
-    <Resource Include="Resources\Revit_2019-01-17_14-39-41.png" />
-    <Resource Include="Resources\Revit_2019-01-17_14-26-11.png" />
     <Resource Include="Resources\beam_confirm_32.ico" />
     <Resource Include="Resources\beam_confirm_32.png" />
     <Resource Include="Resources\beam_doubt_32.ico" />
     <Resource Include="Resources\beam_doubt_32.png" />
     <Resource Include="Resources\direction_32.ico" />
-    <Resource Include="Resources\direction_32.png" />
     <Resource Include="Resources\FloorSpanDirectionImage.png" />
     <Resource Include="Resources\load_32.ico" />
     <Resource Include="Resources\load_32.png" />

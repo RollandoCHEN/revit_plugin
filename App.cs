@@ -135,7 +135,7 @@ namespace DCEStudyTools
             PushButton pbTest = genericToolsRibbonPanel.AddItem(
                 CreatePushButtonData(
                     "cmdTest",
-                    "Test",
+                    "Test/Debug",
                     thisAssemblyPath,
                     "DCEStudyTools.Test.Test",
                     "test_32.png",

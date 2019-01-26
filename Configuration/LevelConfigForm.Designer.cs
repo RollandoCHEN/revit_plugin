@@ -44,10 +44,10 @@
             this.checkedListBox.CheckOnClick = true;
             this.checkedListBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkedListBox.FormattingEnabled = true;
-            this.checkedListBox.Location = new System.Drawing.Point(16, 66);
-            this.checkedListBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.checkedListBox.Location = new System.Drawing.Point(21, 81);
+            this.checkedListBox.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.checkedListBox.Name = "checkedListBox";
-            this.checkedListBox.Size = new System.Drawing.Size(537, 184);
+            this.checkedListBox.Size = new System.Drawing.Size(715, 224);
             this.checkedListBox.TabIndex = 0;
             this.checkedListBox.SelectedIndexChanged += new System.EventHandler(this.checkedListBox_SelectedIndexChanged);
             // 
@@ -55,10 +55,9 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(9, 9);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Location = new System.Drawing.Point(12, 11);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(375, 17);
+            this.label1.Size = new System.Drawing.Size(447, 20);
             this.label1.TabIndex = 1;
             this.label1.Text = "Cocher les niveaux où se trouve les éléments structuraux :";
             // 
@@ -67,10 +66,10 @@
             this.cancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.cancelButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cancelButton.Location = new System.Drawing.Point(482, 304);
-            this.cancelButton.Margin = new System.Windows.Forms.Padding(2);
+            this.cancelButton.Location = new System.Drawing.Point(643, 374);
+            this.cancelButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(71, 26);
+            this.cancelButton.Size = new System.Drawing.Size(95, 32);
             this.cancelButton.TabIndex = 2;
             this.cancelButton.Text = "Annuler";
             this.cancelButton.UseVisualStyleBackColor = true;
@@ -80,10 +79,10 @@
             // 
             this.okButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.okButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.okButton.Location = new System.Drawing.Point(407, 304);
-            this.okButton.Margin = new System.Windows.Forms.Padding(2);
+            this.okButton.Location = new System.Drawing.Point(543, 374);
+            this.okButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.okButton.Name = "okButton";
-            this.okButton.Size = new System.Drawing.Size(71, 26);
+            this.okButton.Size = new System.Drawing.Size(95, 32);
             this.okButton.TabIndex = 3;
             this.okButton.Text = "OK";
             this.okButton.UseVisualStyleBackColor = true;
@@ -93,10 +92,10 @@
             // 
             this.checkAll.AutoSize = true;
             this.checkAll.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkAll.Location = new System.Drawing.Point(16, 36);
-            this.checkAll.Margin = new System.Windows.Forms.Padding(4);
+            this.checkAll.Location = new System.Drawing.Point(21, 44);
+            this.checkAll.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.checkAll.Name = "checkAll";
-            this.checkAll.Size = new System.Drawing.Size(59, 21);
+            this.checkAll.Size = new System.Drawing.Size(68, 24);
             this.checkAll.TabIndex = 4;
             this.checkAll.Text = "Tous";
             this.checkAll.UseVisualStyleBackColor = true;
@@ -105,17 +104,17 @@
             // LevelConfigForm
             // 
             this.AcceptButton = this.okButton;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.cancelButton;
-            this.ClientSize = new System.Drawing.Size(569, 341);
+            this.ClientSize = new System.Drawing.Size(759, 420);
             this.Controls.Add(this.checkAll);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.okButton);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.checkedListBox);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "LevelConfigForm";
             this.Text = "Configurer Niveaux Structuraux";
             this.Load += new System.EventHandler(this.LevelConfigForm_Load);

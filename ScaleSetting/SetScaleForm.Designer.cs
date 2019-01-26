@@ -39,10 +39,10 @@
             this.cancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.cancelButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cancelButton.Location = new System.Drawing.Point(441, 86);
-            this.cancelButton.Margin = new System.Windows.Forms.Padding(2);
+            this.cancelButton.Location = new System.Drawing.Point(588, 106);
+            this.cancelButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(71, 26);
+            this.cancelButton.Size = new System.Drawing.Size(95, 32);
             this.cancelButton.TabIndex = 4;
             this.cancelButton.Text = "Annuler";
             this.cancelButton.UseVisualStyleBackColor = true;
@@ -52,10 +52,10 @@
             // 
             this.okButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.okButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.okButton.Location = new System.Drawing.Point(366, 86);
-            this.okButton.Margin = new System.Windows.Forms.Padding(2);
+            this.okButton.Location = new System.Drawing.Point(488, 106);
+            this.okButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.okButton.Name = "okButton";
-            this.okButton.Size = new System.Drawing.Size(71, 26);
+            this.okButton.Size = new System.Drawing.Size(95, 32);
             this.okButton.TabIndex = 5;
             this.okButton.Text = "OK";
             this.okButton.UseVisualStyleBackColor = true;
@@ -63,24 +63,26 @@
             // 
             // ucScale
             // 
-            this.ucScale.Location = new System.Drawing.Point(12, 18);
+            this.ucScale.Location = new System.Drawing.Point(16, 22);
+            this.ucScale.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.ucScale.Name = "ucScale";
-            this.ucScale.Size = new System.Drawing.Size(503, 52);
+            this.ucScale.Size = new System.Drawing.Size(671, 64);
             this.ucScale.TabIndex = 6;
             this.ucScale.ViewScale = 150;
             // 
             // SetScaleForm
             // 
             this.AcceptButton = this.okButton;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.cancelButton;
-            this.ClientSize = new System.Drawing.Size(523, 123);
+            this.ClientSize = new System.Drawing.Size(697, 151);
             this.Controls.Add(this.ucScale);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.okButton);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "SetScaleForm";
             this.Text = "Echelle de vue";
             this.ResumeLayout(false);
