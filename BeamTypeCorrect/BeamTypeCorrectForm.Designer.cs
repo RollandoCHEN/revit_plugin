@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace DCEStudyTools.BeamTypeCorrect
 {
-    partial class BeamChangingForm
+    partial class BeamTypeCorrectForm
     {
         /// <summary>
         /// Required designer variable.
@@ -47,7 +47,7 @@ namespace DCEStudyTools.BeamTypeCorrect
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BeamChangingForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BeamTypeCorrectForm));
             this.toNormalDataTable = new System.Data.DataTable();
             this.idDataTextBoxColumn1 = new System.Data.DataColumn();
             this.isBeamToBeChangedColumn1 = new System.Data.DataColumn();
@@ -112,7 +112,7 @@ namespace DCEStudyTools.BeamTypeCorrect
             this.tabControl1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // toNomalDataTable
+            // toNormalDataTable
             // 
             this.toNormalDataTable.Columns.AddRange(new System.Data.DataColumn[] {
             this.idDataTextBoxColumn1,
@@ -219,7 +219,7 @@ namespace DCEStudyTools.BeamTypeCorrect
             this.okButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.okButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.okButton.Location = new System.Drawing.Point(456, 403);
-            this.okButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.okButton.Margin = new System.Windows.Forms.Padding(2);
             this.okButton.Name = "okButton";
             this.okButton.Size = new System.Drawing.Size(71, 26);
             this.okButton.TabIndex = 1;
@@ -233,7 +233,7 @@ namespace DCEStudyTools.BeamTypeCorrect
             this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.cancelButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cancelButton.Location = new System.Drawing.Point(530, 403);
-            this.cancelButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cancelButton.Margin = new System.Windows.Forms.Padding(2);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(71, 26);
             this.cancelButton.TabIndex = 1;
@@ -248,8 +248,8 @@ namespace DCEStudyTools.BeamTypeCorrect
             this.wall_tabPage.Controls.Add(this.label3);
             this.wall_tabPage.Location = new System.Drawing.Point(4, 29);
             this.wall_tabPage.Name = "wall_tabPage";
-            this.wall_tabPage.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
-            this.wall_tabPage.Size = new System.Drawing.Size(599, 354);
+            this.wall_tabPage.Padding = new System.Windows.Forms.Padding(3);
+            this.wall_tabPage.Size = new System.Drawing.Size(598, 354);
             this.wall_tabPage.TabIndex = 2;
             this.wall_tabPage.Text = "Murs";
             this.wall_tabPage.UseVisualStyleBackColor = true;
@@ -260,7 +260,7 @@ namespace DCEStudyTools.BeamTypeCorrect
             this.toPV_ApplyButton.Enabled = false;
             this.toPV_ApplyButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toPV_ApplyButton.Location = new System.Drawing.Point(513, 321);
-            this.toPV_ApplyButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.toPV_ApplyButton.Margin = new System.Windows.Forms.Padding(2);
             this.toPV_ApplyButton.Name = "toPV_ApplyButton";
             this.toPV_ApplyButton.Size = new System.Drawing.Size(81, 28);
             this.toPV_ApplyButton.TabIndex = 11;
@@ -273,8 +273,8 @@ namespace DCEStudyTools.BeamTypeCorrect
             this.unsupportedWallGridView.AllowUserToAddRows = false;
             this.unsupportedWallGridView.AllowUserToDeleteRows = false;
             this.unsupportedWallGridView.AllowUserToResizeRows = false;
-            this.unsupportedWallGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.unsupportedWallGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.unsupportedWallGridView.AutoGenerateColumns = false;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
@@ -294,7 +294,7 @@ namespace DCEStudyTools.BeamTypeCorrect
             this.wall_ThicknessGridColumn});
             this.unsupportedWallGridView.DataSource = this.unsupportedWallDataTable;
             this.unsupportedWallGridView.Location = new System.Drawing.Point(5, 33);
-            this.unsupportedWallGridView.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.unsupportedWallGridView.Margin = new System.Windows.Forms.Padding(2);
             this.unsupportedWallGridView.MultiSelect = false;
             this.unsupportedWallGridView.Name = "unsupportedWallGridView";
             this.unsupportedWallGridView.ReadOnly = true;
@@ -345,7 +345,7 @@ namespace DCEStudyTools.BeamTypeCorrect
             // 
             // label3
             // 
-            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -363,7 +363,7 @@ namespace DCEStudyTools.BeamTypeCorrect
             this.toGB_TabPage.Controls.Add(this.label2);
             this.toGB_TabPage.Location = new System.Drawing.Point(4, 29);
             this.toGB_TabPage.Name = "toGB_TabPage";
-            this.toGB_TabPage.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.toGB_TabPage.Padding = new System.Windows.Forms.Padding(3);
             this.toGB_TabPage.Size = new System.Drawing.Size(598, 354);
             this.toGB_TabPage.TabIndex = 1;
             this.toGB_TabPage.Text = "Longrines";
@@ -374,7 +374,7 @@ namespace DCEStudyTools.BeamTypeCorrect
             this.toGB_ApplyButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.toGB_ApplyButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toGB_ApplyButton.Location = new System.Drawing.Point(514, 321);
-            this.toGB_ApplyButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.toGB_ApplyButton.Margin = new System.Windows.Forms.Padding(2);
             this.toGB_ApplyButton.Name = "toGB_ApplyButton";
             this.toGB_ApplyButton.Size = new System.Drawing.Size(81, 28);
             this.toGB_ApplyButton.TabIndex = 5;
@@ -388,8 +388,8 @@ namespace DCEStudyTools.BeamTypeCorrect
             this.toGroundBeamDataView.AllowUserToAddRows = false;
             this.toGroundBeamDataView.AllowUserToDeleteRows = false;
             this.toGroundBeamDataView.AllowUserToResizeRows = false;
-            this.toGroundBeamDataView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.toGroundBeamDataView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.toGroundBeamDataView.AutoGenerateColumns = false;
             dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
@@ -411,7 +411,7 @@ namespace DCEStudyTools.BeamTypeCorrect
             this.toL_widthGridColumn});
             this.toGroundBeamDataView.DataSource = this.toGroundBeamDataTable;
             this.toGroundBeamDataView.Location = new System.Drawing.Point(5, 34);
-            this.toGroundBeamDataView.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.toGroundBeamDataView.Margin = new System.Windows.Forms.Padding(2);
             this.toGroundBeamDataView.MultiSelect = false;
             this.toGroundBeamDataView.Name = "toGroundBeamDataView";
             this.toGroundBeamDataView.RowHeadersVisible = false;
@@ -477,7 +477,7 @@ namespace DCEStudyTools.BeamTypeCorrect
             // 
             // label2
             // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoEllipsis = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -496,19 +496,19 @@ namespace DCEStudyTools.BeamTypeCorrect
             this.toN_TabPage.Controls.Add(this.label1);
             this.toN_TabPage.Location = new System.Drawing.Point(4, 29);
             this.toN_TabPage.Name = "toN_TabPage";
-            this.toN_TabPage.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
-            this.toN_TabPage.Size = new System.Drawing.Size(588, 354);
+            this.toN_TabPage.Padding = new System.Windows.Forms.Padding(3);
+            this.toN_TabPage.Size = new System.Drawing.Size(598, 354);
             this.toN_TabPage.TabIndex = 0;
             this.toN_TabPage.Text = "Poutres Normaux";
             this.toN_TabPage.UseVisualStyleBackColor = true;
             // 
-            // toNomalDataView
+            // toNormalDataView
             // 
             this.toNormalDataView.AllowUserToAddRows = false;
             this.toNormalDataView.AllowUserToDeleteRows = false;
             this.toNormalDataView.AllowUserToResizeRows = false;
-            this.toNormalDataView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.toNormalDataView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.toNormalDataView.AutoGenerateColumns = false;
             dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
@@ -530,9 +530,9 @@ namespace DCEStudyTools.BeamTypeCorrect
             this.toN_widthGridColumn});
             this.toNormalDataView.DataSource = this.toNormalDataTable;
             this.toNormalDataView.Location = new System.Drawing.Point(5, 123);
-            this.toNormalDataView.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.toNormalDataView.Margin = new System.Windows.Forms.Padding(2);
             this.toNormalDataView.MultiSelect = false;
-            this.toNormalDataView.Name = "toNomalDataView";
+            this.toNormalDataView.Name = "toNormalDataView";
             this.toNormalDataView.RowHeadersVisible = false;
             this.toNormalDataView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.toNormalDataView.RowTemplate.Height = 26;
@@ -609,11 +609,11 @@ namespace DCEStudyTools.BeamTypeCorrect
             // 
             // ucBeamFilterCondition
             // 
-            this.ucBeamFilterCondition.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.ucBeamFilterCondition.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ucBeamFilterCondition.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ucBeamFilterCondition.Location = new System.Drawing.Point(5, 8);
-            this.ucBeamFilterCondition.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ucBeamFilterCondition.Margin = new System.Windows.Forms.Padding(2);
             this.ucBeamFilterCondition.Name = "ucBeamFilterCondition";
             this.ucBeamFilterCondition.Size = new System.Drawing.Size(578, 71);
             this.ucBeamFilterCondition.TabIndex = 3;
@@ -623,7 +623,7 @@ namespace DCEStudyTools.BeamTypeCorrect
             this.toN_ApplyButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.toN_ApplyButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toN_ApplyButton.Location = new System.Drawing.Point(502, 321);
-            this.toN_ApplyButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.toN_ApplyButton.Margin = new System.Windows.Forms.Padding(2);
             this.toN_ApplyButton.Name = "toN_ApplyButton";
             this.toN_ApplyButton.Size = new System.Drawing.Size(81, 28);
             this.toN_ApplyButton.TabIndex = 1;
@@ -635,7 +635,7 @@ namespace DCEStudyTools.BeamTypeCorrect
             // 
             // label1
             // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label1.Location = new System.Drawing.Point(5, 81);
@@ -648,8 +648,8 @@ namespace DCEStudyTools.BeamTypeCorrect
             // 
             // tabControl1
             // 
-            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.toN_TabPage);
             this.tabControl1.Controls.Add(this.toGB_TabPage);
@@ -663,7 +663,7 @@ namespace DCEStudyTools.BeamTypeCorrect
             this.tabControl1.Size = new System.Drawing.Size(606, 387);
             this.tabControl1.TabIndex = 6;
             // 
-            // BeamChangingForm
+            // BeamTypeCorrectForm
             // 
             this.AcceptButton = this.okButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -674,9 +674,9 @@ namespace DCEStudyTools.BeamTypeCorrect
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.okButton);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.MinimumSize = new System.Drawing.Size(630, 398);
-            this.Name = "BeamChangingForm";
+            this.Name = "BeamTypeCorrectForm";
             this.Text = "Poutres en doute";
             this.Load += new System.EventHandler(this.BeamChangingForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.toNormalDataTable)).EndInit();

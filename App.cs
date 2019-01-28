@@ -84,7 +84,7 @@ namespace DCEStudyTools
                 "Correct" + System.Environment.NewLine + "Beam Type",
                 thisAssemblyPath,
                 "DCEStudyTools.BeamTypeCorrect.BeamTypeCorrect",
-                "beam_doubt_32.png",
+                "beam_correct_32.png",
                 String.Empty,
                 "Correct the type of beams whose type are not appropriate")
             ) as PushButton;

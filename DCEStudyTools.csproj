@@ -76,12 +76,17 @@
     </Compile>
     <Compile Include="Configuration\LevelConfiguration.cs" />
     <Compile Include="BeamTypeCorrect\ChangeBeamFamilyTypeEvent.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Test\Test.cs" />
-    <Compile Include="BeamTypeCorrect\BeamChangingForm.cs">
+    <Compile Include="BeamTypeCorrect\BeamTypeCorrectForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="BeamTypeCorrect\BeamChangingForm.Designer.cs">
-      <DependentUpon>BeamChangingForm.cs</DependentUpon>
+    <Compile Include="BeamTypeCorrect\BeamTypeCorrectForm.Designer.cs">
+      <DependentUpon>BeamTypeCorrectForm.cs</DependentUpon>
     </Compile>
     <Compile Include="BeamTypeCorrect\ucNomalBeamFilterCondition.cs">
       <SubType>UserControl</SubType>
@@ -193,11 +198,6 @@
       <DependentUpon>LevelCreationForm.cs</DependentUpon>
     </Compile>
     <Compile Include="LevelCreation\LevelCreation.cs" />
-    <Compile Include="Properties\Resources2.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\Settings1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
@@ -290,6 +290,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
+    <Resource Include="Resources\beam_correct_32.ico" />
+    <Resource Include="Resources\beam_correct_32.png" />
+    <Resource Include="Resources\sheet_create_32.ico" />
     <Resource Include="Resources\direction_32.png" />
     <Resource Include="Resources\beam_update_16.png" />
     <Resource Include="Resources\sheet_create_32.png" />
@@ -299,8 +302,6 @@
     <Resource Include="Resources\Revit_2019-01-17_16-21-57.png" />
     <Resource Include="Resources\beam_confirm_32.ico" />
     <Resource Include="Resources\beam_confirm_32.png" />
-    <Resource Include="Resources\beam_doubt_32.ico" />
-    <Resource Include="Resources\beam_doubt_32.png" />
     <Resource Include="Resources\direction_32.ico" />
     <Resource Include="Resources\FloorSpanDirectionImage.png" />
     <Resource Include="Resources\load_32.ico" />
@@ -340,8 +341,8 @@
     <EmbeddedResource Include="Configuration\LevelConfigForm.resx">
       <DependentUpon>LevelConfigForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="BeamTypeCorrect\BeamChangingForm.resx">
-      <DependentUpon>BeamChangingForm.cs</DependentUpon>
+    <EmbeddedResource Include="BeamTypeCorrect\BeamTypeCorrectForm.resx">
+      <DependentUpon>BeamTypeCorrectForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="BeamTypeCorrect\ucNomalBeamFilterCondition.resx">
       <DependentUpon>ucNomalBeamFilterCondition.cs</DependentUpon>
@@ -391,7 +392,7 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
-      <LastGenOutput>Resources2.Designer.cs</LastGenOutput>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="ScaleSetting\SetScaleForm.resx">
       <DependentUpon>SetScaleForm.cs</DependentUpon>

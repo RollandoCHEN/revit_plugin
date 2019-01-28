@@ -20,7 +20,7 @@ namespace DCEStudyTools.BeamTypeCorrect
         private UIDocument _uidoc;
         private Document _doc;
 
-        private BeamChangingForm _form;
+        private BeamTypeCorrectForm _form;
 
         private ExternalEvent _exEvent;
         
@@ -55,7 +55,7 @@ namespace DCEStudyTools.BeamTypeCorrect
                 ChangeBeamFamilyTypeEvent handler = new ChangeBeamFamilyTypeEvent();
                 _exEvent = ExternalEvent.Create(handler);
 
-                _form = new BeamChangingForm(_uidoc, _exEvent, handler);
+                _form = new BeamTypeCorrectForm(_uidoc, _exEvent, handler);
 
                 // Capture the error of no-host beam
                 bool allBeamsHaveHost = !new FilteredElementCollector(_doc)

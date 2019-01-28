@@ -32,66 +32,77 @@ namespace DCEStudyTools.ScaleSetting
 
             try
             {
-                // Create a 3D view in order to ge the outline of the entire model
-                // Get a ViewFamilyType for a 3D view
-                ViewFamilyType viewFamilyType =
-                    (from v in new FilteredElementCollector(_doc)
-                     .OfClass(typeof(ViewFamilyType))
-                     .Cast<ViewFamilyType>()
-                     where v.ViewFamily == ViewFamily.ThreeDimensional
-                     select v).First();
-                Transaction t = new Transaction(_doc);
-                t.Start("Create 3D View to get the size of the building");
-                View3D view = View3D.CreateIsometric(_doc, viewFamilyType.Id);
-
-                // Get the outline of the entire 3D model
+                // Get all the floor elements
                 FilteredElementCollector floorFec = new FilteredElementCollector(_doc).OfClass(typeof(Floor));
-                BoundingBoxXYZ ibb = floorFec.Cast<Floor>().First().get_BoundingBox(view);
-                Outline outline = new Outline(ibb.Min, ibb.Max);
-                foreach (Floor floor in floorFec)
+                if (floorFec.Count() != 0)
                 {
-                    BoundingBoxXYZ boxXYZ = floor.get_BoundingBox(view);
-                    outline.AddPoint(boxXYZ.Min);
-                    outline.AddPoint(boxXYZ.Max);
-                }
+                    // Create a 3D view in order to ge the outline of the entire model
+                    // Get a ViewFamilyType for a 3D view
+                    ViewFamilyType viewFamilyType =
+                        (from v in new FilteredElementCollector(_doc)
+                         .OfClass(typeof(ViewFamilyType))
+                         .Cast<ViewFamilyType>()
+                         where v.ViewFamily == ViewFamily.ThreeDimensional
+                         select v).First();
+                    Transaction t = new Transaction(_doc);
+                    t.Start("Create 3D View to get the size of the building");
+                    View3D view = View3D.CreateIsometric(_doc, viewFamilyType.Id);
+                    t.Commit();
 
-                XYZ dimension = outline.MaximumPoint - outline.MinimumPoint;
-                double xDimension = UnitUtils.Convert(
-                    dimension.X,
-                    DisplayUnitType.DUT_DECIMAL_FEET,
-                    DisplayUnitType.DUT_METERS);
-                double yDimension = UnitUtils.Convert(
-                    dimension.Y,
-                    DisplayUnitType.DUT_DECIMAL_FEET,
-                    DisplayUnitType.DUT_METERS);
-
-                double maxLength = Math.Max(xDimension, yDimension);
-                double minLength = Math.Min(xDimension, yDimension);
-                bool scaleIsFound = false;
-
-                foreach (int scale in _scales)
-                {
-                    if (maxLength / scale < Properties.Settings.Default.TITLEBLOCK_LENGTH && 
-                        minLength / scale < Properties.Settings.Default.TITLEBLOCK_WIDTH)
+                    // Get the outline of the entire 3D model
+                    BoundingBoxXYZ ibb = floorFec.Cast<Floor>().First().get_BoundingBox(view);
+                    Outline outline = new Outline(ibb.Min, ibb.Max);
+                    foreach (Floor floor in floorFec)
                     {
-                        SetScaleForm form = new SetScaleForm(scale);
-                        if (form.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-                        {
-                            ChangeViewTemplateScaleIfFound(scale);
-                        }
-                        scaleIsFound = true;
-                        break;
+                        BoundingBoxXYZ boxXYZ = floor.get_BoundingBox(view);
+                        outline.AddPoint(boxXYZ.Min);
+                        outline.AddPoint(boxXYZ.Max);
                     }
-                }
 
-                if (!scaleIsFound)
+                    XYZ dimension = outline.MaximumPoint - outline.MinimumPoint;
+                    double xDimension = UnitUtils.Convert(
+                        dimension.X,
+                        DisplayUnitType.DUT_DECIMAL_FEET,
+                        DisplayUnitType.DUT_METERS);
+                    double yDimension = UnitUtils.Convert(
+                        dimension.Y,
+                        DisplayUnitType.DUT_DECIMAL_FEET,
+                        DisplayUnitType.DUT_METERS);
+
+                    double maxLength = Math.Max(xDimension, yDimension);
+                    double minLength = Math.Min(xDimension, yDimension);
+                    bool scaleIsFound = false;
+
+                    foreach (int scale in _scales)
+                    {
+                        if (maxLength / scale < Properties.Settings.Default.TITLEBLOCK_LENGTH &&
+                            minLength / scale < Properties.Settings.Default.TITLEBLOCK_WIDTH)
+                        {
+                            SetScaleForm form = new SetScaleForm(scale);
+                            if (form.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                            {
+                                ChangeViewTemplateScaleIfFound(scale);
+                            }
+                            scaleIsFound = true;
+                            break;
+                        }
+                    }
+
+                    if (!scaleIsFound)
+                    {
+                        SetScaleForm form = new SetScaleForm(0);
+                        form.ShowDialog();
+                    }
+
+                    t.Start("Delete the 3D View");
+                    _doc.Delete(view.Id);
+                    t.Commit();
+                }
+                else
                 {
-                    SetScaleForm form = new SetScaleForm(0);
-                    form.ShowDialog();
+                    TaskDialog.Show("Revit", "No floor element exists in the document !");
                 }
 
-                _doc.Delete(view.Id);
-                t.Commit();
             }
             catch (Exception e)
             {

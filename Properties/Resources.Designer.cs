@@ -101,6 +101,26 @@ namespace DCEStudyTools.Properties {
         }
         
         /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap beam_correct_32 {
+            get {
+                object obj = ResourceManager.GetObject("beam_correct_32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Icon semblable à (Icône).
+        /// </summary>
+        internal static System.Drawing.Icon beam_correct_321 {
+            get {
+                object obj = ResourceManager.GetObject("beam_correct_321", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Icon semblable à (Icône).
         /// </summary>
         internal static System.Drawing.Icon beam_dimension_32 {
@@ -116,26 +136,6 @@ namespace DCEStudyTools.Properties {
         internal static System.Drawing.Bitmap beam_dimension_321 {
             get {
                 object obj = ResourceManager.GetObject("beam_dimension_321", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une ressource localisée de type System.Drawing.Icon semblable à (Icône).
-        /// </summary>
-        internal static System.Drawing.Icon beam_doubt_32 {
-            get {
-                object obj = ResourceManager.GetObject("beam_doubt_32", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap beam_doubt_321 {
-            get {
-                object obj = ResourceManager.GetObject("beam_doubt_321", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -357,6 +357,16 @@ namespace DCEStudyTools.Properties {
             get {
                 object obj = ResourceManager.GetObject("sheet_create_32", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Icon semblable à (Icône).
+        /// </summary>
+        internal static System.Drawing.Icon sheet_create_321 {
+            get {
+                object obj = ResourceManager.GetObject("sheet_create_321", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
             }
         }
         

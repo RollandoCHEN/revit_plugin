@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace DCEStudyTools.BeamTypeCorrect
 {
-    public partial class BeamChangingForm : System.Windows.Forms.Form
+    public partial class BeamTypeCorrectForm : System.Windows.Forms.Form
     {
         private ExternalEvent _exEvent;
         private ChangeBeamFamilyTypeEvent _handler;
@@ -25,7 +25,7 @@ namespace DCEStudyTools.BeamTypeCorrect
         private readonly string GROUND_BEAM_TAB_NAME = "Longrines";
         private readonly string WALL_TAB_NAME = "Murs";
 
-        public BeamChangingForm(UIDocument uidoc, ExternalEvent exEvent, ChangeBeamFamilyTypeEvent handler)
+        public BeamTypeCorrectForm(UIDocument uidoc, ExternalEvent exEvent, ChangeBeamFamilyTypeEvent handler)
         {
             InitializeComponent();
             _uidoc = uidoc;
