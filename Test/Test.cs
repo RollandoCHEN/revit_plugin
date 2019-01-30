@@ -3,8 +3,10 @@ using Autodesk.Revit.UI;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
 
 namespace DCEStudyTools.Test
 {
@@ -23,43 +25,78 @@ namespace DCEStudyTools.Test
             
             try
             {
-                IList<FamilySymbol> beamTypesList =
-                    (from beam in new FilteredElementCollector(_doc)
-                     .OfClass(typeof(FamilySymbol))
-                     .OfCategory(BuiltInCategory.OST_StructuralFraming)
-                     select beam)
-                     .Cast<FamilySymbol>()
-                     .ToList();
+                string path =
+                    Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) +
+                    Path.DirectorySeparatorChar + "test1.dwg";
 
-                Material target =
-                    (from Material m in new FilteredElementCollector(_doc)
-                     .OfClass(typeof(Material))
-                     where m != null
-                     select m)
-                     .Cast<Material>()
-                     .FirstOrDefault(m => m.Name.Equals("Béton - Coulé sur place - Béton25"));
+                DWGImportOptions opt = new DWGImportOptions();
+                opt.Placement = ImportPlacement.Origin;
+                opt.AutoCorrectAlmostVHLines = true;
+                opt.ThisViewOnly = true; // not this view only
+                opt.Unit = ImportUnit.Default;
+                ElementId linkId = ElementId.InvalidElementId;
 
-                Transaction t = new Transaction(_doc, "Set mat");
-                t.Start();
-                foreach (FamilySymbol bt in beamTypesList)
+                using (var fbd = new FolderBrowserDialog())
                 {
-                    if (bt.Name.Contains("BA25"))
+                    DialogResult result = fbd.ShowDialog();
+
+                    if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
                     {
-                        Parameter mat =
-                            (from Parameter para in bt.Parameters
-                             where para.Definition.Name.Equals("Matériau structurel")
-                             select para)
-                             .Cast<Parameter>()
-                             .First();
-                
-                        mat.Set(target.Id);
+                        string[] files = Directory.GetFiles(fbd.SelectedPath);
+                        foreach (string file in files)
+                        {
+                            if (file.ToLower().Contains("dwg") || file.ToLower().Contains("dxf"))
+                            {
+                                using (Transaction tran = new Transaction(_doc, "Quick Link"))
+                                {
+                                    tran.Start();
+                                    _doc.Link(file, opt, _doc.ActiveView, out linkId);
+                                    tran.Commit();
+                                }
+                            }
+                            
+                        }
+                        
                     }
-
                 }
-                t.Commit();
-                
 
-                
+
+
+                //IList<FamilySymbol> beamTypesList =
+                //    (from beam in new FilteredElementCollector(_doc)
+                //     .OfClass(typeof(FamilySymbol))
+                //     .OfCategory(BuiltInCategory.OST_StructuralFraming)
+                //     select beam)
+                //     .Cast<FamilySymbol>()
+                //     .ToList();
+
+                //Material target =
+                //    (from Material m in new FilteredElementCollector(_doc)
+                //     .OfClass(typeof(Material))
+                //     where m != null
+                //     select m)
+                //     .Cast<Material>()
+                //     .FirstOrDefault(m => m.Name.Equals("Béton - Coulé sur place - Béton25"));
+
+                //Transaction t = new Transaction(_doc, "Set mat");
+                //t.Start();
+                //foreach (FamilySymbol bt in beamTypesList)
+                //{
+                //    if (bt.Name.Contains("BA25"))
+                //    {
+                //        Parameter mat =
+                //            (from Parameter para in bt.Parameters
+                //             where para.Definition.Name.Equals("Matériau structurel")
+                //             select para)
+                //             .Cast<Parameter>()
+                //             .First();
+
+                //        mat.Set(target.Id);
+                //    }
+
+                //}
+                //t.Commit();
+
                 //// Duplicate the selected view selon the number of zone de définition
 
                 //// Get list of all structural levels
