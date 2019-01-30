@@ -23,43 +23,88 @@ namespace DCEStudyTools.Test
             
             try
             {
-                IList<FamilySymbol> beamTypesList =
-                    (from beam in new FilteredElementCollector(_doc)
-                     .OfClass(typeof(FamilySymbol))
-                     .OfCategory(BuiltInCategory.OST_StructuralFraming)
-                     select beam)
-                     .Cast<FamilySymbol>()
-                     .ToList();
+                // Get list of all structural levels
+                IList<Level> strLevels =
+                    (from lev in new FilteredElementCollector(_doc)
+                    .OfClass(typeof(Level))
+                     where lev.GetEntitySchemaGuids().Count != 0
+                     select lev)
+                    .Cast<Level>()
+                    .OrderBy(l => l.Elevation)
+                    .ToList();
 
-                Material target =
-                    (from Material m in new FilteredElementCollector(_doc)
-                     .OfClass(typeof(Material))
-                     where m != null
-                     select m)
-                     .Cast<Material>()
-                     .FirstOrDefault(m => m.Name.Equals("Béton - Coulé sur place - Béton25"));
-
-                Transaction t = new Transaction(_doc, "Set mat");
-                t.Start();
-                foreach (FamilySymbol bt in beamTypesList)
+                if (strLevels.Count == 0)
                 {
-                    if (bt.Name.Contains("BA25"))
+                    TaskDialog.Show("Revit", "Configurer les niveaux structuraux avant de lancer cette commande.");
+                    return Result.Cancelled;
+                }
+
+                IList<ImportInstance> dwgFilesList =
+                    (from ImportInstance plan in new FilteredElementCollector(_doc)
+                    .OfClass(typeof(ImportInstance))
+                    where plan.Category.Name.ToLower().EndsWith(".dwg") || plan.Category.Name.ToLower().EndsWith(".dxf")
+                    select plan)
+                    .Cast<ImportInstance>()
+                    .ToList();
+
+                if (dwgFilesList.Count == 0)
+                {
+                    TaskDialog.Show("Revit", "No dwg file is found in the document.");
+                    return Result.Cancelled;
+                }
+
+                IList<ViewPlan> viewPlanList =
+                            (from ViewPlan view in new FilteredElementCollector(_doc)
+                            .OfClass(typeof(ViewPlan))
+                             where view.ViewType == ViewType.CeilingPlan && !view.IsTemplate
+                             select view)
+                            .Cast<ViewPlan>()
+                            .ToList();
+
+                if (viewPlanList.Count == 0)
+                {
+                    TaskDialog.Show("Revit", "No view plan is found in the document.");
+                    return Result.Cancelled;
+                }
+
+                foreach (ViewPlan view in viewPlanList)
+                {
+                    Level viewLvl = view.GenLevel;
+                    Level supLvl = strLevels.Where(lvl => lvl.Elevation > viewLvl.Elevation).OrderBy(l => l.Elevation).FirstOrDefault();
+                    using (Transaction tx = new Transaction(_doc))
                     {
-                        Parameter mat =
-                            (from Parameter para in bt.Parameters
-                             where para.Definition.Name.Equals("Matériau structurel")
-                             select para)
-                             .Cast<Parameter>()
-                             .First();
-                
-                        mat.Set(target.Id);
+                        tx.Start("Underlay Range");
+                        if (supLvl != null)
+                        {
+                            view.SetUnderlayRange(viewLvl.Id, supLvl.Id);
+                        }
+                        else
+                        {
+                            view.SetUnderlayBaseLevel(viewLvl.Id);
+                        }
+                        tx.Commit();
                     }
 
-                }
-                t.Commit();
-                
+                    foreach (ImportInstance dwg in dwgFilesList)
+                    {
+                        // if the level linked to the dwg is one of the structural level
 
-                
+                        if (dwg.LevelId == supLvl.Id)
+                        {
+                            OverrideGraphicSettings ogs = new OverrideGraphicSettings();
+
+                            //Set Halftone Element
+                            using (Transaction tx = new Transaction(_doc))
+                            {
+                                tx.Start("Halftone");
+
+                                ogs.SetHalftone(true);
+                                view.SetCategoryOverrides(dwg.Category.Id, ogs);
+                                tx.Commit();
+                            }
+                        }
+                    }
+                }
                 //// Duplicate the selected view selon the number of zone de définition
 
                 //// Get list of all structural levels

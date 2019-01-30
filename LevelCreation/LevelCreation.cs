@@ -207,14 +207,14 @@ namespace DCEStudyTools.LevelCreation
             View standardTemplate =
                 ViewTemplate.FindViewTemplateOrDefault(
                     _doc,
-                    ViewType.FloorPlan,
+                    ViewType.CeilingPlan,
                     Properties.Settings.Default.TEMPLATE_NAME_STANDARD_FLOOR,
                     out bool standardTemplateIsFound);
 
             View foundationTemplate =
                 ViewTemplate.FindViewTemplateOrDefault(
                     _doc,
-                    ViewType.FloorPlan,
+                    ViewType.CeilingPlan,
                     Properties.Settings.Default.TEMPLATE_NAME_FOUNDATION,
                     out bool foundationTemplateIsFound);
 
