@@ -29,11 +29,13 @@ namespace DCEStudyTools.Test
                     Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) +
                     Path.DirectorySeparatorChar + "test1.dwg";
 
-                DWGImportOptions opt = new DWGImportOptions();
-                opt.Placement = ImportPlacement.Origin;
-                opt.AutoCorrectAlmostVHLines = true;
-                opt.ThisViewOnly = true; // not this view only
-                opt.Unit = ImportUnit.Default;
+                DWGImportOptions opt = new DWGImportOptions
+                {
+                    Placement = ImportPlacement.Origin,
+                    AutoCorrectAlmostVHLines = true,
+                    ThisViewOnly = true, // not this view only
+                    Unit = ImportUnit.Default
+                };
                 ElementId linkId = ElementId.InvalidElementId;
 
                 using (var fbd = new FolderBrowserDialog())
