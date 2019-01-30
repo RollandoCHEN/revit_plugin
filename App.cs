@@ -143,6 +143,18 @@ namespace DCEStudyTools
                     "")
             ) as PushButton;
 
+            // Create push button for CADLink
+            PushButton pbAddLink = levelManagementRibbonPanel.AddItem(
+                CreatePushButtonData(
+                    "cmdAddLink",
+                    "Add" + System.Environment.NewLine + "CAD Link",
+                    thisAssemblyPath,
+                    "DCEStudyTools.CADLink.CADLink",
+                    "link_32.png",
+                    String.Empty,
+                    "Add CAD links")
+            ) as PushButton;
+
             // Create push button for LevelsCreation
             PushButton pbScaleSetting = genericToolsRibbonPanel.AddItem(
                 CreatePushButtonData(

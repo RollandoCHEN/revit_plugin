@@ -6,6 +6,7 @@ using System.Data;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace DCEStudyTools.Test
@@ -25,21 +26,44 @@ namespace DCEStudyTools.Test
             
             try
             {
-                string path =
-                    Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) +
-                    Path.DirectorySeparatorChar + "test1.dwg";
+                IList<ViewPlan> viewPlanList =
+                            (from ViewPlan view in new FilteredElementCollector(_doc)
+                            .OfClass(typeof(ViewPlan))
+                             where view.ViewType == ViewType.CeilingPlan && !view.IsTemplate
+                             select view)
+                            .Cast<ViewPlan>()
+                            .ToList();
+
+                if (viewPlanList.Count == 0)
+                {
+                    TaskDialog.Show("Revit", "No view plan is found in the document.");
+                    return Result.Cancelled;
+                }
+
+                Dictionary<string, ViewPlan> viewDic = new Dictionary<string, ViewPlan>();
+                foreach (ViewPlan vp in viewPlanList)
+                {
+                    Regex regex = new Regex(@"r\+\d|rdc|ss\d|ss\-\d");
+                    
+                    Match match = regex.Match(vp.Name.ToLower());
+                    if (match.Success)
+                    {
+                        viewDic.Add(match.Value.ToLower(), vp);
+                    }
+                }
 
                 DWGImportOptions opt = new DWGImportOptions
                 {
                     Placement = ImportPlacement.Origin,
                     AutoCorrectAlmostVHLines = true,
-                    ThisViewOnly = true, // not this view only
+                    ThisViewOnly = true, 
                     Unit = ImportUnit.Default
                 };
                 ElementId linkId = ElementId.InvalidElementId;
 
                 using (var fbd = new FolderBrowserDialog())
                 {
+                    
                     DialogResult result = fbd.ShowDialog();
 
                     if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
@@ -49,11 +73,19 @@ namespace DCEStudyTools.Test
                         {
                             if (file.ToLower().Contains("dwg") || file.ToLower().Contains("dxf"))
                             {
-                                using (Transaction tran = new Transaction(_doc, "Quick Link"))
+                                ViewPlan view = null;
+                                foreach (var item in viewDic)
                                 {
-                                    tran.Start();
-                                    _doc.Link(file, opt, _doc.ActiveView, out linkId);
-                                    tran.Commit();
+                                    if (file.ToLower().Contains(item.Key))
+                                    {
+                                        view = item.Value;
+                                        using (Transaction tran = new Transaction(_doc, "Quick Link"))
+                                        {
+                                            tran.Start();
+                                            _doc.Link(file, opt, view, out linkId);
+                                            tran.Commit();
+                                        }
+                                    }
                                 }
                             }
                             
@@ -61,8 +93,6 @@ namespace DCEStudyTools.Test
                         
                     }
                 }
-
-
 
                 //IList<FamilySymbol> beamTypesList =
                 //    (from beam in new FilteredElementCollector(_doc)

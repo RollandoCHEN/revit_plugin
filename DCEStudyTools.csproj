@@ -67,6 +67,13 @@
       <DependentUpon>BeamTypeForm.cs</DependentUpon>
     </Compile>
     <Compile Include="BeamTypeCorrect\BeamTypeCorrect.cs" />
+    <Compile Include="CADLink\CADLink.cs" />
+    <Compile Include="CADLink\CADLinkForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CADLink\CADLinkForm.Designer.cs">
+      <DependentUpon>CADLinkForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="CategoriesHiding\CategoriesHiding.cs" />
     <Compile Include="Configuration\LevelConfigForm.cs">
       <SubType>Form</SubType>
@@ -290,6 +297,8 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
+    <Resource Include="Resources\link_32.ico" />
+    <Resource Include="Resources\link_32.png" />
     <Resource Include="Resources\beam_correct_32.ico" />
     <Resource Include="Resources\beam_correct_32.png" />
     <Resource Include="Resources\sheet_create_32.ico" />
@@ -337,6 +346,9 @@
   <ItemGroup>
     <EmbeddedResource Include="BeamTypeChange\BeamTypeForm.resx">
       <DependentUpon>BeamTypeForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CADLink\CADLinkForm.resx">
+      <DependentUpon>CADLinkForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Configuration\LevelConfigForm.resx">
       <DependentUpon>LevelConfigForm.cs</DependentUpon>
