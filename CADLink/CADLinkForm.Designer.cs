@@ -32,7 +32,6 @@ namespace DCEStudyTools.CADLink
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CADLinkForm));
             this.selsectButton = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -42,7 +41,7 @@ namespace DCEStudyTools.CADLink
             this.pathDataTextBoxColumn = new System.Data.DataColumn();
             this.cancelButton = new System.Windows.Forms.Button();
             this.okButton = new System.Windows.Forms.Button();
-            this.keywordDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.keywordDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pathDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataTable)).BeginInit();
@@ -131,19 +130,18 @@ namespace DCEStudyTools.CADLink
             // keywordDataGridViewTextBoxColumn
             // 
             this.keywordDataGridViewTextBoxColumn.DataPropertyName = "Keyword";
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.keywordDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.keywordDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle1;
             this.keywordDataGridViewTextBoxColumn.HeaderText = "Niveau";
             this.keywordDataGridViewTextBoxColumn.Name = "keywordDataGridViewTextBoxColumn";
             this.keywordDataGridViewTextBoxColumn.ReadOnly = true;
             this.keywordDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.keywordDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // pathDataGridViewTextBoxColumn
             // 
             this.pathDataGridViewTextBoxColumn.DataPropertyName = "Path";
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.pathDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.pathDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle2;
             this.pathDataGridViewTextBoxColumn.HeaderText = "Fichier CAD";
             this.pathDataGridViewTextBoxColumn.Name = "pathDataGridViewTextBoxColumn";
             this.pathDataGridViewTextBoxColumn.ReadOnly = true;
@@ -181,9 +179,7 @@ namespace DCEStudyTools.CADLink
         private DataTable dataTable;
         private DataColumn keywordDataTextBoxColumn;
         private DataColumn pathDataTextBoxColumn;
-        private System.Windows.Forms.DataGridViewComboBoxColumn keyword;
-        private System.Windows.Forms.DataGridViewTextBoxColumn path;
-        private System.Windows.Forms.DataGridViewComboBoxColumn keywordDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn keywordDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn pathDataGridViewTextBoxColumn;
     }
 }
