@@ -26,84 +26,6 @@ namespace DCEStudyTools.Test
             
             try
             {
-                IList<ViewPlan> viewPlanList =
-                            (from ViewPlan view in new FilteredElementCollector(_doc)
-                            .OfClass(typeof(ViewPlan))
-                             where view.ViewType == ViewType.CeilingPlan && !view.IsTemplate
-                             select view)
-                            .Cast<ViewPlan>()
-                            .ToList();
-
-                if (viewPlanList.Count == 0)
-                {
-                    TaskDialog.Show("Revit", "No view plan is found in the document.");
-                    return Result.Cancelled;
-                }
-
-                Dictionary<string, ViewPlan> viewDic = new Dictionary<string, ViewPlan>();
-                foreach (ViewPlan vp in viewPlanList)
-                {
-                    Regex regex = new Regex(@"r\+\d|rdc|ss\d|ss\-\d");
-                    
-                    Match match = regex.Match(vp.Name.ToLower());
-                    if (match.Success)
-                    {
-                        viewDic.Add(match.Value.ToLower(), vp);
-                    }
-                }
-
-                DWGImportOptions opt = new DWGImportOptions
-                {
-                    Placement = ImportPlacement.Origin,
-                    AutoCorrectAlmostVHLines = true,
-                    ThisViewOnly = true, 
-                    Unit = ImportUnit.Default
-                };
-                ElementId linkId = ElementId.InvalidElementId;
-
-                // list of all dwg or dxf links
-                IList<ImportInstance> cadFileLinksList = new List<ImportInstance>();
-
-                using (var fbd = new FolderBrowserDialog())
-                {
-                    
-                    DialogResult result = fbd.ShowDialog();
-
-                    if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
-                    {
-                        string[] files = Directory.GetFiles(fbd.SelectedPath);
-                        foreach (string file in files)
-                        {
-                            if (file.ToLower().Contains("dwg") || file.ToLower().Contains("dxf"))
-                            {
-                                ViewPlan view = null;
-                                foreach (var item in viewDic)
-                                {
-                                    if (file.ToLower().Contains(item.Key))
-                                    {
-                                        view = item.Value;
-                                        using (Transaction tran = new Transaction(_doc, "Quick Link"))
-                                        {
-                                            tran.Start();
-                                            _doc.Link(file, opt, view, out linkId);
-                                            tran.Commit();
-                                        }
-                                        cadFileLinksList.Add((ImportInstance)_doc.GetElement(linkId));
-                                    }
-                                }
-                            }
-                            
-                        }
-                        
-                    }
-                }
-
-                if (cadFileLinksList.Count == 0)
-                {
-                    TaskDialog.Show("Revit", "No dwg file is added in the document.");
-                    return Result.Cancelled;
-                }
-
                 // Get list of all structural levels
                 IList<Level> strLevels =
                     (from lev in new FilteredElementCollector(_doc)
@@ -120,7 +42,31 @@ namespace DCEStudyTools.Test
                     return Result.Cancelled;
                 }
 
+                IList<ImportInstance> cadFileLinksList =
+                    new FilteredElementCollector(_doc)
+                    .OfClass(typeof(ImportInstance))
+                    .Cast<ImportInstance>()
+                    .ToList();
 
+                if (cadFileLinksList.Count == 0)
+                {
+                    TaskDialog.Show("Revit", "No dwg file is found in the document.");
+                    return Result.Cancelled;
+                }
+
+                IList<ViewPlan> viewPlanList =
+                            (from ViewPlan view in new FilteredElementCollector(_doc)
+                            .OfClass(typeof(ViewPlan))
+                             where view.ViewType == ViewType.CeilingPlan && !view.IsTemplate
+                             select view)
+                            .Cast<ViewPlan>()
+                            .ToList();
+
+                if (viewPlanList.Count == 0)
+                {
+                    TaskDialog.Show("Revit", "No view plan is found in the document.");
+                    return Result.Cancelled;
+                }
 
                 foreach (ViewPlan view in viewPlanList)
                 {
@@ -142,19 +88,16 @@ namespace DCEStudyTools.Test
 
                     foreach (ImportInstance cadFile in cadFileLinksList)
                     {
-                        // if the level linked to the dwg is one of the structural level
-
-                        if (cadFile.LevelId == supLvl.Id)
+                        if (supLvl != null && cadFile.LevelId == supLvl.Id)
                         {
-                            OverrideGraphicSettings ogs = new OverrideGraphicSettings();
-
+                            OverrideGraphicSettings ogs = view.GetElementOverrides(cadFile.Id);
                             //Set Halftone Element
                             using (Transaction tx = new Transaction(_doc))
                             {
                                 tx.Start("Halftone");
 
                                 ogs.SetHalftone(true);
-                                view.SetCategoryOverrides(cadFile.Category.Id, ogs);
+                                view.SetElementOverrides(cadFile.Id, ogs);
                                 tx.Commit();
                             }
                         }
@@ -273,8 +216,7 @@ namespace DCEStudyTools.Test
                 //}
                 //t.Commit();
 
-
-
+                return Result.Succeeded;
             }
             catch (Exception e)
             {
@@ -282,7 +224,6 @@ namespace DCEStudyTools.Test
                 return Result.Failed;
             }
 
-            return Result.Succeeded;
         }
 
       

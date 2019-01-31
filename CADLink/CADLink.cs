@@ -63,10 +63,10 @@ namespace DCEStudyTools.CADLink
                     {
                         Placement = ImportPlacement.Origin,
                         AutoCorrectAlmostVHLines = true,
-                        ThisViewOnly = true,
-                        Unit = ImportUnit.Default
+                        ThisViewOnly = false,
+                        Unit = ImportUnit.Default,
                     };
-
+                    
                     ElementId linkId = ElementId.InvalidElementId;
                     // add links
                     foreach (DataGridViewRow row in form.DataGridView.Rows)
