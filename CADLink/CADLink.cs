@@ -74,7 +74,7 @@ namespace DCEStudyTools.CADLink
                         if (!string.IsNullOrEmpty(keyword))
                         {
                             ViewPlan view = viewDic[keyword];
-                            string filePath = row.Cells[1].Value.ToString();
+                            string filePath = row.Cells[2].Value.ToString();
                             using (Transaction tran = new Transaction(_doc, "Quick Link"))
                             {
                                 tran.Start();

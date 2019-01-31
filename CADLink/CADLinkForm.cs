@@ -1,5 +1,6 @@
 ﻿using Autodesk.Revit.DB;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
@@ -33,7 +34,9 @@ namespace DCEStudyTools.CADLink
         {
             InitializeComponent();
             _viewDic = viewDic;
-            keywordDataGridViewTextBoxColumn.DataSource = new List<string>(_viewDic.Keys);
+            List<string> keysList = new List<string>(_viewDic.Keys);
+            keysList.Add(string.Empty);
+            keywordDataGridViewTextBoxColumn.DataSource = keysList;
         }
 
         private void okButton_Click(object sender, EventArgs e)
@@ -65,20 +68,29 @@ namespace DCEStudyTools.CADLink
                 if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
                 {
 
-                    string[] files = Directory.GetFiles(fbd.SelectedPath);
-                    foreach (string file in files)
+                    string[] filesPaths = Directory.GetFiles(fbd.SelectedPath);
+                    foreach (string filePath in filesPaths)
                     {
-                        if (file.ToLower().Contains("dwg") || file.ToLower().Contains("dxf"))
+                        if (filePath.ToLower().Contains("dwg") || filePath.ToLower().Contains("dxf"))
                         {
-                            foreach (var item in _viewDic)
+                            string fileName = Utils.SubstringExtensions.After(filePath, "\\");
+
+                            IList<string> keyList = new List<string>(_viewDic.Keys);
+                            if (!keyList.Any(key => filePath.ToLower().Contains(key)))
                             {
-                                if (file.ToLower().Contains(item.Key))
-                                {
-                                    dataTable.Rows.Add(item.Key, file);
-                                }
-                                
+                                dataTable.Rows.Add(string.Empty, fileName, filePath);
                             }
-                            
+                            else
+                            {
+                                foreach (var item in _viewDic)
+                                {
+                                    if (filePath.ToLower().Contains(item.Key))
+                                    {
+                                        dataTable.Rows.Add(item.Key, fileName, filePath);
+                                        break;
+                                    }
+                                }
+                            }
                         }
                     }
                     _folderIsSelected = true;
