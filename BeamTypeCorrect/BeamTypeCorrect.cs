@@ -70,6 +70,7 @@ namespace DCEStudyTools.BeamTypeCorrect
                     return Result.Cancelled;
                 }
 
+                // TODO : Extract the methode
                 // Get list of all structural levels
                 IList<Level> strLevels =
                     (from lev in new FilteredElementCollector(_doc)
