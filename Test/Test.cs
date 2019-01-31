@@ -61,6 +61,9 @@ namespace DCEStudyTools.Test
                 };
                 ElementId linkId = ElementId.InvalidElementId;
 
+                // list of all dwg or dxf links
+                IList<ImportInstance> cadFileLinksList = new List<ImportInstance>();
+
                 using (var fbd = new FolderBrowserDialog())
                 {
                     
@@ -85,12 +88,76 @@ namespace DCEStudyTools.Test
                                             _doc.Link(file, opt, view, out linkId);
                                             tran.Commit();
                                         }
+                                        cadFileLinksList.Add((ImportInstance)_doc.GetElement(linkId));
                                     }
                                 }
                             }
                             
                         }
                         
+                    }
+                }
+
+                if (cadFileLinksList.Count == 0)
+                {
+                    TaskDialog.Show("Revit", "No dwg file is added in the document.");
+                    return Result.Cancelled;
+                }
+
+                // Get list of all structural levels
+                IList<Level> strLevels =
+                    (from lev in new FilteredElementCollector(_doc)
+                    .OfClass(typeof(Level))
+                     where lev.GetEntitySchemaGuids().Count != 0
+                     select lev)
+                    .Cast<Level>()
+                    .OrderBy(l => l.Elevation)
+                    .ToList();
+
+                if (strLevels.Count == 0)
+                {
+                    TaskDialog.Show("Revit", "Configurer les niveaux structuraux avant de lancer cette commande.");
+                    return Result.Cancelled;
+                }
+
+
+
+                foreach (ViewPlan view in viewPlanList)
+                {
+                    Level viewLvl = view.GenLevel;
+                    Level supLvl = strLevels.Where(lvl => lvl.Elevation > viewLvl.Elevation).OrderBy(l => l.Elevation).FirstOrDefault();
+                    using (Transaction tx = new Transaction(_doc))
+                    {
+                        tx.Start("Underlay Range");
+                        if (supLvl != null)
+                        {
+                            view.SetUnderlayRange(viewLvl.Id, supLvl.Id);
+                        }
+                        else
+                        {
+                            view.SetUnderlayBaseLevel(viewLvl.Id);
+                        }
+                        tx.Commit();
+                    }
+
+                    foreach (ImportInstance cadFile in cadFileLinksList)
+                    {
+                        // if the level linked to the dwg is one of the structural level
+
+                        if (cadFile.LevelId == supLvl.Id)
+                        {
+                            OverrideGraphicSettings ogs = new OverrideGraphicSettings();
+
+                            //Set Halftone Element
+                            using (Transaction tx = new Transaction(_doc))
+                            {
+                                tx.Start("Halftone");
+
+                                ogs.SetHalftone(true);
+                                view.SetCategoryOverrides(cadFile.Category.Id, ogs);
+                                tx.Commit();
+                            }
+                        }
                     }
                 }
 

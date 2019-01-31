@@ -24,6 +24,7 @@ namespace DCEStudyTools.CADLink
 
             try
             {
+                // Get list of all structural view plans
                 IList<ViewPlan> viewPlanList =
                             (from ViewPlan view in new FilteredElementCollector(_doc)
                             .OfClass(typeof(ViewPlan))
@@ -41,8 +42,8 @@ namespace DCEStudyTools.CADLink
                 Dictionary<string, ViewPlan> viewDic = new Dictionary<string, ViewPlan>();
                 foreach (ViewPlan vp in viewPlanList)
                 {
+                    // filter structural view plan
                     Regex regex = new Regex(@"r\+\d|rdc|ss\d|ss\-\d");
-
                     Match match = regex.Match(vp.Name.ToLower());
                     // TODO : to be improved
                     if (match.Success && vp.Name.Contains("PH"))
@@ -67,7 +68,7 @@ namespace DCEStudyTools.CADLink
                     };
 
                     ElementId linkId = ElementId.InvalidElementId;
-
+                    // add links
                     foreach (DataGridViewRow row in form.DataGridView.Rows)
                     {
                         string keyword = row.Cells[0].Value.ToString();
@@ -83,7 +84,6 @@ namespace DCEStudyTools.CADLink
                             }
                         }
                     }
-                    
                     return Result.Succeeded;
                 }
                 else
