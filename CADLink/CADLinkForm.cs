@@ -33,6 +33,7 @@ namespace DCEStudyTools.CADLink
         {
             InitializeComponent();
             _viewDic = viewDic;
+            keywordDataGridViewTextBoxColumn.DataSource = new List<string>(_viewDic.Keys);
         }
 
         private void okButton_Click(object sender, EventArgs e)
@@ -52,8 +53,13 @@ namespace DCEStudyTools.CADLink
 
         private void selectButton_Click(object sender, EventArgs e)
         {
+            dataTable.Clear();
             using (var fbd = new FolderBrowserDialog())
             {
+                if (!string.IsNullOrWhiteSpace(pathTextbox.Text))
+                {
+                    fbd.SelectedPath = $"{pathTextbox.Text}";
+                }
                 DialogResult result = fbd.ShowDialog();
 
                 if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
@@ -70,12 +76,16 @@ namespace DCEStudyTools.CADLink
                                 {
                                     dataTable.Rows.Add(item.Key, file);
                                 }
+                                
                             }
+                            
                         }
                     }
                     _folderIsSelected = true;
+                    pathTextbox.Text = fbd.SelectedPath;
                 }
             }
         }
+        
     }
 }

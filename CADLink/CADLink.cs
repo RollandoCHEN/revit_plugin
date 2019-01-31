@@ -44,9 +44,13 @@ namespace DCEStudyTools.CADLink
                     Regex regex = new Regex(@"r\+\d|rdc|ss\d|ss\-\d");
 
                     Match match = regex.Match(vp.Name.ToLower());
-                    if (match.Success)
+                    // TODO : to be improved
+                    if (match.Success && vp.Name.Contains("PH"))
                     {
-                        viewDic.Add(match.Value.ToLower(), vp);
+                        if (!viewDic.ContainsKey(match.Value))
+                        {
+                            viewDic.Add(match.Value.ToLower(), vp);
+                        }
                     }
                 }
 
@@ -67,13 +71,16 @@ namespace DCEStudyTools.CADLink
                     foreach (DataGridViewRow row in form.DataGridView.Rows)
                     {
                         string keyword = row.Cells[0].Value.ToString();
-                        ViewPlan view = viewDic[keyword];
-                        string filePath = row.Cells[1].Value.ToString();
-                        using (Transaction tran = new Transaction(_doc, "Quick Link"))
+                        if (!string.IsNullOrEmpty(keyword))
                         {
-                            tran.Start();
-                            _doc.Link(filePath, opt, view, out linkId);
-                            tran.Commit();
+                            ViewPlan view = viewDic[keyword];
+                            string filePath = row.Cells[1].Value.ToString();
+                            using (Transaction tran = new Transaction(_doc, "Quick Link"))
+                            {
+                                tran.Start();
+                                _doc.Link(filePath, opt, view, out linkId);
+                                tran.Commit();
+                            }
                         }
                     }
                     
