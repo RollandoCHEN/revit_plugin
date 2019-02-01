@@ -26,6 +26,34 @@ namespace DCEStudyTools.Test
             
             try
             {
+                // Get list of all structural levels
+                IList<Level> strLevels =
+                    (from lev in new FilteredElementCollector(_doc)
+                    .OfClass(typeof(Level))
+                     where lev.GetEntitySchemaGuids().Count != 0
+                     select lev)
+                    .Cast<Level>()
+                    .OrderBy(l => l.Elevation)
+                    .ToList();
+
+                if (strLevels.Count == 0)
+                {
+                    TaskDialog.Show("Revit", "Configurer les niveaux structuraux avant de lancer cette commande.");
+                    return Result.Cancelled;
+                }
+
+                IList<ImportInstance> cadFileLinksList =
+                    new FilteredElementCollector(_doc)
+                    .OfClass(typeof(ImportInstance))
+                    .Cast<ImportInstance>()
+                    .ToList();
+
+                if (cadFileLinksList.Count == 0)
+                {
+                    TaskDialog.Show("Revit", "No dwg file is found in the document.");
+                    return Result.Cancelled;
+                }
+
                 IList<ViewPlan> viewPlanList =
                             (from ViewPlan view in new FilteredElementCollector(_doc)
                             .OfClass(typeof(ViewPlan))
@@ -40,57 +68,39 @@ namespace DCEStudyTools.Test
                     return Result.Cancelled;
                 }
 
-                Dictionary<string, ViewPlan> viewDic = new Dictionary<string, ViewPlan>();
-                foreach (ViewPlan vp in viewPlanList)
+                foreach (ViewPlan view in viewPlanList)
                 {
-                    Regex regex = new Regex(@"r\+\d|rdc|ss\d|ss\-\d");
-                    
-                    Match match = regex.Match(vp.Name.ToLower());
-                    if (match.Success)
+                    Level viewLvl = view.GenLevel;
+                    Level supLvl = strLevels.Where(lvl => lvl.Elevation > viewLvl.Elevation).OrderBy(l => l.Elevation).FirstOrDefault();
+                    using (Transaction tx = new Transaction(_doc))
                     {
-                        viewDic.Add(match.Value.ToLower(), vp);
-                    }
-                }
-
-                DWGImportOptions opt = new DWGImportOptions
-                {
-                    Placement = ImportPlacement.Origin,
-                    AutoCorrectAlmostVHLines = true,
-                    ThisViewOnly = true, 
-                    Unit = ImportUnit.Default
-                };
-                ElementId linkId = ElementId.InvalidElementId;
-
-                using (var fbd = new FolderBrowserDialog())
-                {
-                    
-                    DialogResult result = fbd.ShowDialog();
-
-                    if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
-                    {
-                        string[] files = Directory.GetFiles(fbd.SelectedPath);
-                        foreach (string file in files)
+                        tx.Start("Underlay Range");
+                        if (supLvl != null)
                         {
-                            if (file.ToLower().Contains("dwg") || file.ToLower().Contains("dxf"))
-                            {
-                                ViewPlan view = null;
-                                foreach (var item in viewDic)
-                                {
-                                    if (file.ToLower().Contains(item.Key))
-                                    {
-                                        view = item.Value;
-                                        using (Transaction tran = new Transaction(_doc, "Quick Link"))
-                                        {
-                                            tran.Start();
-                                            _doc.Link(file, opt, view, out linkId);
-                                            tran.Commit();
-                                        }
-                                    }
-                                }
-                            }
-                            
+                            view.SetUnderlayRange(viewLvl.Id, supLvl.Id);
                         }
-                        
+                        else
+                        {
+                            view.SetUnderlayBaseLevel(viewLvl.Id);
+                        }
+                        tx.Commit();
+                    }
+
+                    foreach (ImportInstance cadFile in cadFileLinksList)
+                    {
+                        if (supLvl != null && cadFile.LevelId == supLvl.Id)
+                        {
+                            OverrideGraphicSettings ogs = view.GetElementOverrides(cadFile.Id);
+                            //Set Halftone Element
+                            using (Transaction tx = new Transaction(_doc))
+                            {
+                                tx.Start("Halftone");
+
+                                ogs.SetHalftone(true);
+                                view.SetElementOverrides(cadFile.Id, ogs);
+                                tx.Commit();
+                            }
+                        }
                     }
                 }
 
@@ -206,8 +216,7 @@ namespace DCEStudyTools.Test
                 //}
                 //t.Commit();
 
-
-
+                return Result.Succeeded;
             }
             catch (Exception e)
             {
@@ -215,7 +224,6 @@ namespace DCEStudyTools.Test
                 return Result.Failed;
             }
 
-            return Result.Succeeded;
         }
 
       

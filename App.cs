@@ -18,10 +18,10 @@ namespace DCEStudyTools
             application.CreateRibbonTab(tabName);
 
             // Add level management ribbon panel
-            RibbonPanel levelManagementRibbonPanel = application.CreateRibbonPanel(tabName, "Level Tools");
+            RibbonPanel levelToolRibbonPanel = application.CreateRibbonPanel(tabName, "Level Tools");
 
             // Create push button for LevelCreation
-            PushButton pbLevelCreation = levelManagementRibbonPanel.AddItem(
+            PushButton pbLevelCreation = levelToolRibbonPanel.AddItem(
                 CreatePushButtonData(
                     "cmdLevelCreation",
                     "Create" + System.Environment.NewLine + "Levels",
@@ -33,7 +33,7 @@ namespace DCEStudyTools
             ) as PushButton;
 
             // Create push button for LevelConfigration
-            PushButton pbLevelConfig = levelManagementRibbonPanel.AddItem(
+            PushButton pbLevelConfig = levelToolRibbonPanel.AddItem(
                 CreatePushButtonData(
                     "cmdLevelConfig",
                     "Configurate" + System.Environment.NewLine + "Structural Levels",
@@ -47,10 +47,10 @@ namespace DCEStudyTools
             ////////////////////////////////////////////////////// Seperate line ////////////////////////////////////////////////////
 
             // Add sheet management ribbon panel
-            RibbonPanel sheetManagementRibbonPanel = application.CreateRibbonPanel(tabName, "Sheet Tools");
+            RibbonPanel sheetToolRibbonPanel = application.CreateRibbonPanel(tabName, "Sheet Tools");
 
             // Create push button for SheetCreation
-            PushButton pbSheetCreation = sheetManagementRibbonPanel.AddItem(
+            PushButton pbSheetCreation = sheetToolRibbonPanel.AddItem(
                 CreatePushButtonData(
                     "cmdSheetCreation",
                     "Create" + System.Environment.NewLine + "Sheets",
@@ -61,7 +61,7 @@ namespace DCEStudyTools
                     "Create Sheets for Each Level")
             ) as PushButton;
 
-            PushButton pbLegendUpdate = sheetManagementRibbonPanel.AddItem(
+            PushButton pbLegendUpdate = sheetToolRibbonPanel.AddItem(
                 CreatePushButtonData(
                     "cmdLegendUpdate",
                     "Add/Update" + System.Environment.NewLine + "Legend",
@@ -75,10 +75,10 @@ namespace DCEStudyTools
             ////////////////////////////////////////////////////// Seperate line ////////////////////////////////////////////////////
 
             // Add beam management ribbon panel
-            RibbonPanel beamtManagementRibbonPanel = application.CreateRibbonPanel(tabName, "Beam Tools");
+            RibbonPanel beamtToolRibbonPanel = application.CreateRibbonPanel(tabName, "Beam Tools");
 
             // Create push button for beam type detect
-            PushButton pbBeamTypeDetect = beamtManagementRibbonPanel.AddItem(
+            PushButton pbBeamTypeDetect = beamtToolRibbonPanel.AddItem(
                 CreatePushButtonData(
                 "cmdBeamTypeCorrect",
                 "Correct" + System.Environment.NewLine + "Beam Type",
@@ -124,7 +124,48 @@ namespace DCEStudyTools
                     "beam_update_16.png",
                     "Select beams to be changed and choose the target type");
 
-            beamtManagementRibbonPanel.AddStackedItems(pbBeamTypeNameAdjustData, pbBeamTypePropertiesAdjustData, pbBeamTypeChangeData);
+            beamtToolRibbonPanel.AddStackedItems(pbBeamTypeNameAdjustData, pbBeamTypePropertiesAdjustData, pbBeamTypeChangeData);
+
+            ////////////////////////////////////////////////////// Seperate line ////////////////////////////////////////////////////
+
+            // Add beam management ribbon panel
+            RibbonPanel cadLinkToolRibbonPanel = application.CreateRibbonPanel(tabName, "CAD Link Tools");
+
+            // Create push button for CADLink
+            PushButton pbAddLink = cadLinkToolRibbonPanel.AddItem(
+                CreatePushButtonData(
+                    "cmdAddLink",
+                    "Add" + System.Environment.NewLine + "CAD Link",
+                    thisAssemblyPath,
+                    "DCEStudyTools.CADLink.CADLink",
+                    "link_32.png",
+                    String.Empty,
+                    "Add CAD links")
+            ) as PushButton;
+
+            // Create push button for UnderlayerSetting
+            PushButtonData pbSetUnderlayer = 
+                CreatePushButtonData(
+                    "cmdSetUnderlayer",
+                    "Set" + System.Environment.NewLine + "Underlayer",
+                    thisAssemblyPath,
+                    "DCEStudyTools.UnderlaySetting.UnderlaySetting",
+                    "underlayer_32.png",
+                    "underlayer_16.png",
+                    "Set underlayer and halftone for all the view plan");
+
+            // Create push button for undoing halftone
+            PushButtonData pbUndoHalftone = 
+                CreatePushButtonData(
+                    "cmdUndoHalftone",
+                    "Undo" + System.Environment.NewLine + "Halftone",
+                    thisAssemblyPath,
+                    "DCEStudyTools.HalftoneUndo.HalftoneUndo",
+                    "undo_32.png",
+                    "undo_16.png",
+                    "Undo halftone for all the view plan");
+
+            cadLinkToolRibbonPanel.AddStackedItems(pbSetUnderlayer, pbUndoHalftone);
 
             ////////////////////////////////////////////////////// Seperate line ////////////////////////////////////////////////////
 
@@ -141,18 +182,6 @@ namespace DCEStudyTools
                     "test_32.png",
                     String.Empty,
                     "")
-            ) as PushButton;
-
-            // Create push button for CADLink
-            PushButton pbAddLink = genericToolsRibbonPanel.AddItem(
-                CreatePushButtonData(
-                    "cmdAddLink",
-                    "Add" + System.Environment.NewLine + "CAD Link",
-                    thisAssemblyPath,
-                    "DCEStudyTools.CADLink.CADLink",
-                    "link_32.png",
-                    String.Empty,
-                    "Add CAD links")
             ) as PushButton;
 
             // Create push button for LevelsCreation
