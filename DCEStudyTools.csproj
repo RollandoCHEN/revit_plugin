@@ -83,6 +83,7 @@
     </Compile>
     <Compile Include="Configuration\LevelConfiguration.cs" />
     <Compile Include="BeamTypeCorrect\ChangeBeamFamilyTypeEvent.cs" />
+    <Compile Include="HalftoneUndo\HalftoneUndo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -298,7 +299,10 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
+    <Resource Include="Resources\underlayer_16.png" />
     <Resource Include="Resources\underlayer_32.png" />
+    <Resource Include="Resources\undo_16.png" />
+    <Resource Include="Resources\undo_32.png" />
     <Resource Include="Resources\link_32.ico" />
     <Resource Include="Resources\link_32.png" />
     <Resource Include="Resources\beam_correct_32.ico" />
