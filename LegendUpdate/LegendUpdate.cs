@@ -78,7 +78,7 @@ namespace DCEStudyTools.LegendUpdate
             t.Start();
             foreach (ViewSheet viewSheet in viewSheets)
             {
-                if (viewSheet.Name.Contains(Properties.Settings.Default.KEY_WORD_FOUNDATION))
+                if (viewSheet.Name.Contains(Properties.Settings.Default.KEYWORD_FOUNDATION))
                 {
                     ElementId viewportId =
                     (from vpId in viewSheet.GetAllViewports()

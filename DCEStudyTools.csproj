@@ -89,6 +89,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Test\LevelSelectionFilter.cs" />
     <Compile Include="Test\Test.cs" />
     <Compile Include="BeamTypeCorrect\BeamTypeCorrectForm.cs">
       <SubType>Form</SubType>
@@ -293,12 +294,16 @@
     <Compile Include="Utils\Guids.cs" />
     <Compile Include="Utils\SubstringExtensions.cs" />
     <Compile Include="Utils\ViewTemplate.cs" />
+    <Compile Include="ViewDuplicate\StructuralPlanSelectionFilter.cs" />
+    <Compile Include="ViewDuplicate\ViewDuplicate.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="DCEStudyTools.addin">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
+    <Resource Include="Resources\duplicate_32.png" />
+    <Resource Include="Resources\legend_32.png" />
     <Resource Include="Resources\underlayer_16.png" />
     <Resource Include="Resources\underlayer_32.png" />
     <Resource Include="Resources\undo_16.png" />
@@ -312,7 +317,6 @@
     <Resource Include="Resources\beam_update_16.png" />
     <Resource Include="Resources\sheet_create_32.png" />
     <Resource Include="Resources\beam_update_32.png" />
-    <Resource Include="Resources\legend_32.png" />
     <Resource Include="Resources\test_32.png" />
     <Resource Include="Resources\Revit_2019-01-17_16-21-57.png" />
     <Resource Include="Resources\beam_confirm_32.ico" />

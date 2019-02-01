@@ -47,9 +47,10 @@
             this.foundation.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.foundation.FormattingEnabled = true;
             this.foundation.Items.AddRange(new object[] {
-            "Pieux",
-            "Semelles",
-            "Radier"});
+            Properties.Settings.Default.KEYWOARD_FOUNDATION_TYPE_PILE,
+            Properties.Settings.Default.KEYWOARD_FOUNDATION_TYPE_FOOTING,
+            Properties.Settings.Default.KEYWOARD_FOUNDATION_TYPE_RAFT,
+            Properties.Settings.Default.KEYWOARD_FOUNDATION_TYPE_DEEP_FOOTING});
             this.foundation.Location = new System.Drawing.Point(136, 2);
             this.foundation.Name = "foundation";
             this.foundation.Size = new System.Drawing.Size(110, 25);
@@ -61,7 +62,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.label3);
             this.Controls.Add(this.foundation);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "ucFoundation";
             this.Size = new System.Drawing.Size(258, 31);
             this.Load += new System.EventHandler(this.ucFoundation_Load);

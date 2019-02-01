@@ -61,7 +61,7 @@ namespace DCEStudyTools.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Fondation : Semelles isolées et Filantes")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Fondation : Semelles isolées et filantes")]
         public string FOUNDATION_TITLE_FOOTING {
             get {
                 return ((string)(this["FOUNDATION_TITLE_FOOTING"]));
@@ -74,12 +74,12 @@ namespace DCEStudyTools.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Fondation : Radier")]
-        public string FOUNDATION_TITLE_GROUND_SLAB {
+        public string FOUNDATION_TITLE_RAFT {
             get {
-                return ((string)(this["FOUNDATION_TITLE_GROUND_SLAB"]));
+                return ((string)(this["FOUNDATION_TITLE_RAFT"]));
             }
             set {
-                this["FOUNDATION_TITLE_GROUND_SLAB"] = value;
+                this["FOUNDATION_TITLE_RAFT"] = value;
             }
         }
         
@@ -170,12 +170,12 @@ namespace DCEStudyTools.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Fondation")]
-        public string KEY_WORD_FOUNDATION {
+        public string KEYWORD_FOUNDATION {
             get {
-                return ((string)(this["KEY_WORD_FOUNDATION"]));
+                return ((string)(this["KEYWORD_FOUNDATION"]));
             }
             set {
-                this["KEY_WORD_FOUNDATION"] = value;
+                this["KEYWORD_FOUNDATION"] = value;
             }
         }
         
@@ -350,12 +350,12 @@ namespace DCEStudyTools.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Bas")]
-        public string KEY_WORD_BOTTOM_LEVEL {
+        public string KEYWORD_BOTTOM_LEVEL {
             get {
-                return ((string)(this["KEY_WORD_BOTTOM_LEVEL"]));
+                return ((string)(this["KEYWORD_BOTTOM_LEVEL"]));
             }
             set {
-                this["KEY_WORD_BOTTOM_LEVEL"] = value;
+                this["KEYWORD_BOTTOM_LEVEL"] = value;
             }
         }
         
@@ -740,6 +740,102 @@ namespace DCEStudyTools.Properties {
             }
             set {
                 this["BEAM_MAT_SYNTAXE_OTHER"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Pieux")]
+        public string KEYWOARD_FOUNDATION_TYPE_PILE {
+            get {
+                return ((string)(this["KEYWOARD_FOUNDATION_TYPE_PILE"]));
+            }
+            set {
+                this["KEYWOARD_FOUNDATION_TYPE_PILE"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Semelles")]
+        public string KEYWOARD_FOUNDATION_TYPE_FOOTING {
+            get {
+                return ((string)(this["KEYWOARD_FOUNDATION_TYPE_FOOTING"]));
+            }
+            set {
+                this["KEYWOARD_FOUNDATION_TYPE_FOOTING"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Radier")]
+        public string KEYWOARD_FOUNDATION_TYPE_RAFT {
+            get {
+                return ((string)(this["KEYWOARD_FOUNDATION_TYPE_RAFT"]));
+            }
+            set {
+                this["KEYWOARD_FOUNDATION_TYPE_RAFT"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Puits")]
+        public string KEYWOARD_FOUNDATION_TYPE_DEEP_FOOTING {
+            get {
+                return ((string)(this["KEYWOARD_FOUNDATION_TYPE_DEEP_FOOTING"]));
+            }
+            set {
+                this["KEYWOARD_FOUNDATION_TYPE_DEEP_FOOTING"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Fondation : Puits")]
+        public string FOUNDATION_TITLE_DEEP_FOOTING {
+            get {
+                return ((string)(this["FOUNDATION_TITLE_DEEP_FOOTING"]));
+            }
+            set {
+                this["FOUNDATION_TITLE_DEEP_FOOTING"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Vues")]
+        public string CATEGORY_NAME_VIEW {
+            get {
+                return ((string)(this["CATEGORY_NAME_VIEW"]));
+            }
+            set {
+                this["CATEGORY_NAME_VIEW"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Vue en plan")]
+        public string FAMILY_TYPE_NAME_STR_PLAN {
+            get {
+                return ((string)(this["FAMILY_TYPE_NAME_STR_PLAN"]));
+            }
+            set {
+                this["FAMILY_TYPE_NAME_STR_PLAN"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Niveaux")]
+        public string CATEGORY_NAME_LEVEL {
+            get {
+                return ((string)(this["CATEGORY_NAME_LEVEL"]));
+            }
+            set {
+                this["CATEGORY_NAME_LEVEL"] = value;
             }
         }
     }

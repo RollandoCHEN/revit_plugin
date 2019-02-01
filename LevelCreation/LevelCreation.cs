@@ -230,12 +230,12 @@ namespace DCEStudyTools.LevelCreation
                         viewPlan.Name = $"0{i + 1} {level.Name}";
                         viewPlans.Add(viewPlan);
                         // TODO: Deal with the case when template is not found
-                        if (!viewPlan.Name.Contains(Properties.Settings.Default.KEY_WORD_FOUNDATION) && standardTemplateIsFound)
+                        if (!viewPlan.Name.Contains(Properties.Settings.Default.KEYWORD_FOUNDATION) && standardTemplateIsFound)
                         {
                             viewPlan.ViewTemplateId = standardTemplate.Id;
                         }
 
-                        if (viewPlan.Name.Contains(Properties.Settings.Default.KEY_WORD_FOUNDATION) && foundationTemplateIsFound)
+                        if (viewPlan.Name.Contains(Properties.Settings.Default.KEYWORD_FOUNDATION) && foundationTemplateIsFound)
                         {
                             viewPlan.ViewTemplateId = foundationTemplate.Id;
                         }

@@ -233,6 +233,16 @@ namespace DCEStudyTools.Properties {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap duplicate_32 {
+            get {
+                object obj = ResourceManager.GetObject("duplicate_32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap floor_span_direction {
             get {
                 object obj = ResourceManager.GetObject("floor_span_direction", resourceCulture);

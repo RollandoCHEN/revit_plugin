@@ -38,6 +38,7 @@ namespace DCEStudyTools.Design.Beam.BeamCreation
             _uidoc = _uiapp.ActiveUIDocument;
             _doc = _uidoc.Document;
 
+            // TODO : Extract GetAllStructuralLevels the methode
             _strLevels =
                 (from l in new FilteredElementCollector(_doc)
                  .OfClass(typeof(Level))
@@ -98,7 +99,7 @@ namespace DCEStudyTools.Design.Beam.BeamCreation
                 {
                     continue;
                 }
-                // TODO : 
+                // TODO : Material should be choosed when creat model line
                 FamilySymbol beamType = beamFamily.GetBeamFamilyTypeOrCreateNew(beamSign, "Béton25", beamHeight, beamWidth);
 
                 ElementId newBeamId = PlaceBeam(line, level, beamType);

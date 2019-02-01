@@ -14,10 +14,10 @@ namespace DCEStudyTools
             string thisAssemblyPath = Assembly.GetExecutingAssembly().Location;
 
             // Create a custom ribbon tab
-            string tabName = "EasyJob";
+            string tabName = "TakeItEasy";
             application.CreateRibbonTab(tabName);
 
-            // Add level management ribbon panel
+            // Add level tools ribbon panel
             RibbonPanel levelToolRibbonPanel = application.CreateRibbonPanel(tabName, "Level Tools");
 
             // Create push button for LevelCreation
@@ -46,7 +46,24 @@ namespace DCEStudyTools
 
             ////////////////////////////////////////////////////// Seperate line ////////////////////////////////////////////////////
 
-            // Add sheet management ribbon panel
+            // Add view tools ribbon panel
+            RibbonPanel viewToolRibbonPanel = application.CreateRibbonPanel(tabName, "View Tools");
+
+            // Create push button for ViewDuplicate
+            PushButton pbViewDuplicate = viewToolRibbonPanel.AddItem(
+                CreatePushButtonData(
+                    "cmdViewDuplicate",
+                    "Duplicate" + System.Environment.NewLine + "Views",
+                    thisAssemblyPath,
+                    "DCEStudyTools.ViewDuplicate.ViewDuplicate",
+                    "duplicate_32.png",
+                    String.Empty,
+                    "Duplicate the selected view according to the number of zone de définition")
+            ) as PushButton;
+
+            ////////////////////////////////////////////////////// Seperate line ////////////////////////////////////////////////////
+
+            // Add sheet tools ribbon panel
             RibbonPanel sheetToolRibbonPanel = application.CreateRibbonPanel(tabName, "Sheet Tools");
 
             // Create push button for SheetCreation
@@ -74,7 +91,7 @@ namespace DCEStudyTools
 
             ////////////////////////////////////////////////////// Seperate line ////////////////////////////////////////////////////
 
-            // Add beam management ribbon panel
+            // Add beam tools ribbon panel
             RibbonPanel beamtToolRibbonPanel = application.CreateRibbonPanel(tabName, "Beam Tools");
 
             // Create push button for beam type detect
@@ -128,7 +145,7 @@ namespace DCEStudyTools
 
             ////////////////////////////////////////////////////// Seperate line ////////////////////////////////////////////////////
 
-            // Add beam management ribbon panel
+            // Add CAD link tools ribbon panel
             RibbonPanel cadLinkToolRibbonPanel = application.CreateRibbonPanel(tabName, "CAD Link Tools");
 
             // Create push button for CADLink
@@ -147,7 +164,7 @@ namespace DCEStudyTools
             PushButtonData pbSetUnderlayer = 
                 CreatePushButtonData(
                     "cmdSetUnderlayer",
-                    "Set" + System.Environment.NewLine + "Underlayer",
+                    "Set Underlayer",
                     thisAssemblyPath,
                     "DCEStudyTools.UnderlaySetting.UnderlaySetting",
                     "underlayer_32.png",
@@ -158,7 +175,7 @@ namespace DCEStudyTools
             PushButtonData pbUndoHalftone = 
                 CreatePushButtonData(
                     "cmdUndoHalftone",
-                    "Undo" + System.Environment.NewLine + "Halftone",
+                    "Undo Halftone",
                     thisAssemblyPath,
                     "DCEStudyTools.HalftoneUndo.HalftoneUndo",
                     "undo_32.png",

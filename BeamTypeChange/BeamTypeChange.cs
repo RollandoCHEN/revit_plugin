@@ -57,7 +57,7 @@ namespace DCEStudyTools.BeamTypeChange
             return Result.Succeeded;
         }
 
-        // TODO : Extraire method
+        // TODO : Extraire ChangeBeamFamilyType method
         private void ChangeBeamFamilyType(string targetTypeSign, IList<Reference> refIds)
         {
             foreach (Reference reference in refIds)

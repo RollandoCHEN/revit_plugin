@@ -35,7 +35,7 @@ namespace DCEStudyTools.BeamTypeCorrect
             return "Change beam family type";
         }
 
-        // TODO : Extraire method
+        // TODO : Extraire ChangeBeamFamilyType method
         private void ChangeBeamFamilyType(string targetTypeSign, IList<Element> elemCol)
         {
             if (elemCol.Count != 0)

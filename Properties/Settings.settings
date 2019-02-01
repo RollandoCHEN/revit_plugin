@@ -12,9 +12,9 @@
       <Value Profile="(Default)">Charge Verticale par Pieux en Tonnes à ELS(G+Q) Test</Value>
     </Setting>
     <Setting Name="FOUNDATION_TITLE_FOOTING" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Fondation : Semelles isolées et Filantes</Value>
+      <Value Profile="(Default)">Fondation : Semelles isolées et filantes</Value>
     </Setting>
-    <Setting Name="FOUNDATION_TITLE_GROUND_SLAB" Type="System.String" Scope="User">
+    <Setting Name="FOUNDATION_TITLE_RAFT" Type="System.String" Scope="User">
       <Value Profile="(Default)">Fondation : Radier</Value>
     </Setting>
     <Setting Name="TYPE_NAME_VIEWPORT_WITHOUT_TITLE" Type="System.String" Scope="User">
@@ -38,7 +38,7 @@
     <Setting Name="PARA_NAME_BEAM_TYPE" Type="System.String" Scope="User">
       <Value Profile="(Default)">Poutre type</Value>
     </Setting>
-    <Setting Name="KEY_WORD_FOUNDATION" Type="System.String" Scope="User">
+    <Setting Name="KEYWORD_FOUNDATION" Type="System.String" Scope="User">
       <Value Profile="(Default)">Fondation</Value>
     </Setting>
     <Setting Name="FAMILY_NAME_PILE" Type="System.String" Scope="User">
@@ -83,7 +83,7 @@
     <Setting Name="CATEGORY_NAME_BEAM" Type="System.String" Scope="User">
       <Value Profile="(Default)">Ossature</Value>
     </Setting>
-    <Setting Name="KEY_WORD_BOTTOM_LEVEL" Type="System.String" Scope="User">
+    <Setting Name="KEYWORD_BOTTOM_LEVEL" Type="System.String" Scope="User">
       <Value Profile="(Default)">Bas</Value>
     </Setting>
     <Setting Name="BEAM_TYPE_SIGN_BN" Type="System.String" Scope="User">
@@ -181,6 +181,30 @@
     </Setting>
     <Setting Name="BEAM_MAT_SYNTAXE_OTHER" Type="System.String" Scope="User">
       <Value Profile="(Default)">AUTRE</Value>
+    </Setting>
+    <Setting Name="KEYWOARD_FOUNDATION_TYPE_PILE" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Pieux</Value>
+    </Setting>
+    <Setting Name="KEYWOARD_FOUNDATION_TYPE_FOOTING" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Semelles</Value>
+    </Setting>
+    <Setting Name="KEYWOARD_FOUNDATION_TYPE_RAFT" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Radier</Value>
+    </Setting>
+    <Setting Name="KEYWOARD_FOUNDATION_TYPE_DEEP_FOOTING" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Puits</Value>
+    </Setting>
+    <Setting Name="FOUNDATION_TITLE_DEEP_FOOTING" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Fondation : Puits</Value>
+    </Setting>
+    <Setting Name="CATEGORY_NAME_VIEW" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Vues</Value>
+    </Setting>
+    <Setting Name="FAMILY_TYPE_NAME_STR_PLAN" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Vue en plan</Value>
+    </Setting>
+    <Setting Name="CATEGORY_NAME_LEVEL" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Niveaux</Value>
     </Setting>
   </Settings>
 </SettingsFile>

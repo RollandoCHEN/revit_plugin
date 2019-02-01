@@ -125,7 +125,7 @@ namespace DCEStudyTools.SheetCreation
 
             for (int i = 0; i < levels.Count; i++)
             {
-                if (!levels[i].Name.Contains("Bas"))
+                if (!levels[i].Name.Contains(Properties.Settings.Default.KEYWORD_BOTTOM_LEVEL))
                 {
                     ViewSheet viewSheet = ViewSheet.Create(doc, familySymbol.Id);
                     if (_form.DuplicateNumber == 0)
@@ -139,7 +139,7 @@ namespace DCEStudyTools.SheetCreation
                         viewSheet.ViewName = $"{levels[i].Name} -{duplicateNum + 1}";
                     }
 
-                    if (!levels[i].Name.Contains(Properties.Settings.Default.KEY_WORD_FOUNDATION))
+                    if (!levels[i].Name.Contains(Properties.Settings.Default.KEYWORD_FOUNDATION))
                     {
                         SetParameterValuefor(viewSheet, Properties.Settings.Default.PARA_NAME_SHEET_REI, _form.FireResist);
                         AddLegendToSheetView(legendView, viewPortType_WithoutTitle, viewSheet);
@@ -148,20 +148,23 @@ namespace DCEStudyTools.SheetCreation
                     {
                         SetParameterValuefor(viewSheet, Properties.Settings.Default.PARA_NAME_SHEET_REI, Properties.Settings.Default.PARA_VALUE_SHEET_REI_NA);
                         string title = string.Empty;
-                        switch (_form.FoundationType)
+                        if (_form.FoundationType.Equals(Properties.Settings.Default.KEYWOARD_FOUNDATION_TYPE_PILE))
                         {
-                            case "Pieux":
-                                title = Properties.Settings.Default.FOUNDATION_TITLE_PILE;
-                                break;
-                            case "Semelles":
-                                title = Properties.Settings.Default.FOUNDATION_TITLE_FOOTING;
-                                break;
-                            case "Radier":
-                                title = Properties.Settings.Default.FOUNDATION_TITLE_GROUND_SLAB;
-                                break;
-                            default:
-                                break;
+                            title = Properties.Settings.Default.FOUNDATION_TITLE_PILE;
                         }
+                        else if (_form.FoundationType.Equals(Properties.Settings.Default.KEYWOARD_FOUNDATION_TYPE_FOOTING))
+                        {
+                            title = Properties.Settings.Default.FOUNDATION_TITLE_FOOTING;
+                        }
+                        else if (_form.FoundationType.Equals(Properties.Settings.Default.KEYWOARD_FOUNDATION_TYPE_RAFT))
+                        {
+                            title = Properties.Settings.Default.FOUNDATION_TITLE_RAFT;
+                        }
+                        else if (_form.FoundationType.Equals(Properties.Settings.Default.KEYWOARD_FOUNDATION_TYPE_DEEP_FOOTING))
+                        {
+                            title = Properties.Settings.Default.FOUNDATION_TITLE_DEEP_FOOTING;
+                        }
+                        
                         SetParameterValuefor(viewSheet, Properties.Settings.Default.PARA_NAME_SHEET_TITLE, title);
                         AddLegendToSheetView(foundationLegend, viewPortType_WithoutTitle, viewSheet);
                     }
