@@ -155,6 +155,18 @@ namespace DCEStudyTools
                     "Add CAD links")
             ) as PushButton;
 
+            // Create push button for UnderlayerStting
+            PushButton pbSetUnderlayer = genericToolsRibbonPanel.AddItem(
+                CreatePushButtonData(
+                    "cmdSetUnderlayer",
+                    "Set" + System.Environment.NewLine + "Underlayer",
+                    thisAssemblyPath,
+                    "DCEStudyTools.UnderlaySetting.UnderlaySetting",
+                    "underlayer_32.png",
+                    String.Empty,
+                    "Set underlayer for all the view plan")
+            ) as PushButton;
+
             // Create push button for LevelsCreation
             PushButton pbScaleSetting = genericToolsRibbonPanel.AddItem(
                 CreatePushButtonData(
