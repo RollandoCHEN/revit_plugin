@@ -84,6 +84,8 @@
     <Compile Include="Configuration\LevelConfiguration.cs" />
     <Compile Include="BeamTypeCorrect\ChangeBeamFamilyTypeEvent.cs" />
     <Compile Include="HalftoneUndo\HalftoneUndo.cs" />
+    <Compile Include="LevelRenaming\LevelRenaming.cs" />
+    <Compile Include="LevelRenaming\LevelSelectionFilter.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -302,6 +304,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
+    <Resource Include="Resources\rename_32.png" />
     <Resource Include="Resources\duplicate_32.png" />
     <Resource Include="Resources\legend_32.png" />
     <Resource Include="Resources\underlayer_16.png" />

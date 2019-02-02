@@ -53,23 +53,11 @@ namespace DCEStudyTools.ViewDuplicate
                     TaskDialog.Show("Revit", "Aucune zone de définition dans le projet");
                     return Result.Cancelled;
                 }
-                else
-                {
-                    StringBuilder zones = new StringBuilder();
-                    foreach (var zone in zoneList)
-                    {
-                        zones.AppendLine(zone.Name);
-                    }
-                    TaskDialog.Show("Revit", $"Zone(s) de définition :\n{zones}");
-                }
 
                 int zoneCount = zoneList.Count;  // Num of duplicata
 
                 // Get the selected view
-                ICollection<Reference> refIds =
-                _uidoc.Selection.PickObjects(
-                            ObjectType.Element,
-                            new StructuralPlanSelectionFilter());
+                ICollection<ElementId> refIds = _uidoc.Selection.GetElementIds();
 
                 if (refIds.Count == 0)
                 {
@@ -77,7 +65,25 @@ namespace DCEStudyTools.ViewDuplicate
                     return Result.Cancelled;
                 }
 
-                foreach (Reference refId in refIds)
+
+                foreach (ElementId refId in refIds)
+                {
+                    Element ele = _doc.GetElement(refId);
+                    if (ele.Category == null || !ele.Category.Name.Equals(Properties.Settings.Default.CATEGORY_NAME_VIEW))
+                    {
+                        TaskDialog.Show("Revit", "Les élément selectionnés doivent être des VUES EN PLAN");
+                        return Result.Cancelled;
+                    }
+
+                    View view = ele as View;
+                    if (!view.GetType().Name.Equals(Properties.Settings.Default.FAMILY_TYPE_NAME_STR_PLAN))
+                    {
+                        TaskDialog.Show("Revit", "Les élément selectionnés doivent être des VUES EN PLAN");
+                        return Result.Cancelled;
+                    }
+                }
+
+                foreach (ElementId refId in refIds)
                 {
                     View viewToDuplicate = (View)_doc.GetElement(refId);
                     String levelName = viewToDuplicate.GenLevel.Name;

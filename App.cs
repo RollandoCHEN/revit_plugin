@@ -44,6 +44,18 @@ namespace DCEStudyTools
                     "Set the levels for structural elements")
             ) as PushButton;
 
+            // Create push button for LevelRenaming
+            PushButton pbLevelRenaming = levelToolRibbonPanel.AddItem(
+                CreatePushButtonData(
+                    "cmdLevelRenaming",
+                    "Rename" + System.Environment.NewLine + "Structural Levels",
+                    thisAssemblyPath,
+                    "DCEStudyTools.LevelRenaming.LevelRenaming",
+                    "rename_32.png",
+                    String.Empty,
+                    "Rename the levels for structural elements")
+            ) as PushButton;
+
             ////////////////////////////////////////////////////// Seperate line ////////////////////////////////////////////////////
 
             // Add view tools ribbon panel
