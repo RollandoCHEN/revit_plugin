@@ -125,7 +125,7 @@ namespace DCEStudyTools.SheetCreation
 
             for (int i = 0; i < levels.Count; i++)
             {
-                if (!levels[i].Name.Contains(Properties.Settings.Default.KEYWORD_BOTTOM_LEVEL))
+                if (!levels[i].Name.ToLower().Contains(Properties.Settings.Default.KEYWORD_BOTTOM_LEVEL))
                 {
                     ViewSheet viewSheet = ViewSheet.Create(doc, familySymbol.Id);
                     if (_form.DuplicateNumber == 0)
@@ -139,7 +139,7 @@ namespace DCEStudyTools.SheetCreation
                         viewSheet.ViewName = $"{levels[i].Name} -{duplicateNum + 1}";
                     }
 
-                    if (!levels[i].Name.Contains(Properties.Settings.Default.KEYWORD_FOUNDATION))
+                    if (!levels[i].Name.ToLower().Contains(Properties.Settings.Default.KEYWORD_FOUNDATION))
                     {
                         SetParameterValuefor(viewSheet, Properties.Settings.Default.PARA_NAME_SHEET_REI, _form.FireResist);
                         AddLegendToSheetView(legendView, viewPortType_WithoutTitle, viewSheet);

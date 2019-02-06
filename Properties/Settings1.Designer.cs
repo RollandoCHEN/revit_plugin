@@ -169,7 +169,7 @@ namespace DCEStudyTools.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Fondation")]
+        [global::System.Configuration.DefaultSettingValueAttribute("fondation")]
         public string KEYWORD_FOUNDATION {
             get {
                 return ((string)(this["KEYWORD_FOUNDATION"]));
@@ -349,7 +349,7 @@ namespace DCEStudyTools.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Bas")]
+        [global::System.Configuration.DefaultSettingValueAttribute("bas")]
         public string KEYWORD_BOTTOM_LEVEL {
             get {
                 return ((string)(this["KEYWORD_BOTTOM_LEVEL"]));
@@ -836,6 +836,18 @@ namespace DCEStudyTools.Properties {
             }
             set {
                 this["CATEGORY_NAME_LEVEL"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("cartouche")]
+        public string KEYWORD_TITLEBLOCK {
+            get {
+                return ((string)(this["KEYWORD_TITLEBLOCK"]));
+            }
+            set {
+                this["KEYWORD_TITLEBLOCK"] = value;
             }
         }
     }

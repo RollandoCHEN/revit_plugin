@@ -39,7 +39,7 @@
       <Value Profile="(Default)">Poutre type</Value>
     </Setting>
     <Setting Name="KEYWORD_FOUNDATION" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Fondation</Value>
+      <Value Profile="(Default)">fondation</Value>
     </Setting>
     <Setting Name="FAMILY_NAME_PILE" Type="System.String" Scope="User">
       <Value Profile="(Default)">FON-PIEUX</Value>
@@ -84,7 +84,7 @@
       <Value Profile="(Default)">Ossature</Value>
     </Setting>
     <Setting Name="KEYWORD_BOTTOM_LEVEL" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Bas</Value>
+      <Value Profile="(Default)">bas</Value>
     </Setting>
     <Setting Name="BEAM_TYPE_SIGN_BN" Type="System.String" Scope="User">
       <Value Profile="(Default)">BN</Value>
@@ -205,6 +205,9 @@
     </Setting>
     <Setting Name="CATEGORY_NAME_LEVEL" Type="System.String" Scope="User">
       <Value Profile="(Default)">Niveaux</Value>
+    </Setting>
+    <Setting Name="KEYWORD_TITLEBLOCK" Type="System.String" Scope="User">
+      <Value Profile="(Default)">cartouche</Value>
     </Setting>
   </Settings>
 </SettingsFile>

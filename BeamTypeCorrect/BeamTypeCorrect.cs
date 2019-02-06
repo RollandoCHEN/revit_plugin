@@ -236,13 +236,13 @@ namespace DCEStudyTools.BeamTypeCorrect
 
             List<Element> normalBeamList =
             (from Element elem in nomalBeamCollect
-             where (elem as FamilyInstance).Host.Name.Contains(Properties.Settings.Default.KEYWORD_BOTTOM_LEVEL)
+             where (elem as FamilyInstance).Host.Name.ToLower().Contains(Properties.Settings.Default.KEYWORD_BOTTOM_LEVEL)
              select elem)
              .ToList();
 
             List<Element> pouRList =
             (from Element elem in pouRCollect
-             where (elem as FamilyInstance).Host.Name.Contains(Properties.Settings.Default.KEYWORD_BOTTOM_LEVEL)
+             where (elem as FamilyInstance).Host.Name.ToLower().Contains(Properties.Settings.Default.KEYWORD_BOTTOM_LEVEL)
              select elem)
              .ToList();
 
@@ -298,7 +298,7 @@ namespace DCEStudyTools.BeamTypeCorrect
                     Properties.Settings.Default.BEAM_TYPE_SIGN_LON);
             List<Element> groundBeamList =
             (from Element elem in groundBeamCollect
-             where !(elem as FamilyInstance).Host.Name.Contains(Properties.Settings.Default.KEYWORD_BOTTOM_LEVEL)
+             where !(elem as FamilyInstance).Host.Name.ToLower().Contains(Properties.Settings.Default.KEYWORD_BOTTOM_LEVEL)
              select elem)
              .ToList();
 

@@ -78,8 +78,16 @@ namespace DCEStudyTools.LegendUpdate
             t.Start();
             foreach (ViewSheet viewSheet in viewSheets)
             {
-                if (viewSheet.Name.Contains(Properties.Settings.Default.KEYWORD_FOUNDATION))
+                // for the sheet "Cartouche", skip it
+                if (viewSheet.Name.ToLower().Contains(Properties.Settings.Default.KEYWORD_TITLEBLOCK))
                 {
+                    continue;
+                }
+
+                // for the sheet "Fondation"
+                if (viewSheet.Name.ToLower().Contains(Properties.Settings.Default.KEYWORD_FOUNDATION))
+                {
+                    // fondation legend view existing on the sheet 
                     ElementId viewportId =
                     (from vpId in viewSheet.GetAllViewports()
                      where ((Viewport)_doc.GetElement(vpId))
@@ -89,21 +97,24 @@ namespace DCEStudyTools.LegendUpdate
                      .ToList()
                      .FirstOrDefault();
 
+                    // if the legendView exists
                     if (viewportId != null)
                     {
                         Viewport foundationLegendViewport = (Viewport)_doc.GetElement(viewportId);
 
-
+                        // get the corresponding fondation legend view
                         View foundationLegend = (View)_doc.GetElement(foundationLegendViewport.ViewId);
 
+                        // delete the old one
                         viewSheet.DeleteViewport(foundationLegendViewport);
 
+                        // add the legend view at the new position
                         AddLegendToSheetView(foundationLegend, viewPortType_WithoutTitle, viewSheet, _form.SelectedLegendPosition);
                     }
                 }
                 else
                 {
-                    // LegendView existing on the sheet 
+                    // legend view existing on the sheet 
                     ElementId id =
                     (from viewportId in viewSheet.GetAllViewports()
                      where ((Viewport)_doc.GetElement(viewportId)).ViewId == legendView.Id
@@ -111,14 +122,14 @@ namespace DCEStudyTools.LegendUpdate
                      .ToList()
                      .FirstOrDefault();
 
-                    // if the legendView exists, delete it
+                    // if the legend view exists, delete it
                     if (id != null)
                     {
                         Viewport legendViewport = (Viewport)_doc.GetElement(id);
 
                         viewSheet.DeleteViewport(legendViewport);
                     }
-                    // Re-add the legendView to the sheet
+                    // add the legend view at the new position
                     AddLegendToSheetView(legendView, viewPortType_WithoutTitle, viewSheet, _form.SelectedLegendPosition);
                 }
             }
