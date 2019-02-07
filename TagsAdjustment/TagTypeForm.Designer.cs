@@ -41,6 +41,7 @@
             this.ucRoundColumn1 = new DCEStudyTools.TagsAdjustment.UserControls.ucRoundColumn();
             this.ucBeamTagWithoutDimension1 = new DCEStudyTools.TagsAdjustment.UserControls.ucBeamTagWithoutDimension();
             this.ucBeamTagWithDimension1 = new DCEStudyTools.TagsAdjustment.UserControls.ucBeamTagWithDimension();
+            this.noDimension = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // defaultCheck
@@ -83,7 +84,7 @@
             this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.cancelButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cancelButton.Location = new System.Drawing.Point(502, 539);
-            this.cancelButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cancelButton.Margin = new System.Windows.Forms.Padding(2);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(71, 26);
             this.cancelButton.TabIndex = 6;
@@ -96,7 +97,7 @@
             this.okButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.okButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.okButton.Location = new System.Drawing.Point(427, 539);
-            this.okButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.okButton.Margin = new System.Windows.Forms.Padding(2);
             this.okButton.Name = "okButton";
             this.okButton.Size = new System.Drawing.Size(71, 26);
             this.okButton.TabIndex = 7;
@@ -129,7 +130,7 @@
             this.ucRectColumn1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ucRectColumn1.Location = new System.Drawing.Point(12, 444);
-            this.ucRectColumn1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ucRectColumn1.Margin = new System.Windows.Forms.Padding(4);
             this.ucRectColumn1.Name = "ucRectColumn1";
             this.ucRectColumn1.SelectedFamilyName = "";
             this.ucRectColumn1.SelectedTagName = "";
@@ -141,7 +142,7 @@
             this.ucSquareColumn1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ucSquareColumn1.Location = new System.Drawing.Point(12, 350);
-            this.ucSquareColumn1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ucSquareColumn1.Margin = new System.Windows.Forms.Padding(4);
             this.ucSquareColumn1.Name = "ucSquareColumn1";
             this.ucSquareColumn1.SelectedFamilyName = "";
             this.ucSquareColumn1.SelectedTagName = "";
@@ -153,7 +154,7 @@
             this.ucRoundColumn1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ucRoundColumn1.Location = new System.Drawing.Point(12, 260);
-            this.ucRoundColumn1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ucRoundColumn1.Margin = new System.Windows.Forms.Padding(4);
             this.ucRoundColumn1.Name = "ucRoundColumn1";
             this.ucRoundColumn1.SelectedFamilyName = "";
             this.ucRoundColumn1.SelectedTagName = "";
@@ -165,7 +166,7 @@
             this.ucBeamTagWithoutDimension1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ucBeamTagWithoutDimension1.Location = new System.Drawing.Point(37, 112);
-            this.ucBeamTagWithoutDimension1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ucBeamTagWithoutDimension1.Margin = new System.Windows.Forms.Padding(4);
             this.ucBeamTagWithoutDimension1.Name = "ucBeamTagWithoutDimension1";
             this.ucBeamTagWithoutDimension1.SelectedTagName = "";
             this.ucBeamTagWithoutDimension1.Size = new System.Drawing.Size(537, 31);
@@ -176,11 +177,25 @@
             this.ucBeamTagWithDimension1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ucBeamTagWithDimension1.Location = new System.Drawing.Point(37, 187);
-            this.ucBeamTagWithDimension1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ucBeamTagWithDimension1.Margin = new System.Windows.Forms.Padding(4);
             this.ucBeamTagWithDimension1.Name = "ucBeamTagWithDimension1";
             this.ucBeamTagWithDimension1.SelectedTagName = "";
             this.ucBeamTagWithDimension1.Size = new System.Drawing.Size(536, 29);
             this.ucBeamTagWithDimension1.TabIndex = 3;
+            // 
+            // noDimension
+            // 
+            this.noDimension.AutoSize = true;
+            this.noDimension.Checked = true;
+            this.noDimension.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.noDimension.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.noDimension.Location = new System.Drawing.Point(201, 19);
+            this.noDimension.Name = "noDimension";
+            this.noDimension.Size = new System.Drawing.Size(183, 21);
+            this.noDimension.TabIndex = 2;
+            this.noDimension.Text = "Sans dimension pour BN";
+            this.noDimension.UseVisualStyleBackColor = true;
+            this.noDimension.CheckedChanged += new System.EventHandler(this.defaultCheck_CheckedChanged);
             // 
             // TagTypeForm
             // 
@@ -200,6 +215,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.ucBeamTagWithoutDimension1);
             this.Controls.Add(this.ucBeamTagWithDimension1);
+            this.Controls.Add(this.noDimension);
             this.Controls.Add(this.defaultCheck);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -224,5 +240,6 @@
         private UserControls.ucRectColumn ucRectColumn1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.CheckBox noDimension;
     }
 }

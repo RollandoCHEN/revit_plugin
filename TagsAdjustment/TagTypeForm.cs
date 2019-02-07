@@ -94,6 +94,13 @@ namespace DCEStudyTools.TagsAdjustment
                 return ucRectColumn1.SelectedTagName;
             }
         }
+        public bool NoDimentionForAllBN
+        {
+            get
+            {
+                return noDimension.Checked;
+            }
+        }
 
         public TagTypeForm(Document doc)
         {

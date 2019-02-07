@@ -1,14 +1,9 @@
 ﻿using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
-using Autodesk.Revit.UI.Selection;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Windows.Forms;
 
 namespace DCEStudyTools.Test
 {
@@ -27,7 +22,32 @@ namespace DCEStudyTools.Test
             
             try
             {
-                
+                List<FamilyInstance> bn_pvList =
+                    (from FamilyInstance beam in new FilteredElementCollector(_doc)
+                     .OfCategory(BuiltInCategory.OST_StructuralFraming)
+                     .OfClass(typeof(FamilyInstance))
+                     .Cast<FamilyInstance>()
+                     where beam.Name.Contains("BN")||beam.Name.Contains("TAL")
+                     select beam)
+                     .ToList();
+
+
+                TaskDialog.Show("Revit", $"{bn_pvList.Count()} BN/Tallon");
+                using (Transaction tx = new Transaction(_doc))
+                {
+                    tx.Start("Unjoin");
+                    foreach (FamilyInstance bn in bn_pvList)
+                    {
+                        IList<ElementId> eleList = JoinGeometryUtils.GetJoinedElements(_doc, bn).ToList();
+
+                        foreach (ElementId id in eleList)
+                        {
+                            Element ele = _doc.GetElement(id);
+                            JoinGeometryUtils.UnjoinGeometry(_doc, bn, ele);
+                        }
+                    }
+                    tx.Commit();
+                }
 
                 //// Delete "Etage 1 - " in the level name
                 //string pattern = @"(Etage\s?[0-9]{0,2}\s?-?\s?)";
@@ -39,7 +59,7 @@ namespace DCEStudyTools.Test
                 //    lvl.Name = Regex.Replace(lvl.Name, pattern, String.Empty);
                 //}
                 //t.Commit();
-                
+
                 return Result.Succeeded;
             }
             catch (Exception e)

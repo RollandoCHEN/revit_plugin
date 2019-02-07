@@ -24,7 +24,7 @@ namespace DCEStudyTools.TagsAdjustment
 
             if (form.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                AdjustBeamTags(form.BeamTagWithDimension, form.BeamTagWithoutDimension);
+                AdjustBeamTags(form.BeamTagWithDimension, form.BeamTagWithoutDimension, form.NoDimentionForAllBN);
             
                 AdjustColumnTags(
                     form.RoundColumnFamilyName,
@@ -106,7 +106,7 @@ namespace DCEStudyTools.TagsAdjustment
             }
         }
 
-        private void AdjustBeamTags(string withDimensionTagName, string withoutDimensionTagName)
+        private void AdjustBeamTags(string withDimensionTagName, string withoutDimensionTagName, bool noDimensionForAllBN)
         {
             // Adjust beam tags
 
@@ -134,18 +134,34 @@ namespace DCEStudyTools.TagsAdjustment
                     BuiltInCategory.OST_StructuralFraming,
                     "Poutre type", "Talon PV");
 
-            // Get all the structural framing tags
-            // who links to the framing element in the above collector
-            IList<IndependentTag> tagWithoutDList =
-                (from t in new FilteredElementCollector(_doc)
+            IList<IndependentTag> tagWithoutDList = new List<IndependentTag>();
+
+            if (noDimensionForAllBN)
+            {
+                tagWithoutDList =
+                (from tag in new FilteredElementCollector(_doc)
                  .OfCategory(BuiltInCategory.OST_StructuralFramingTags)
                  .OfClass(typeof(IndependentTag))
                  .Cast<IndependentTag>()
                  where
-                 (colBN.Any(x => x.Id == t.GetTaggedLocalElement().Id) && colWidth20.Any(x => x.Id == t.GetTaggedLocalElement().Id))
-                 || colPV.Any(x => x.Id == t.GetTaggedLocalElement().Id)
-                 select t)
+                 colBN.Any(x => x.Id == tag.GetTaggedLocalElement().Id)
+                 || colPV.Any(x => x.Id == tag.GetTaggedLocalElement().Id)
+                 select tag)
                  .ToList();
+            }
+            else
+            {
+                tagWithoutDList =
+                    (from tag in new FilteredElementCollector(_doc)
+                     .OfCategory(BuiltInCategory.OST_StructuralFramingTags)
+                     .OfClass(typeof(IndependentTag))
+                     .Cast<IndependentTag>()
+                     where
+                     (colBN.Any(x => x.Id == tag.GetTaggedLocalElement().Id) && colWidth20.Any(x => x.Id == tag.GetTaggedLocalElement().Id))
+                     || colPV.Any(x => x.Id == tag.GetTaggedLocalElement().Id)
+                     select tag)
+                     .ToList();
+            }
 
             StringBuilder sb = new StringBuilder();
 
