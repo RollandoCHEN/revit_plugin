@@ -118,6 +118,17 @@ namespace DCEStudyTools
                 "Correct the type of beams whose type are not appropriate")
             ) as PushButton;
 
+            // Create push button for beam type detect
+            PushButton pbBeamUnjoint = beamtToolRibbonPanel.AddItem(
+                CreatePushButtonData(
+                "cmdBeamUnjoint",
+                "Unjoint" + System.Environment.NewLine + "BN & Talon PV",
+                thisAssemblyPath,
+                "DCEStudyTools.BeamUnjoint.BeamUnjoint",
+                "unjoint_32.png",
+                String.Empty,
+                "Unjoint all the \"BN\" and  \"Talon PV\"")
+            ) as PushButton;
 
             // Create push button data for beam type name adjustment
             PushButtonData pbBeamTypeNameAdjustData = 
@@ -153,7 +164,10 @@ namespace DCEStudyTools
                     "beam_update_16.png",
                     "Select beams to be changed and choose the target type");
 
+            // Add stacked push buttons for beam type change/adjustment
             beamtToolRibbonPanel.AddStackedItems(pbBeamTypeNameAdjustData, pbBeamTypePropertiesAdjustData, pbBeamTypeChangeData);
+            
+
 
             ////////////////////////////////////////////////////// Seperate line ////////////////////////////////////////////////////
 

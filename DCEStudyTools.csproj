@@ -67,6 +67,7 @@
       <DependentUpon>BeamTypeForm.cs</DependentUpon>
     </Compile>
     <Compile Include="BeamTypeCorrect\BeamTypeCorrect.cs" />
+    <Compile Include="BeamUnjoint\BeamUnjoint.cs" />
     <Compile Include="CADLink\CADLink.cs" />
     <Compile Include="CADLink\CADLinkForm.cs">
       <SubType>Form</SubType>
@@ -304,6 +305,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
+    <Resource Include="Resources\unjoint_32.png" />
     <Resource Include="Resources\rename_32.png" />
     <Resource Include="Resources\duplicate_32.png" />
     <Resource Include="Resources\legend_32.png" />
