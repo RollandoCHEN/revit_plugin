@@ -181,16 +181,6 @@ namespace DCEStudyTools.Properties {
         }
         
         /// <summary>
-        ///   Recherche une ressource localisée de type System.Byte[].
-        /// </summary>
-        internal static byte[] concrete_beam {
-            get {
-                object obj = ResourceManager.GetObject("concrete_beam", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Icon semblable à (Icône).
         /// </summary>
         internal static System.Drawing.Icon dimension_edit_32 {
@@ -357,6 +347,36 @@ namespace DCEStudyTools.Properties {
             get {
                 object obj = ResourceManager.GetObject("load_321", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] POT_BA_RECT {
+            get {
+                object obj = ResourceManager.GetObject("POT_BA_RECT", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] POT_BA_ROND {
+            get {
+                object obj = ResourceManager.GetObject("POT_BA_ROND", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] POU_BA {
+            get {
+                object obj = ResourceManager.GetObject("POU_BA", resourceCulture);
+                return ((byte[])(obj));
             }
         }
         

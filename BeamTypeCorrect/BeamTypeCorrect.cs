@@ -269,7 +269,7 @@ namespace DCEStudyTools.BeamTypeCorrect
             ElementParameterFilter height25Filter
                 = EleParamGreaterFilter(
                     _doc,
-                    Properties.Settings.Default.PARA_NAME_BEAM_HEIGHT,
+                    Properties.Settings.Default.PARA_NAME_DIM_HEIGHT,
                     Properties.Settings.Default.CHECK_BN_MAX_HEIGHT_METER);
             List<Element> bnHeightGreaterList
                 = bnCollect.WherePasses(height25Filter).ToList();
@@ -284,7 +284,7 @@ namespace DCEStudyTools.BeamTypeCorrect
             ElementParameterFilter width18Filter
                 = EleParamGreaterFilter(
                     _doc,
-                    Properties.Settings.Default.PARA_NAME_BEAM_WIDTH,
+                    Properties.Settings.Default.PARA_NAME_DIM_WIDTH,
                     Properties.Settings.Default.CHECK_PV_MAX_WIDTH_METER);
             List<Element> pvWidthGreaterList
                 = pvCollect.WherePasses(width18Filter).ToList();
@@ -324,7 +324,7 @@ namespace DCEStudyTools.BeamTypeCorrect
                 double beamHeight =
                     UnitUtils.Convert(
                         (from Parameter pr in beam.Symbol.Parameters
-                         where pr.Definition.Name.Equals(Properties.Settings.Default.PARA_NAME_BEAM_HEIGHT)
+                         where pr.Definition.Name.Equals(Properties.Settings.Default.PARA_NAME_DIM_HEIGHT)
                          select pr)
                          .First()
                          .AsDouble(),
@@ -334,7 +334,7 @@ namespace DCEStudyTools.BeamTypeCorrect
                 double beamWidth =
                     UnitUtils.Convert(
                         (from Parameter pr in beam.Symbol.Parameters
-                         where pr.Definition.Name.Equals(Properties.Settings.Default.PARA_NAME_BEAM_WIDTH)
+                         where pr.Definition.Name.Equals(Properties.Settings.Default.PARA_NAME_DIM_WIDTH)
                          select pr)
                          .First()
                          .AsDouble(),

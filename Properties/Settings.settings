@@ -29,10 +29,10 @@
     <Setting Name="TEMPLATE_NAME_FOUNDATION" Type="System.String" Scope="User">
       <Value Profile="(Default)">DCE Structure Fondation</Value>
     </Setting>
-    <Setting Name="PARA_NAME_BEAM_HEIGHT" Type="System.String" Scope="User">
+    <Setting Name="PARA_NAME_DIM_HEIGHT" Type="System.String" Scope="User">
       <Value Profile="(Default)">Hauteur</Value>
     </Setting>
-    <Setting Name="PARA_NAME_BEAM_WIDTH" Type="System.String" Scope="User">
+    <Setting Name="PARA_NAME_DIM_WIDTH" Type="System.String" Scope="User">
       <Value Profile="(Default)">Largeur</Value>
     </Setting>
     <Setting Name="PARA_NAME_BEAM_TYPE" Type="System.String" Scope="User">
@@ -146,40 +146,40 @@
     <Setting Name="TITLEBLOCK_LENGTH" Type="System.Double" Scope="User">
       <Value Profile="(Default)">0.4</Value>
     </Setting>
-    <Setting Name="PARA_NAME_BEAM_MATERIAL" Type="System.String" Scope="User">
+    <Setting Name="PARA_NAME_STR_MATERIAL" Type="System.String" Scope="User">
       <Value Profile="(Default)">Matériau structurel</Value>
     </Setting>
-    <Setting Name="BEAM_MAT_NAME_BA25" Type="System.String" Scope="User">
+    <Setting Name="MAT_NAME_BA25" Type="System.String" Scope="User">
       <Value Profile="(Default)">Béton - Coulé sur place - Béton25</Value>
     </Setting>
-    <Setting Name="BEAM_MAT_NAME_BA30" Type="System.String" Scope="User">
+    <Setting Name="MAT_NAME_BA30" Type="System.String" Scope="User">
       <Value Profile="(Default)">Béton - Coulé sur place - Béton30</Value>
     </Setting>
-    <Setting Name="BEAM_MAT_NAME_BA35" Type="System.String" Scope="User">
+    <Setting Name="MAT_NAME_BA35" Type="System.String" Scope="User">
       <Value Profile="(Default)">Béton - Coulé sur place - Béton35</Value>
     </Setting>
-    <Setting Name="BEAM_MAT_NAME_BA40" Type="System.String" Scope="User">
+    <Setting Name="MAT_NAME_BA40" Type="System.String" Scope="User">
       <Value Profile="(Default)">Béton - Coulé sur place - Béton40</Value>
     </Setting>
-    <Setting Name="BEAM_MAT_NAME_BA45" Type="System.String" Scope="User">
+    <Setting Name="MAT_NAME_BA45" Type="System.String" Scope="User">
       <Value Profile="(Default)">Béton - Coulé sur place - Béton45</Value>
     </Setting>
-    <Setting Name="BEAM_MAT_SYNTAXE_BA25" Type="System.String" Scope="User">
+    <Setting Name="MAT_SYNTAXE_BA25" Type="System.String" Scope="User">
       <Value Profile="(Default)">BA25</Value>
     </Setting>
-    <Setting Name="BEAM_MAT_SYNTAXE_BA30" Type="System.String" Scope="User">
+    <Setting Name="MAT_SYNTAXE_BA30" Type="System.String" Scope="User">
       <Value Profile="(Default)">BA30</Value>
     </Setting>
-    <Setting Name="BEAM_MAT_SYNTAXE_BA35" Type="System.String" Scope="User">
+    <Setting Name="MAT_SYNTAXE_BA35" Type="System.String" Scope="User">
       <Value Profile="(Default)">BA35</Value>
     </Setting>
-    <Setting Name="BEAM_MAT_SYNTAXE_BA40" Type="System.String" Scope="User">
+    <Setting Name="MAT_SYNTAXE_BA40" Type="System.String" Scope="User">
       <Value Profile="(Default)">BA40</Value>
     </Setting>
-    <Setting Name="BEAM_MAT_SYNTAXE_BA45" Type="System.String" Scope="User">
+    <Setting Name="MAT_SYNTAXE_BA45" Type="System.String" Scope="User">
       <Value Profile="(Default)">BA45</Value>
     </Setting>
-    <Setting Name="BEAM_MAT_SYNTAXE_OTHER" Type="System.String" Scope="User">
+    <Setting Name="MAT_SYNTAXE_OTHER" Type="System.String" Scope="User">
       <Value Profile="(Default)">AUTRE</Value>
     </Setting>
     <Setting Name="KEYWOARD_FOUNDATION_TYPE_PILE" Type="System.String" Scope="User">
@@ -208,6 +208,21 @@
     </Setting>
     <Setting Name="KEYWORD_TITLEBLOCK" Type="System.String" Scope="User">
       <Value Profile="(Default)">cartouche</Value>
+    </Setting>
+    <Setting Name="FAMILY_NAME_RECT_COLUMN" Type="System.String" Scope="User">
+      <Value Profile="(Default)">POT-BA-RECT</Value>
+    </Setting>
+    <Setting Name="FAMILY_NAME_ROND_COLUMN" Type="System.String" Scope="User">
+      <Value Profile="(Default)">POT-BA-ROND</Value>
+    </Setting>
+    <Setting Name="COLUMN_SYNT" Type="System.String" Scope="User">
+      <Value Profile="(Default)">POT</Value>
+    </Setting>
+    <Setting Name="PARA_NAME_DIM_DIAMETER" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Diamètre</Value>
+    </Setting>
+    <Setting Name="KEYWORD_ROND_COLUMN_DIM" Type="System.String" Scope="User">
+      <Value Profile="(Default)">D</Value>
     </Setting>
   </Settings>
 </SettingsFile>

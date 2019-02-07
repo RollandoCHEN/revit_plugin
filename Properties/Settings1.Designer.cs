@@ -134,24 +134,24 @@ namespace DCEStudyTools.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Hauteur")]
-        public string PARA_NAME_BEAM_HEIGHT {
+        public string PARA_NAME_DIM_HEIGHT {
             get {
-                return ((string)(this["PARA_NAME_BEAM_HEIGHT"]));
+                return ((string)(this["PARA_NAME_DIM_HEIGHT"]));
             }
             set {
-                this["PARA_NAME_BEAM_HEIGHT"] = value;
+                this["PARA_NAME_DIM_HEIGHT"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Largeur")]
-        public string PARA_NAME_BEAM_WIDTH {
+        public string PARA_NAME_DIM_WIDTH {
             get {
-                return ((string)(this["PARA_NAME_BEAM_WIDTH"]));
+                return ((string)(this["PARA_NAME_DIM_WIDTH"]));
             }
             set {
-                this["PARA_NAME_BEAM_WIDTH"] = value;
+                this["PARA_NAME_DIM_WIDTH"] = value;
             }
         }
         
@@ -602,144 +602,144 @@ namespace DCEStudyTools.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Matériau structurel")]
-        public string PARA_NAME_BEAM_MATERIAL {
+        public string PARA_NAME_STR_MATERIAL {
             get {
-                return ((string)(this["PARA_NAME_BEAM_MATERIAL"]));
+                return ((string)(this["PARA_NAME_STR_MATERIAL"]));
             }
             set {
-                this["PARA_NAME_BEAM_MATERIAL"] = value;
+                this["PARA_NAME_STR_MATERIAL"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Béton - Coulé sur place - Béton25")]
-        public string BEAM_MAT_NAME_BA25 {
+        public string MAT_NAME_BA25 {
             get {
-                return ((string)(this["BEAM_MAT_NAME_BA25"]));
+                return ((string)(this["MAT_NAME_BA25"]));
             }
             set {
-                this["BEAM_MAT_NAME_BA25"] = value;
+                this["MAT_NAME_BA25"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Béton - Coulé sur place - Béton30")]
-        public string BEAM_MAT_NAME_BA30 {
+        public string MAT_NAME_BA30 {
             get {
-                return ((string)(this["BEAM_MAT_NAME_BA30"]));
+                return ((string)(this["MAT_NAME_BA30"]));
             }
             set {
-                this["BEAM_MAT_NAME_BA30"] = value;
+                this["MAT_NAME_BA30"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Béton - Coulé sur place - Béton35")]
-        public string BEAM_MAT_NAME_BA35 {
+        public string MAT_NAME_BA35 {
             get {
-                return ((string)(this["BEAM_MAT_NAME_BA35"]));
+                return ((string)(this["MAT_NAME_BA35"]));
             }
             set {
-                this["BEAM_MAT_NAME_BA35"] = value;
+                this["MAT_NAME_BA35"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Béton - Coulé sur place - Béton40")]
-        public string BEAM_MAT_NAME_BA40 {
+        public string MAT_NAME_BA40 {
             get {
-                return ((string)(this["BEAM_MAT_NAME_BA40"]));
+                return ((string)(this["MAT_NAME_BA40"]));
             }
             set {
-                this["BEAM_MAT_NAME_BA40"] = value;
+                this["MAT_NAME_BA40"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Béton - Coulé sur place - Béton45")]
-        public string BEAM_MAT_NAME_BA45 {
+        public string MAT_NAME_BA45 {
             get {
-                return ((string)(this["BEAM_MAT_NAME_BA45"]));
+                return ((string)(this["MAT_NAME_BA45"]));
             }
             set {
-                this["BEAM_MAT_NAME_BA45"] = value;
+                this["MAT_NAME_BA45"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("BA25")]
-        public string BEAM_MAT_SYNTAXE_BA25 {
+        public string MAT_SYNTAXE_BA25 {
             get {
-                return ((string)(this["BEAM_MAT_SYNTAXE_BA25"]));
+                return ((string)(this["MAT_SYNTAXE_BA25"]));
             }
             set {
-                this["BEAM_MAT_SYNTAXE_BA25"] = value;
+                this["MAT_SYNTAXE_BA25"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("BA30")]
-        public string BEAM_MAT_SYNTAXE_BA30 {
+        public string MAT_SYNTAXE_BA30 {
             get {
-                return ((string)(this["BEAM_MAT_SYNTAXE_BA30"]));
+                return ((string)(this["MAT_SYNTAXE_BA30"]));
             }
             set {
-                this["BEAM_MAT_SYNTAXE_BA30"] = value;
+                this["MAT_SYNTAXE_BA30"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("BA35")]
-        public string BEAM_MAT_SYNTAXE_BA35 {
+        public string MAT_SYNTAXE_BA35 {
             get {
-                return ((string)(this["BEAM_MAT_SYNTAXE_BA35"]));
+                return ((string)(this["MAT_SYNTAXE_BA35"]));
             }
             set {
-                this["BEAM_MAT_SYNTAXE_BA35"] = value;
+                this["MAT_SYNTAXE_BA35"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("BA40")]
-        public string BEAM_MAT_SYNTAXE_BA40 {
+        public string MAT_SYNTAXE_BA40 {
             get {
-                return ((string)(this["BEAM_MAT_SYNTAXE_BA40"]));
+                return ((string)(this["MAT_SYNTAXE_BA40"]));
             }
             set {
-                this["BEAM_MAT_SYNTAXE_BA40"] = value;
+                this["MAT_SYNTAXE_BA40"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("BA45")]
-        public string BEAM_MAT_SYNTAXE_BA45 {
+        public string MAT_SYNTAXE_BA45 {
             get {
-                return ((string)(this["BEAM_MAT_SYNTAXE_BA45"]));
+                return ((string)(this["MAT_SYNTAXE_BA45"]));
             }
             set {
-                this["BEAM_MAT_SYNTAXE_BA45"] = value;
+                this["MAT_SYNTAXE_BA45"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("AUTRE")]
-        public string BEAM_MAT_SYNTAXE_OTHER {
+        public string MAT_SYNTAXE_OTHER {
             get {
-                return ((string)(this["BEAM_MAT_SYNTAXE_OTHER"]));
+                return ((string)(this["MAT_SYNTAXE_OTHER"]));
             }
             set {
-                this["BEAM_MAT_SYNTAXE_OTHER"] = value;
+                this["MAT_SYNTAXE_OTHER"] = value;
             }
         }
         
@@ -848,6 +848,66 @@ namespace DCEStudyTools.Properties {
             }
             set {
                 this["KEYWORD_TITLEBLOCK"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("POT-BA-RECT")]
+        public string FAMILY_NAME_RECT_COLUMN {
+            get {
+                return ((string)(this["FAMILY_NAME_RECT_COLUMN"]));
+            }
+            set {
+                this["FAMILY_NAME_RECT_COLUMN"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("POT-BA-ROND")]
+        public string FAMILY_NAME_ROND_COLUMN {
+            get {
+                return ((string)(this["FAMILY_NAME_ROND_COLUMN"]));
+            }
+            set {
+                this["FAMILY_NAME_ROND_COLUMN"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("POT")]
+        public string COLUMN_SYNT {
+            get {
+                return ((string)(this["COLUMN_SYNT"]));
+            }
+            set {
+                this["COLUMN_SYNT"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Diamètre")]
+        public string PARA_NAME_DIM_DIAMETER {
+            get {
+                return ((string)(this["PARA_NAME_DIM_DIAMETER"]));
+            }
+            set {
+                this["PARA_NAME_DIM_DIAMETER"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("D")]
+        public string KEYWORD_ROND_COLUMN_DIM {
+            get {
+                return ((string)(this["KEYWORD_ROND_COLUMN_DIM"]));
+            }
+            set {
+                this["KEYWORD_ROND_COLUMN_DIM"] = value;
             }
         }
     }

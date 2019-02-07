@@ -294,7 +294,10 @@
     <Compile Include="ThreeDViewsCreation\ThreeDViewsCreation.cs" />
     <Compile Include="UnderlaySetting\UnderlaySetting.cs" />
     <Compile Include="Utils\BeamFamily.cs" />
+    <Compile Include="Utils\ColumnFamily.cs" />
     <Compile Include="Utils\Guids.cs" />
+    <Compile Include="Utils\Material.cs" />
+    <Compile Include="Utils\PropertyValueSetter.cs" />
     <Compile Include="Utils\SubstringExtensions.cs" />
     <Compile Include="Utils\ViewTemplate.cs" />
     <Compile Include="ViewDuplicate\StructuralPlanSelectionFilter.cs" />
@@ -464,6 +467,9 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings1.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Resources\POT-BA-RECT.rfa" />
+    <None Include="Resources\POT-BA-ROND.rfa" />
+    <None Include="Resources\POU-BA.rfa" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
