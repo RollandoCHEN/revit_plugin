@@ -167,7 +167,9 @@ namespace DCEStudyTools
             // Add stacked push buttons for beam type change/adjustment
             beamtToolRibbonPanel.AddStackedItems(pbBeamTypeNameAdjustData, pbBeamTypePropertiesAdjustData, pbBeamTypeChangeData);
 
-            // Add beam tools ribbon panel
+            ////////////////////////////////////////////////////// Seperate line ////////////////////////////////////////////////////
+
+            // Add column tools ribbon panel
             RibbonPanel columntToolRibbonPanel = application.CreateRibbonPanel(tabName, "Column Tools");
 
             // Create push button for column type name adjustment

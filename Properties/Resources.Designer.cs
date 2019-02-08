@@ -561,6 +561,26 @@ namespace DCEStudyTools.Properties {
         }
         
         /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap wall_name_16 {
+            get {
+                object obj = ResourceManager.GetObject("wall_name_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap wall_name_32 {
+            get {
+                object obj = ResourceManager.GetObject("wall_name_32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Icon semblable à (Icône).
         /// </summary>
         internal static System.Drawing.Icon wall_remove_32 {

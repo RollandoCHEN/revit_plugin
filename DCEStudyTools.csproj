@@ -310,6 +310,8 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
+    <None Include="Resources\wall_name_16.png" />
+    <None Include="Resources\wall_name_32.png" />
     <Resource Include="Resources\column_32.png" />
     <Resource Include="Resources\column_16.png" />
     <Resource Include="Resources\unjoint_32.png" />
