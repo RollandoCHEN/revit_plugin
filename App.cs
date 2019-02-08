@@ -166,7 +166,34 @@ namespace DCEStudyTools
 
             // Add stacked push buttons for beam type change/adjustment
             beamtToolRibbonPanel.AddStackedItems(pbBeamTypeNameAdjustData, pbBeamTypePropertiesAdjustData, pbBeamTypeChangeData);
-            
+
+            // Add beam tools ribbon panel
+            RibbonPanel columntToolRibbonPanel = application.CreateRibbonPanel(tabName, "Column Tools");
+
+            // Create push button for column type name adjustment
+            PushButton pbColumnTypeNameAdjust = columntToolRibbonPanel.AddItem(
+                CreatePushButtonData(
+                "cmdColumnTypeNameAdjust",
+                "Adjust Column" + System.Environment.NewLine + "Type Name",
+                thisAssemblyPath,
+                "DCEStudyTools.ColumnTypeNameAdjust.ColumnTypeNameAdjust",
+                "column_32.png",
+                "column_16.png",
+                "Update the type name of ALL column types according to their properties")
+            ) as PushButton;
+
+            // Create push button for column type properties adjustment
+            PushButton pbColumnTypePropertiesAdjust = columntToolRibbonPanel.AddItem(
+                CreatePushButtonData(
+                "cmdColumnTypePropertiesAdjust",
+                "Adjust Column" + System.Environment.NewLine + "Type Properties",
+                thisAssemblyPath,
+                "DCEStudyTools.ColumnTypePropertiesAdjust.ColumnTypePropertiesAdjust",
+                "column_32.png",
+                "column_16.png",
+                "Update the properties \"POT\", \"Matérial\", \"Largeur\" and \"Hauteur\" \\/ \"Diamètre\" of ALL column types according to their type name, " +
+                    "if their type name is in format of \"POT-BAdd-ddxdd\" \\/ \"POT-BAdd-Ddd\"")
+            ) as PushButton;
 
 
             ////////////////////////////////////////////////////// Seperate line ////////////////////////////////////////////////////

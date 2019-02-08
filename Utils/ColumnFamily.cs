@@ -115,24 +115,24 @@ namespace DCEStudyTools.Utils
                 t.Commit();
             }
 
-            // Retrieve all the Beam types of the family "POT-BA-RECT"
+            // Retrieve all the Column types of the family "POT-BA-RECT"
             List<FamilySymbol> rectColumnTypesList =
-                    (from beam in new FilteredElementCollector(_doc)
+                    (from col in new FilteredElementCollector(_doc)
                      .OfClass(typeof(FamilySymbol))
-                     .OfCategory(BuiltInCategory.OST_StructuralFraming)
+                     .OfCategory(BuiltInCategory.OST_StructuralColumns)
                      .Cast<FamilySymbol>()
-                     where beam.Family.Id == rectColumn.Id
-                     select beam)
+                     where col.Family.Id == rectColumn.Id
+                     select col)
                      .ToList();
 
             // Retrieve all the Beam types of the family "POT-BA-ROND"
             List<FamilySymbol> rondColumnTypesList =
-                    (from beam in new FilteredElementCollector(_doc)
+                    (from col in new FilteredElementCollector(_doc)
                      .OfClass(typeof(FamilySymbol))
-                     .OfCategory(BuiltInCategory.OST_StructuralFraming)
+                     .OfCategory(BuiltInCategory.OST_StructuralColumns)
                      .Cast<FamilySymbol>()
-                     where beam.Family.Id == rondColumn.Id
-                     select beam)
+                     where col.Family.Id == rondColumn.Id
+                     select col)
                      .ToList();
 
             _rectColumnfamily = rectColumn;
@@ -233,7 +233,7 @@ namespace DCEStudyTools.Utils
             }
         }
 
-        public void AdjustWholeBeamFamilyProperties()
+        public void AdjustWholeColumnFamilyProperties()
         {
             foreach (FamilySymbol colSymbol in RectColumnTypesList)
             {

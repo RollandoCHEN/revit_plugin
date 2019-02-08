@@ -76,6 +76,8 @@
       <DependentUpon>CADLinkForm.cs</DependentUpon>
     </Compile>
     <Compile Include="CategoriesHiding\CategoriesHiding.cs" />
+    <Compile Include="ColumnTypePropertiesAdjust\ColumnTypePropertiesAdjust.cs" />
+    <Compile Include="ColumnTypeNameAdjust\ColumnTypeNameAdjust.cs" />
     <Compile Include="Configuration\LevelConfigForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -308,6 +310,8 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
+    <Resource Include="Resources\column_32.png" />
+    <Resource Include="Resources\column_16.png" />
     <Resource Include="Resources\unjoint_32.png" />
     <Resource Include="Resources\rename_32.png" />
     <Resource Include="Resources\duplicate_32.png" />
