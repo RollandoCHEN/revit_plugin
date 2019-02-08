@@ -42,7 +42,7 @@
       <Value Profile="(Default)">fondation</Value>
     </Setting>
     <Setting Name="FAMILY_NAME_PILE" Type="System.String" Scope="User">
-      <Value Profile="(Default)">FON-PIEUX</Value>
+      <Value Profile="(Default)">FON-PIEUX_FORES</Value>
     </Setting>
     <Setting Name="TYPE_NAME_POINT_LOAD" Type="System.String" Scope="User">
       <Value Profile="(Default)">Charge-Point 2.5mm</Value>

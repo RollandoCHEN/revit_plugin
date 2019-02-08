@@ -181,7 +181,7 @@ namespace DCEStudyTools.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("FON-PIEUX")]
+        [global::System.Configuration.DefaultSettingValueAttribute("FON-PIEUX_FORES")]
         public string FAMILY_NAME_PILE {
             get {
                 return ((string)(this["FAMILY_NAME_PILE"]));
