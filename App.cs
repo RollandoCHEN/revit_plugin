@@ -104,99 +104,137 @@ namespace DCEStudyTools
             ////////////////////////////////////////////////////// Seperate line ////////////////////////////////////////////////////
 
             // Add beam tools ribbon panel
-            RibbonPanel beamtToolRibbonPanel = application.CreateRibbonPanel(tabName, "Beam Tools");
+            RibbonPanel beamToolRibbonPanel = application.CreateRibbonPanel(tabName, "Beam Tools");
 
             // Create push button for beam type detect
-            PushButton pbBeamTypeDetect = beamtToolRibbonPanel.AddItem(
+            PushButton pbBeamTypeDetect = beamToolRibbonPanel.AddItem(
                 CreatePushButtonData(
                 "cmdBeamTypeCorrect",
                 "Correct" + System.Environment.NewLine + "Beam Type",
                 thisAssemblyPath,
                 "DCEStudyTools.BeamTypeCorrect.BeamTypeCorrect",
                 "beam_correct_32.png",
-                String.Empty,
+                "beam_correct_16.png",
                 "Correct the type of beams whose type are not appropriate")
             ) as PushButton;
 
             // Create push button for beam type detect
-            PushButton pbBeamUnjoint = beamtToolRibbonPanel.AddItem(
+            PushButton pbBeamUnjoint = beamToolRibbonPanel.AddItem(
                 CreatePushButtonData(
                 "cmdBeamUnjoint",
                 "Unjoint" + System.Environment.NewLine + "BN & Talon PV",
                 thisAssemblyPath,
                 "DCEStudyTools.BeamUnjoint.BeamUnjoint",
                 "unjoint_32.png",
-                String.Empty,
+                "unjoint_16.png",
                 "Unjoint all the \"BN\" and  \"Talon PV\"")
+            ) as PushButton;
+
+            // Create push button for beam type change
+            PushButton pbBeamTypeChangeData = beamToolRibbonPanel.AddItem(
+                CreatePushButtonData(
+                    "cmdBeamTypeChange",
+                    "Change" + System.Environment.NewLine + "Beam Type",
+                    thisAssemblyPath,
+                    "DCEStudyTools.BeamTypeChange.BeamTypeChange",
+                    "beam_update_32.png",
+                    "beam_update_16.png",
+                    "Select beams to be changed and choose the target type")
             ) as PushButton;
 
             // Create push button data for beam type name adjustment
             PushButtonData pbBeamTypeNameAdjustData = 
                 CreatePushButtonData(
                     "cmdBeamTypeNameAdjust",
-                    "Adjust Beam Type Name",
+                    "Adjust Beam" + System.Environment.NewLine + "Type Name",
                     thisAssemblyPath,
                     "DCEStudyTools.BeamTypeNameAdjust.BeamTypeNameAdjust",
-                    "beam_update_32.png",
-                    "beam_update_16.png",
+                    "beam_name_32.png",
+                    "beam_name_16.png",
                     "Update the type name of ALL beam types according to their properties");
 
             // Create push button data for beam type properties adjustment
             PushButtonData pbBeamTypePropertiesAdjustData = 
                 CreatePushButtonData(
                     "cmdBeamTypePropertiesAdjust",
-                    "Adjust Beam Type Properties",
+                    "Adjust Beam" + System.Environment.NewLine + "Type Properties",
                     thisAssemblyPath,
                     "DCEStudyTools.BeamTypePropertiesAdjust.BeamTypePropertiesAdjust",
-                    "beam_update_32.png",
-                    "beam_update_16.png",
+                    "beam_name_32.png",
+                    "beam_name_16.png",
                     "Update the properties \"Poutre type\", \"Matérial\", \"Largeur\" and \"Hauteur\" of ALL beam types according to their type name, " +
                     "if their type name is in format of \"XXX-BAdd-ddxdd\"");
 
-            // Create push button data for beam type change
-            PushButtonData pbBeamTypeChangeData = 
-                CreatePushButtonData(
-                    "cmdBeamTypeChange",
-                    "Change Beam Type",
-                    thisAssemblyPath,
-                    "DCEStudyTools.BeamTypeChange.BeamTypeChange",
-                    "beam_update_32.png",
-                    "beam_update_16.png",
-                    "Select beams to be changed and choose the target type");
+            // Create "Beam Adjust" split button
+            SplitButtonData sbBeamAdjustData = new SplitButtonData("cmdBeamAdjust", "Beam Type Adjust");
+            SplitButton sbBeamAdjust = beamToolRibbonPanel.AddItem(sbBeamAdjustData) as SplitButton;
+            sbBeamAdjust.AddPushButton(pbBeamTypeNameAdjustData);
+            sbBeamAdjust.AddPushButton(pbBeamTypePropertiesAdjustData);
 
-            // Add stacked push buttons for beam type change/adjustment
-            beamtToolRibbonPanel.AddStackedItems(pbBeamTypeNameAdjustData, pbBeamTypePropertiesAdjustData, pbBeamTypeChangeData);
 
             ////////////////////////////////////////////////////// Seperate line ////////////////////////////////////////////////////
 
             // Add column tools ribbon panel
-            RibbonPanel columntToolRibbonPanel = application.CreateRibbonPanel(tabName, "Column Tools");
+            RibbonPanel columnToolRibbonPanel = application.CreateRibbonPanel(tabName, "Column Tools");
 
-            // Create push button for column type name adjustment
-            PushButton pbColumnTypeNameAdjust = columntToolRibbonPanel.AddItem(
-                CreatePushButtonData(
+            // Create push button data for column type name adjustment
+            PushButtonData pbColumnTypeNameAdjustData = CreatePushButtonData(
                 "cmdColumnTypeNameAdjust",
                 "Adjust Column" + System.Environment.NewLine + "Type Name",
                 thisAssemblyPath,
                 "DCEStudyTools.ColumnTypeNameAdjust.ColumnTypeNameAdjust",
                 "column_32.png",
                 "column_16.png",
-                "Update the type name of ALL column types according to their properties")
-            ) as PushButton;
+                "Update the type name of ALL column types according to their properties");
 
-            // Create push button for column type properties adjustment
-            PushButton pbColumnTypePropertiesAdjust = columntToolRibbonPanel.AddItem(
-                CreatePushButtonData(
+            // Create push button data for column type properties adjustment
+            PushButtonData pbColumnTypePropertiesAdjustData = CreatePushButtonData(
                 "cmdColumnTypePropertiesAdjust",
                 "Adjust Column" + System.Environment.NewLine + "Type Properties",
                 thisAssemblyPath,
                 "DCEStudyTools.ColumnTypePropertiesAdjust.ColumnTypePropertiesAdjust",
                 "column_32.png",
                 "column_16.png",
-                "Update the properties \"POT\", \"Matérial\", \"Largeur\" and \"Hauteur\" \\/ \"Diamètre\" of ALL column types according to their type name, " +
-                    "if their type name is in format of \"POT-BAdd-ddxdd\" \\/ \"POT-BAdd-Ddd\"")
-            ) as PushButton;
+                "Update the properties \"Matérial\", \"Largeur\" and \"Hauteur\" / \"Diamètre\" of ALL column types according to their type name, " +
+                    "if their type name is in format of \"POT-BAdd-ddxdd\" / \"POT-BAdd-Ddd\"");
 
+            // Create "Column Adjust" split button
+            SplitButtonData sbColAdjustData = new SplitButtonData("cmdColumnAdjust", "Column Type Adjust");
+            SplitButton sbColAdjust = columnToolRibbonPanel.AddItem(sbColAdjustData) as SplitButton;
+            sbColAdjust.AddPushButton(pbColumnTypeNameAdjustData);
+            sbColAdjust.AddPushButton(pbColumnTypePropertiesAdjustData);
+
+            ////////////////////////////////////////////////////// Seperate line ////////////////////////////////////////////////////
+
+            // Add wall tools ribbon panel
+            RibbonPanel wallToolRibbonPanel = application.CreateRibbonPanel(tabName, "Wall Tools");
+
+            // Create push button data for wall type name adjustment
+            PushButtonData pbWallTypeNameAdjustData = CreatePushButtonData(
+                "cmdWallTypeNameAdjust",
+                "Adjust Wall" + System.Environment.NewLine + "Type Name",
+                thisAssemblyPath,
+                "DCEStudyTools.WallTypeNameAdjust.WallTypeNameAdjust",
+                "wall_name_32.png",
+                "wall_name_16.png",
+                "Update the type name of ALL wall types according to their properties");
+
+            // Create push button data for wall type properties adjustment
+            PushButtonData pbWallTypePropertiesAdjustData = CreatePushButtonData(
+                "cmdWallTypePropertiesAdjust",
+                "Adjust Wall" + System.Environment.NewLine + "Type Properties",
+                thisAssemblyPath,
+                "DCEStudyTools.WallTypePropertiesAdjust.WallTypePropertiesAdjust",
+                "wall_name_32.png",
+                "wall_name_16.png",
+                "Update the properties \"Matérial\", \"Epaisseur\" of ALL wall types according to their type name, " +
+                    "if their type name is in format of \"MUR-BAdd-EPdd\"");
+
+            // Create "Wall Adjust" split button
+            SplitButtonData sbWallAdjustData = new SplitButtonData("cmdWallAdjust", "Wall Type Adjust");
+            SplitButton sbWallAdjust = wallToolRibbonPanel.AddItem(sbWallAdjustData) as SplitButton;
+            sbWallAdjust.AddPushButton(pbWallTypeNameAdjustData);
+            sbWallAdjust.AddPushButton(pbWallTypePropertiesAdjustData);
 
             ////////////////////////////////////////////////////// Seperate line ////////////////////////////////////////////////////
 

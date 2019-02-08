@@ -304,14 +304,20 @@
     <Compile Include="Utils\ViewTemplate.cs" />
     <Compile Include="ViewDuplicate\StructuralPlanSelectionFilter.cs" />
     <Compile Include="ViewDuplicate\ViewDuplicate.cs" />
+    <Compile Include="WallTypeNameAdjust\WallTypeNameAdjust.cs" />
+    <Compile Include="WallTypePropertiesAdjust\WallTypePropertiesAdjust.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="DCEStudyTools.addin">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
-    <None Include="Resources\wall_name_16.png" />
-    <None Include="Resources\wall_name_32.png" />
+    <Resource Include="Resources\beam_name_16.png" />
+    <Resource Include="Resources\beam_name_32.png" />
+    <Resource Include="Resources\beam_correct_16.png" />
+    <Resource Include="Resources\unjoint_16.png" />
+    <Resource Include="Resources\wall_name_16.png" />
+    <Resource Include="Resources\wall_name_32.png" />
     <Resource Include="Resources\column_32.png" />
     <Resource Include="Resources\column_16.png" />
     <Resource Include="Resources\unjoint_32.png" />

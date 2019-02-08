@@ -103,6 +103,16 @@ namespace DCEStudyTools.Properties {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap beam_correct_16 {
+            get {
+                object obj = ResourceManager.GetObject("beam_correct_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap beam_correct_32 {
             get {
                 object obj = ResourceManager.GetObject("beam_correct_32", resourceCulture);
@@ -136,6 +146,26 @@ namespace DCEStudyTools.Properties {
         internal static System.Drawing.Bitmap beam_dimension_321 {
             get {
                 object obj = ResourceManager.GetObject("beam_dimension_321", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap beam_name_16 {
+            get {
+                object obj = ResourceManager.GetObject("beam_name_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap beam_name_32 {
+            get {
+                object obj = ResourceManager.GetObject("beam_name_32", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -526,6 +556,16 @@ namespace DCEStudyTools.Properties {
         internal static System.Drawing.Bitmap undo_32 {
             get {
                 object obj = ResourceManager.GetObject("undo_32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap unjoint_16 {
+            get {
+                object obj = ResourceManager.GetObject("unjoint_16", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
