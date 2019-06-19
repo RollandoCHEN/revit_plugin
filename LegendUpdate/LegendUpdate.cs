@@ -76,6 +76,7 @@ namespace DCEStudyTools.LegendUpdate
 
             Transaction t = new Transaction(_doc, "Update legend");
             t.Start();
+            // update legend
             foreach (ViewSheet viewSheet in viewSheets)
             {
                 // for the sheet "Cartouche", skip it
@@ -108,8 +109,12 @@ namespace DCEStudyTools.LegendUpdate
                         // delete the old one
                         viewSheet.DeleteViewport(foundationLegendViewport);
 
-                        // add the legend view at the new position
-                        AddLegendToSheetView(foundationLegend, viewPortType_WithoutTitle, viewSheet, _form.SelectedLegendPosition);
+                        // if legend should be shown
+                        if (_form.DoseShowLegend)
+                        {
+                            // add the legend view at the new position
+                            AddLegendToSheetView(foundationLegend, viewPortType_WithoutTitle, viewSheet, _form.SelectedLegendPosition);
+                        }
                     }
                 }
                 else
@@ -129,8 +134,13 @@ namespace DCEStudyTools.LegendUpdate
 
                         viewSheet.DeleteViewport(legendViewport);
                     }
-                    // add the legend view at the new position
-                    AddLegendToSheetView(legendView, viewPortType_WithoutTitle, viewSheet, _form.SelectedLegendPosition);
+
+                    // if legend should be shown
+                    if (_form.DoseShowLegend)
+                    {
+                        // add the legend view at the new position
+                        AddLegendToSheetView(legendView, viewPortType_WithoutTitle, viewSheet, _form.SelectedLegendPosition);
+                    }
                 }
             }
             t.Commit();

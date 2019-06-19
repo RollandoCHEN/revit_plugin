@@ -36,6 +36,7 @@
             this.TopLeft = new System.Windows.Forms.RadioButton();
             this.TopRight = new System.Windows.Forms.RadioButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.ShowLegend = new System.Windows.Forms.CheckBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -46,7 +47,7 @@
             this.cancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.cancelButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cancelButton.Location = new System.Drawing.Point(341, 292);
+            this.cancelButton.Location = new System.Drawing.Point(341, 324);
             this.cancelButton.Margin = new System.Windows.Forms.Padding(2);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(71, 26);
@@ -59,7 +60,7 @@
             // 
             this.okButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.okButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.okButton.Location = new System.Drawing.Point(269, 290);
+            this.okButton.Location = new System.Drawing.Point(269, 322);
             this.okButton.Name = "okButton";
             this.okButton.Size = new System.Drawing.Size(67, 28);
             this.okButton.TabIndex = 10;
@@ -74,7 +75,7 @@
             this.BottomRight.BackColor = System.Drawing.SystemColors.Window;
             this.BottomRight.Checked = true;
             this.BottomRight.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BottomRight.Location = new System.Drawing.Point(286, 213);
+            this.BottomRight.Location = new System.Drawing.Point(286, 245);
             this.BottomRight.Name = "BottomRight";
             this.BottomRight.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.BottomRight.Size = new System.Drawing.Size(81, 20);
@@ -89,7 +90,7 @@
             this.BottomLeft.AutoSize = true;
             this.BottomLeft.BackColor = System.Drawing.SystemColors.Window;
             this.BottomLeft.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BottomLeft.Location = new System.Drawing.Point(29, 225);
+            this.BottomLeft.Location = new System.Drawing.Point(29, 257);
             this.BottomLeft.Name = "BottomLeft";
             this.BottomLeft.Size = new System.Drawing.Size(100, 20);
             this.BottomLeft.TabIndex = 12;
@@ -98,10 +99,11 @@
             // 
             // TopLeft
             // 
+            this.TopLeft.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.TopLeft.AutoSize = true;
             this.TopLeft.BackColor = System.Drawing.SystemColors.Window;
             this.TopLeft.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TopLeft.Location = new System.Drawing.Point(28, 53);
+            this.TopLeft.Location = new System.Drawing.Point(28, 85);
             this.TopLeft.Name = "TopLeft";
             this.TopLeft.Size = new System.Drawing.Size(104, 20);
             this.TopLeft.TabIndex = 12;
@@ -110,11 +112,11 @@
             // 
             // TopRight
             // 
-            this.TopRight.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.TopRight.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.TopRight.AutoSize = true;
             this.TopRight.BackColor = System.Drawing.SystemColors.Window;
             this.TopRight.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TopRight.Location = new System.Drawing.Point(280, 64);
+            this.TopRight.Location = new System.Drawing.Point(280, 96);
             this.TopRight.Name = "TopRight";
             this.TopRight.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.TopRight.Size = new System.Drawing.Size(85, 20);
@@ -127,6 +129,7 @@
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.ShowLegend);
             this.groupBox1.Controls.Add(this.TopLeft);
             this.groupBox1.Controls.Add(this.BottomRight);
             this.groupBox1.Controls.Add(this.TopRight);
@@ -135,15 +138,29 @@
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(399, 272);
+            this.groupBox1.Size = new System.Drawing.Size(399, 304);
             this.groupBox1.TabIndex = 13;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Position de la Légende";
             // 
+            // ShowLegend
+            // 
+            this.ShowLegend.AutoSize = true;
+            this.ShowLegend.Checked = true;
+            this.ShowLegend.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ShowLegend.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ShowLegend.Location = new System.Drawing.Point(28, 30);
+            this.ShowLegend.Name = "ShowLegend";
+            this.ShowLegend.Size = new System.Drawing.Size(138, 20);
+            this.ShowLegend.TabIndex = 14;
+            this.ShowLegend.Text = "Afficher la légende";
+            this.ShowLegend.UseVisualStyleBackColor = true;
+            this.ShowLegend.CheckedChanged += new System.EventHandler(this.ShowLegend_CheckedChanged);
+            // 
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(14, 29);
+            this.pictureBox1.Location = new System.Drawing.Point(11, 59);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(373, 233);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -156,7 +173,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.cancelButton;
-            this.ClientSize = new System.Drawing.Size(427, 334);
+            this.ClientSize = new System.Drawing.Size(427, 366);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.okButton);
@@ -164,6 +181,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "LegendUpdateForm";
             this.Text = "Ajouter/Màj Légendes";
+            this.Load += new System.EventHandler(this.LegendUpdateForm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -181,5 +199,6 @@
         private System.Windows.Forms.RadioButton TopRight;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.CheckBox ShowLegend;
     }
 }

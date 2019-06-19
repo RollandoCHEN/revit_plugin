@@ -12,6 +12,14 @@ namespace DCEStudyTools.LegendUpdate
 {
     public partial class LegendUpdateForm : Form
     {
+        public bool DoseShowLegend
+        {
+            get
+            {
+                return ShowLegend.Checked;
+            }
+        }
+
         public string SelectedLegendPosition
         {
             get
@@ -28,9 +36,9 @@ namespace DCEStudyTools.LegendUpdate
                 {
                     return TopRight.Name;
                 }
-                else if (TopRight.Checked)
+                else if (BottomRight.Checked)
                 {
-                    return TopRight.Name;
+                    return BottomRight.Name;
                 }
                 return String.Empty;
             }
@@ -51,6 +59,22 @@ namespace DCEStudyTools.LegendUpdate
         {
             DialogResult = DialogResult.Cancel;
             Close();
+        }
+
+        private void LegendUpdateForm_Load(object sender, EventArgs e)
+        {
+            TopLeft.Enabled = ShowLegend.Checked;
+            BottomLeft.Enabled = ShowLegend.Checked;
+            TopRight.Enabled = ShowLegend.Checked;
+            BottomRight.Enabled = ShowLegend.Checked;
+        }
+
+        private void ShowLegend_CheckedChanged(object sender, EventArgs e)
+        {
+            TopLeft.Enabled = ShowLegend.Checked;
+            BottomLeft.Enabled = ShowLegend.Checked;
+            TopRight.Enabled = ShowLegend.Checked;
+            BottomRight.Enabled = ShowLegend.Checked;
         }
     }
 }
