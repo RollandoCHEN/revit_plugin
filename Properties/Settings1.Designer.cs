@@ -817,7 +817,7 @@ namespace DCEStudyTools.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Vue en plan")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Plan de structure")]
         public string FAMILY_TYPE_NAME_STR_PLAN {
             get {
                 return ((string)(this["FAMILY_TYPE_NAME_STR_PLAN"]));

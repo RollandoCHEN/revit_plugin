@@ -201,7 +201,7 @@
       <Value Profile="(Default)">Vues</Value>
     </Setting>
     <Setting Name="FAMILY_TYPE_NAME_STR_PLAN" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Vue en plan</Value>
+      <Value Profile="(Default)">Plan de structure</Value>
     </Setting>
     <Setting Name="CATEGORY_NAME_LEVEL" Type="System.String" Scope="User">
       <Value Profile="(Default)">Niveaux</Value>

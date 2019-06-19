@@ -71,14 +71,15 @@ namespace DCEStudyTools.ViewDuplicate
                     Element ele = _doc.GetElement(refId);
                     if (ele.Category == null || !ele.Category.Name.Equals(Properties.Settings.Default.CATEGORY_NAME_VIEW))
                     {
-                        TaskDialog.Show("Revit", "Les élément selectionnés doivent être des VUES EN PLAN");
+                        TaskDialog.Show("Revit", "Les élément selectionnés doivent être des VUES");
                         return Result.Cancelled;
                     }
 
                     View view = ele as View;
-                    if (!view.GetType().Name.Equals(Properties.Settings.Default.FAMILY_TYPE_NAME_STR_PLAN))
+                    ViewFamilyType viewType = _doc.GetElement(view.GetTypeId()) as ViewFamilyType;
+                    if (!viewType.FamilyName.Equals(Properties.Settings.Default.FAMILY_TYPE_NAME_STR_PLAN))
                     {
-                        TaskDialog.Show("Revit", "Les élément selectionnés doivent être des VUES EN PLAN");
+                        TaskDialog.Show("Revit", $"Les élément selectionnés doivent être des VUES EN PLAN");
                         return Result.Cancelled;
                     }
                 }
