@@ -1,6 +1,8 @@
 ﻿using Autodesk.Revit.DB;
+using Autodesk.Revit.DB.ExtensibleStorage;
 using Autodesk.Revit.UI;
 using Autodesk.Revit.UI.Selection;
+using DCEStudyTools.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -86,16 +88,20 @@ namespace DCEStudyTools.ViewDuplicate
 
                 foreach (ElementId refId in refIds)
                 {
-                    View viewToDuplicate = (View)_doc.GetElement(refId);
-                    String levelName = viewToDuplicate.GenLevel.Name;
+                    ViewPlan viewToDuplicate = _doc.GetElement(refId) as ViewPlan;
+                    Level level = viewToDuplicate.GenLevel;
+                    String levelName = level.Name;
                     Transaction t = new Transaction(_doc, "Duplicate view");
                     t.Start();
                     for (int i = 0; i < zoneCount; i++)
                     {
                         ElementId viewId = viewToDuplicate.Duplicate(ViewDuplicateOption.AsDependent);
-                        View duplicatedView = _doc.GetElement(viewId) as View;
+                        ViewPlan duplicatedView = _doc.GetElement(viewId) as ViewPlan;
                         duplicatedView.Name = $"{levelName} - {zoneList[i].Name}";
                         duplicatedView.get_Parameter(BuiltInParameter.VIEWER_VOLUME_OF_INTEREST_CROP).Set(zoneList[i].Id);
+
+                        // Associate level to the new viewplan
+                        AssociateLevelToNewViewPlan(level, duplicatedView);
                     }
                     t.Commit();
                 }
@@ -106,6 +112,32 @@ namespace DCEStudyTools.ViewDuplicate
             {
                 return Result.Cancelled;
             }
+        }
+
+        private void AssociateLevelToNewViewPlan(Level level, ViewPlan view)
+        {
+            SchemaBuilder builder = new SchemaBuilder(Guids.VIEW_PLAN_SHEMA_GUID);
+
+            builder.SetReadAccessLevel(AccessLevel.Public);
+            builder.SetWriteAccessLevel(AccessLevel.Public);
+
+            builder.SetSchemaName("AssociatedLevel");
+
+            builder.SetDocumentation("Associated level");
+
+            // Create field1
+            FieldBuilder fieldBuilder1 = builder.AddSimpleField("Level", typeof(ElementId));
+
+            // Register the schema object
+            Schema schema = builder.Finish();
+
+            Field levelId = schema.GetField("Level");
+
+            Entity ent = new Entity(schema);
+
+            ent.Set(levelId, level.Id);
+
+            view.SetEntity(ent);
         }
     }
 }

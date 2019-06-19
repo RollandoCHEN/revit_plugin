@@ -239,6 +239,9 @@ namespace DCEStudyTools.LevelCreation
                         {
                             viewPlan.ViewTemplateId = foundationTemplate.Id;
                         }
+
+                        // Associate level to the new viewplan
+                        AssociateLevelToNewViewPlan(level, viewPlan);
                     }
                     t.Commit();
                 }
@@ -249,6 +252,32 @@ namespace DCEStudyTools.LevelCreation
                 }
             }
             return viewPlans;
+        }
+
+        private void AssociateLevelToNewViewPlan(Level level, ViewPlan view)
+        {
+            SchemaBuilder builder = new SchemaBuilder(Guids.VIEW_PLAN_SHEMA_GUID);
+
+            builder.SetReadAccessLevel(AccessLevel.Public);
+            builder.SetWriteAccessLevel(AccessLevel.Public);
+
+            builder.SetSchemaName("AssociatedLevel");
+
+            builder.SetDocumentation("Associated level");
+
+            // Create field1
+            FieldBuilder fieldBuilder1 = builder.AddSimpleField("Level", typeof(ElementId));
+
+            // Register the schema object
+            Schema schema = builder.Finish();
+
+            Field levelId = schema.GetField("Level");
+
+            Entity ent = new Entity(schema);
+
+            ent.Set(levelId, level.Id);
+
+            view.SetEntity(ent);
         }
     }
 }

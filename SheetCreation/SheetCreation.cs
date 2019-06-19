@@ -1,5 +1,7 @@
 ﻿using Autodesk.Revit.DB;
+using Autodesk.Revit.DB.ExtensibleStorage;
 using Autodesk.Revit.UI;
+using DCEStudyTools.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,15 +29,23 @@ namespace DCEStudyTools.SheetCreation
             {
                 try
                 {
-                    List<Level> levelsInDoc;
-
-                    levelsInDoc = new FilteredElementCollector(_doc)
+                    // Get list of all levels for structural elements
+                    IList<Level> strLevels =
+                        (from lev in new FilteredElementCollector(_doc)
                         .OfClass(typeof(Level))
+                         where lev.GetEntitySchemaGuids().Count != 0
+                         select lev)
                         .Cast<Level>()
                         .OrderBy(l => l.Elevation)
                         .ToList();
 
-                    CreateNewSheets(_doc, levelsInDoc);
+                    if (strLevels.Count == 0)
+                    {
+                        TaskDialog.Show("Revit", "Configurer les niveaux structuraux avant de lancer cette commande.");
+                        return Result.Cancelled;
+                    }
+
+                    CreateNewSheets(_doc, strLevels);
                 }
                 catch (Exception e)
                 {
@@ -51,7 +61,7 @@ namespace DCEStudyTools.SheetCreation
             }
         }
 
-        private void CreateNewSheets(Document doc, List<Level> levels)
+        private void CreateNewSheets(Document doc, IList<Level> levels)
         {
             // Get the "Cartouche A3" title block 
             FamilySymbol familySymbol =
@@ -107,7 +117,7 @@ namespace DCEStudyTools.SheetCreation
         }
 
         private void CreateSheetsForEachLevel(Document doc,
-            List<Level> levels,
+            IList<Level> levels,
             FamilySymbol familySymbol,
             View legendView,
             View foundationLegend,
@@ -125,24 +135,27 @@ namespace DCEStudyTools.SheetCreation
 
             for (int i = 0; i < levels.Count; i++)
             {
-                if (!levels[i].Name.ToLower().Contains(Properties.Settings.Default.KEYWORD_BOTTOM_LEVEL))
+                Level level = levels[i];
+                if (!level.Name.ToLower().Contains(Properties.Settings.Default.KEYWORD_BOTTOM_LEVEL))
                 {
                     ViewSheet viewSheet = ViewSheet.Create(doc, familySymbol.Id);
                     if (_form.DuplicateNumber == 0)
                     {
                         viewSheet.SheetNumber = $"0{sheetNum}{duplicateNum}";
-                        viewSheet.ViewName = levels[i].Name;
+                        viewSheet.ViewName = level.Name;
                     }
                     else
                     {
                         viewSheet.SheetNumber = $"0{sheetNum}{duplicateNum + 1}";
-                        viewSheet.ViewName = $"{levels[i].Name} -{duplicateNum + 1}";
+                        viewSheet.ViewName = $"{level.Name} -{duplicateNum + 1}";
                     }
 
-                    if (!levels[i].Name.ToLower().Contains(Properties.Settings.Default.KEYWORD_FOUNDATION))
+                    if (!level.Name.ToLower().Contains(Properties.Settings.Default.KEYWORD_FOUNDATION))
                     {
                         SetParameterValuefor(viewSheet, Properties.Settings.Default.PARA_NAME_SHEET_REI, _form.FireResist);
                         AddLegendToSheetView(legendView, viewPortType_WithoutTitle, viewSheet);
+
+                        AssociateLevelToNewSheet(level, viewSheet);
                     }
                     else
                     {
@@ -167,6 +180,8 @@ namespace DCEStudyTools.SheetCreation
                         
                         SetParameterValuefor(viewSheet, Properties.Settings.Default.PARA_NAME_SHEET_TITLE, title);
                         AddLegendToSheetView(foundationLegend, viewPortType_WithoutTitle, viewSheet);
+
+                        AssociateLevelToNewSheet(level, viewSheet);
                     }
 
                     if (null == viewSheet)
@@ -203,6 +218,32 @@ namespace DCEStudyTools.SheetCreation
                     pr.Set(value);
                 }
             }
+        }
+
+        private void AssociateLevelToNewSheet(Level level, ViewSheet sheet)
+        {
+            SchemaBuilder builder = new SchemaBuilder(Guids.SHEET_SHEMA_GUID);
+
+            builder.SetReadAccessLevel(AccessLevel.Public);
+            builder.SetWriteAccessLevel(AccessLevel.Public);
+
+            builder.SetSchemaName("AssociatedLevel");
+
+            builder.SetDocumentation("Associated level");
+
+            // Create field1
+            FieldBuilder fieldBuilder1 = builder.AddSimpleField("Level", typeof(ElementId));
+
+            // Register the schema object
+            Schema schema = builder.Finish();
+
+            Field levelId = schema.GetField("Level");
+
+            Entity ent = new Entity(schema);
+
+            ent.Set(levelId, level.Id);
+
+            sheet.SetEntity(ent);
         }
     }
 }

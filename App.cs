@@ -73,6 +73,18 @@ namespace DCEStudyTools
                     "Duplicate the selected view according to the number of zone de définition")
             ) as PushButton;
 
+            // Create push button for ViewDuplicate
+            PushButton pbViewToSheet = viewToolRibbonPanel.AddItem(
+                CreatePushButtonData(
+                    "cmdViewToSheet",
+                    "Add View" + System.Environment.NewLine + "To Sheet",
+                    thisAssemblyPath,
+                    "DCEStudyTools.ViewToSheet.ViewToSheet",
+                    "view_to_sheet_32.png",
+                    String.Empty,
+                    "Add corresponding views to the sheet")
+            ) as PushButton;
+
             ////////////////////////////////////////////////////// Seperate line ////////////////////////////////////////////////////
 
             // Add sheet tools ribbon panel

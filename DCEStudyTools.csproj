@@ -304,6 +304,7 @@
     <Compile Include="Utils\ViewTemplate.cs" />
     <Compile Include="ViewDuplicate\StructuralPlanSelectionFilter.cs" />
     <Compile Include="ViewDuplicate\ViewDuplicate.cs" />
+    <Compile Include="ViewToSheet\ViewToSheet.cs" />
     <Compile Include="WallTypeNameAdjust\WallTypeNameAdjust.cs" />
     <Compile Include="WallTypePropertiesAdjust\WallTypePropertiesAdjust.cs" />
   </ItemGroup>
@@ -312,6 +313,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
+    <Resource Include="Resources\view_to_sheet_32.png" />
     <Resource Include="Resources\beam_name_16.png" />
     <Resource Include="Resources\beam_name_32.png" />
     <Resource Include="Resources\beam_correct_16.png" />

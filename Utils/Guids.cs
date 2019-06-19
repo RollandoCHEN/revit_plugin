@@ -17,5 +17,9 @@ namespace DCEStudyTools.Utils
         public static readonly Guid POINTLOAD_SHEMA_GUID = new Guid("54f0ab33-4a16-4a85-98a5-01c3813f468d");
 
         public static readonly Guid THREE_D_VIEW_SHEMA_GUID = new Guid("92903f24-a3c1-4cc0-b684-101776933491");
+
+        public static readonly Guid VIEW_PLAN_SHEMA_GUID = new Guid("9087de2e-bab8-4cec-92fa-ef292262049b");
+
+        public static readonly Guid SHEET_SHEMA_GUID = new Guid("97470f7a-72a6-4b85-be9f-c7a5e974fdc9");
     }
 }
