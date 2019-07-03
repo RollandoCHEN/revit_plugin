@@ -14,7 +14,7 @@ namespace DCEStudyTools
             string thisAssemblyPath = Assembly.GetExecutingAssembly().Location;
 
             // Create a custom ribbon tab
-            string tabName = "TakeItEasy";
+            string tabName = "Take It Easy";
             application.CreateRibbonTab(tabName);
 
             // Add level tools ribbon panel
@@ -71,6 +71,18 @@ namespace DCEStudyTools
                     "duplicate_32.png",
                     String.Empty,
                     "Duplicate the selected view according to the number of zone de définition")
+            ) as PushButton;
+
+            // Create push button for 3DViewCreation
+            PushButton pb3DView = viewToolRibbonPanel.AddItem(
+                CreatePushButtonData(
+                    "cmd3DViewCreation",
+                    "Create/Update" + System.Environment.NewLine + "3D Views",
+                    thisAssemblyPath,
+                    "DCEStudyTools.ThreeDViewsCreation.ThreeDViewsCreation",
+                    "3dview_32.png",
+                    String.Empty,
+                    "Create a 3D View for each Level")
             ) as PushButton;
 
             // Create push button for ViewDuplicate
@@ -352,18 +364,6 @@ namespace DCEStudyTools
                    "direction_32.png",
                    String.Empty,
                    "Change Floor Span Direction")
-            ) as PushButton;
-
-            // Create push button for 3DViewCreation
-            PushButton pb3DView = genericToolsRibbonPanel.AddItem(
-                CreatePushButtonData(
-                    "cmd3DViewCreation",
-                    "Create/Update" + System.Environment.NewLine + "3D Views",
-                    thisAssemblyPath,
-                    "DCEStudyTools.ThreeDViewsCreation.ThreeDViewsCreation",
-                    "3dview_32.png",
-                    String.Empty,
-                    "Create a 3D View for each Level")
             ) as PushButton;
 
             // Create push button for FoundationLoad
