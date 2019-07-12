@@ -35,6 +35,7 @@ namespace DCEStudyTools.ViewToSheet
                 .Cast<ViewPlan>()
                 .ToList();
 
+                // If no viewplan has entity, show a message
                 if (viewplans.Count ==0)
                 {
                     TaskDialog.Show("Revit", "Pas de vue liée au niveaux structuraux");
@@ -50,6 +51,7 @@ namespace DCEStudyTools.ViewToSheet
                     .Cast<ViewSheet>()
                     .ToList();
 
+                // If no sheet has entity, show a message
                 if (viewsheets.Count == 0)
                 {
                     TaskDialog.Show("Revit", "Pas de feuille liée au niveaux structuraux");
@@ -65,33 +67,53 @@ namespace DCEStudyTools.ViewToSheet
                      select type)
                      .FirstOrDefault();
 
+                // Count num of views added to all sheets
+                int numOfViews = 0;
+
                 using (Transaction t = new Transaction(_doc, "Add ViewPlans to the corresponding Sheets"))
                 {
                     t.Start();
+                    
                     foreach (ViewSheet sheet in viewsheets)
                     {
                         ElementId sheetLevelId = GetAssociateLevelOfSheet(sheet);
                         foreach (ViewPlan viewplan in viewplans)
                         {
                             ElementId viewplanLevelId = GetAssociateLevelOfViewPlan(viewplan);
+                            // Add viewplan to the sheet
                             if (viewplanLevelId == sheetLevelId)
                             {
-                                Viewport v1 = Viewport.Create(_doc, sheet.Id, viewplan.Id, XYZ.Zero);
-                                BoundingBoxUV sheetOutline = sheet.Outline;
-                                UV titleblockCenter = (sheetOutline.Max + sheetOutline.Min) / 2.0;
-                                XYZ xyzToMove = new XYZ(titleblockCenter.U, titleblockCenter.V, 0);
-                                ElementTransformUtils.MoveElement(_doc, v1.Id, xyzToMove);
-                                v1.ChangeTypeId(viewPortType_WithoutTitle.Id);
+                                // if the viewplan is already on the sheet
+                                bool viewExistsOnSheet = sheet.GetAllViewports().Any(
+                                    viewportId => 
+                                    (_doc.GetElement(viewportId) as Viewport).ViewId == viewplan.Id
+                                );
+
+                                if (!viewExistsOnSheet)
+                                {
+                                    Viewport v1 = Viewport.Create(_doc, sheet.Id, viewplan.Id, XYZ.Zero);
+                                    BoundingBoxUV sheetOutline = sheet.Outline;
+                                    UV titleblockCenter = (sheetOutline.Max + sheetOutline.Min) / 2.0;
+                                    XYZ xyzToMove = new XYZ(titleblockCenter.U, titleblockCenter.V, 0);
+                                    ElementTransformUtils.MoveElement(_doc, v1.Id, xyzToMove);
+                                    v1.ChangeTypeId(viewPortType_WithoutTitle.Id);
+                                    // num +1
+                                    numOfViews++;
+                                }
                             }
                         }
                     }
                     t.Commit();
                 }
 
+                // TODO : show user which view is added to which sheet
+                TaskDialog.Show("Revit", $"{numOfViews} vues en plan sont ajoutées aux toutes les feuilles");
+
                 return Result.Succeeded;
             }
-            catch (Autodesk.Revit.Exceptions.OperationCanceledException)
+            catch (Autodesk.Revit.Exceptions.ArgumentException)
             {
+                TaskDialog.Show("Revit", "Erreur dans le process, la commande va être annulée");
                 return Result.Cancelled;
             }
         }

@@ -128,7 +128,7 @@ namespace DCEStudyTools.LegendUpdate
                      .FirstOrDefault();
 
                     // if the legend view exists, delete it
-                    if (id != null)
+                    if (id != ElementId.InvalidElementId)
                     {
                         Viewport legendViewport = (Viewport)_doc.GetElement(id);
 
