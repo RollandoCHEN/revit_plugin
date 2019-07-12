@@ -14,14 +14,14 @@ namespace DCEStudyTools
             string thisAssemblyPath = Assembly.GetExecutingAssembly().Location;
 
             // Create a custom ribbon tab
-            string tabName = "Take It Easy";
+            string tabName = "Outils APS";
             application.CreateRibbonTab(tabName);
 
-            // Add level tools ribbon panel
-            RibbonPanel levelToolRibbonPanel = application.CreateRibbonPanel(tabName, "Level Tools");
+            // Add "APS" tools ribbon panel
+            RibbonPanel apsToolRibbonPanel = application.CreateRibbonPanel(tabName, "APS avec DWG");
 
             // Create push button for LevelCreation
-            PushButton pbLevelCreation = levelToolRibbonPanel.AddItem(
+            PushButton pbLevelCreation = apsToolRibbonPanel.AddItem(
                 CreatePushButtonData(
                     "cmdLevelCreation",
                     "Create" + System.Environment.NewLine + "Levels",
@@ -32,8 +32,69 @@ namespace DCEStudyTools
                     "Enter Number Of Floors to Create Levels, ViewPlans and Sheets for Each Level")
             ) as PushButton;
 
+            // Create push button for SheetCreation
+            PushButton pbSheetCreation = apsToolRibbonPanel.AddItem(
+                CreatePushButtonData(
+                    "cmdSheetCreation",
+                    "Create" + System.Environment.NewLine + "Sheets",
+                    thisAssemblyPath,
+                    "DCEStudyTools.SheetCreation.SheetCreation",
+                    "sheet_create_32.png",
+                    String.Empty,
+                    "Create Sheets for Each Level")
+            ) as PushButton;
+
+            // Create push button for CADLink
+            PushButton pbAddLink = apsToolRibbonPanel.AddItem(
+                CreatePushButtonData(
+                    "cmdAddLink",
+                    "Add" + System.Environment.NewLine + "CAD Link",
+                    thisAssemblyPath,
+                    "DCEStudyTools.CADLink.CADLink",
+                    "link_32.png",
+                    String.Empty,
+                    "Add CAD links")
+            ) as PushButton;
+
+            // Create push button for UnderlayerSetting
+            PushButtonData pbSetUnderlayer =
+                CreatePushButtonData(
+                    "cmdSetUnderlayer",
+                    "Set Underlayer",
+                    thisAssemblyPath,
+                    "DCEStudyTools.UnderlaySetting.UnderlaySetting",
+                    "underlayer_32.png",
+                    "underlayer_16.png",
+                    "Set underlayer and halftone for all the view plan");
+
+            // Create push button for undoing halftone
+            PushButtonData pbUndoHalftone =
+                CreatePushButtonData(
+                    "cmdUndoHalftone",
+                    "Undo Halftone",
+                    thisAssemblyPath,
+                    "DCEStudyTools.HalftoneUndo.HalftoneUndo",
+                    "undo_32.png",
+                    "undo_16.png",
+                    "Undo halftone for all the view plan");
+
+            apsToolRibbonPanel.AddStackedItems(pbSetUnderlayer, pbUndoHalftone);
+
+            // Create push button for ViewToSheet
+            PushButton pbViewToSheet = apsToolRibbonPanel.AddItem(
+                CreatePushButtonData(
+                    "cmdViewToSheet",
+                    "Add View" + System.Environment.NewLine + "To Sheet",
+                    thisAssemblyPath,
+                    "DCEStudyTools.ViewToSheet.ViewToSheet",
+                    "view_to_sheet_32.png",
+                    String.Empty,
+                    "Add corresponding views to the sheet")
+            ) as PushButton;
+
+            /*
             // Create push button for LevelConfigration
-            PushButton pbLevelConfig = levelToolRibbonPanel.AddItem(
+            PushButton pbLevelConfig = apsToolRibbonPanel.AddItem(
                 CreatePushButtonData(
                     "cmdLevelConfig",
                     "Configurate" + System.Environment.NewLine + "Structural Levels",
@@ -45,7 +106,7 @@ namespace DCEStudyTools
             ) as PushButton;
 
             // Create push button for LevelRenaming
-            PushButton pbLevelRenaming = levelToolRibbonPanel.AddItem(
+            PushButton pbLevelRenaming = apsToolRibbonPanel.AddItem(
                 CreatePushButtonData(
                     "cmdLevelRenaming",
                     "Rename" + System.Environment.NewLine + "Structural Levels",
@@ -85,34 +146,14 @@ namespace DCEStudyTools
                     "Create a 3D View for each Level")
             ) as PushButton;
 
-            // Create push button for ViewDuplicate
-            PushButton pbViewToSheet = viewToolRibbonPanel.AddItem(
-                CreatePushButtonData(
-                    "cmdViewToSheet",
-                    "Add View" + System.Environment.NewLine + "To Sheet",
-                    thisAssemblyPath,
-                    "DCEStudyTools.ViewToSheet.ViewToSheet",
-                    "view_to_sheet_32.png",
-                    String.Empty,
-                    "Add corresponding views to the sheet")
-            ) as PushButton;
+            
 
             ////////////////////////////////////////////////////// Seperate line ////////////////////////////////////////////////////
 
             // Add sheet tools ribbon panel
             RibbonPanel sheetToolRibbonPanel = application.CreateRibbonPanel(tabName, "Sheet Tools");
 
-            // Create push button for SheetCreation
-            PushButton pbSheetCreation = sheetToolRibbonPanel.AddItem(
-                CreatePushButtonData(
-                    "cmdSheetCreation",
-                    "Create" + System.Environment.NewLine + "Sheets",
-                    thisAssemblyPath,
-                    "DCEStudyTools.SheetCreation.SheetCreation",
-                    "sheet_create_32.png",
-                    String.Empty,
-                    "Create Sheets for Each Level")
-            ) as PushButton;
+            
 
             PushButton pbLegendUpdate = sheetToolRibbonPanel.AddItem(
                 CreatePushButtonData(
@@ -459,6 +500,7 @@ namespace DCEStudyTools
             sbBeam.AddPushButton(pbAddWDBeamData);
             sbBeam.AddPushButton(pbEditSectionData);
             sbBeam.AddPushButton(pbCreateBeamData);
+            */
 
         }
 
