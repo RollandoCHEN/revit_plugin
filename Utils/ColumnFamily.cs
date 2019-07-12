@@ -14,7 +14,7 @@ using System.Text.RegularExpressions;
 
 namespace DCEStudyTools.Utils
 {
-    class ColumnFamily
+    public class ColumnFamily
     {
         readonly static string rectColumnPath =
             Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) +
@@ -212,7 +212,7 @@ namespace DCEStudyTools.Utils
             
                 string matSign = RvtMaterial.GetMatSyntaxe(colMat);
 
-                targetColumnTypeName = $"{Default.COLUMN_SYNT}-{matSign}-{colWidth}x{colHeight}";
+                targetColumnTypeName = $"{Default.SYNT_COLUMN}-{matSign}-{colWidth}x{colHeight}";
                 
             }
             else
@@ -221,7 +221,7 @@ namespace DCEStudyTools.Utils
 
                 string matSign = RvtMaterial.GetMatSyntaxe(colMat);
 
-                targetColumnTypeName = $"{Default.COLUMN_SYNT}-{matSign}-D{colDiameter}";
+                targetColumnTypeName = $"{Default.SYNT_COLUMN}-{matSign}-D{colDiameter}";
             }
 
             if (!colSymbol.Name.Equals(targetColumnTypeName))

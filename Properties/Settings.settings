@@ -215,7 +215,7 @@
     <Setting Name="FAMILY_NAME_ROND_COLUMN" Type="System.String" Scope="User">
       <Value Profile="(Default)">POT-BA-ROND</Value>
     </Setting>
-    <Setting Name="COLUMN_SYNT" Type="System.String" Scope="User">
+    <Setting Name="SYNT_COLUMN" Type="System.String" Scope="User">
       <Value Profile="(Default)">POT</Value>
     </Setting>
     <Setting Name="PARA_NAME_DIM_DIAMETER" Type="System.String" Scope="User">
@@ -223,6 +223,12 @@
     </Setting>
     <Setting Name="KEYWORD_ROND_COLUMN_DIM" Type="System.String" Scope="User">
       <Value Profile="(Default)">D</Value>
+    </Setting>
+    <Setting Name="SYNT_WALL" Type="System.String" Scope="User">
+      <Value Profile="(Default)">MUR</Value>
+    </Setting>
+    <Setting Name="FAMILY_NAME_BASIC_WALL" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Mur de base</Value>
     </Setting>
   </Settings>
 </SettingsFile>
