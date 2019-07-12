@@ -302,6 +302,7 @@
     <Compile Include="Utils\PropertyValueSetter.cs" />
     <Compile Include="Utils\SubstringExtensions.cs" />
     <Compile Include="Utils\ViewTemplate.cs" />
+    <Compile Include="Utils\WallFamily.cs" />
     <Compile Include="ViewDuplicate\StructuralPlanSelectionFilter.cs" />
     <Compile Include="ViewDuplicate\ViewDuplicate.cs" />
     <Compile Include="ViewToSheet\ViewToSheet.cs" />

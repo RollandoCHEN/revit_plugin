@@ -49,13 +49,13 @@ namespace DCEStudyTools.Utils
             MatSyntaxe = syntaxeBA;
         }
 
-        public static string GetMatSyntaxe(string beamMat)
+        public static string GetMatSyntaxe(string mat)
         {
-            foreach (RvtMaterial mat in Values)
+            foreach (RvtMaterial rvtMat in Values)
             {
-                if (mat.MatName.Equals(beamMat))
+                if (rvtMat.MatName.Equals(mat))
                 {
-                    return mat.MatSyntaxe;
+                    return rvtMat.MatSyntaxe;
                 }
             }
             return Properties.Settings.Default.MAT_SYNTAXE_OTHER;
