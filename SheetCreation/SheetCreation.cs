@@ -139,6 +139,11 @@ namespace DCEStudyTools.SheetCreation
                 if (!level.Name.ToLower().Contains(Properties.Settings.Default.KEYWORD_BOTTOM_LEVEL))
                 {
                     ViewSheet viewSheet = ViewSheet.Create(doc, familySymbol.Id);
+
+                    // Set "Niveau" Property Value
+                    SetParameterValuefor(viewSheet, Properties.Settings.Default.PARA_NAME_SHEET_LEVEL, level.Name);
+
+                    // Set Sheet Number & Sheet Name
                     if (_form.DuplicateNumber == 0)
                     {
                         viewSheet.SheetNumber = $"0{sheetNum}{duplicateNum}";
@@ -146,20 +151,25 @@ namespace DCEStudyTools.SheetCreation
                     }
                     else
                     {
-                        viewSheet.SheetNumber = $"0{sheetNum}{duplicateNum + 1}";
-                        viewSheet.ViewName = $"{level.Name} -{duplicateNum + 1}";
+                        viewSheet.SheetNumber = $"0{sheetNum}{duplicateNum + 1}"; // TODO to be improved
+                        viewSheet.ViewName = $"{level.Name} -{duplicateNum + 1}"; // TODO to be improved
                     }
 
+                    
                     if (!level.Name.ToLower().Contains(Properties.Settings.Default.KEYWORD_FOUNDATION))
                     {
+                        // Set REI Value
                         SetParameterValuefor(viewSheet, Properties.Settings.Default.PARA_NAME_SHEET_REI, _form.FireResist);
+                        // Add Legend
                         AddLegendToSheetView(legendView, viewPortType_WithoutTitle, viewSheet);
-
+                        // Add Level Entity
                         AssociateLevelToNewSheet(level, viewSheet);
                     }
                     else
                     {
+                        // Set REI Value "NA"
                         SetParameterValuefor(viewSheet, Properties.Settings.Default.PARA_NAME_SHEET_REI, Properties.Settings.Default.PARA_VALUE_SHEET_REI_NA);
+                        // Set Foundation Type Value
                         string title = string.Empty;
                         if (_form.FoundationType.Equals(Properties.Settings.Default.KEYWOARD_FOUNDATION_TYPE_PILE))
                         {
@@ -177,10 +187,11 @@ namespace DCEStudyTools.SheetCreation
                         {
                             title = Properties.Settings.Default.FOUNDATION_TITLE_DEEP_FOOTING;
                         }
-                        
+                        // Set Foundation Page Title
                         SetParameterValuefor(viewSheet, Properties.Settings.Default.PARA_NAME_SHEET_TITLE, title);
+                        // Add Legend
                         AddLegendToSheetView(foundationLegend, viewPortType_WithoutTitle, viewSheet);
-
+                        // Add Level Entity
                         AssociateLevelToNewSheet(level, viewSheet);
                     }
 

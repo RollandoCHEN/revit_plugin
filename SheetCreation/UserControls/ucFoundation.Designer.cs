@@ -47,14 +47,15 @@
             this.foundation.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.foundation.FormattingEnabled = true;
             this.foundation.Items.AddRange(new object[] {
-            Properties.Settings.Default.KEYWOARD_FOUNDATION_TYPE_PILE,
-            Properties.Settings.Default.KEYWOARD_FOUNDATION_TYPE_FOOTING,
-            Properties.Settings.Default.KEYWOARD_FOUNDATION_TYPE_RAFT,
-            Properties.Settings.Default.KEYWOARD_FOUNDATION_TYPE_DEEP_FOOTING});
+            "Pieux",
+            "Semelles",
+            "Radier",
+            "Puits"});
             this.foundation.Location = new System.Drawing.Point(136, 2);
             this.foundation.Name = "foundation";
             this.foundation.Size = new System.Drawing.Size(110, 25);
             this.foundation.TabIndex = 7;
+            this.foundation.Text = "Pieux";
             // 
             // ucFoundation
             // 

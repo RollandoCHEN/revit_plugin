@@ -224,5 +224,8 @@
     <Setting Name="KEYWORD_ROND_COLUMN_DIM" Type="System.String" Scope="User">
       <Value Profile="(Default)">D</Value>
     </Setting>
+    <Setting Name="PARA_NAME_SHEET_LEVEL" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Niveau</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

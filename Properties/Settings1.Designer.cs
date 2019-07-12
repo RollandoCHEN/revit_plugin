@@ -910,5 +910,17 @@ namespace DCEStudyTools.Properties {
                 this["KEYWORD_ROND_COLUMN_DIM"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Niveau")]
+        public string PARA_NAME_SHEET_LEVEL {
+            get {
+                return ((string)(this["PARA_NAME_SHEET_LEVEL"]));
+            }
+            set {
+                this["PARA_NAME_SHEET_LEVEL"] = value;
+            }
+        }
     }
 }
