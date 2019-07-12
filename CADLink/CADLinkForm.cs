@@ -14,6 +14,8 @@ namespace DCEStudyTools.CADLink
 
         private bool _folderIsSelected = false;
 
+        public ImportUnit impUnit;
+
         public DataTable DataTable
         {
             get
@@ -28,6 +30,31 @@ namespace DCEStudyTools.CADLink
             {
                 return dataGridView;
             }
+        }
+
+        // TODO: to be enhanced
+        public ImportUnit Unit
+        {
+            get
+            {
+                switch (unit.Text)
+                {
+                    case "Mètre":
+                        impUnit = ImportUnit.Meter;
+                        break;
+                    case "Décimètre":
+                        impUnit = ImportUnit.Decimeter;
+                        break;
+                    case "Centimètre":
+                        impUnit = ImportUnit.Centimeter;
+                        break;
+                    case "Milimètre":
+                        impUnit = ImportUnit.Millimeter;
+                        break;
+                }
+                return impUnit;
+            }
+
         }
 
         public CADLinkForm(Dictionary<string, ViewPlan> viewDic)
@@ -98,6 +125,13 @@ namespace DCEStudyTools.CADLink
                 }
             }
         }
-        
+
+        // TODO: to be enhanced
+        private void CADLinkForm_Load(object sender, EventArgs e)
+        {
+            unit.Items.AddRange(new String[] {
+                "Mètre","Décimètre","Centimètre","Milimètre"
+            });
+        }
     }
 }

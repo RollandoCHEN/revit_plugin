@@ -64,7 +64,7 @@ namespace DCEStudyTools.CADLink
                         Placement = ImportPlacement.Origin,
                         AutoCorrectAlmostVHLines = true,
                         ThisViewOnly = false,
-                        Unit = ImportUnit.Meter,
+                        Unit = form.Unit,
                     };
                     
                     ElementId linkId = ElementId.InvalidElementId;
