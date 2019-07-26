@@ -3,8 +3,6 @@ using Autodesk.Revit.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DCEStudyTools.UnderlaySetting
 {
@@ -38,6 +36,7 @@ namespace DCEStudyTools.UnderlaySetting
                     return Result.Cancelled;
                 }
 
+                // Get list of all CAD files
                 IList<ImportInstance> cadFileLinksList =
                     new FilteredElementCollector(_doc)
                     .OfClass(typeof(ImportInstance))
@@ -50,6 +49,7 @@ namespace DCEStudyTools.UnderlaySetting
                     return Result.Cancelled;
                 }
 
+                // Get list of all views
                 IList<ViewPlan> viewPlanList =
                             (from ViewPlan view in new FilteredElementCollector(_doc)
                             .OfClass(typeof(ViewPlan))
@@ -62,6 +62,18 @@ namespace DCEStudyTools.UnderlaySetting
                 {
                     TaskDialog.Show("Revit", "No view plan is found in the document.");
                     return Result.Cancelled;
+                }
+
+                // Set offset to -0.1m for each CAD file
+                foreach (ImportInstance cad in cadFileLinksList)
+                {
+                    using (Transaction tx = new Transaction(_doc, "Set offset for each CAD file"))
+                    {
+                        tx.Start();
+                        cad.get_Parameter(BuiltInParameter.IMPORT_BASE_LEVEL_OFFSET).Set(
+                        UnitUtils.Convert(-1, DisplayUnitType.DUT_DECIMETERS, DisplayUnitType.DUT_DECIMAL_FEET));
+                        tx.Commit();
+                    }
                 }
 
                 foreach (ViewPlan view in viewPlanList)
@@ -81,24 +93,8 @@ namespace DCEStudyTools.UnderlaySetting
                         }
                         tx.Commit();
                     }
-
-                    foreach (ImportInstance cadFile in cadFileLinksList)
-                    {
-                        if (supLvl != null && cadFile.LevelId == supLvl.Id)
-                        {
-                            OverrideGraphicSettings ogs = view.GetElementOverrides(cadFile.Id);
-                            //Set Halftone Element
-                            using (Transaction tx = new Transaction(_doc))
-                            {
-                                tx.Start("Halftone");
-
-                                ogs.SetHalftone(true);
-                                view.SetElementOverrides(cadFile.Id, ogs);
-                                tx.Commit();
-                            }
-                        }
-                    }
                 }
+                    
                 return Result.Succeeded;
             }
             catch (Exception e)

@@ -265,6 +265,30 @@ namespace DCEStudyTools
             // Add CAD link tools ribbon panel
             RibbonPanel cadLinkToolRibbonPanel = application.CreateRibbonPanel(tabName, "CAD Link Tools");
 
+            // Create push button for setting underlayer
+            PushButtonData pbSetUnderlayer = 
+                CreatePushButtonData(
+                    "cmdSetUnderlayer",
+                    "Set Underlayer",
+                    thisAssemblyPath,
+                    "DCEStudyTools.UnderlaySetting.UnderlaySetting",
+                    "underlayer_32.png",
+                    "underlayer_16.png",
+                    "Set underlayer and halftone for all the view plan");
+
+            // Create push button for underlayer undo
+            PushButtonData pbUndoUnderlayer =
+                CreatePushButtonData(
+                    "cmdUndoUnderlayer",
+                    "Undo Underlayer",
+                    thisAssemblyPath,
+                    "DCEStudyTools.UnderlayUndo.UnderlayUndo",
+                    "undo_32.png",
+                    "undo_16.png",
+                    "Undo underlayer for all the view plan");
+
+            cadLinkToolRibbonPanel.AddStackedItems(pbSetUnderlayer, pbUndoUnderlayer);
+
             // Create push button for CADLink
             PushButton pbAddLink = cadLinkToolRibbonPanel.AddItem(
                 CreatePushButtonData(
@@ -277,16 +301,16 @@ namespace DCEStudyTools
                     "Add CAD links")
             ) as PushButton;
 
-            // Create push button for UnderlayerSetting
-            PushButtonData pbSetUnderlayer = 
+            // Create push button for setting halftone
+            PushButtonData pbSettingHalftone =
                 CreatePushButtonData(
-                    "cmdSetUnderlayer",
-                    "Set Underlayer",
+                    "cmdSetHalftone",
+                    "Set Halftone",
                     thisAssemblyPath,
-                    "DCEStudyTools.UnderlaySetting.UnderlaySetting",
-                    "underlayer_32.png",
-                    "underlayer_16.png",
-                    "Set underlayer and halftone for all the view plan");
+                    "DCEStudyTools.HalftoneSetting.HalftoneSetting",
+                    "undo_32.png",
+                    "undo_16.png",
+                    "Set halftone for all the view plan");
 
             // Create push button for undoing halftone
             PushButtonData pbUndoHalftone = 
@@ -299,7 +323,7 @@ namespace DCEStudyTools
                     "undo_16.png",
                     "Undo halftone for all the view plan");
 
-            cadLinkToolRibbonPanel.AddStackedItems(pbSetUnderlayer, pbUndoHalftone);
+            cadLinkToolRibbonPanel.AddStackedItems(pbSettingHalftone, pbUndoHalftone);
 
             ////////////////////////////////////////////////////// Seperate line ////////////////////////////////////////////////////
 

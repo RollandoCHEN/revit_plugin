@@ -6,23 +6,37 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DCEStudyTools.HalftoneUndo
+namespace DCEStudyTools.HalftoneSetting
 {
     [Autodesk.Revit.Attributes.Transaction(Autodesk.Revit.Attributes.TransactionMode.Manual)]
-    class HalftoneUndo : IExternalCommand
+    class HalftoneSetting : IExternalCommand
     {
         private UIApplication _uiapp;
         private UIDocument _uidoc;
         private Document _doc;
-
         public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
         {
             _uiapp = commandData.Application;
             _uidoc = _uiapp.ActiveUIDocument;
             _doc = _uidoc.Document;
-
             try
             {
+                // Get list of all structural levels
+                IList<Level> strLevels =
+                    (from lev in new FilteredElementCollector(_doc)
+                    .OfClass(typeof(Level))
+                     where lev.GetEntitySchemaGuids().Count != 0
+                     select lev)
+                    .Cast<Level>()
+                    .OrderBy(l => l.Elevation)
+                    .ToList();
+
+                if (strLevels.Count == 0)
+                {
+                    TaskDialog.Show("Revit", "Configurer les niveaux structuraux avant de lancer cette commande.");
+                    return Result.Cancelled;
+                }
+                
                 // Get list of all CAD files
                 IList<ImportInstance> cadFileLinksList =
                     new FilteredElementCollector(_doc)
@@ -53,22 +67,27 @@ namespace DCEStudyTools.HalftoneUndo
 
                 foreach (ViewPlan view in viewPlanList) // Loop through each view
                 {
+                    Level viewLvl = view.GenLevel;
+                    Level supLvl = strLevels.Where(lvl => lvl.Elevation > viewLvl.Elevation).OrderBy(l => l.Elevation).FirstOrDefault();
+
                     foreach (ImportInstance cadFile in cadFileLinksList)    // On each view, loop through each CAD file
                     {
-                        OverrideGraphicSettings ogs = view.GetElementOverrides(cadFile.Id);
-                        //Set Halftone Element
-                        using (Transaction tx = new Transaction(_doc))
+                        if (supLvl != null && cadFile.LevelId == supLvl.Id) // super level exists and CAD file is on super level
                         {
-                            tx.Start("Undo Halftone");
-                            ogs.SetHalftone(false);
-                            view.SetElementOverrides(cadFile.Id, ogs);
-                            tx.Commit();
+                            OverrideGraphicSettings ogs = view.GetElementOverrides(cadFile.Id);
+                            //Set Halftone Element
+                            using (Transaction tx = new Transaction(_doc))
+                            {
+                                tx.Start("Halftone");
+                                ogs.SetHalftone(true);
+                                view.SetElementOverrides(cadFile.Id, ogs);
+                                tx.Commit();
+                            }
                         }
-                        
                     }
                 }
-                return Result.Succeeded;
 
+                return Result.Succeeded;
             }
             catch (Exception e)
             {
