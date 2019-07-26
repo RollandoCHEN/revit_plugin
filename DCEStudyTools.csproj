@@ -316,6 +316,8 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
+    <Resource Include="Resources\halftone_16.png" />
+    <Resource Include="Resources\halftone_32.png" />
     <Resource Include="Resources\levels_32.png" />
     <Resource Include="Resources\view_to_sheet_32.png" />
     <Resource Include="Resources\beam_name_16.png" />

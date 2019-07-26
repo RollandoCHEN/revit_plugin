@@ -274,7 +274,7 @@ namespace DCEStudyTools
                     "DCEStudyTools.UnderlaySetting.UnderlaySetting",
                     "underlayer_32.png",
                     "underlayer_16.png",
-                    "Set underlayer and halftone for all the view plan");
+                    "Set underlayer and halftone for all the view plans");
 
             // Create push button for underlayer undo
             PushButtonData pbUndoUnderlayer =
@@ -285,7 +285,7 @@ namespace DCEStudyTools
                     "DCEStudyTools.UnderlayUndo.UnderlayUndo",
                     "undo_32.png",
                     "undo_16.png",
-                    "Undo underlayer for all the view plan");
+                    "Undo underlayer for all the view plans");
 
             cadLinkToolRibbonPanel.AddStackedItems(pbSetUnderlayer, pbUndoUnderlayer);
 
@@ -308,9 +308,9 @@ namespace DCEStudyTools
                     "Set Halftone",
                     thisAssemblyPath,
                     "DCEStudyTools.HalftoneSetting.HalftoneSetting",
-                    "undo_32.png",
-                    "undo_16.png",
-                    "Set halftone for all the view plan");
+                    "Halftone_32.png",
+                    "Halftone_16.png",
+                    "Set halftone for all the view plans");
 
             // Create push button for undoing halftone
             PushButtonData pbUndoHalftone = 
@@ -321,7 +321,7 @@ namespace DCEStudyTools
                     "DCEStudyTools.HalftoneUndo.HalftoneUndo",
                     "undo_32.png",
                     "undo_16.png",
-                    "Undo halftone for all the view plan");
+                    "Undo halftone for all the view plans");
 
             cadLinkToolRibbonPanel.AddStackedItems(pbSettingHalftone, pbUndoHalftone);
 
