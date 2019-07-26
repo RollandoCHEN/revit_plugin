@@ -91,14 +91,16 @@ namespace DCEStudyTools.ViewToSheet
 
                                 if (!viewExistsOnSheet)
                                 {
-                                    Viewport v1 = Viewport.Create(_doc, sheet.Id, viewplan.Id, XYZ.Zero);
                                     BoundingBoxUV sheetOutline = sheet.Outline;
                                     UV titleblockCenter = (sheetOutline.Max + sheetOutline.Min) / 2.0;
                                     XYZ xyzToMove = new XYZ(titleblockCenter.U, titleblockCenter.V, 0);
-                                    ElementTransformUtils.MoveElement(_doc, v1.Id, xyzToMove);
-                                    v1.ChangeTypeId(viewPortType_WithoutTitle.Id);
-                                    // num +1
-                                    numOfViews++;
+                                    Viewport v1 = Viewport.Create(_doc, sheet.Id, viewplan.Id, xyzToMove);
+                                    if (v1 != null)
+                                    {
+                                        v1.ChangeTypeId(viewPortType_WithoutTitle.Id);
+                                        // num +1
+                                        numOfViews++;
+                                    }
                                 }
                             }
                         }
