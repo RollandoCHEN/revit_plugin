@@ -83,7 +83,7 @@ namespace DCEStudyTools.CADLink
                             {
                                 tran.Start();
                                 _doc.Link(filePath, opt, view, out linkId);
-                                ImportInstance cad = _doc.GetElement(linkId) as ImportInstance;
+                                tran.Commit();
                             }
                         }
                     }
