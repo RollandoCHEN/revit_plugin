@@ -878,12 +878,12 @@ namespace DCEStudyTools.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("POT")]
-        public string COLUMN_SYNT {
+        public string SYNT_COLUMN {
             get {
-                return ((string)(this["COLUMN_SYNT"]));
+                return ((string)(this["SYNT_COLUMN"]));
             }
             set {
-                this["COLUMN_SYNT"] = value;
+                this["SYNT_COLUMN"] = value;
             }
         }
         
@@ -908,6 +908,30 @@ namespace DCEStudyTools.Properties {
             }
             set {
                 this["KEYWORD_ROND_COLUMN_DIM"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("MUR")]
+        public string SYNT_WALL {
+            get {
+                return ((string)(this["SYNT_WALL"]));
+            }
+            set {
+                this["SYNT_WALL"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Mur de base")]
+        public string FAMILY_NAME_BASIC_WALL {
+            get {
+                return ((string)(this["FAMILY_NAME_BASIC_WALL"]));
+            }
+            set {
+                this["FAMILY_NAME_BASIC_WALL"] = value;
             }
         }
         

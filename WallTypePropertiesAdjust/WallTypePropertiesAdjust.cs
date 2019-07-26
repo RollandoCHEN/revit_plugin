@@ -1,5 +1,6 @@
 ﻿using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
+using DCEStudyTools.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,8 +24,8 @@ namespace DCEStudyTools.WallTypePropertiesAdjust
 
             try
             {
-                // ColumnFamily cf = new ColumnFamily(_doc);
-                // cf.AdjustWholeColumnFamilyProperties();
+                WallFamily cf = new WallFamily(_doc);
+                cf.AdjustWholeWallFamilyProperties();
                 return Result.Succeeded;
             }
             catch (Autodesk.Revit.Exceptions.OperationCanceledException)
