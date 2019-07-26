@@ -233,5 +233,11 @@
     <Setting Name="PARA_NAME_SHEET_LEVEL" Type="System.String" Scope="User">
       <Value Profile="(Default)">Niveau</Value>
     </Setting>
+    <Setting Name="CATEGORY_NAME_WALL" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Murs</Value>
+    </Setting>
+    <Setting Name="CATEGORY_NAME_COLUMN" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Poteaux porteurs</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

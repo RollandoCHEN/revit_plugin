@@ -94,7 +94,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="RefLevelChange\LevelSelectionFilter.cs" />
+    <Compile Include="RefLevelChange\RefLevelChange.cs" />
+    <Compile Include="RefLevelChange\StructElementsSelectionFilter.cs" />
     <Compile Include="Test\LevelSelectionFilter.cs" />
+    <Compile Include="Test\StructElementsSelectionFilter.cs" />
     <Compile Include="Test\Test.cs" />
     <Compile Include="BeamTypeCorrect\BeamTypeCorrectForm.cs">
       <SubType>Form</SubType>

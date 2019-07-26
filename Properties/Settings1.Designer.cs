@@ -946,5 +946,29 @@ namespace DCEStudyTools.Properties {
                 this["PARA_NAME_SHEET_LEVEL"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Murs")]
+        public string CATEGORY_NAME_WALL {
+            get {
+                return ((string)(this["CATEGORY_NAME_WALL"]));
+            }
+            set {
+                this["CATEGORY_NAME_WALL"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Poteaux porteurs")]
+        public string CATEGORY_NAME_COLUMN {
+            get {
+                return ((string)(this["CATEGORY_NAME_COLUMN"]));
+            }
+            set {
+                this["CATEGORY_NAME_COLUMN"] = value;
+            }
+        }
     }
 }
