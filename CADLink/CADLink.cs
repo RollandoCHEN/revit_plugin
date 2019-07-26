@@ -7,6 +7,9 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
+using static DCEStudyTools.Utils.PropertyValueSetter;
+using static DCEStudyTools.Properties.Settings;
+
 namespace DCEStudyTools.CADLink
 {
     [Autodesk.Revit.Attributes.Transaction(Autodesk.Revit.Attributes.TransactionMode.Manual)]
@@ -43,7 +46,7 @@ namespace DCEStudyTools.CADLink
                 foreach (ViewPlan vp in viewPlanList)
                 {
                     // filter structural view plan
-                    Regex regex = new Regex(@"r\+\d|rdc|ss\d|ss\-\d");
+                    Regex regex = new Regex(@"r\+\d+|rdc|ss\d|ss\-\d");
                     Match match = regex.Match(vp.Name.ToLower());
                     // TODO : to be improved
                     if (match.Success && vp.Name.Contains("PH"))

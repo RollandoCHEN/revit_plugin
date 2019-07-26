@@ -86,6 +86,7 @@
     </Compile>
     <Compile Include="Configuration\LevelConfiguration.cs" />
     <Compile Include="BeamTypeCorrect\ChangeBeamFamilyTypeEvent.cs" />
+    <Compile Include="HalftoneSetting\HalftoneSetting.cs" />
     <Compile Include="HalftoneUndo\HalftoneUndo.cs" />
     <Compile Include="LevelRenaming\LevelRenaming.cs" />
     <Compile Include="LevelRenaming\LevelSelectionFilter.cs" />
@@ -299,6 +300,7 @@
     </Compile>
     <Compile Include="ThreeDViewsCreation\ThreeDViewsCreation.cs" />
     <Compile Include="UnderlaySetting\UnderlaySetting.cs" />
+    <Compile Include="UnderlayUndo\UnderlayUndo.cs" />
     <Compile Include="Utils\BeamFamily.cs" />
     <Compile Include="Utils\ColumnFamily.cs" />
     <Compile Include="Utils\Guids.cs" />
@@ -318,6 +320,8 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
+    <Resource Include="Resources\halftone_16.png" />
+    <Resource Include="Resources\halftone_32.png" />
     <Resource Include="Resources\levels_32.png" />
     <Resource Include="Resources\view_to_sheet_32.png" />
     <Resource Include="Resources\beam_name_16.png" />

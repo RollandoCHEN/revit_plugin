@@ -970,5 +970,17 @@ namespace DCEStudyTools.Properties {
                 this["CATEGORY_NAME_COLUMN"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Niveau Ref")]
+        public string LEVEL_NAME_REF {
+            get {
+                return ((string)(this["LEVEL_NAME_REF"]));
+            }
+            set {
+                this["LEVEL_NAME_REF"] = value;
+            }
+        }
     }
 }
