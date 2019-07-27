@@ -72,6 +72,25 @@ namespace DCEStudyTools.LevelCreation
                             t.Commit();
                         }
                     }
+
+                    // Add linear dimension to levels
+                    Line line = Line.CreateBound(new XYZ(0,0,0), new XYZ(0,0,20));
+                    ReferenceArray refArray = new ReferenceArray();
+                    foreach (Level level in newLevels)
+                    {
+                        refArray.Append(level.GetPlaneReference());
+                    }
+
+                    using (Transaction t = new Transaction(_doc, "Create dimension"))
+                    {
+                        t.Start();
+                        Dimension levelDimension = _doc.Create.NewDimension(_doc.ActiveView, line, refArray);
+                        foreach (DimensionSegment ds in levelDimension.Segments)
+                        {
+                            ds.IsLocked = true;
+                        }
+                        t.Commit();
+                    }
                 }
                 return Result.Succeeded;
             }
