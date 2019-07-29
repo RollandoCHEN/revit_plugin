@@ -2,13 +2,11 @@
 using Autodesk.Revit.UI;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
-using static DCEStudyTools.Utils.PropertyValueSetter;
-using static DCEStudyTools.Properties.Settings;
+using static DCEStudyTools.Utils.RvtElementGetter;
 
 namespace DCEStudyTools.CADLink
 {
@@ -28,19 +26,8 @@ namespace DCEStudyTools.CADLink
             try
             {
                 // Get list of all structural view plans
-                IList<ViewPlan> viewPlanList =
-                            (from ViewPlan view in new FilteredElementCollector(_doc)
-                            .OfClass(typeof(ViewPlan))
-                             where view.ViewType == ViewType.CeilingPlan && !view.IsTemplate
-                             select view)
-                            .Cast<ViewPlan>()
-                            .ToList();
-
-                if (viewPlanList.Count == 0)
-                {
-                    TaskDialog.Show("Revit", "No view plan is found in the document.");
-                    return Result.Cancelled;
-                }
+                IList<ViewPlan> viewPlanList = GetAllViewPlans(_doc);
+                if (viewPlanList.Count == 0){ return Result.Cancelled; }
 
                 Dictionary<string, ViewPlan> viewDic = new Dictionary<string, ViewPlan>();
                 foreach (ViewPlan vp in viewPlanList)

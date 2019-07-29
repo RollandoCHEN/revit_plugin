@@ -1,9 +1,10 @@
 ﻿using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
 using Autodesk.Revit.UI.Selection;
-using System;
 using System.Collections.Generic;
 using System.Linq;
+
+using static DCEStudyTools.Utils.RvtElementGetter;
 
 namespace DCEStudyTools.LevelRenaming
 {
@@ -19,21 +20,9 @@ namespace DCEStudyTools.LevelRenaming
             _uiapp = commandData.Application;
             _uidoc = _uiapp.ActiveUIDocument;
             _doc = _uidoc.Document;
-            
-            IList<Level> strLevels =
-                (from lev in new FilteredElementCollector(_doc)
-                .OfClass(typeof(Level))
-                where lev.GetEntitySchemaGuids().Count != 0
-                select lev)
-                .Cast<Level>()
-                .OrderBy(l => l.Elevation)
-                .ToList();
 
-            if (strLevels.Count == 0)
-            {
-                TaskDialog.Show("Revit", "Configurer les niveaux structuraux avant de lancer cette commande.");
-                return Result.Cancelled;
-            }
+            IList<Level> strLevels = GetAllStructLevels(_doc);
+            if (strLevels.Count == 0){ return Result.Cancelled; }
 
             Reference refId;
             try

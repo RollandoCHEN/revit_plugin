@@ -6,8 +6,8 @@ using DCEStudyTools.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+using static DCEStudyTools.Utils.RvtElementGetter;
 
 namespace DCEStudyTools.ViewDuplicate
 {
@@ -26,35 +26,13 @@ namespace DCEStudyTools.ViewDuplicate
 
             try
             {
-                // TODO : Extract GetAllStructuralLevels the methode
                 // Get list of all structural levels
-                IList<Level> strLevels =
-                    (from lev in new FilteredElementCollector(_doc)
-                    .OfClass(typeof(Level))
-                     where lev.GetEntitySchemaGuids().Count != 0
-                     select lev)
-                    .Cast<Level>()
-                    .OrderBy(l => l.Elevation)
-                    .ToList();
-
-                if (strLevels.Count == 0)
-                {
-                    TaskDialog.Show("Revit", "Configurer les niveaux structuraux avant de lancer cette commande.");
-                    return Result.Cancelled;
-                }
+                IList<Level> strLevels = GetAllStructLevels(_doc);
+                if (strLevels.Count == 0){ return Result.Cancelled; }
 
                 // Get list of all zone de définition
-                List<Element> zoneList =
-                    new FilteredElementCollector(_doc)
-                    .OfCategory(BuiltInCategory.OST_VolumeOfInterest)
-                     .Cast<Element>()
-                     .ToList();
-
-                if (zoneList.Count == 0)
-                {
-                    TaskDialog.Show("Revit", "Aucune zone de définition dans le projet");
-                    return Result.Cancelled;
-                }
+                IList<Element> zoneList = GetAllBuildingZones(_doc);
+                if (zoneList.Count == 0){ return Result.Cancelled; }
 
                 int zoneCount = zoneList.Count;  // Num of duplicata
 

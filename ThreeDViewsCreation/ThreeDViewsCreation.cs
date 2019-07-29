@@ -4,9 +4,10 @@ using System.Linq;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
 using System.Collections.ObjectModel;
-using System.Windows.Forms;
 using DCEStudyTools.Utils;
 using Autodesk.Revit.DB.ExtensibleStorage;
+
+using static DCEStudyTools.Utils.RvtElementGetter;
 
 namespace DCEStudyTools.ThreeDViewsCreation
 {
@@ -29,20 +30,8 @@ namespace DCEStudyTools.ThreeDViewsCreation
             _doc = _uidoc.Document;
 
             // Get list of all levels for structural elements
-            IList<Level> strLevels =
-                (from lev in new FilteredElementCollector(_doc)
-                .OfClass(typeof(Level))
-                where lev.GetEntitySchemaGuids().Count != 0
-                select lev)
-                .Cast<Level>()
-                .OrderBy(l => l.Elevation)
-                .ToList();
-
-            if (strLevels.Count == 0)
-            {
-                TaskDialog.Show("Revit", "Configurer les niveaux structuraux avant de lancer cette commande.");
-                return Result.Cancelled;
-            }
+            IList<Level> strLevels = GetAllStructLevels(_doc);
+            if (strLevels.Count == 0) { return Result.Cancelled; }
 
             // Get a ViewFamilyType for a 3D view
             ViewFamilyType viewFamilyType =

@@ -6,6 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
+using static DCEStudyTools.Utils.RvtElementGetter;
+
 namespace DCEStudyTools.SheetCreation
 {
     [Autodesk.Revit.Attributes.Transaction(Autodesk.Revit.Attributes.TransactionMode.Manual)]
@@ -30,20 +32,8 @@ namespace DCEStudyTools.SheetCreation
                 try
                 {
                     // Get list of all levels for structural elements
-                    IList<Level> strLevels =
-                        (from lev in new FilteredElementCollector(_doc)
-                        .OfClass(typeof(Level))
-                         where lev.GetEntitySchemaGuids().Count != 0
-                         select lev)
-                        .Cast<Level>()
-                        .OrderBy(l => l.Elevation)
-                        .ToList();
-
-                    if (strLevels.Count == 0)
-                    {
-                        TaskDialog.Show("Revit", "Configurer les niveaux structuraux avant de lancer cette commande.");
-                        return Result.Cancelled;
-                    }
+                    IList<Level> strLevels = GetAllStructLevels(_doc);
+                    if (strLevels.Count == 0){ return Result.Cancelled; }
 
                     CreateNewSheets(_doc, strLevels);
                 }

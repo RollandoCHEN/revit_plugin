@@ -2,7 +2,8 @@
 using Autodesk.Revit.UI;
 using System;
 using System.Collections.Generic;
-using System.Linq;
+
+using static DCEStudyTools.Utils.RvtElementGetter;
 
 namespace DCEStudyTools.UnderlayUndo
 {
@@ -20,44 +21,17 @@ namespace DCEStudyTools.UnderlayUndo
             _doc = _uidoc.Document;
             try
             {
-                // Get list of all views
-                IList<ViewPlan> viewPlanList =
-                            (from ViewPlan view in new FilteredElementCollector(_doc)
-                            .OfClass(typeof(ViewPlan))
-                             where view.ViewType == ViewType.CeilingPlan && !view.IsTemplate
-                             select view)
-                            .Cast<ViewPlan>()
-                            .ToList();
-
-                if (viewPlanList.Count == 0)
-                {
-                    TaskDialog.Show("Revit", "No view plan is found in the document.");
-                    return Result.Cancelled;
-                }
+                // Get list of all structural levels
+                IList<Level> strLevels = GetAllStructLevels(_doc);
+                if (strLevels.Count == 0) { return Result.Cancelled; }
 
                 // Get list of all CAD files
-                IList<ImportInstance> cadFileLinksList =
-                    new FilteredElementCollector(_doc)
-                    .OfClass(typeof(ImportInstance))
-                    .Cast<ImportInstance>()
-                    .ToList();
+                IList<ImportInstance> cadFileLinksList = GetAllCADFiles(_doc);
+                if (cadFileLinksList.Count == 0) { return Result.Cancelled; }
 
-                if (cadFileLinksList.Count == 0)
-                {
-                    TaskDialog.Show("Revit", "No dwg file is found in the document.");
-                    return Result.Cancelled;
-                }
-
-                // Set offset to 0 for each CAD file
-                foreach (ImportInstance cad in cadFileLinksList)
-                {
-                    using (Transaction tx = new Transaction(_doc, "Set offset for each CAD file"))
-                    {
-                        tx.Start();
-                        cad.get_Parameter(BuiltInParameter.IMPORT_BASE_LEVEL_OFFSET).Set(0);
-                        tx.Commit();
-                    }
-                }
+                // Get list of all views
+                IList<ViewPlan> viewPlanList = GetAllViewPlans(_doc);
+                if (viewPlanList.Count == 0) { return Result.Cancelled; }
 
                 foreach (ViewPlan view in viewPlanList)
                 {

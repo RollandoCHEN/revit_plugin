@@ -80,7 +80,7 @@ namespace DCEStudyTools.Utils
         const StructuralType STBEAM
           = StructuralType.Beam;
 
-        private List<FamilySymbol> _beamTypesList = new List<FamilySymbol>();
+        private IList<FamilySymbol> _beamTypesList = new List<FamilySymbol>();
         private Family _family;
         private Document _doc;
 
@@ -91,7 +91,7 @@ namespace DCEStudyTools.Utils
                 return _family;
             }
         }
-        public List<FamilySymbol> BeamTypesList
+        public IList<FamilySymbol> BeamTypesList
         {
             get
             {
@@ -132,7 +132,7 @@ namespace DCEStudyTools.Utils
             }
 
             // Retrieve all the Beam types of the family "POU-BA"
-            List<FamilySymbol> beamTypesList =
+            IList<FamilySymbol> beamTypesList =
                     (from beam in new FilteredElementCollector(_doc)
                      .OfClass(typeof(FamilySymbol))
                      .OfCategory(BuiltInCategory.OST_StructuralFraming)

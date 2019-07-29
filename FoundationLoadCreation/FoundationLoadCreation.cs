@@ -7,6 +7,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
+using static DCEStudyTools.Utils.RvtElementGetter;
+using static DCEStudyTools.Properties.Settings;
+
 namespace DCEStudyTools.FoundationLoadCreation
 {
     [Autodesk.Revit.Attributes.Transaction(Autodesk.Revit.Attributes.TransactionMode.Manual)]
@@ -26,11 +29,7 @@ namespace DCEStudyTools.FoundationLoadCreation
             {
                 View activeV = _doc.ActiveView;
 
-                List<FamilyInstance> foundations =
-                      new FilteredElementCollector(_doc)
-                     .OfClass(typeof(FamilyInstance)).Cast<FamilyInstance>()
-                     .Where(f => f.Symbol.Name.Contains(Properties.Settings.Default.FAMILY_NAME_PILE))
-                     .ToList();
+                IList<FamilyInstance> foundations = GetAllPileFoundations(_doc);
 
                 foreach (FamilyInstance foundation in foundations)
                 {
@@ -119,7 +118,7 @@ namespace DCEStudyTools.FoundationLoadCreation
                     .OfCategory(BuiltInCategory.OST_PointLoadTags)
                     .OfClass(typeof(FamilySymbol))
                     .Cast<FamilySymbol>()
-                 where fs.Name.Equals(Properties.Settings.Default.TYPE_NAME_POINT_LOAD)
+                 where fs.Name.Equals(Default.TYPE_NAME_POINT_LOAD)
                  select fs)
                     .FirstOrDefault();
             if (tagType != null)

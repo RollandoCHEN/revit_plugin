@@ -2,11 +2,10 @@
 using Autodesk.Revit.DB.ExtensibleStorage;
 using Autodesk.Revit.UI;
 using DCEStudyTools.Utils;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+using static DCEStudyTools.Utils.RvtElementGetter;
 
 namespace DCEStudyTools.ViewToSheet
 {
@@ -27,36 +26,14 @@ namespace DCEStudyTools.ViewToSheet
             try
             {
                 // Get list of all viewplans who have entity
-                IList<ViewPlan> viewplans =
-                (from view in new FilteredElementCollector(_doc)
-                .OfClass(typeof(ViewPlan))
-                 where view.GetEntitySchemaGuids().Count != 0
-                 select view)
-                .Cast<ViewPlan>()
-                .ToList();
-
+                IList<ViewPlan> viewplans = GetAllViewPlans(_doc);
                 // If no viewplan has entity, show a message
-                if (viewplans.Count == 0)
-                {
-                    TaskDialog.Show("Revit", "Pas de vue liée au niveaux structuraux");
-                    return Result.Cancelled;
-                }
+                if (viewplans.Count == 0) { return Result.Cancelled; }
 
                 // Get list of all sheets who have entity
-                IList<ViewSheet> viewsheets =
-                    (from sheet in new FilteredElementCollector(_doc)
-                    .OfClass(typeof(ViewSheet))
-                     where sheet.GetEntitySchemaGuids().Count != 0
-                     select sheet)
-                    .Cast<ViewSheet>()
-                    .ToList();
-
+                IList<ViewSheet> viewsheets = GetAllSheets(_doc);
                 // If no sheet has entity, show a message
-                if (viewsheets.Count == 0)
-                {
-                    TaskDialog.Show("Revit", "Pas de feuille liée au niveaux structuraux");
-                    return Result.Cancelled;
-                }
+                if (viewsheets.Count == 0) {  return Result.Cancelled; }
 
                 // Get view port type for adding viewplans to sheets
                 ElementType viewPortType_WithoutTitle =

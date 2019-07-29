@@ -3,8 +3,8 @@ using Autodesk.Revit.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+using static DCEStudyTools.Utils.RvtElementGetter;
 
 namespace DCEStudyTools.HalftoneUndo
 {
@@ -24,32 +24,12 @@ namespace DCEStudyTools.HalftoneUndo
             try
             {
                 // Get list of all CAD files
-                IList<ImportInstance> cadFileLinksList =
-                    new FilteredElementCollector(_doc)
-                    .OfClass(typeof(ImportInstance))
-                    .Cast<ImportInstance>()
-                    .ToList();
-
-                if (cadFileLinksList.Count == 0)
-                {
-                    TaskDialog.Show("Revit", "No dwg file is found in the document.");
-                    return Result.Cancelled;
-                }
+                IList<ImportInstance> cadFileLinksList = GetAllCADFiles(_doc);
+                if (cadFileLinksList.Count == 0){ return Result.Cancelled; }
 
                 // Get list of all views
-                IList<ViewPlan> viewPlanList =
-                            (from ViewPlan view in new FilteredElementCollector(_doc)
-                            .OfClass(typeof(ViewPlan))
-                             where view.ViewType == ViewType.CeilingPlan && !view.IsTemplate
-                             select view)
-                            .Cast<ViewPlan>()
-                            .ToList();
-
-                if (viewPlanList.Count == 0)
-                {
-                    TaskDialog.Show("Revit", "No view plan is found in the document.");
-                    return Result.Cancelled;
-                }
+                IList<ViewPlan> viewPlanList = GetAllViewPlans(_doc);
+                if (viewPlanList.Count == 0){ return Result.Cancelled; }
 
                 foreach (ViewPlan view in viewPlanList) // Loop through each view
                 {
