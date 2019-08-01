@@ -8,7 +8,9 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-using static DCEStudyTools.Utils.PropertyValueSetter;
+using static DCEStudyTools.Utils.Getter.RvtElementGetter;
+using static DCEStudyTools.Utils.Getter.PropertyValueGetter;
+using static DCEStudyTools.Utils.Setter.PropertyValueSetter;
 using static DCEStudyTools.Properties.Settings;
 
 
@@ -108,20 +110,15 @@ namespace DCEStudyTools.Utils
         {
             _doc = doc;
             // Retrieve the Beam family "POU-BA"
-            Family f =
-                (from fa in new FilteredElementCollector(doc)
-                .OfClass(typeof(Family)).Cast<Family>()
-                    where fa.Name.Equals(Default.FAMILY_NAME_BEAM)
-                    select fa)
-                .FirstOrDefault();
+            Family beamFamily = GetFamilyByName(doc, Default.FAMILY_NAME_BEAM);
 
             // if the family doesn't exist, then load family
-            if (null == f)      
+            if (null == beamFamily)      
             {
                 Transaction t = new Transaction(doc);
                 t.Start("Load family");
                 File.WriteAllBytes(path, Resources.POU_BA);
-                if (!doc.LoadFamily(path, out f))
+                if (!doc.LoadFamily(path, out beamFamily))
                 {
                     string message1 = "Unable to load '" + path + "'.";
                     TaskDialog.Show("Revit", message1);
@@ -132,49 +129,24 @@ namespace DCEStudyTools.Utils
             }
 
             // Retrieve all the Beam types of the family "POU-BA"
-            IList<FamilySymbol> beamTypesList =
-                    (from beam in new FilteredElementCollector(_doc)
-                     .OfClass(typeof(FamilySymbol))
-                     .OfCategory(BuiltInCategory.OST_StructuralFraming)
-                     .Cast<FamilySymbol>()
-                     where beam.Family.Id==f.Id
-                     select beam)
-                     .ToList();
+            IList<FamilySymbol> beamTypesList = GetAllFamilySymbolsInFamily(doc, BuiltInCategory.OST_StructuralFraming, beamFamily);
 
-            _family = f;
+            _family = beamFamily;
             _beamTypesList = beamTypesList;
         }
 
         public static void GetBeamSymbolProperties(FamilySymbol beamSymbol, out string beamSign, out string beamMat, out double beamHeight, out double beamWidth)
         {
-            beamSign =
-                (from Parameter pr in beamSymbol.Parameters
-                 where pr.Definition.Name.Equals(Default.PARA_NAME_BEAM_TYPE)
-                 select pr)
-                 .First()
-                 .AsString();
+            beamSign = GetFamilySymbolStringValueByPropertyName(beamSymbol, Default.PARA_NAME_BEAM_TYPE);
 
-            beamMat =
-                (from Parameter pr in beamSymbol.Parameters
-                 where pr.Definition.Name.Equals(Default.PARA_NAME_STR_MATERIAL)
-                 select pr)
-                 .First()
-                 .AsValueString();
+            beamMat = GetFamilySymbolStringValueByPropertyName(beamSymbol, Default.PARA_NAME_STR_MATERIAL);
 
             beamHeight = UnitUtils.Convert(
-                    (from Parameter pr in beamSymbol.Parameters
-                     where pr.Definition.Name.Equals(Default.PARA_NAME_DIM_HEIGHT)
-                     select pr)
-                     .First()
-                     .AsDouble(),
+                    GetFamilySymbolDoubleValueByPropertyName(beamSymbol, Default.PARA_NAME_DIM_HEIGHT),
                     DisplayUnitType.DUT_DECIMAL_FEET,
                     DisplayUnitType.DUT_CENTIMETERS);
             beamWidth = UnitUtils.Convert(
-                    (from Parameter pr in beamSymbol.Parameters
-                     where pr.Definition.Name.Equals(Default.PARA_NAME_DIM_WIDTH)
-                     select pr)
-                     .First()
-                     .AsDouble(),
+                    GetFamilySymbolDoubleValueByPropertyName(beamSymbol, Default.PARA_NAME_DIM_WIDTH),
                     DisplayUnitType.DUT_DECIMAL_FEET,
                     DisplayUnitType.DUT_CENTIMETERS);
         }
@@ -250,13 +222,7 @@ namespace DCEStudyTools.Utils
 
             if (!beamMat.Equals(targetBeamMat))
             {
-                Material targetMaterial =
-                    (from Material m in new FilteredElementCollector(_doc)
-                     .OfClass(typeof(Material))
-                     where m != null
-                     select m)
-                     .Cast<Material>()
-                     .FirstOrDefault(m => m.Name.Equals(targetBeamMat));
+                Material targetMaterial = GetMaterialByName(_doc, targetBeamMat);
 
                 Transaction t = new Transaction(_doc);
                 t.Start("Change beam material property");
@@ -295,11 +261,7 @@ namespace DCEStudyTools.Utils
             string targetBeamTypeName = $"{synthaxe}-{matSign}-{beamWidth}x{beamHeight}";
 
             // find the family type for beam creation
-            FamilySymbol beamSymbol =
-                (from sm in BeamTypesList
-                 where sm.Name.Equals(targetBeamTypeName)
-                 select sm)
-                 .FirstOrDefault();
+            FamilySymbol beamSymbol = GetFamilySymbolByName(_doc, BuiltInCategory.OST_StructuralFraming, targetBeamTypeName);
 
             // if family type exists, adjust its properties
             if (beamSymbol != null)
@@ -337,13 +299,7 @@ namespace DCEStudyTools.Utils
 
                     SetStringValueTo(beamSymbol, Default.PARA_NAME_BEAM_TYPE, beamSign);
 
-                    Material targetMaterial =
-                    (from Material m in new FilteredElementCollector(_doc)
-                     .OfClass(typeof(Material))
-                     where m != null
-                     select m)
-                     .Cast<Material>()
-                     .FirstOrDefault(m => m.Name.Equals(beamMat));
+                    Material targetMaterial = GetMaterialByName(_doc, beamMat);
 
                     SetElementIdValueTo(beamSymbol, Default.PARA_NAME_STR_MATERIAL, targetMaterial.Id);
 

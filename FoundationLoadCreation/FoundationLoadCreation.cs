@@ -7,7 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-using static DCEStudyTools.Utils.RvtElementGetter;
+using static DCEStudyTools.Utils.Getter.RvtElementGetter;
 using static DCEStudyTools.Properties.Settings;
 
 namespace DCEStudyTools.FoundationLoadCreation

@@ -4,6 +4,9 @@ using System.Text;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
 
+using static DCEStudyTools.Utils.Getter.RvtElementGetter;
+using static DCEStudyTools.Properties.Settings;
+
 namespace DCEStudyTools.TagsAdjustment
 {
     [Autodesk.Revit.Attributes.Transaction(Autodesk.Revit.Attributes.TransactionMode.Manual)]
@@ -24,7 +27,10 @@ namespace DCEStudyTools.TagsAdjustment
 
             if (form.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                AdjustBeamTags(form.BeamTagWithDimension, form.BeamTagWithoutDimension, form.NoDimentionForAllBN);
+                AdjustBeamTags(
+                    form.BeamTagWithDimension, 
+                    form.BeamTagWithoutDimension, 
+                    form.NoDimentionForAllBN);
             
                 AdjustColumnTags(
                     form.RoundColumnFamilyName,
@@ -53,12 +59,10 @@ namespace DCEStudyTools.TagsAdjustment
         {
 
             // Get all the column tags
-            FilteredElementCollector fec = new FilteredElementCollector(_doc)
-                 .OfCategory(BuiltInCategory.OST_StructuralColumnTags)
-                 .OfClass(typeof(IndependentTag));
+            IList<IndependentTag> allTagsList = GetAllTagsInCategory(_doc, BuiltInCategory.OST_StructuralColumnTags);
 
-            // Loop for each tag to check if it's necessary to change tis type
-            foreach (IndependentTag tag in fec)
+            // Loop for each tag to check if it's necessary to change its type
+            foreach (IndependentTag tag in allTagsList)
             {
                 // Get column tagged by this tag
                 FamilyInstance columnInstence = tag.GetTaggedLocalElement() as FamilyInstance;
@@ -77,7 +81,7 @@ namespace DCEStudyTools.TagsAdjustment
                     // if the tag type is not the same as the column type, change it
                     if (sColumnFamily.Equals(roundColFamilyName) && !tagType.Name.Contains("arrondi"))
                     {
-                        FamilySymbol newColmnTagType = GetFamilyTypeByName(
+                        FamilySymbol newColmnTagType = GetFamilySymbolByName(
                             _doc,
                             BuiltInCategory.OST_StructuralColumnTags,
                             roundColTagName);
@@ -86,7 +90,7 @@ namespace DCEStudyTools.TagsAdjustment
                     // if the tag type is not the same as the column type, change it
                     if (sColumnFamily.Equals(squareColFamilyName) && !tagType.Name.Contains("carré"))
                     {
-                        FamilySymbol newColmnTagType = GetFamilyTypeByName(
+                        FamilySymbol newColmnTagType = GetFamilySymbolByName(
                             _doc,
                             BuiltInCategory.OST_StructuralColumnTags,
                             squareColTagName);
@@ -95,7 +99,7 @@ namespace DCEStudyTools.TagsAdjustment
                     // if the tag type is not the same as the column type, change it
                     if (sColumnFamily.Equals(rectColFamilyName) && !tagType.Name.Contains("rectang"))
                     {
-                        FamilySymbol newColmnTagType = GetFamilyTypeByName(
+                        FamilySymbol newColmnTagType = GetFamilySymbolByName(
                             _doc,
                             BuiltInCategory.OST_StructuralColumnTags,
                             rectColTagName);
@@ -110,55 +114,44 @@ namespace DCEStudyTools.TagsAdjustment
         {
             // Adjust beam tags
 
-            IList<IndependentTag> allTagList =
-                new FilteredElementCollector(_doc)
-                 .OfCategory(BuiltInCategory.OST_StructuralFramingTags)
-                 .OfClass(typeof(IndependentTag))
-                 .Cast<IndependentTag>().ToList();
+            IList<IndependentTag> allBeamTagsList = GetAllTagsInCategory(_doc, BuiltInCategory.OST_StructuralFramingTags);
 
             // Get all the structural framing elements 
             // whose value of "Poutre type" is "BN" or "Talon PV"
-            FilteredElementCollector colBN
+            FilteredElementCollector collectorBN
                 = GetElementsByShareParamValue(
                     _doc,
                     BuiltInCategory.OST_StructuralFraming,
                     "Poutre type", "BN");
-            FilteredElementCollector colWidth20
+            FilteredElementCollector collectorWidth20
                 = GetElementsByShareParamValue(
                     _doc,
                     BuiltInCategory.OST_StructuralFraming,
                     "Largeur", 0.2);
-            FilteredElementCollector colPV
+            FilteredElementCollector collectorPV
                 = GetElementsByShareParamValue(
                     _doc,
                     BuiltInCategory.OST_StructuralFraming,
                     "Poutre type", "Talon PV");
 
-            IList<IndependentTag> tagWithoutDList = new List<IndependentTag>();
+            IList<IndependentTag> tagWithoutDimList = new List<IndependentTag>();
 
             if (noDimensionForAllBN)
             {
-                tagWithoutDList =
-                (from tag in new FilteredElementCollector(_doc)
-                 .OfCategory(BuiltInCategory.OST_StructuralFramingTags)
-                 .OfClass(typeof(IndependentTag))
-                 .Cast<IndependentTag>()
-                 where
-                 colBN.Any(x => x.Id == tag.GetTaggedLocalElement().Id)
-                 || colPV.Any(x => x.Id == tag.GetTaggedLocalElement().Id)
+                tagWithoutDimList =
+                (from tag in allBeamTagsList
+                 where collectorBN.Any(x => x.Id == tag.GetTaggedLocalElement().Id)
+                 || collectorPV.Any(x => x.Id == tag.GetTaggedLocalElement().Id)
                  select tag)
                  .ToList();
             }
             else
             {
-                tagWithoutDList =
-                    (from tag in new FilteredElementCollector(_doc)
-                     .OfCategory(BuiltInCategory.OST_StructuralFramingTags)
-                     .OfClass(typeof(IndependentTag))
-                     .Cast<IndependentTag>()
-                     where
-                     (colBN.Any(x => x.Id == tag.GetTaggedLocalElement().Id) && colWidth20.Any(x => x.Id == tag.GetTaggedLocalElement().Id))
-                     || colPV.Any(x => x.Id == tag.GetTaggedLocalElement().Id)
+                tagWithoutDimList =
+                    (from tag in allBeamTagsList
+                     where (collectorBN.Any(x => x.Id == tag.GetTaggedLocalElement().Id) 
+                     && collectorWidth20.Any(x => x.Id == tag.GetTaggedLocalElement().Id))
+                     || collectorPV.Any(x => x.Id == tag.GetTaggedLocalElement().Id)
                      select tag)
                      .ToList();
             }
@@ -166,110 +159,34 @@ namespace DCEStudyTools.TagsAdjustment
             StringBuilder sb = new StringBuilder();
 
             // Get new framing tag type to change
-            FamilySymbol tagTypeWithoutD = GetFamilyTypeByName(
-                _doc,
-                BuiltInCategory.OST_StructuralFramingTags,
-                withoutDimensionTagName);
-            FamilySymbol tagTypeWithD = GetFamilyTypeByName(
-                _doc,
-                BuiltInCategory.OST_StructuralFramingTags,
-                withDimensionTagName);
+            FamilySymbol tagTypeWithoutDim 
+                = GetFamilySymbolByName(
+                    _doc,
+                    BuiltInCategory.OST_StructuralFramingTags,
+                    withoutDimensionTagName);
+            FamilySymbol tagTypeWithDim 
+                = GetFamilySymbolByName(
+                    _doc,
+                    BuiltInCategory.OST_StructuralFramingTags,
+                    withDimensionTagName);
 
 
             using (Transaction t = new Transaction(_doc, "Change beam tags type"))
             {
                 t.Start();
-                foreach (Element elem in allTagList)
+                foreach (Element elem in allBeamTagsList)
                 {
-                    if (tagWithoutDList.Any(x => x.Id == elem.Id))
+                    if (tagWithoutDimList.Any(x => x.Id == elem.Id))
                     {
-                        elem.ChangeTypeId(tagTypeWithoutD.Id);
+                        elem.ChangeTypeId(tagTypeWithoutDim.Id);
                     }
                     else
                     {
-                        elem.ChangeTypeId(tagTypeWithD.Id);
+                        elem.ChangeTypeId(tagTypeWithDim.Id);
                     }
                 }
                 t.Commit();
             }
-        }
-
-        private static FamilySymbol GetFamilyTypeByName(Document doc, BuiltInCategory bic, string typeName)
-        {
-            return (from tt in new FilteredElementCollector(doc)
-                                .OfCategory(bic)
-                                .OfClass(typeof(FamilySymbol))
-                                .Cast<FamilySymbol>()
-                    where tt.Name.Equals(typeName)
-                    select tt).First();
-        }
-
-        private FilteredElementCollector GetElementsByShareParamValue(
-            Document doc, BuiltInCategory bic, string sParaName, string sValue
-            )
-        {
-            SharedParameterElement para =
-                                (from p in new FilteredElementCollector(doc)
-                                 .OfClass(typeof(SharedParameterElement))
-                                 .Cast<SharedParameterElement>()
-                                 where p.Name.Equals(sParaName)
-                                 select p).First();
-
-            ParameterValueProvider provider
-                = new ParameterValueProvider(para.Id);
-
-            FilterStringRuleEvaluator evaluator
-                = new FilterStringEquals();
-
-            string sType = sValue;
-            
-            FilterRule rule = new FilterStringRule(
-                provider, evaluator, sType, false);
-            
-            ElementParameterFilter filter
-                = new ElementParameterFilter(rule);
-
-            FilteredElementCollector collector
-                = new FilteredElementCollector(doc)
-                .OfCategory(bic)
-                .WherePasses(filter);
-            return collector;
-        }
-
-        private FilteredElementCollector GetElementsByShareParamValue(
-            Document doc, BuiltInCategory bic, string sParaName, double dValue
-            )
-        {
-            SharedParameterElement para =
-                                (from p in new FilteredElementCollector(doc)
-                                 .OfClass(typeof(SharedParameterElement))
-                                 .Cast<SharedParameterElement>()
-                                 where p.Name.Equals(sParaName)
-                                 select p).First();
-
-            ParameterValueProvider provider
-                = new ParameterValueProvider(para.Id);
-
-            FilterNumericRuleEvaluator evaluator
-                = new FilterNumericEquals();
-
-            double sLength_feet = UnitUtils.Convert(
-                dValue, 
-                DisplayUnitType.DUT_METERS, 
-                DisplayUnitType.DUT_DECIMAL_FEET);
-            double epsilon = 0.0001;
-
-            FilterRule rule = new FilterDoubleRule(
-                provider, evaluator, sLength_feet, epsilon);
-
-            ElementParameterFilter filter
-                = new ElementParameterFilter(rule);
-
-            FilteredElementCollector collector
-                = new FilteredElementCollector(doc)
-                .OfCategory(bic)
-                .WherePasses(filter);
-            return collector;
         }
     }
 }

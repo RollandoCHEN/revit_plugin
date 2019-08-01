@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
-using static DCEStudyTools.Utils.RvtElementGetter;
+using static DCEStudyTools.Utils.Getter.RvtElementGetter;
 
 namespace DCEStudyTools.CADLink
 {
@@ -26,7 +26,7 @@ namespace DCEStudyTools.CADLink
             try
             {
                 // Get list of all structural view plans
-                IList<ViewPlan> viewPlanList = GetAllViewPlans(_doc);
+                IList<ViewPlan> viewPlanList = GetAllLinkedViewPlans(_doc);
                 if (viewPlanList.Count == 0){ return Result.Cancelled; }
 
                 Dictionary<string, ViewPlan> viewDic = new Dictionary<string, ViewPlan>();

@@ -1,6 +1,6 @@
 ﻿using Autodesk.Revit.DB;
 
-namespace DCEStudyTools.Utils
+namespace DCEStudyTools.Utils.Setter
 {
     public class PropertyValueSetter
     {

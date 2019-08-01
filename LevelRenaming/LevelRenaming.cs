@@ -4,7 +4,7 @@ using Autodesk.Revit.UI.Selection;
 using System.Collections.Generic;
 using System.Linq;
 
-using static DCEStudyTools.Utils.RvtElementGetter;
+using static DCEStudyTools.Utils.Getter.RvtElementGetter;
 
 namespace DCEStudyTools.LevelRenaming
 {
@@ -21,7 +21,7 @@ namespace DCEStudyTools.LevelRenaming
             _uidoc = _uiapp.ActiveUIDocument;
             _doc = _uidoc.Document;
 
-            IList<Level> strLevels = GetAllStructLevels(_doc);
+            IList<Level> strLevels = GetAllLevels(_doc, true);
             if (strLevels.Count == 0){ return Result.Cancelled; }
 
             Reference refId;

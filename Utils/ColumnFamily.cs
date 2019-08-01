@@ -7,8 +7,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-
-using static DCEStudyTools.Utils.PropertyValueSetter;
+using static DCEStudyTools.Utils.Getter.RvtElementGetter;
+using static DCEStudyTools.Utils.Getter.PropertyValueGetter;
+using static DCEStudyTools.Utils.Setter.PropertyValueSetter;
 using static DCEStudyTools.Properties.Settings;
 using System.Text.RegularExpressions;
 
@@ -29,8 +30,8 @@ namespace DCEStudyTools.Utils
         const StructuralType STCOLUMN
           = StructuralType.Column;
 
-        private List<FamilySymbol> _rectColumnTypesList = new List<FamilySymbol>();
-        private List<FamilySymbol> _rondColumnTypesList = new List<FamilySymbol>();
+        private IList<FamilySymbol> _rectColumnTypesList = new List<FamilySymbol>();
+        private IList<FamilySymbol> _rondColumnTypesList = new List<FamilySymbol>();
         private Family _rectColumnfamily;
         private Family _rondColumnfamily;
         private Document _doc;
@@ -49,14 +50,14 @@ namespace DCEStudyTools.Utils
                 return _rondColumnfamily;
             }
         }
-        public List<FamilySymbol> RectColumnTypesList
+        public IList<FamilySymbol> RectColumnTypesList
         {
             get
             {
                 return _rectColumnTypesList;
             }
         }
-        public List<FamilySymbol> RondColumnTypesList
+        public IList<FamilySymbol> RondColumnTypesList
         {
             get
             {
@@ -68,20 +69,15 @@ namespace DCEStudyTools.Utils
         {
             _doc = doc;
             // Retrieve the Column family "POT-BA-RECT"
-            Family rectColumn =
-                (from fa in new FilteredElementCollector(doc)
-                .OfClass(typeof(Family)).Cast<Family>()
-                 where fa.Name.Equals(Default.FAMILY_NAME_RECT_COLUMN)
-                 select fa)
-                .FirstOrDefault();
+            Family rectColumnFamily = GetFamilyByName(doc, Default.FAMILY_NAME_RECT_COLUMN);
 
             // if the family doesn't exist, then load family
-            if (null == rectColumn)
+            if (null == rectColumnFamily)
             {
                 Transaction t = new Transaction(doc);
                 t.Start("Load family");
                 File.WriteAllBytes(rectColumnPath, Resources.POT_BA_RECT);
-                if (!doc.LoadFamily(rectColumnPath, out rectColumn))
+                if (!doc.LoadFamily(rectColumnPath, out rectColumnFamily))
                 {
                     string message1 = "Unable to load '" + rectColumnPath + "'.";
                     TaskDialog.Show("Revit", message1);
@@ -92,20 +88,15 @@ namespace DCEStudyTools.Utils
             }
 
             // Retrieve the Column family "POT-BA-ROND"
-            Family rondColumn =
-                (from fa in new FilteredElementCollector(doc)
-                .OfClass(typeof(Family)).Cast<Family>()
-                 where fa.Name.Equals(Default.FAMILY_NAME_ROND_COLUMN)
-                 select fa)
-                .FirstOrDefault();
+            Family rondColumnFamily = GetFamilyByName(doc, Default.FAMILY_NAME_ROND_COLUMN);
 
             // if the family doesn't exist, then load family
-            if (null == rondColumn)
+            if (null == rondColumnFamily)
             {
                 Transaction t = new Transaction(doc);
                 t.Start("Load family");
                 File.WriteAllBytes(rondColumnPath, Resources.POT_BA_ROND);
-                if (!doc.LoadFamily(rondColumnPath, out rondColumn))
+                if (!doc.LoadFamily(rondColumnPath, out rondColumnFamily))
                 {
                     string message1 = "Unable to load '" + rondColumnPath + "'.";
                     TaskDialog.Show("Revit", message1);
@@ -116,73 +107,39 @@ namespace DCEStudyTools.Utils
             }
 
             // Retrieve all the Column types of the family "POT-BA-RECT"
-            List<FamilySymbol> rectColumnTypesList =
-                    (from col in new FilteredElementCollector(_doc)
-                     .OfClass(typeof(FamilySymbol))
-                     .OfCategory(BuiltInCategory.OST_StructuralColumns)
-                     .Cast<FamilySymbol>()
-                     where col.Family.Id == rectColumn.Id
-                     select col)
-                     .ToList();
+            IList<FamilySymbol> rectColumnTypesList =
+                GetAllFamilySymbolsInFamily(doc, BuiltInCategory.OST_StructuralColumns, rectColumnFamily);
 
             // Retrieve all the Beam types of the family "POT-BA-ROND"
-            List<FamilySymbol> rondColumnTypesList =
-                    (from col in new FilteredElementCollector(_doc)
-                     .OfClass(typeof(FamilySymbol))
-                     .OfCategory(BuiltInCategory.OST_StructuralColumns)
-                     .Cast<FamilySymbol>()
-                     where col.Family.Id == rondColumn.Id
-                     select col)
-                     .ToList();
+            IList<FamilySymbol> rondColumnTypesList =
+                GetAllFamilySymbolsInFamily(doc, BuiltInCategory.OST_StructuralColumns, rondColumnFamily);
 
-            _rectColumnfamily = rectColumn;
-            _rondColumnfamily = rondColumn;
+            _rectColumnfamily = rectColumnFamily;
+            _rondColumnfamily = rondColumnFamily;
             _rectColumnTypesList = rectColumnTypesList;
             _rondColumnTypesList = rondColumnTypesList;
         }
 
         public static void GetRectColumnSymbolProperties(FamilySymbol colSymbol, out string colMat, out double colHeight, out double colWidth)
         {
-            colMat =
-                (from Parameter pr in colSymbol.Parameters
-                 where pr.Definition.Name.Equals(Default.PARA_NAME_STR_MATERIAL)
-                 select pr)
-                 .First()
-                 .AsValueString();
+            colMat = GetFamilySymbolStringValueByPropertyName(colSymbol, Default.PARA_NAME_STR_MATERIAL);
 
             colHeight = UnitUtils.Convert(
-                    (from Parameter pr in colSymbol.Parameters
-                     where pr.Definition.Name.Equals(Default.PARA_NAME_DIM_HEIGHT)
-                     select pr)
-                     .First()
-                     .AsDouble(),
+                    GetFamilySymbolDoubleValueByPropertyName(colSymbol, Default.PARA_NAME_DIM_HEIGHT),
                     DisplayUnitType.DUT_DECIMAL_FEET,
                     DisplayUnitType.DUT_CENTIMETERS);
             colWidth = UnitUtils.Convert(
-                    (from Parameter pr in colSymbol.Parameters
-                     where pr.Definition.Name.Equals(Default.PARA_NAME_DIM_WIDTH)
-                     select pr)
-                     .First()
-                     .AsDouble(),
+                    GetFamilySymbolDoubleValueByPropertyName(colSymbol, Default.PARA_NAME_DIM_WIDTH),
                     DisplayUnitType.DUT_DECIMAL_FEET,
                     DisplayUnitType.DUT_CENTIMETERS);
         }
 
         public static void GetRondColumnSymbolProperties(FamilySymbol colSymbol, out string colMat, out double colDiameter)
         {
-            colMat =
-                (from Parameter pr in colSymbol.Parameters
-                 where pr.Definition.Name.Equals(Default.PARA_NAME_STR_MATERIAL)
-                 select pr)
-                 .First()
-                 .AsValueString();
+            colMat = GetFamilySymbolStringValueByPropertyName(colSymbol, Default.PARA_NAME_STR_MATERIAL);
 
             colDiameter = UnitUtils.Convert(
-                    (from Parameter pr in colSymbol.Parameters
-                     where pr.Definition.Name.Equals(Default.PARA_NAME_DIM_DIAMETER)
-                     select pr)
-                     .First()
-                     .AsDouble(),
+                    GetFamilySymbolDoubleValueByPropertyName(colSymbol, Default.PARA_NAME_DIM_DIAMETER),
                     DisplayUnitType.DUT_DECIMAL_FEET,
                     DisplayUnitType.DUT_CENTIMETERS);
         }
@@ -272,14 +229,8 @@ namespace DCEStudyTools.Utils
 
                 if (!colMat.Equals(targetColMat))
                 {
-                    Material targetMaterial =
-                        (from Material m in new FilteredElementCollector(_doc)
-                         .OfClass(typeof(Material))
-                         where m != null
-                         select m)
-                         .Cast<Material>()
-                         .FirstOrDefault(m => m.Name.Equals(targetColMat));
-
+                    Material targetMaterial = GetMaterialByName(_doc, targetColMat);
+                    
                     Transaction t = new Transaction(_doc);
                     t.Start("Change column material property");
                     SetElementIdValueTo(colSymbol,
@@ -316,13 +267,7 @@ namespace DCEStudyTools.Utils
 
                 if (!colMat.Equals(targetColMat))
                 {
-                    Material targetMaterial =
-                        (from Material m in new FilteredElementCollector(_doc)
-                         .OfClass(typeof(Material))
-                         where m != null
-                         select m)
-                         .Cast<Material>()
-                         .FirstOrDefault(m => m.Name.Equals(targetColMat));
+                    Material targetMaterial = GetMaterialByName(_doc, targetColMat);
 
                     Transaction t = new Transaction(_doc);
                     t.Start("Change column material property");

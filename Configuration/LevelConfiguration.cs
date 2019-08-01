@@ -5,6 +5,8 @@ using DCEStudyTools.Utils;
 using System.Collections.Generic;
 using System.Linq;
 
+using static DCEStudyTools.Utils.Getter.RvtElementGetter;
+
 namespace DCEStudyTools.Configuration
 {
     [Autodesk.Revit.Attributes.Transaction(Autodesk.Revit.Attributes.TransactionMode.Manual)]
@@ -14,8 +16,9 @@ namespace DCEStudyTools.Configuration
         private UIDocument _uidoc;
         private Document _doc;
         
-        private List<Level> _strLevelsAfterConfig;
-        private List<Level> _allLevels;
+        private IList<Level> _strLevelsAfterConfig;
+        private IList<Level> _strLevelsBeforeConfig;
+        private IList<Level> _allLevels;
         private string[] _actualStrLevelNames;
         private string[] _allLevelNames;
 
@@ -41,22 +44,16 @@ namespace DCEStudyTools.Configuration
             _uidoc = _uiapp.ActiveUIDocument;
             _doc = _uidoc.Document;
 
-            _allLevels =
-                new FilteredElementCollector(_doc)
-                .OfClass(typeof(Level)).Cast<Level>()
-                .OrderBy(lev => lev.Elevation)
-                .ToList();
+            _allLevels = GetAllLevels(_doc, false);
 
             _allLevelNames = 
-                (from lev in new FilteredElementCollector(_doc)
-                .OfClass(typeof(Level)).Cast<Level>()
-                .OrderBy(lev => lev.Elevation)
+                (from lev in _allLevels
                 select lev.Name).ToArray();
 
+            _strLevelsBeforeConfig = GetAllLevels(_doc, true);
+
             _actualStrLevelNames =
-                (from lev in new FilteredElementCollector(_doc)
-                 .OfClass(typeof(Level)).Cast<Level>()
-                 where lev.GetEntitySchemaGuids().Count != 0
+                (from lev in _strLevelsBeforeConfig
                  select lev.Name).ToArray();
 
             LevelConfigForm form = new LevelConfigForm(this);
@@ -95,10 +92,7 @@ namespace DCEStudyTools.Configuration
                 Field levelNumber = schema.GetField("StrLevelNumber");
 
                 _strLevelsAfterConfig =
-                    (from lev in new FilteredElementCollector(_doc)
-                     .OfClass(typeof(Level))
-                     .Cast<Level>()
-                     .OrderBy(lev => lev.Elevation)
+                    (from lev in _allLevels
                      where strLevelNames.Any(name => name.Equals(lev.Name))
                      select lev)
                      .ToList();

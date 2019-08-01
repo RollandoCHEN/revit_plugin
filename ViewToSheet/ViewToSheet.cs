@@ -5,7 +5,8 @@ using DCEStudyTools.Utils;
 using System.Collections.Generic;
 using System.Linq;
 
-using static DCEStudyTools.Utils.RvtElementGetter;
+using static DCEStudyTools.Utils.Getter.RvtElementGetter;
+using static DCEStudyTools.Properties.Settings;
 
 namespace DCEStudyTools.ViewToSheet
 {
@@ -26,23 +27,17 @@ namespace DCEStudyTools.ViewToSheet
             try
             {
                 // Get list of all viewplans who have entity
-                IList<ViewPlan> viewplans = GetAllViewPlans(_doc);
+                IList<ViewPlan> viewplans = GetAllLinkedViewPlans(_doc);
                 // If no viewplan has entity, show a message
                 if (viewplans.Count == 0) { return Result.Cancelled; }
 
                 // Get list of all sheets who have entity
-                IList<ViewSheet> viewsheets = GetAllSheets(_doc);
+                IList<ViewSheet> viewsheets = GetAllSheets(_doc, true);
                 // If no sheet has entity, show a message
                 if (viewsheets.Count == 0) {  return Result.Cancelled; }
 
                 // Get view port type for adding viewplans to sheets
-                ElementType viewPortType_WithoutTitle =
-                    (from type in new FilteredElementCollector(_doc)
-                     .OfClass(typeof(ElementType))
-                     .Cast<ElementType>()
-                     where type.Name.Equals(Properties.Settings.Default.TYPE_NAME_VIEWPORT_WITHOUT_TITLE)
-                     select type)
-                     .FirstOrDefault();
+                ElementType viewPortType_WithoutTitle = GetElementTypeByName(_doc, Default.TYPE_NAME_VIEWPORT_WITHOUT_TITLE);
 
                 // Count num of views added to all sheets
                 int numOfViews = 0;

@@ -4,6 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
+using static DCEStudyTools.Utils.Getter.RvtElementGetter;
+using static DCEStudyTools.Properties.Settings;
+
 namespace DCEStudyTools.LegendUpdate
 {
     [Autodesk.Revit.Attributes.Transaction(Autodesk.Revit.Attributes.TransactionMode.Manual)]
@@ -45,34 +48,16 @@ namespace DCEStudyTools.LegendUpdate
         private void UpdateLegends()
         {
             // Get the "Légendes" legend view 
-            View legendView =
-                (from v in new FilteredElementCollector(_doc)
-                 .OfClass(typeof(View))
-                 .Cast<View>()
-                 where v.ViewType == ViewType.Legend && v.ViewName.Equals(Properties.Settings.Default.LEGEND_NAME_STANDARD)
-                 select v).FirstOrDefault();
+            View legendView = GetLegendViewByName(_doc, Default.LEGEND_NAME_STANDARD);
 
-            // Get the "Légendes" legend view 
-            //View foundationLegend =
-            //    (from v in new FilteredElementCollector(_doc)
-            //     .OfClass(typeof(View))
-            //     .Cast<View>()
-            //     where v.ViewType == ViewType.Legend &&
-            //     v.ViewName.Equals(Properties.Settings.Default.STANDARD_LEGEND_NAME + $" {_form.FoundationType}")
-            //     select v).FirstOrDefault();
+            // TOGO: Get the foundation legend view 
+            // View foundationLegend = GetLegendViewByName(_doc, Default.STANDARD_LEGEND_NAME + $" {_form.FoundationType}");
 
-            ElementType viewPortType_WithoutTitle =
-                (from type in new FilteredElementCollector(_doc)
-                 .OfClass(typeof(ElementType))
-                 .Cast<ElementType>()
-                 where type.Name.Equals(Properties.Settings.Default.TYPE_NAME_VIEWPORT_WITHOUT_TITLE)
-                 select type)
-                 .FirstOrDefault();
+            // Get view port type "without title"
+            ElementType viewPortType_WithoutTitle = GetElementTypeByName(_doc, Default.TYPE_NAME_VIEWPORT_WITHOUT_TITLE);
 
-            List<ViewSheet> viewSheets =
-                new FilteredElementCollector(_doc)
-                     .OfClass(typeof(ViewSheet)).Cast<ViewSheet>()
-                     .ToList();
+            // Get all sheets
+            IList<ViewSheet> viewSheets = GetAllSheets(_doc, false);
 
             Transaction t = new Transaction(_doc, "Update legend");
             t.Start();
@@ -80,20 +65,20 @@ namespace DCEStudyTools.LegendUpdate
             foreach (ViewSheet viewSheet in viewSheets)
             {
                 // for the sheet "Cartouche", skip it
-                if (viewSheet.Name.ToLower().Contains(Properties.Settings.Default.KEYWORD_TITLEBLOCK))
+                if (viewSheet.Name.ToLower().Contains(Default.KEYWORD_TITLEBLOCK))
                 {
                     continue;
                 }
 
                 // for the sheet "Fondation"
-                if (viewSheet.Name.ToLower().Contains(Properties.Settings.Default.KEYWORD_FOUNDATION))
+                if (viewSheet.Name.ToLower().Contains(Default.KEYWORD_FOUNDATION))
                 {
                     // fondation legend view existing on the sheet 
                     ElementId viewportId =
                     (from vpId in viewSheet.GetAllViewports()
                      where ((Viewport)_doc.GetElement(vpId))
                         .get_Parameter(BuiltInParameter.VIEWPORT_VIEW_NAME)
-                        .AsString().Contains(Properties.Settings.Default.LEGEND_NAME_STANDARD)
+                        .AsString().Contains(Default.LEGEND_NAME_STANDARD)
                      select vpId)
                      .ToList()
                      .FirstOrDefault();
@@ -154,31 +139,30 @@ namespace DCEStudyTools.LegendUpdate
                 Outline lvOutline = v1.GetBoxOutline();
                 XYZ legendViewCenter = (lvOutline.MaximumPoint + lvOutline.MinimumPoint) / 2.0;
 
-
                 // The position of the legend is Bottom Right by default
-                double refX = Properties.Settings.Default.LEGEND_POSITION_X_MAX;
-                double refY = Properties.Settings.Default.LEGEND_POSITION_Y_MIN_R;
+                double refX = Default.LEGEND_POSITION_X_MAX;
+                double refY = Default.LEGEND_POSITION_Y_MIN_R;
 
                 XYZ legendRefPointToCenter = legendViewCenter - new XYZ(lvOutline.MaximumPoint.X, lvOutline.MinimumPoint.Y, 0);
 
                 if (position.Equals("TopRight"))
                 {
-                    refX = Properties.Settings.Default.LEGEND_POSITION_X_MAX;
-                    refY = Properties.Settings.Default.LEGEND_POSITION_Y_MAX_R;
+                    refX = Default.LEGEND_POSITION_X_MAX;
+                    refY = Default.LEGEND_POSITION_Y_MAX_R;
 
                     legendRefPointToCenter = legendViewCenter - new XYZ(lvOutline.MaximumPoint.X, lvOutline.MaximumPoint.Y, 0);
                 }
                 else if (position.Equals("BottomLeft"))
                 {
-                    refX = Properties.Settings.Default.LEGEND_POSITION_X_MIN;
-                    refY = Properties.Settings.Default.LEGEND_POSITION_Y_MIN_L;
+                    refX = Default.LEGEND_POSITION_X_MIN;
+                    refY = Default.LEGEND_POSITION_Y_MIN_L;
 
                     legendRefPointToCenter = legendViewCenter - new XYZ(lvOutline.MinimumPoint.X, lvOutline.MinimumPoint.Y, 0);
                 }
                 else if (position.Equals("TopLeft"))
                 {
-                    refX = Properties.Settings.Default.LEGEND_POSITION_X_MIN;
-                    refY = Properties.Settings.Default.LEGEND_POSITION_Y_MAX_L;
+                    refX = Default.LEGEND_POSITION_X_MIN;
+                    refY = Default.LEGEND_POSITION_Y_MAX_L;
 
                     legendRefPointToCenter = legendViewCenter - new XYZ(lvOutline.MinimumPoint.X, lvOutline.MaximumPoint.Y, 0);
                 }

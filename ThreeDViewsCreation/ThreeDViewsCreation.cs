@@ -7,7 +7,7 @@ using System.Collections.ObjectModel;
 using DCEStudyTools.Utils;
 using Autodesk.Revit.DB.ExtensibleStorage;
 
-using static DCEStudyTools.Utils.RvtElementGetter;
+using static DCEStudyTools.Utils.Getter.RvtElementGetter;
 
 namespace DCEStudyTools.ThreeDViewsCreation
 {
@@ -30,7 +30,7 @@ namespace DCEStudyTools.ThreeDViewsCreation
             _doc = _uidoc.Document;
 
             // Get list of all levels for structural elements
-            IList<Level> strLevels = GetAllStructLevels(_doc);
+            IList<Level> strLevels = GetAllLevels(_doc, true);
             if (strLevels.Count == 0) { return Result.Cancelled; }
 
             // Get a ViewFamilyType for a 3D view

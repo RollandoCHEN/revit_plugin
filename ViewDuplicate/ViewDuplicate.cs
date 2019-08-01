@@ -7,7 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-using static DCEStudyTools.Utils.RvtElementGetter;
+using static DCEStudyTools.Utils.Getter.RvtElementGetter;
 
 namespace DCEStudyTools.ViewDuplicate
 {
@@ -27,7 +27,7 @@ namespace DCEStudyTools.ViewDuplicate
             try
             {
                 // Get list of all structural levels
-                IList<Level> strLevels = GetAllStructLevels(_doc);
+                IList<Level> strLevels = GetAllLevels(_doc, true);
                 if (strLevels.Count == 0){ return Result.Cancelled; }
 
                 // Get list of all zone de définition

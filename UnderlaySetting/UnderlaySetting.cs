@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-using static DCEStudyTools.Utils.RvtElementGetter;
+using static DCEStudyTools.Utils.Getter.RvtElementGetter;
 
 namespace DCEStudyTools.UnderlaySetting
 {
@@ -23,7 +23,7 @@ namespace DCEStudyTools.UnderlaySetting
             try
             {
                 // Get list of all structural levels
-                IList<Level> strLevels = GetAllStructLevels(_doc);
+                IList<Level> strLevels = GetAllLevels(_doc, true);
                 if (strLevels.Count == 0) { return Result.Cancelled; }
 
                 // Get list of all CAD files
@@ -31,7 +31,7 @@ namespace DCEStudyTools.UnderlaySetting
                 if (cadFileLinksList.Count == 0) { return Result.Cancelled; }
 
                 // Get list of all views
-                IList<ViewPlan> viewPlanList = GetAllViewPlans(_doc);
+                IList<ViewPlan> viewPlanList = GetAllLinkedViewPlans(_doc);
                 if (viewPlanList.Count == 0) { return Result.Cancelled; }
 
                 // Set offset to -0.1m for each CAD file

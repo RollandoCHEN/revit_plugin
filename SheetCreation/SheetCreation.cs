@@ -6,7 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-using static DCEStudyTools.Utils.RvtElementGetter;
+using static DCEStudyTools.Utils.Getter.RvtElementGetter;
+using static DCEStudyTools.Properties.Settings;
 
 namespace DCEStudyTools.SheetCreation
 {
@@ -32,10 +33,10 @@ namespace DCEStudyTools.SheetCreation
                 try
                 {
                     // Get list of all levels for structural elements
-                    IList<Level> strLevels = GetAllStructLevels(_doc);
+                    IList<Level> strLevels = GetAllLevels(_doc, true);
                     if (strLevels.Count == 0){ return Result.Cancelled; }
 
-                    CreateNewSheets(_doc, strLevels);
+                    CreateNewSheets(strLevels);
                 }
                 catch (Exception e)
                 {
@@ -51,59 +52,41 @@ namespace DCEStudyTools.SheetCreation
             }
         }
 
-        private void CreateNewSheets(Document doc, IList<Level> levels)
+        private void CreateNewSheets(IList<Level> levels)
         {
             // Get the "Cartouche A3" title block 
-            FamilySymbol familySymbol =
-                (from fs in new FilteredElementCollector(doc)
-                 .OfClass(typeof(FamilySymbol)).OfCategory(BuiltInCategory.OST_TitleBlocks)
-                 .Cast<FamilySymbol>()
-                 where fs.Name.Equals(Properties.Settings.Default.TYPE_NAME_TITLEBLOCK)
-                 select fs).FirstOrDefault();
-
-            // Get the "Légendes" legend view 
-            View legendView =
-                (from v in new FilteredElementCollector(doc)
-                 .OfClass(typeof(View))
-                 .Cast<View>()
-                 where v.ViewType == ViewType.Legend && v.ViewName.Equals(Properties.Settings.Default.LEGEND_NAME_STANDARD)
-                 select v).FirstOrDefault();
-
-            // Get the "Légendes" legend view 
-            View foundationLegend =
-                (from v in new FilteredElementCollector(doc)
-                 .OfClass(typeof(View))
-                 .Cast<View>()
-                 where v.ViewType == ViewType.Legend &&
-                 v.ViewName.Equals(Properties.Settings.Default.LEGEND_NAME_STANDARD + $" {_form.FoundationType}")
-                 select v).FirstOrDefault();
-
-            // If there exists the "Cartouche A3" title block, create sheets with it
-            if (familySymbol != null)
+            FamilySymbol familySymbol = GetFamilySymbolByName(_doc, BuiltInCategory.OST_TitleBlocks, Default.TYPE_NAME_TITLEBLOCK);
+            if (familySymbol == null)
             {
-                using (Transaction t = new Transaction(doc, "Create new ViewSheets"))
-                {
-                    t.Start();
-                    try
-                    {
+                throw new MissingMemberException();
+            }
 
-                        for (int duplicateNum = 0; duplicateNum <= _form.DuplicateNumber; duplicateNum++)
-                        {
-                            CreateSheetsForEachLevel(doc, levels, familySymbol, legendView, foundationLegend, duplicateNum);
-                        }
-                        t.Commit();
-                    }
-                    catch (Exception e)
+            // Get the "Légendes" legend view 
+            View legendView = GetLegendViewByName(_doc, Default.LEGEND_NAME_STANDARD);
+
+            // Get the "Légendes" legend view 
+            View foundationLegend = GetLegendViewByName(_doc, Default.LEGEND_NAME_STANDARD + $" {_form.FoundationType}");
+            
+            // If there exists the "Cartouche A3" title block, create sheets with it
+            using (Transaction t = new Transaction(_doc, "Create new ViewSheets"))
+            {
+                t.Start();
+                try
+                {
+
+                    for (int duplicateNum = 0; duplicateNum <= _form.DuplicateNumber; duplicateNum++)
                     {
-                        TaskDialog.Show("Revit", $"Exception when creating view sheets : {e.Message}");
-                        t.RollBack();
+                        CreateSheetsForEachLevel(_doc, levels, familySymbol, legendView, foundationLegend, duplicateNum);
                     }
+                    t.Commit();
+                }
+                catch (Exception e)
+                {
+                    TaskDialog.Show("Revit", $"Exception when creating view sheets : {e.Message}");
+                    t.RollBack();
                 }
             }
-            else
-            {
-                throw new MissingMemberException($"Ne pas trouver la cartouche \"{Properties.Settings.Default.TYPE_NAME_TITLEBLOCK}\"!");
-            }
+            
         }
 
         private void CreateSheetsForEachLevel(Document doc,
