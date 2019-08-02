@@ -4,15 +4,17 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+
+using static DCEStudyTools.Utils.Getter.RvtElementGetter;
 using static DCEStudyTools.Properties.Settings;
 
 namespace DCEStudyTools.Utils
 {
     public class WallFamily
     {
-        private List<WallType> _wallTypesList = new List<WallType>();
+        private IList<WallType> _wallTypesList = new List<WallType>();
         private Document _doc;
-        public List<WallType> WallTypesList
+        public IList<WallType> WallTypesList
         {
             get
             {
@@ -25,14 +27,7 @@ namespace DCEStudyTools.Utils
             _doc = doc;
 
             // Retrieve all the Wall types
-            List<WallType> wallTypesList =
-                    (from WallType wt in new FilteredElementCollector(_doc)
-                     .OfClass(typeof(WallType))
-                     .OfCategory(BuiltInCategory.OST_Walls)
-                     where wt.FamilyName == Default.FAMILY_NAME_BASIC_WALL
-                     select wt)
-                     .Cast<WallType>()
-                     .ToList();
+            IList<WallType> wallTypesList = GetAllWallTypesByFamilyName(_doc, Default.FAMILY_NAME_BASIC_WALL);
 
             _wallTypesList = wallTypesList;
         }
@@ -133,14 +128,8 @@ namespace DCEStudyTools.Utils
             {
                 if (!wallMat.Equals(targetWallMat))
                 {
-                    Material targetMaterial =
-                        (from Material m in new FilteredElementCollector(_doc)
-                         .OfClass(typeof(Material))
-                         where m != null
-                         select m)
-                         .Cast<Material>()
-                         .FirstOrDefault(m => m.Name.Equals(targetWallMat));
-
+                    Material targetMaterial = GetMaterialByName(_doc, targetWallMat);
+                       
                     Transaction t = new Transaction(_doc);
                     t.Start("Change the material of the structural layer of the wall type");
                     foreach (CompoundStructureLayer layer in wallType.GetCompoundStructure().GetLayers())

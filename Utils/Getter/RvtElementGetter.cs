@@ -143,6 +143,43 @@ namespace DCEStudyTools.Utils.Getter
             return viewsheetsList;
         }
 
+        public static IList<Wall> GetAllWalls(Document doc)
+        {
+            IList<Wall> wallsList =
+                (from wall in new FilteredElementCollector(doc)
+                 .OfClass(typeof(Wall))
+                 .Cast<Wall>()
+                 select wall)
+                 .ToList();
+            return wallsList;
+        }
+
+        public static IList<Floor> GetAllFloors(Document doc)
+        {
+            IList<Floor> floorsList =
+                (from floor in new FilteredElementCollector(doc)
+                 .OfClass(typeof(Floor))
+                 .Cast<Floor>()
+                 select floor)
+                 .ToList();
+            return floorsList;
+        }
+
+        public static IList<FamilyInstance> GetAllFamilyInstances(Document doc, BuiltInCategory category)
+        {
+            IList<FamilyInstance> familyInstancesList =
+                (from fi in new FilteredElementCollector(doc)
+                 .OfCategory(category)
+                 .OfClass(typeof(FamilyInstance))
+                 .Cast<FamilyInstance>()
+                 select fi)
+                 .ToList();
+            return familyInstancesList;
+        }
+
+
+
+
         /////////////////////////////////////// END ///////////////////////////////////////////////
 
         ///////////////////////////////// ALL ELEMENTS GETTERS ////////////////////////////////////
@@ -237,8 +274,8 @@ namespace DCEStudyTools.Utils.Getter
         {
             IList<FamilySymbol> familySymbolsList =
                     (from fs in new FilteredElementCollector(doc)
-                     .OfClass(typeof(FamilySymbol))
                      .OfCategory(category)
+                     .OfClass(typeof(FamilySymbol))
                      .Cast<FamilySymbol>()
                      where fs.Family.Id == family.Id
                      select fs)
@@ -246,6 +283,21 @@ namespace DCEStudyTools.Utils.Getter
 
             return familySymbolsList;
         }
+
+        public static IList<WallType> GetAllWallTypesByFamilyName(Document doc, string familyName)
+        {
+            IList<WallType> wallTypesList =
+                    (from WallType wt in new FilteredElementCollector(doc)
+                     .OfCategory(BuiltInCategory.OST_Walls)
+                     .OfClass(typeof(WallType))
+                     where wt.FamilyName.Equals(familyName)
+                     select wt)
+                     .Cast<WallType>()
+                     .ToList();
+
+            return wallTypesList;
+        }
+
 
         public static FilteredElementCollector GetElementsByShareParamValue(Document doc, BuiltInCategory bic, string sParaName, double dValue)
         {

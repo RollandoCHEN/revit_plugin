@@ -496,5 +496,8 @@
     <None Include="Resources\POT-BA-ROND.rfa" />
     <None Include="Resources\POU-BA.rfa" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Utils\Connecter\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

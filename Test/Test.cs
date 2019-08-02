@@ -3,8 +3,9 @@ using Autodesk.Revit.UI;
 using Autodesk.Revit.UI.Selection;
 using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Linq;
+
+using static DCEStudyTools.Utils.Getter.RvtElementGetter;
+using static DCEStudyTools.Properties.Settings;
 
 namespace DCEStudyTools.Test
 {
@@ -23,13 +24,13 @@ namespace DCEStudyTools.Test
             
             try
             {
-                IList<Reference> structEleRefs = new List<Reference>();
+                Reference originalLevelRef;
                 try
                 {
-                    structEleRefs = _uidoc.Selection.PickObjects(
+                    originalLevelRef = _uidoc.Selection.PickObject(
                     ObjectType.Element,
-                    new StructElementsSelectionFilter(),
-                    "Selectionner les voiles/poteaux/poutres/dalles qui doivent changer le niveau de reference");
+                    new LevelSelectionFilter(),
+                    "Selectionner un niveau");
                 }
                 catch (Autodesk.Revit.Exceptions.OperationCanceledException)
                 {
@@ -49,54 +50,49 @@ namespace DCEStudyTools.Test
                     return Result.Cancelled;
                 }
 
+                Level originalLevelEle = _doc.GetElement(originalLevelRef) as Level;
                 Level levelEle = _doc.GetElement(levelRef) as Level;
-
-                int numBeams = 0;
 
                 Transaction t = new Transaction(_doc, "Modify elements ref level");
                 t.Start();
-                foreach (Reference eleRef in structEleRefs)
+
+                foreach (Floor floor in GetAllFloors(_doc))
                 {
-                    Element ele = _doc.GetElement(eleRef);
-                    if (Properties.Settings.Default.CATEGORY_NAME_FLOOR.Equals(ele.Category.Name))
+                    Parameter p = floor.get_Parameter(BuiltInParameter.LEVEL_PARAM);
+                    ElementId levelId = p.AsElementId();
+                    if (levelId == originalLevelEle.Id)
                     {
-                        Floor floorEle = ele as Floor;
-                        Parameter p = floorEle.get_Parameter(BuiltInParameter.LEVEL_PARAM);
-                        p.Set(levelEle.Id);
-                    }
-                    else if (Properties.Settings.Default.CATEGORY_NAME_BEAM.Equals(ele.Category.Name))
-                    {
-                        FamilyInstance beamEle = ele as FamilyInstance;
-                        Parameter p = beamEle.get_Parameter(BuiltInParameter.SKETCH_PLANE_PARAM);
-                        if (p == null)
-                        {
-                            p.Set(levelEle.Id);
-                        }
-                        else
-                        {
-                            numBeams++;
-                        }
-                    }
-                    else if (Properties.Settings.Default.CATEGORY_NAME_WALL.Equals(ele.Category.Name))
-                    {
-                        Wall wallEle = ele as Wall;
-                        Parameter p = wallEle.get_Parameter(BuiltInParameter.WALL_HEIGHT_TYPE);
-                        p.Set(levelEle.Id);
-                    }
-                    else if (Properties.Settings.Default.CATEGORY_NAME_COLUMN.Equals(ele.Category.Name))
-                    {
-                        FamilyInstance columnEle = ele as FamilyInstance;
-                        Parameter p = columnEle.get_Parameter(BuiltInParameter.FAMILY_TOP_LEVEL_PARAM);
                         p.Set(levelEle.Id);
                     }
                 }
 
-                if (numBeams != 0)
+                foreach (Wall wall in GetAllWalls(_doc))
                 {
-                    TaskDialog.Show("Revit", $"{numBeams} poutres ne sont pas liées au niveau selectionné. " 
-                        + "Elles doivent être modifiées manuellement.");
+                    Parameter p1 = wall.get_Parameter(BuiltInParameter.WALL_HEIGHT_TYPE);
+                    Parameter p2 = wall.get_Parameter(BuiltInParameter.WALL_BASE_CONSTRAINT);
+                    if (p1.AsElementId() == originalLevelEle.Id)
+                    {
+                        p1.Set(levelEle.Id);
+                    }
+                    else if (p2.AsElementId() == originalLevelEle.Id)
+                    {
+                        p2.Set(levelEle.Id);
+                    }
                 }
 
+                foreach (FamilyInstance fi in GetAllFamilyInstances(_doc, BuiltInCategory.OST_StructuralColumns))
+                {
+                    Parameter p1 = fi.get_Parameter(BuiltInParameter.FAMILY_TOP_LEVEL_PARAM);
+                    Parameter p2 = fi.get_Parameter(BuiltInParameter.FAMILY_BASE_LEVEL_PARAM);
+                    if (p1.AsElementId() == originalLevelEle.Id)
+                    {
+                        p1.Set(levelEle.Id);
+                    }
+                    else if(p2.AsElementId() == originalLevelEle.Id)
+                    {
+                        p2.Set(levelEle.Id);
+                    }
+                }
                 t.Commit();
 
                 //// Delete "Etage 1 - " in the level name
