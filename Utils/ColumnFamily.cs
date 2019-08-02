@@ -122,24 +122,24 @@ namespace DCEStudyTools.Utils
 
         public static void GetRectColumnSymbolProperties(FamilySymbol colSymbol, out string colMat, out double colHeight, out double colWidth)
         {
-            colMat = GetFamilySymbolStringValueByPropertyName(colSymbol, Default.PARA_NAME_STR_MATERIAL);
+            colMat = GetFamilySymbolValueStringByPropertyName(colSymbol, Default.PARA_NAME_STR_MATERIAL);
 
             colHeight = UnitUtils.Convert(
-                    GetFamilySymbolDoubleValueByPropertyName(colSymbol, Default.PARA_NAME_DIM_HEIGHT),
+                    GetFamilySymbolDoubleByPropertyName(colSymbol, Default.PARA_NAME_DIM_HEIGHT),
                     DisplayUnitType.DUT_DECIMAL_FEET,
                     DisplayUnitType.DUT_CENTIMETERS);
             colWidth = UnitUtils.Convert(
-                    GetFamilySymbolDoubleValueByPropertyName(colSymbol, Default.PARA_NAME_DIM_WIDTH),
+                    GetFamilySymbolDoubleByPropertyName(colSymbol, Default.PARA_NAME_DIM_WIDTH),
                     DisplayUnitType.DUT_DECIMAL_FEET,
                     DisplayUnitType.DUT_CENTIMETERS);
         }
 
         public static void GetRondColumnSymbolProperties(FamilySymbol colSymbol, out string colMat, out double colDiameter)
         {
-            colMat = GetFamilySymbolStringValueByPropertyName(colSymbol, Default.PARA_NAME_STR_MATERIAL);
+            colMat = GetFamilySymbolValueStringByPropertyName(colSymbol, Default.PARA_NAME_STR_MATERIAL);
 
             colDiameter = UnitUtils.Convert(
-                    GetFamilySymbolDoubleValueByPropertyName(colSymbol, Default.PARA_NAME_DIM_DIAMETER),
+                    GetFamilySymbolDoubleByPropertyName(colSymbol, Default.PARA_NAME_DIM_DIAMETER),
                     DisplayUnitType.DUT_DECIMAL_FEET,
                     DisplayUnitType.DUT_CENTIMETERS);
         }

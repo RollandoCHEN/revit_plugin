@@ -9,9 +9,24 @@ namespace DCEStudyTools.Utils.Getter
 {
     class PropertyValueGetter
     {
-        public static string GetFamilySymbolStringValueByPropertyName(FamilySymbol familySymbol, string propertyName)
+        // On a 2 methodes GetString et GetValueString car dans Revit 
+        //  -   pour tous les paramètres en Texte, on utilise asString à choper sa valeur
+        //  -   pour tous les paramètres ne pas en Texte, on utilise plutôt asValueString à choper sa valeur
+
+        public static string GetFamilySymbolStringByPropertyName(FamilySymbol familySymbol, string propertyName)
         {
             string value = 
+                (from Parameter pr in familySymbol.Parameters
+                 where pr.Definition.Name.Equals(propertyName)
+                 select pr)
+                     .First()
+                     .AsString();
+            return value;
+        }
+
+        public static string GetFamilySymbolValueStringByPropertyName(FamilySymbol familySymbol, string propertyName)
+        {
+            string value =
                 (from Parameter pr in familySymbol.Parameters
                  where pr.Definition.Name.Equals(propertyName)
                  select pr)
@@ -20,7 +35,7 @@ namespace DCEStudyTools.Utils.Getter
             return value;
         }
 
-        public static double GetFamilySymbolDoubleValueByPropertyName(FamilySymbol familySymbol, string propertyName)
+        public static double GetFamilySymbolDoubleByPropertyName(FamilySymbol familySymbol, string propertyName)
         {
             double value =
                 (from Parameter pr in familySymbol.Parameters

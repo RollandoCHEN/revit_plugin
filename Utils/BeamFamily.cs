@@ -51,7 +51,7 @@ namespace DCEStudyTools.Utils
         {
             foreach (BeamType item in Values)
             {
-                if (beamSign.Equals(item.ParaSign))
+                if (item.ParaSign.Equals(beamSign))
                 {
                     return item.Syntaxe;
                 } 
@@ -63,7 +63,7 @@ namespace DCEStudyTools.Utils
         {
             foreach (BeamType item in Values)
             {
-                if (syntaxe.Equals(item.Syntaxe))
+                if (item.Syntaxe.Equals(syntaxe))
                 {
                     return item.ParaSign;
                 }
@@ -137,16 +137,16 @@ namespace DCEStudyTools.Utils
 
         public static void GetBeamSymbolProperties(FamilySymbol beamSymbol, out string beamSign, out string beamMat, out double beamHeight, out double beamWidth)
         {
-            beamSign = GetFamilySymbolStringValueByPropertyName(beamSymbol, Default.PARA_NAME_BEAM_TYPE);
+            beamSign = GetFamilySymbolStringByPropertyName(beamSymbol, Default.PARA_NAME_BEAM_TYPE);
 
-            beamMat = GetFamilySymbolStringValueByPropertyName(beamSymbol, Default.PARA_NAME_STR_MATERIAL);
+            beamMat = GetFamilySymbolValueStringByPropertyName(beamSymbol, Default.PARA_NAME_STR_MATERIAL);
 
             beamHeight = UnitUtils.Convert(
-                    GetFamilySymbolDoubleValueByPropertyName(beamSymbol, Default.PARA_NAME_DIM_HEIGHT),
+                    GetFamilySymbolDoubleByPropertyName(beamSymbol, Default.PARA_NAME_DIM_HEIGHT),
                     DisplayUnitType.DUT_DECIMAL_FEET,
                     DisplayUnitType.DUT_CENTIMETERS);
             beamWidth = UnitUtils.Convert(
-                    GetFamilySymbolDoubleValueByPropertyName(beamSymbol, Default.PARA_NAME_DIM_WIDTH),
+                    GetFamilySymbolDoubleByPropertyName(beamSymbol, Default.PARA_NAME_DIM_WIDTH),
                     DisplayUnitType.DUT_DECIMAL_FEET,
                     DisplayUnitType.DUT_CENTIMETERS);
         }

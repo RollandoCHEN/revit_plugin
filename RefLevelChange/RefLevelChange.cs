@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace DCEStudyTools.RefLevelChange
 {
     [Autodesk.Revit.Attributes.Transaction(Autodesk.Revit.Attributes.TransactionMode.Manual)]
-    class RefLevelChange
+    class RefLevelChange : IExternalCommand
     {
         private UIApplication _uiapp;
         private UIDocument _uidoc;
