@@ -2,6 +2,7 @@
 using Autodesk.Revit.UI;
 using Autodesk.Revit.UI.Selection;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 
 using static DCEStudyTools.Utils.Getter.RvtElementGetter;
@@ -24,73 +25,113 @@ namespace DCEStudyTools.Test
             
             try
             {
-                Reference originalLevelRef;
+                IList<Reference> originalLevelRefsList;
                 try
                 {
-                    originalLevelRef = _uidoc.Selection.PickObject(
+                    originalLevelRefsList = _uidoc.Selection.PickObjects(
                     ObjectType.Element,
                     new LevelSelectionFilter(),
-                    "Selectionner un niveau");
+                    "Selectionner les niveaux");
                 }
                 catch (Autodesk.Revit.Exceptions.OperationCanceledException)
                 {
                     return Result.Cancelled;
                 }
+                IList<Level> originalLevelsList =
+                    (from Reference levelRef in originalLevelRefsList
+                     select (_doc.GetElement(levelRef) as Level))
+                    .ToList();
 
-                Reference levelRef;
-                try
-                {
-                    levelRef = _uidoc.Selection.PickObject(
-                    ObjectType.Element,
-                    new LevelSelectionFilter(),
-                    "Selectionner un niveau en tant que niveau reference");
-                }
-                catch (Autodesk.Revit.Exceptions.OperationCanceledException)
-                {
-                    return Result.Cancelled;
-                }
+                IList<Level> allStructLevels = GetAllLevels(_doc, true);
+                int numOfLevels = allStructLevels.Count;
 
-                Level originalLevelEle = _doc.GetElement(originalLevelRef) as Level;
-                Level levelEle = _doc.GetElement(levelRef) as Level;
-
-                Transaction t = new Transaction(_doc, "Modify elements ref level");
-                t.Start();
-
+                Transaction t = new Transaction(_doc);
+                t.Start("Modify floor ref level");
                 foreach (Floor floor in GetAllFloors(_doc))
                 {
                     Parameter p = floor.get_Parameter(BuiltInParameter.LEVEL_PARAM);
-                    ElementId levelId = p.AsElementId();
-                    if (levelId == originalLevelEle.Id)
+                    ElementId floorlevelId = p.AsElementId();
+                    Level floorLevel = _doc.GetElement(floorlevelId) as Level;
+
+                    if (originalLevelsList.Any(level => level.Id == floorlevelId) 
+                        && allStructLevels.Any(level => level.Elevation == floorLevel.Elevation))
                     {
-                        p.Set(levelEle.Id);
+                        Level targetLevel =
+                            (from Level l in allStructLevels
+                             where l.Elevation == floorLevel.Elevation
+                             select l)
+                             .First();
+                        p.Set(targetLevel.Id);
                     }
                 }
-
+                t.Commit();
+                
+                t.Start("Modify wall ref levels");
                 foreach (Wall wall in GetAllWalls(_doc))
                 {
                     Parameter p1 = wall.get_Parameter(BuiltInParameter.WALL_HEIGHT_TYPE);
+                    ElementId wallUpperLevelId = p1.AsElementId();
+                    Level wallUpperLevel = _doc.GetElement(wallUpperLevelId) as Level;
+
                     Parameter p2 = wall.get_Parameter(BuiltInParameter.WALL_BASE_CONSTRAINT);
-                    if (p1.AsElementId() == originalLevelEle.Id)
+                    ElementId wallLowerLevelId = p2.AsElementId();
+                    Level wallLowerLevel = _doc.GetElement(wallLowerLevelId) as Level;
+
+                    if (originalLevelsList.Any(level => level.Id == wallUpperLevelId)
+                        && allStructLevels.Any(level => level.Elevation == wallUpperLevel.Elevation))
                     {
-                        p1.Set(levelEle.Id);
+                        Level targetLevel =
+                            (from Level l in allStructLevels
+                             where l.Elevation == wallUpperLevel.Elevation
+                             select l)
+                             .First();
+                        p1.Set(targetLevel.Id);
                     }
-                    else if (p2.AsElementId() == originalLevelEle.Id)
+
+                    if (originalLevelsList.Any(level => level.Id == wallLowerLevelId)
+                        && allStructLevels.Any(level => level.Elevation == wallLowerLevel.Elevation))
                     {
-                        p2.Set(levelEle.Id);
+                        Level targetLevel =
+                            (from Level l in allStructLevels
+                             where l.Elevation == wallLowerLevel.Elevation
+                             select l)
+                             .First();
+                        p2.Set(targetLevel.Id);
                     }
                 }
+                t.Commit();
 
+                t.Start("Modify column ref levels");
                 foreach (FamilyInstance fi in GetAllFamilyInstances(_doc, BuiltInCategory.OST_StructuralColumns))
                 {
                     Parameter p1 = fi.get_Parameter(BuiltInParameter.FAMILY_TOP_LEVEL_PARAM);
+                    ElementId columnUpperLevelId = p1.AsElementId();
+                    Level columnUpperLevel = _doc.GetElement(columnUpperLevelId) as Level;
+
                     Parameter p2 = fi.get_Parameter(BuiltInParameter.FAMILY_BASE_LEVEL_PARAM);
-                    if (p1.AsElementId() == originalLevelEle.Id)
+                    ElementId columnLowerLevelId = p2.AsElementId();
+                    Level columnLowerLevel = _doc.GetElement(columnLowerLevelId) as Level;
+
+                    if (originalLevelsList.Any(level => level.Id == columnUpperLevelId)
+                        && allStructLevels.Any(level => level.Elevation == columnUpperLevel.Elevation))
                     {
-                        p1.Set(levelEle.Id);
+                        Level targetLevel =
+                            (from Level l in allStructLevels
+                             where l.Elevation == columnUpperLevel.Elevation
+                             select l)
+                             .First();
+                        p1.Set(targetLevel.Id);
                     }
-                    else if(p2.AsElementId() == originalLevelEle.Id)
+
+                    if (originalLevelsList.Any(level => level.Id == columnLowerLevelId)
+                        && allStructLevels.Any(level => level.Elevation == columnLowerLevel.Elevation))
                     {
-                        p2.Set(levelEle.Id);
+                        Level targetLevel =
+                            (from Level l in allStructLevels
+                             where l.Elevation == columnLowerLevel.Elevation
+                             select l)
+                             .First();
+                        p2.Set(targetLevel.Id);
                     }
                 }
                 t.Commit();
