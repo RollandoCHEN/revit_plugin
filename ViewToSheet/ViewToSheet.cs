@@ -27,7 +27,7 @@ namespace DCEStudyTools.ViewToSheet
             try
             {
                 // Get list of all viewplans who have entity
-                IList<ViewPlan> viewplans = GetAllLinkedViewPlans(_doc);
+                IList<ViewPlan> viewplans = GetAllStructuralPlans(_doc, true);
                 // If no viewplan has entity, show a message
                 if (viewplans.Count == 0) { return Result.Cancelled; }
 

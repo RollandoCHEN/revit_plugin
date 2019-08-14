@@ -28,7 +28,7 @@ namespace DCEStudyTools.HalftoneUndo
                 if (cadFileLinksList.Count == 0){ return Result.Cancelled; }
 
                 // Get list of all views
-                IList<ViewPlan> viewPlanList = GetAllLinkedViewPlans(_doc);
+                IList<ViewPlan> viewPlanList = GetAllStructuralPlans(_doc, true);
                 if (viewPlanList.Count == 0){ return Result.Cancelled; }
 
                 foreach (ViewPlan view in viewPlanList) // Loop through each view

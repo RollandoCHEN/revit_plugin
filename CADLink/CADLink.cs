@@ -26,7 +26,7 @@ namespace DCEStudyTools.CADLink
             try
             {
                 // Get list of all structural view plans
-                IList<ViewPlan> viewPlanList = GetAllLinkedViewPlans(_doc);
+                IList<ViewPlan> viewPlanList = GetAllStructuralPlans(_doc, true);
                 if (viewPlanList.Count == 0){ return Result.Cancelled; }
 
                 Dictionary<string, ViewPlan> viewDic = new Dictionary<string, ViewPlan>();

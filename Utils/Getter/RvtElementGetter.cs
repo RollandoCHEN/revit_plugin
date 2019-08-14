@@ -3,6 +3,8 @@ using Autodesk.Revit.UI;
 using System.Collections.Generic;
 using System.Linq;
 
+using static DCEStudyTools.Properties.Settings;
+
 namespace DCEStudyTools.Utils.Getter
 {
     class RvtElementGetter
@@ -69,7 +71,7 @@ namespace DCEStudyTools.Utils.Getter
                       new FilteredElementCollector(doc)
                      .OfClass(typeof(FamilyInstance))
                      .Cast<FamilyInstance>()
-                     .Where(f => f.Symbol.Name.Contains(Properties.Settings.Default.FAMILY_NAME_PILE))
+                     .Where(f => f.Symbol.Name.Contains(Default.FAMILY_NAME_PILE))
                      .ToList();
             if (pilesList.Count == 0)
             {
@@ -111,18 +113,36 @@ namespace DCEStudyTools.Utils.Getter
             return cadFileLinksList;
         }
 
-        public static IList<ViewPlan> GetAllLinkedViewPlans(Document doc)
+        public static IList<ViewPlan> GetAllStructuralPlans(Document doc, bool isOnlyStruct)
         {
-            IList<ViewPlan> viewPlansList =
-                            (from ViewPlan view in new FilteredElementCollector(doc)
-                            .OfClass(typeof(ViewPlan))
-                             where view.ViewType == ViewType.CeilingPlan && !view.IsTemplate
-                             select view)
-                            .Cast<ViewPlan>()
-                            .ToList();
+            IList<ViewPlan> viewPlansList;
+            if (isOnlyStruct)
+            {
+                viewPlansList =
+                                (from ViewPlan view in new FilteredElementCollector(doc)
+                                .OfClass(typeof(ViewPlan))
+                                 where view.ViewType == ViewType.CeilingPlan && !view.IsTemplate
+                                 && view.GetEntitySchemaGuids().Count != 0
+                                 select view)
+                                .Cast<ViewPlan>()
+                                .ToList();
+            }
+            else
+            {
+                viewPlansList =
+                                (from ViewPlan view in new FilteredElementCollector(doc)
+                                .OfClass(typeof(ViewPlan))
+                                 where view.ViewType == ViewType.CeilingPlan && !view.IsTemplate
+                                 select view)
+                                .Cast<ViewPlan>()
+                                .ToList();
+            }
+
+            string message = "Aucune vue en plan" + (isOnlyStruct ? " liée aux niveaux structuraux" : "") + " dans le projet.";
+
             if (viewPlansList.Count == 0)
             {
-                TaskDialog.Show("Revit", "Aucune vue en plan liée au niveaux structuraux dans le projet.");
+                TaskDialog.Show("Revit", message);
             }
 
             return viewPlansList;
@@ -150,7 +170,7 @@ namespace DCEStudyTools.Utils.Getter
                      .ToList();
             }
 
-            string message = "Aucune feuille" + (isOnlyStruct?" liée au niveaux structuraux":"") + " dans le projet.";
+            string message = "Aucune feuille" + (isOnlyStruct?" liée aux niveaux structuraux":"") + " dans le projet.";
 
             if (viewsheetsList.Count == 0)
             {
