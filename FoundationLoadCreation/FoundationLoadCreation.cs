@@ -112,7 +112,7 @@ namespace DCEStudyTools.FoundationLoadCreation
             TagMode tagMode = TagMode.TM_ADDBY_CATEGORY;
             TagOrientation tagorn = TagOrientation.Horizontal;
 
-            IndependentTag tag = _doc.Create.NewTag(activeV, pl, false, tagMode, tagorn, loadPosition);
+            IndependentTag tag = IndependentTag.Create(_doc, activeV.Id, new Reference(pl), false, tagMode, tagorn, loadPosition);
             FamilySymbol tagType =
                 (from fs in new FilteredElementCollector(_doc)
                     .OfCategory(BuiltInCategory.OST_PointLoadTags)

@@ -23,7 +23,7 @@ namespace DCEStudyTools.UnderlaySetting
             try
             {
                 // Get list of all structural levels
-                IList<Level> strLevels = GetAllLevels(_doc, true);
+                IList<Level> strLevels = GetAllLevels(_doc, true, true);
                 if (strLevels.Count == 0) { return Result.Cancelled; }
 
                 // Get list of all CAD files
@@ -41,7 +41,7 @@ namespace DCEStudyTools.UnderlaySetting
                     {
                         tx.Start();
                         cad.get_Parameter(BuiltInParameter.IMPORT_BASE_LEVEL_OFFSET).Set(
-                        UnitUtils.Convert(-1, DisplayUnitType.DUT_DECIMETERS, DisplayUnitType.DUT_DECIMAL_FEET));
+                        UnitUtils.Convert(-0.1, DisplayUnitType.DUT_METERS, DisplayUnitType.DUT_DECIMAL_FEET));
                         tx.Commit();
                     }
                 }

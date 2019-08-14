@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>DCEStudyTools</RootNamespace>
     <AssemblyName>DCEStudyTools</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -31,16 +32,16 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AdWindows">
-      <HintPath>C:\Program Files\Autodesk\Revit 2017\AdWindows.dll</HintPath>
+      <HintPath>C:\Program Files\Autodesk\Revit 2019\AdWindows.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="RevitAPI">
-      <HintPath>C:\Program Files\Autodesk\Revit 2017\RevitAPI.dll</HintPath>
+      <HintPath>C:\Program Files\Autodesk\Revit 2019\RevitAPI.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="RevitAPIUI">
-      <HintPath>C:\Program Files\Autodesk\Revit 2017\RevitAPIUI.dll</HintPath>
+      <HintPath>C:\Program Files\Autodesk\Revit 2019\RevitAPIUI.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
@@ -90,6 +91,8 @@
     <Compile Include="HalftoneUndo\HalftoneUndo.cs" />
     <Compile Include="LevelRenaming\LevelRenaming.cs" />
     <Compile Include="LevelRenaming\LevelSelectionFilter.cs" />
+    <Compile Include="LevelTransfer\LevelSelectionFilter.cs" />
+    <Compile Include="LevelTransfer\LevelTransfer.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -322,6 +325,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
+    <Resource Include="Resources\transfer_32.png" />
     <Resource Include="Resources\halftone_16.png" />
     <Resource Include="Resources\halftone_32.png" />
     <Resource Include="Resources\levels_32.png" />

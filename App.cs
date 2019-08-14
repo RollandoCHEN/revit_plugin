@@ -56,6 +56,18 @@ namespace DCEStudyTools
                     "Rename the levels for structural elements")
             ) as PushButton;
 
+            // Create push button for LevelTransfer
+            PushButton pbLevelTransfer = levelToolRibbonPanel.AddItem(
+                CreatePushButtonData(
+                    "cmdLevelTranfer",
+                    "Transfer" + System.Environment.NewLine + "Structural Levels",
+                    thisAssemblyPath,
+                    "DCEStudyTools.LevelTransfer.LevelTransfer",
+                    "transfer_32.png",
+                    String.Empty,
+                    "Tranfer all structural elements from actural levels to the structural levels")
+            ) as PushButton;
+
             ////////////////////////////////////////////////////// Seperate line ////////////////////////////////////////////////////
 
             // Add view tools ribbon panel
@@ -265,6 +277,18 @@ namespace DCEStudyTools
             // Add CAD link tools ribbon panel
             RibbonPanel cadLinkToolRibbonPanel = application.CreateRibbonPanel(tabName, "CAD Link Tools");
 
+            // Create push button for CADLink
+            PushButton pbAddLink = cadLinkToolRibbonPanel.AddItem(
+                CreatePushButtonData(
+                    "cmdAddLink",
+                    "Add" + System.Environment.NewLine + "CAD Link",
+                    thisAssemblyPath,
+                    "DCEStudyTools.CADLink.CADLink",
+                    "link_32.png",
+                    String.Empty,
+                    "Add CAD links")
+            ) as PushButton;
+
             // Create push button for setting underlayer
             PushButtonData pbSetUnderlayer = 
                 CreatePushButtonData(
@@ -289,17 +313,6 @@ namespace DCEStudyTools
 
             cadLinkToolRibbonPanel.AddStackedItems(pbSetUnderlayer, pbUndoUnderlayer);
 
-            // Create push button for CADLink
-            PushButton pbAddLink = cadLinkToolRibbonPanel.AddItem(
-                CreatePushButtonData(
-                    "cmdAddLink",
-                    "Add" + System.Environment.NewLine + "CAD Link",
-                    thisAssemblyPath,
-                    "DCEStudyTools.CADLink.CADLink",
-                    "link_32.png",
-                    String.Empty,
-                    "Add CAD links")
-            ) as PushButton;
 
             // Create push button for setting halftone
             PushButtonData pbSettingHalftone =

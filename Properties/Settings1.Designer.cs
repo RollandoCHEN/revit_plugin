@@ -12,7 +12,7 @@ namespace DCEStudyTools.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.5.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.2.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -949,6 +949,18 @@ namespace DCEStudyTools.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Niveau Ref")]
+        public string LEVEL_NAME_REF {
+            get {
+                return ((string)(this["LEVEL_NAME_REF"]));
+            }
+            set {
+                this["LEVEL_NAME_REF"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Murs")]
         public string CATEGORY_NAME_WALL {
             get {
@@ -968,18 +980,6 @@ namespace DCEStudyTools.Properties {
             }
             set {
                 this["CATEGORY_NAME_COLUMN"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Niveau Ref")]
-        public string LEVEL_NAME_REF {
-            get {
-                return ((string)(this["LEVEL_NAME_REF"]));
-            }
-            set {
-                this["LEVEL_NAME_REF"] = value;
             }
         }
     }

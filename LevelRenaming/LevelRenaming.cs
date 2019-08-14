@@ -21,7 +21,7 @@ namespace DCEStudyTools.LevelRenaming
             _uidoc = _uiapp.ActiveUIDocument;
             _doc = _uidoc.Document;
 
-            IList<Level> strLevels = GetAllLevels(_doc, true);
+            IList<Level> strLevels = GetAllLevels(_doc, true, true);
             if (strLevels.Count == 0){ return Result.Cancelled; }
 
             Reference refId;

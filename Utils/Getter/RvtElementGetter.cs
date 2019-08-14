@@ -12,7 +12,7 @@ namespace DCEStudyTools.Utils.Getter
 
         /////////////////////////////////////// START /////////////////////////////////////////////
 
-        public static IList<Level> GetAllLevels(Document doc, bool isOnlyStruct)
+        public static IList<Level> GetAllLevels(Document doc, bool isOnlyStruct, bool showMessage)
         {
             IList<Level> levelsList;
             string message;
@@ -40,7 +40,7 @@ namespace DCEStudyTools.Utils.Getter
                 message = "Aucun niveau dans le projet.";
             }
 
-            if (levelsList.Count == 0)
+            if (showMessage && levelsList.Count == 0)
             {
                 TaskDialog.Show("Revit", message);
             }
@@ -77,6 +77,23 @@ namespace DCEStudyTools.Utils.Getter
             }
 
             return pilesList;
+        }
+
+        public static IList<FamilyInstance> GetAllFoundations(Document doc)
+        {
+            IList<FamilyInstance> foundationsList =
+                      new FilteredElementCollector(doc)
+                     .OfClass(typeof(FamilyInstance))
+                     .OfCategory(BuiltInCategory.OST_StructuralFoundation)
+                     .Cast<FamilyInstance>()
+                     .Where(fi => fi.SuperComponent == null)
+                     .ToList();
+            if (foundationsList.Count == 0)
+            {
+                TaskDialog.Show("Revit", "Aucune fondation dans le projet.");
+            }
+
+            return foundationsList;
         }
 
         public static IList<ImportInstance> GetAllCADFiles(Document doc)
@@ -195,7 +212,7 @@ namespace DCEStudyTools.Utils.Getter
                 (from v in new FilteredElementCollector(doc)
                  .OfClass(typeof(View))
                  .Cast<View>()
-                 where v.ViewType == ViewType.Legend && v.ViewName.Equals(name)
+                 where v.ViewType == ViewType.Legend && v.Name.Equals(name)
                  select v)
                  .FirstOrDefault();
             if (legendView == null)

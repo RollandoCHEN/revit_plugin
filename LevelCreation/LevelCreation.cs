@@ -249,14 +249,14 @@ namespace DCEStudyTools.LevelCreation
                     ViewTemplate.FindViewTemplateOrDefault(
                         _doc,
                         ViewType.CeilingPlan,
-                        Properties.Settings.Default.TEMPLATE_NAME_STANDARD_FLOOR,
+                        Default.TEMPLATE_NAME_STANDARD_FLOOR,
                         out bool standardTemplateIsFound);
 
                 View foundationTemplate =
                     ViewTemplate.FindViewTemplateOrDefault(
                         _doc,
                         ViewType.CeilingPlan,
-                        Properties.Settings.Default.TEMPLATE_NAME_FOUNDATION,
+                        Default.TEMPLATE_NAME_FOUNDATION,
                         out bool foundationTemplateIsFound);
 
                 using (Transaction t = new Transaction(doc, "Create View Plans"))
@@ -271,12 +271,12 @@ namespace DCEStudyTools.LevelCreation
                             viewPlan.Name = $"0{i + 1} {level.Name}";
                             viewPlans.Add(viewPlan);
                             // TODO: Deal with the case when template is not found
-                            if (!viewPlan.Name.ToLower().Contains(Properties.Settings.Default.KEYWORD_FOUNDATION) && standardTemplateIsFound)
+                            if (!viewPlan.Name.ToLower().Contains(Default.KEYWORD_FOUNDATION) && standardTemplateIsFound)
                             {
                                 viewPlan.ViewTemplateId = standardTemplate.Id;
                             }
 
-                            if (viewPlan.Name.ToLower().Contains(Properties.Settings.Default.KEYWORD_FOUNDATION) && foundationTemplateIsFound)
+                            if (viewPlan.Name.ToLower().Contains(Default.KEYWORD_FOUNDATION) && foundationTemplateIsFound)
                             {
                                 viewPlan.ViewTemplateId = foundationTemplate.Id;
                             }

@@ -22,7 +22,7 @@ namespace DCEStudyTools.UnderlayUndo
             try
             {
                 // Get list of all structural levels
-                IList<Level> strLevels = GetAllLevels(_doc, true);
+                IList<Level> strLevels = GetAllLevels(_doc, true, true);
                 if (strLevels.Count == 0) { return Result.Cancelled; }
 
                 // Get list of all CAD files

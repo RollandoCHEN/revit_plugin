@@ -30,7 +30,7 @@ namespace DCEStudyTools.ThreeDViewsCreation
             _doc = _uidoc.Document;
 
             // Get list of all levels for structural elements
-            IList<Level> strLevels = GetAllLevels(_doc, true);
+            IList<Level> strLevels = GetAllLevels(_doc, true, true);
             if (strLevels.Count == 0) { return Result.Cancelled; }
 
             // Get a ViewFamilyType for a 3D view

@@ -44,13 +44,13 @@ namespace DCEStudyTools.Configuration
             _uidoc = _uiapp.ActiveUIDocument;
             _doc = _uidoc.Document;
 
-            _allLevels = GetAllLevels(_doc, false);
+            _allLevels = GetAllLevels(_doc, false, false);
 
             _allLevelNames = 
                 (from lev in _allLevels
                 select lev.Name).ToArray();
 
-            _strLevelsBeforeConfig = GetAllLevels(_doc, true);
+            _strLevelsBeforeConfig = GetAllLevels(_doc, true, false);
 
             _actualStrLevelNames =
                 (from lev in _strLevelsBeforeConfig

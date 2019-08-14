@@ -33,7 +33,7 @@ namespace DCEStudyTools.SheetCreation
                 try
                 {
                     // Get list of all levels for structural elements
-                    IList<Level> strLevels = GetAllLevels(_doc, true);
+                    IList<Level> strLevels = GetAllLevels(_doc, true, true);
                     if (strLevels.Count == 0){ return Result.Cancelled; }
 
                     CreateNewSheets(strLevels);
@@ -120,12 +120,12 @@ namespace DCEStudyTools.SheetCreation
                     if (_form.DuplicateNumber == 0)
                     {
                         viewSheet.SheetNumber = $"0{sheetNum}{duplicateNum}";
-                        viewSheet.ViewName = level.Name;
+                        viewSheet.Name = level.Name;
                     }
                     else
                     {
                         viewSheet.SheetNumber = $"0{sheetNum}{duplicateNum + 1}"; // TODO to be improved
-                        viewSheet.ViewName = $"{level.Name} -{duplicateNum + 1}"; // TODO to be improved
+                        viewSheet.Name = $"{level.Name} -{duplicateNum + 1}"; // TODO to be improved
                     }
 
                     

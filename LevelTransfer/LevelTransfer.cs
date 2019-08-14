@@ -2,16 +2,16 @@
 using Autodesk.Revit.UI;
 using Autodesk.Revit.UI.Selection;
 using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
 
 using static DCEStudyTools.Utils.Getter.RvtElementGetter;
 using static DCEStudyTools.Properties.Settings;
 
-namespace DCEStudyTools.Test
+namespace DCEStudyTools.LevelTransfer
 {
     [Autodesk.Revit.Attributes.Transaction(Autodesk.Revit.Attributes.TransactionMode.Manual)]
-    class Test : IExternalCommand
+    class LevelTransfer : IExternalCommand
     {
         private UIApplication _uiapp;
         private UIDocument _uidoc;
@@ -22,7 +22,7 @@ namespace DCEStudyTools.Test
             _uiapp = commandData.Application;
             _uidoc = _uiapp.ActiveUIDocument;
             _doc = _uidoc.Document;
-            
+
             try
             {
                 IList<Reference> originalLevelRefsList;
@@ -62,7 +62,7 @@ namespace DCEStudyTools.Test
                     ElementId floorlevelId = p.AsElementId();
                     Level floorLevel = _doc.GetElement(floorlevelId) as Level;
 
-                    if (originalLevelsList.Any(level => level.Id == floorlevelId) 
+                    if (originalLevelsList.Any(level => level.Id == floorlevelId)
                         && allStructLevels.Any(level => EqualWithTolerance(level.Elevation, floorLevel.Elevation, 0.01))
                         )
                     {
@@ -74,7 +74,7 @@ namespace DCEStudyTools.Test
                         p.Set(targetLevel.Id);
                     }
                 }
-                
+
                 foreach (Wall wall in GetAllWalls(_doc))
                 {
                     Parameter p1 = wall.get_Parameter(BuiltInParameter.WALL_HEIGHT_TYPE);
@@ -109,7 +109,7 @@ namespace DCEStudyTools.Test
                         p2.Set(targetLevel.Id);
                     }
                 }
-                
+
                 foreach (FamilyInstance fi in GetAllFamilyInstances(_doc, BuiltInCategory.OST_StructuralColumns))
                 {
                     Parameter p1 = fi.get_Parameter(BuiltInParameter.FAMILY_TOP_LEVEL_PARAM);
@@ -186,7 +186,7 @@ namespace DCEStudyTools.Test
 
         }
 
-        private bool EqualWithTolerance (double a, double b, double delta)
+        private bool EqualWithTolerance(double a, double b, double delta)
         {
             double delta_feet = UnitUtils.Convert(delta, DisplayUnitType.DUT_METERS, DisplayUnitType.DUT_DECIMAL_FEET);
 
@@ -200,7 +200,6 @@ namespace DCEStudyTools.Test
             }
         }
 
-      
+
     }
 }
-
